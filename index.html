@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contrl — Take back control of your documents</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --white: #fafafa;
+            --gray-1: #888;
+            --gray-2: #555;
+            --gray-3: #222;
+            --gray-4: #111;
+            --accent: #ff4d00;
+            --accent-dim: rgba(255, 77, 0, 0.12);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        .headline-hero {
+            font-size: clamp(52px, 9vw, 96px);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 0.95;
+        }
+
+        .headline-lg {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+        }
+
+        .headline-md {
+            font-size: clamp(20px, 2.5vw, 28px);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .body-lg {
+            font-size: clamp(17px, 2vw, 21px);
+            font-weight: 400;
+            line-height: 1.55;
+            color: var(--gray-1);
+        }
+
+        .body-md {
+            font-size: clamp(15px, 1.4vw, 17px);
+            font-weight: 400;
+            line-height: 1.55;
+            color: var(--gray-1);
+        }
+
+        .label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        /* --- NAV --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 18px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .wordmark {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .wordmark span {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--black);
+            background: var(--accent);
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s;
+            letter-spacing: 0.01em;
+        }
+
+        .nav-cta:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+
+        /* --- HERO --- */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 180px 32px 140px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .hero-visual {
+            flex: 1;
+            min-width: 0;
+            position: relative;
+        }
+
+        .hero .label {
+            margin-bottom: 24px;
+        }
+
+        .hero .headline-hero {
+            margin-bottom: 32px;
+        }
+
+        .hero .headline-hero .accent {
+            color: var(--accent);
+        }
+
+        .hero .body-lg {
+            max-width: 520px;
+            margin-bottom: 48px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        /* --- HERO MOCKUP --- */
+        .doc-compare {
+            position: relative;
+            height: 420px;
+        }
+
+        /* Before doc - messy, tilted */
+        .doc-before {
+            position: absolute;
+            left: 0;
+            top: 20px;
+            width: 220px;
+            height: 300px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 20px 18px;
+            transform: rotate(-4deg);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .doc-before::before {
+            content: 'AI Output';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #2a1a1a;
+            padding: 6px 12px;
+            font-size: 9px;
+            font-weight: 700;
+            color: #ff4444;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-bottom: 1px solid #331a1a;
+        }
+
+        .doc-before .doc-title-bar {
+            margin-top: 20px;
+            height: 14px;
+            width: 75%;
+            background: #444;
+            border-radius: 2px;
+            margin-bottom: 14px;
+            transform: skewX(-3deg);
+        }
+
+        .doc-before .doc-line {
+            height: 7px;
+            background: #2a2a2a;
+            border-radius: 1px;
+            margin-bottom: 7px;
+        }
+
+        .doc-before .doc-line:nth-child(3) {
+            width: 100%;
+            background: #333;
+            transform: skewX(2deg);
+        }
+
+        .doc-before .doc-line:nth-child(4) {
+            width: 60%;
+        }
+
+        .doc-before .doc-line:nth-child(5) {
+            width: 90%;
+            background: #383020;
+        }
+
+        .doc-before .doc-line:nth-child(6) {
+            width: 45%;
+        }
+
+        .doc-before .doc-line:nth-child(7) {
+            width: 100%;
+            background: #333;
+            margin-top: 14px;
+            transform: skewX(-2deg);
+        }
+
+        .doc-before .doc-line:nth-child(8) {
+            width: 80%;
+        }
+
+        .doc-before .doc-line:nth-child(9) {
+            width: 55%;
+            background: #382020;
+        }
+
+        .doc-before .doc-line:nth-child(10) {
+            width: 70%;
+        }
+
+        /* Red strike-through marks */
+        .doc-before .strike {
+            position: absolute;
+            height: 2px;
+            background: #ff4444;
+            opacity: 0.6;
+            border-radius: 1px;
+        }
+
+        .doc-before .strike-1 {
+            top: 68px;
+            left: 18px;
+            width: 120px;
+            transform: rotate(-1deg);
+        }
+
+        .doc-before .strike-2 {
+            top: 115px;
+            left: 24px;
+            width: 80px;
+            transform: rotate(1deg);
+        }
+
+        .doc-before .strike-3 {
+            top: 180px;
+            left: 18px;
+            width: 140px;
+            transform: rotate(-2deg);
+        }
+
+        /* Broken format indicator */
+        .doc-before .broken-badge {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 68, 68, 0.15);
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            border-radius: 4px;
+            padding: 4px 10px;
+            font-size: 9px;
+            font-weight: 700;
+            color: #ff6666;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* Arrow between docs */
+        .doc-arrow {
+            position: absolute;
+            left: 215px;
+            top: 155px;
+            z-index: 5;
+            width: 50px;
+            text-align: center;
+        }
+
+        .doc-arrow svg {
+            width: 40px;
+            height: 24px;
+        }
+
+        /* After doc - clean, perfect */
+        .doc-after {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 240px;
+            height: 320px;
+            background: #141414;
+            border: 1px solid rgba(255, 77, 0, 0.25);
+            border-radius: 6px;
+            padding: 20px 18px;
+            transform: rotate(1deg);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 77, 0, 0.06);
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .doc-after::before {
+            content: 'contrl output';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 77, 0, 0.08);
+            padding: 6px 12px;
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255, 77, 0, 0.15);
+        }
+
+        .doc-after .doc-header {
+            margin-top: 22px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .doc-after .doc-logo {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            background: linear-gradient(135deg, var(--accent), #ff8040);
+        }
+
+        .doc-after .doc-company {
+            height: 10px;
+            width: 70px;
+            background: #333;
+            border-radius: 2px;
+        }
+
+        .doc-after .doc-title-clean {
+            height: 16px;
+            width: 85%;
+            background: #2a2a2a;
+            border-radius: 2px;
+            margin-bottom: 6px;
+        }
+
+        .doc-after .doc-subtitle-clean {
+            height: 10px;
+            width: 55%;
+            background: rgba(255, 77, 0, 0.15);
+            border-radius: 2px;
+            margin-bottom: 20px;
+        }
+
+        .doc-after .doc-divider {
+            height: 1px;
+            background: #2a2a2a;
+            margin-bottom: 16px;
+        }
+
+        .doc-after .doc-line-clean {
+            height: 7px;
+            background: #1e1e1e;
+            border-radius: 1px;
+            margin-bottom: 7px;
+        }
+
+        .doc-after .doc-line-clean:nth-child(n+7) {}
+
+        /* base */
+        .doc-after .doc-line-clean.w100 {
+            width: 100%;
+        }
+
+        .doc-after .doc-line-clean.w90 {
+            width: 90%;
+        }
+
+        .doc-after .doc-line-clean.w80 {
+            width: 80%;
+        }
+
+        .doc-after .doc-line-clean.w70 {
+            width: 70%;
+        }
+
+        .doc-after .doc-line-clean.w60 {
+            width: 60%;
+        }
+
+        .doc-after .clean-badge {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 77, 0, 0.1);
+            border: 1px solid rgba(255, 77, 0, 0.25);
+            border-radius: 4px;
+            padding: 4px 10px;
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* Labels under docs */
+        .doc-label {
+            position: absolute;
+            bottom: 0;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .doc-label-before {
+            left: 40px;
+            color: #ff4444;
+        }
+
+        .doc-label-after {
+            right: 50px;
+            color: var(--accent);
+        }
+
+        .btn-primary {
+            display: inline-block;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--black);
+            background: var(--accent);
+            padding: 16px 36px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            display: inline-block;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--gray-1);
+            padding: 16px 24px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .btn-ghost:hover {
+            color: var(--white);
+        }
+
+        /* --- MARQUEE STRIP --- */
+        .strip {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 20px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .strip-inner {
+            display: inline-block;
+            animation: scroll 30s linear infinite;
+        }
+
+        .strip-item {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-2);
+            padding: 0 40px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .strip-item .dot {
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-right: 16px;
+            vertical-align: middle;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* --- STATEMENT --- */
+        .statement {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 140px 32px;
+        }
+
+        .statement .headline-lg span {
+            color: var(--gray-2);
+        }
+
+        /* --- THREE COLUMN --- */
+        .problems {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px 140px;
+        }
+
+        .problems .label {
+            margin-bottom: 64px;
+        }
+
+        .prob-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .prob-card {
+            background: var(--gray-4);
+            padding: 48px 36px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .prob-card .num {
+            font-size: 64px;
+            font-weight: 800;
+            color: rgba(255, 77, 0, 0.15);
+            line-height: 1;
+            margin-bottom: 24px;
+            letter-spacing: -0.04em;
+        }
+
+        .prob-card .headline-md {
+            margin-bottom: 12px;
+        }
+
+        /* --- PIPELINE --- */
+        .pipeline {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .pipeline-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 32px;
+        }
+
+        .pipeline-inner .label {
+            margin-bottom: 16px;
+        }
+
+        .pipeline-inner .headline-lg {
+            margin-bottom: 80px;
+        }
+
+        .pipe-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .pipe-step {
+            background: var(--gray-4);
+            padding: 48px 36px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            position: relative;
+        }
+
+        .pipe-step .step-num {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .pipe-step .step-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .pipe-step .step-desc {
+            font-size: 15px;
+            color: var(--gray-1);
+            line-height: 1.5;
+        }
+
+        /* --- BIG QUOTE --- */
+        .big-quote {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 160px 32px;
+            text-align: center;
+        }
+
+        .big-quote blockquote {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            color: var(--white);
+        }
+
+        .big-quote blockquote span {
+            color: var(--accent);
+        }
+
+        .big-quote .attribution {
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--gray-2);
+        }
+
+        /* --- FORMATS --- */
+        .formats {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px 140px;
+        }
+
+        .formats .label {
+            margin-bottom: 16px;
+        }
+
+        .formats .headline-lg {
+            margin-bottom: 64px;
+        }
+
+        .format-row {
+            display: flex;
+            gap: 2px;
+        }
+
+        .format-card {
+            flex: 1;
+            background: var(--gray-4);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 48px 36px;
+            text-align: center;
+        }
+
+        .format-card .ext {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+
+        .format-card .ext-desc {
+            font-size: 14px;
+            color: var(--gray-1);
+        }
+
+        /* --- SECURITY --- */
+        .security {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .security-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 32px;
+        }
+
+        .security-inner .label {
+            margin-bottom: 16px;
+        }
+
+        .security-inner .headline-lg {
+            margin-bottom: 64px;
+        }
+
+        .sec-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+        }
+
+        .sec-card {
+            background: var(--gray-4);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 36px 28px;
+        }
+
+        .sec-card .sec-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .sec-card .sec-desc {
+            font-size: 14px;
+            color: var(--gray-2);
+            line-height: 1.45;
+        }
+
+        /* --- CTA --- */
+        .cta-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 160px 32px;
+            text-align: center;
+        }
+
+        .cta-section .headline-lg {
+            margin-bottom: 16px;
+        }
+
+        .cta-section .body-lg {
+            max-width: 420px;
+            margin: 0 auto 48px;
+        }
+
+        .cta-contact {
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--gray-2);
+        }
+
+        .cta-contact a {
+            color: var(--gray-1);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 32px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 13px;
+            color: var(--gray-2);
+        }
+
+        footer a {
+            color: var(--gray-1);
+            text-decoration: none;
+        }
+
+        /* --- FADE IN --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 960px) {
+            .hero {
+                flex-direction: column;
+                padding: 160px 32px 80px;
+                gap: 48px;
+                text-align: center;
+            }
+
+            .hero-text {
+                order: 1;
+            }
+
+            .hero-visual {
+                order: 2;
+            }
+
+            .hero .body-lg {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-ctas {
+                justify-content: center;
+            }
+
+            .doc-compare {
+                max-width: 460px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 140px 24px 80px;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .prob-grid,
+            .pipe-row {
+                grid-template-columns: 1fr;
+            }
+
+            .format-row {
+                flex-direction: column;
+            }
+
+            .sec-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .statement {
+                padding: 100px 24px;
+            }
+
+            .big-quote {
+                padding: 100px 24px;
+            }
+
+            .cta-section {
+                padding: 100px 24px;
+            }
+
+            .doc-before {
+                width: 180px;
+                height: 250px;
+            }
+
+            .doc-after {
+                width: 200px;
+                height: 270px;
+            }
+
+            .doc-arrow {
+                left: 175px;
+                top: 125px;
+            }
+
+            .doc-compare {
+                height: 360px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sec-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .doc-before {
+                width: 150px;
+                height: 210px;
+                padding: 16px 14px;
+            }
+
+            .doc-after {
+                width: 170px;
+                height: 230px;
+                padding: 16px 14px;
+            }
+
+            .doc-arrow {
+                left: 145px;
+                top: 105px;
+            }
+
+            .doc-compare {
+                height: 310px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="wordmark">contrl<span>.</span></a>
+            <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="nav-cta">Request demo</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-text">
+            <p class="label">Document automation</p>
+            <h1 class="headline-hero">Take back<br><span class="accent">contrl.</span></h1>
+            <p class="body-lg">Your templates. Your format. Your company's DNA. Contrl generates documents that are
+                indistinguishable from your best work.</p>
+            <div class="hero-ctas">
+                <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="btn-primary">Book a demo</a>
+                <a href="#how" class="btn-ghost">How it works &darr;</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="doc-compare">
+                <!-- Before: messy AI-generated doc -->
+                <div class="doc-before">
+                    <div class="doc-title-bar"></div>
+                    <div class="doc-line"></div>
+                    <div class="doc-line"></div>
+                    <div class="doc-line"></div>
+                    <div class="doc-line"></div>
+                    <div class="doc-line"></div>
+                    <div class="doc-line"></div>
+                    <div class="doc-line"></div>
+                    <div class="doc-line"></div>
+                    <!-- Red strikes -->
+                    <div class="strike strike-1"></div>
+                    <div class="strike strike-2"></div>
+                    <div class="strike strike-3"></div>
+                    <div class="broken-badge">Format broken</div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="doc-arrow">
+                    <svg viewBox="0 0 40 24" fill="none">
+                        <path d="M2 12h32M28 5l8 7-8 7" stroke="#ff4d00" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+
+                <!-- After: clean contrl output -->
+                <div class="doc-after">
+                    <div class="doc-header">
+                        <div class="doc-logo"></div>
+                        <div class="doc-company"></div>
+                    </div>
+                    <div class="doc-title-clean"></div>
+                    <div class="doc-subtitle-clean"></div>
+                    <div class="doc-divider"></div>
+                    <div class="doc-line-clean w100"></div>
+                    <div class="doc-line-clean w90"></div>
+                    <div class="doc-line-clean w100"></div>
+                    <div class="doc-line-clean w70"></div>
+                    <div class="doc-line-clean w100"></div>
+                    <div class="doc-line-clean w80"></div>
+                    <div class="doc-line-clean w100"></div>
+                    <div class="doc-line-clean w60"></div>
+                    <div class="clean-badge">Format preserved</div>
+                </div>
+
+                <!-- Labels -->
+                <div class="doc-label doc-label-before">Before</div>
+                <div class="doc-label doc-label-after">After</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE STRIP -->
+    <div class="strip">
+        <div class="strip-inner">
+            <span class="strip-item"><span class="dot"></span>Pixel-perfect formatting</span>
+            <span class="strip-item"><span class="dot"></span>Deterministic output</span>
+            <span class="strip-item"><span class="dot"></span>Local-first security</span>
+            <span class="strip-item"><span class="dot"></span>PPTX · DOCX · XLSX</span>
+            <span class="strip-item"><span class="dot"></span>Document DNA extraction</span>
+            <span class="strip-item"><span class="dot"></span>Zero format degradation</span>
+            <span class="strip-item"><span class="dot"></span>Pixel-perfect formatting</span>
+            <span class="strip-item"><span class="dot"></span>Deterministic output</span>
+            <span class="strip-item"><span class="dot"></span>Local-first security</span>
+            <span class="strip-item"><span class="dot"></span>PPTX · DOCX · XLSX</span>
+            <span class="strip-item"><span class="dot"></span>Document DNA extraction</span>
+            <span class="strip-item"><span class="dot"></span>Zero format degradation</span>
+        </div>
+    </div>
+
+    <!-- STATEMENT -->
+    <section class="statement fade-in">
+        <h2 class="headline-lg">Your best proposal writer quits tomorrow. <span>The next one writes exactly like them.
+                Day one.</span></h2>
+    </section>
+
+    <!-- PROBLEMS -->
+    <section class="problems fade-in">
+        <p class="label">The problem</p>
+        <div class="prob-grid">
+            <div class="prob-card">
+                <div class="num">01</div>
+                <h3 class="headline-md">Knowledge leaves with people</h3>
+                <p class="body-md">Templates survive. The judgment to fill them doesn't. When seniors leave, years of
+                    document instinct walk out the door.</p>
+            </div>
+            <div class="prob-card">
+                <div class="num">02</div>
+                <h3 class="headline-md">Quality is a lottery</h3>
+                <p class="body-md">A veteran produces polished proposals. A new hire produces rough drafts. Same
+                    company. Different standards. Every single time.</p>
+            </div>
+            <div class="prob-card">
+                <div class="num">03</div>
+                <h3 class="headline-md">AI destroys your format</h3>
+                <p class="body-md">ChatGPT generates content. Then breaks your layout, fonts, and structure. You spend
+                    hours fixing what should have been preserved.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PIPELINE -->
+    <div class="pipeline" id="how">
+        <div class="pipeline-inner fade-in">
+            <p class="label">How it works</p>
+            <h2 class="headline-lg">Three steps. Zero guesswork.</h2>
+            <div class="pipe-row">
+                <div class="pipe-step">
+                    <div class="step-num">Step 01</div>
+                    <div class="step-title">Upload</div>
+                    <div class="step-desc">Feed Contrl your existing templates. Proposals, reports, contracts — any
+                        format your company uses.</div>
+                </div>
+                <div class="pipe-step">
+                    <div class="step-num">Step 02</div>
+                    <div class="step-title">Extract DNA</div>
+                    <div class="step-desc">Contrl maps your structure, tone, variables, and formatting rules. Every
+                        detail captured automatically.</div>
+                </div>
+                <div class="pipe-step">
+                    <div class="step-num">Step 03</div>
+                    <div class="step-title">Generate</div>
+                    <div class="step-desc">New documents assembled deterministically. No hallucination. No format drift.
+                        Same spec = same output.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BIG QUOTE -->
+    <section class="big-quote fade-in">
+        <blockquote>&ldquo;AI that doesn&rsquo;t improvise.<br>It <span>preserves</span>.&rdquo;</blockquote>
+        <p class="attribution">The Contrl approach to document generation</p>
+    </section>
+
+    <!-- FORMATS -->
+    <section class="formats fade-in">
+        <p class="label">One pipeline</p>
+        <h2 class="headline-lg">Every format. Controlled.</h2>
+        <div class="format-row">
+            <div class="format-card">
+                <div class="ext">.pptx</div>
+                <div class="ext-desc">Presentations &amp; proposals</div>
+            </div>
+            <div class="format-card">
+                <div class="ext">.docx</div>
+                <div class="ext-desc">Reports &amp; plans</div>
+            </div>
+            <div class="format-card">
+                <div class="ext">.xlsx</div>
+                <div class="ext-desc">Data sheets &amp; analysis</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECURITY -->
+    <div class="security">
+        <div class="security-inner fade-in">
+            <p class="label">Trust</p>
+            <h2 class="headline-lg">Your documents never leave.</h2>
+            <div class="sec-grid">
+                <div class="sec-card">
+                    <div class="sec-title">Local-first</div>
+                    <div class="sec-desc">Files stay on your machine. Always.</div>
+                </div>
+                <div class="sec-card">
+                    <div class="sec-title">On-premise</div>
+                    <div class="sec-desc">Self-hosted deployment available.</div>
+                </div>
+                <div class="sec-card">
+                    <div class="sec-title">No data training</div>
+                    <div class="sec-desc">Your documents are never used to train models.</div>
+                </div>
+                <div class="sec-card">
+                    <div class="sec-title">Deterministic</div>
+                    <div class="sec-desc">Same input. Same output. Guaranteed.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-section fade-in">
+        <h2 class="headline-lg">See it with your own templates.</h2>
+        <p class="body-lg">15 minutes. Your documents. No slides, no fluff.</p>
+        <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="btn-primary">Book a demo</a>
+        <p class="cta-contact"><a href="mailto:junho@proact.team">junho@proact.team</a></p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>contrl by <a href="https://proact.team">Proact.Team</a> &middot; 2026</p>
+    </footer>
+
+    <!-- SCROLL FADE-IN -->
+    <script>
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+    </script>
+
+</body>
+
+</html>
