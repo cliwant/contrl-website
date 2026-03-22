@@ -1,1169 +1,527 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>contrl — Take back control of your documents</title>
+    <title>contrl — 문서 자동화의 새로운 기준</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        accent: '#F27A2E',
+                        surface: '#f5f5f4',
+                    },
+                }
+            }
+        }
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --black: #0a0a0a;
-            --white: #fafafa;
-            --gray-1: #888;
-            --gray-2: #555;
-            --gray-3: #222;
-            --gray-4: #111;
-            --accent: #ff4d00;
-            --accent-dim: rgba(255, 77, 0, 0.12);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: var(--black);
-            color: var(--white);
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-
-        /* --- TYPOGRAPHY --- */
-        .headline-hero {
-            font-size: clamp(52px, 9vw, 96px);
+        @font-face {
+            font-family: 'Freesentation';
+            src: url('/fonts/Freesentation-8ExtraBold.ttf') format('truetype');
             font-weight: 800;
-            letter-spacing: -0.04em;
-            line-height: 0.95;
+            font-display: swap;
         }
+        * { word-break: keep-all; }
+        h1, h2, h3, h4 { text-wrap: balance; }
 
-        .headline-lg {
-            font-size: clamp(32px, 5vw, 56px);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.05;
+        /* Hero entrance animation */
+        @keyframes heroEnter {
+            from { opacity: 0; transform: translateY(2rem); filter: blur(4px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
-
-        .headline-md {
-            font-size: clamp(20px, 2.5vw, 28px);
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-        }
-
-        .body-lg {
-            font-size: clamp(17px, 2vw, 21px);
-            font-weight: 400;
-            line-height: 1.55;
-            color: var(--gray-1);
-        }
-
-        .body-md {
-            font-size: clamp(15px, 1.4vw, 17px);
-            font-weight: 400;
-            line-height: 1.55;
-            color: var(--gray-1);
-        }
-
-        .label {
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--accent);
-        }
-
-        /* --- NAV --- */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 18px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .wordmark {
-            font-size: 22px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            color: var(--white);
-            text-decoration: none;
-        }
-
-        .wordmark span {
-            color: var(--accent);
-        }
-
-        .nav-cta {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--black);
-            background: var(--accent);
-            padding: 10px 24px;
-            border-radius: 6px;
-            text-decoration: none;
-            transition: all 0.2s;
-            letter-spacing: 0.01em;
-        }
-
-        .nav-cta:hover {
-            opacity: 0.85;
-            transform: translateY(-1px);
-        }
-
-        /* --- HERO --- */
-        .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 180px 32px 140px;
-            display: flex;
-            align-items: center;
-            gap: 60px;
-        }
-
-        .hero-text {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .hero-visual {
-            flex: 1;
-            min-width: 0;
-            position: relative;
-        }
-
-        .hero .label {
-            margin-bottom: 24px;
-        }
-
-        .hero .headline-hero {
-            margin-bottom: 32px;
-        }
-
-        .hero .headline-hero .accent {
-            color: var(--accent);
-        }
-
-        .hero .body-lg {
-            max-width: 520px;
-            margin-bottom: 48px;
-        }
-
-        .hero-ctas {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
-
-        /* --- HERO MOCKUP --- */
-        .doc-compare {
-            position: relative;
-            height: 420px;
-        }
-
-        /* Before doc - messy, tilted */
-        .doc-before {
-            position: absolute;
-            left: 0;
-            top: 20px;
-            width: 220px;
-            height: 300px;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 6px;
-            padding: 20px 18px;
-            transform: rotate(-4deg);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .doc-before::before {
-            content: 'AI Output';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: #2a1a1a;
-            padding: 6px 12px;
-            font-size: 9px;
-            font-weight: 700;
-            color: #ff4444;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            border-bottom: 1px solid #331a1a;
-        }
-
-        .doc-before .doc-title-bar {
-            margin-top: 20px;
-            height: 14px;
-            width: 75%;
-            background: #444;
-            border-radius: 2px;
-            margin-bottom: 14px;
-            transform: skewX(-3deg);
-        }
-
-        .doc-before .doc-line {
-            height: 7px;
-            background: #2a2a2a;
-            border-radius: 1px;
-            margin-bottom: 7px;
-        }
-
-        .doc-before .doc-line:nth-child(3) {
-            width: 100%;
-            background: #333;
-            transform: skewX(2deg);
-        }
-
-        .doc-before .doc-line:nth-child(4) {
-            width: 60%;
-        }
-
-        .doc-before .doc-line:nth-child(5) {
-            width: 90%;
-            background: #383020;
-        }
-
-        .doc-before .doc-line:nth-child(6) {
-            width: 45%;
-        }
-
-        .doc-before .doc-line:nth-child(7) {
-            width: 100%;
-            background: #333;
-            margin-top: 14px;
-            transform: skewX(-2deg);
-        }
-
-        .doc-before .doc-line:nth-child(8) {
-            width: 80%;
-        }
-
-        .doc-before .doc-line:nth-child(9) {
-            width: 55%;
-            background: #382020;
-        }
-
-        .doc-before .doc-line:nth-child(10) {
-            width: 70%;
-        }
-
-        /* Red strike-through marks */
-        .doc-before .strike {
-            position: absolute;
-            height: 2px;
-            background: #ff4444;
-            opacity: 0.6;
-            border-radius: 1px;
-        }
-
-        .doc-before .strike-1 {
-            top: 68px;
-            left: 18px;
-            width: 120px;
-            transform: rotate(-1deg);
-        }
-
-        .doc-before .strike-2 {
-            top: 115px;
-            left: 24px;
-            width: 80px;
-            transform: rotate(1deg);
-        }
-
-        .doc-before .strike-3 {
-            top: 180px;
-            left: 18px;
-            width: 140px;
-            transform: rotate(-2deg);
-        }
-
-        /* Broken format indicator */
-        .doc-before .broken-badge {
-            position: absolute;
-            bottom: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 68, 68, 0.15);
-            border: 1px solid rgba(255, 68, 68, 0.3);
-            border-radius: 4px;
-            padding: 4px 10px;
-            font-size: 9px;
-            font-weight: 700;
-            color: #ff6666;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        /* Arrow between docs */
-        .doc-arrow {
-            position: absolute;
-            left: 215px;
-            top: 155px;
-            z-index: 5;
-            width: 50px;
-            text-align: center;
-        }
-
-        .doc-arrow svg {
-            width: 40px;
-            height: 24px;
-        }
-
-        /* After doc - clean, perfect */
-        .doc-after {
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 240px;
-            height: 320px;
-            background: #141414;
-            border: 1px solid rgba(255, 77, 0, 0.25);
-            border-radius: 6px;
-            padding: 20px 18px;
-            transform: rotate(1deg);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 77, 0, 0.06);
-            z-index: 2;
-            overflow: hidden;
-        }
-
-        .doc-after::before {
-            content: 'contrl output';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 77, 0, 0.08);
-            padding: 6px 12px;
-            font-size: 9px;
-            font-weight: 700;
-            color: var(--accent);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            border-bottom: 1px solid rgba(255, 77, 0, 0.15);
-        }
-
-        .doc-after .doc-header {
-            margin-top: 22px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .doc-after .doc-logo {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            background: linear-gradient(135deg, var(--accent), #ff8040);
-        }
-
-        .doc-after .doc-company {
-            height: 10px;
-            width: 70px;
-            background: #333;
-            border-radius: 2px;
-        }
-
-        .doc-after .doc-title-clean {
-            height: 16px;
-            width: 85%;
-            background: #2a2a2a;
-            border-radius: 2px;
-            margin-bottom: 6px;
-        }
-
-        .doc-after .doc-subtitle-clean {
-            height: 10px;
-            width: 55%;
-            background: rgba(255, 77, 0, 0.15);
-            border-radius: 2px;
-            margin-bottom: 20px;
-        }
-
-        .doc-after .doc-divider {
-            height: 1px;
-            background: #2a2a2a;
-            margin-bottom: 16px;
-        }
-
-        .doc-after .doc-line-clean {
-            height: 7px;
-            background: #1e1e1e;
-            border-radius: 1px;
-            margin-bottom: 7px;
-        }
-
-        .doc-after .doc-line-clean:nth-child(n+7) {}
-
-        /* base */
-        .doc-after .doc-line-clean.w100 {
-            width: 100%;
-        }
-
-        .doc-after .doc-line-clean.w90 {
-            width: 90%;
-        }
-
-        .doc-after .doc-line-clean.w80 {
-            width: 80%;
-        }
-
-        .doc-after .doc-line-clean.w70 {
-            width: 70%;
-        }
-
-        .doc-after .doc-line-clean.w60 {
-            width: 60%;
-        }
-
-        .doc-after .clean-badge {
-            position: absolute;
-            bottom: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 77, 0, 0.1);
-            border: 1px solid rgba(255, 77, 0, 0.25);
-            border-radius: 4px;
-            padding: 4px 10px;
-            font-size: 9px;
-            font-weight: 700;
-            color: var(--accent);
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        /* Labels under docs */
-        .doc-label {
-            position: absolute;
-            bottom: 0;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-        }
-
-        .doc-label-before {
-            left: 40px;
-            color: #ff4444;
-        }
-
-        .doc-label-after {
-            right: 50px;
-            color: var(--accent);
-        }
-
-        .btn-primary {
-            display: inline-block;
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--black);
-            background: var(--accent);
-            padding: 16px 36px;
-            border-radius: 6px;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .btn-primary:hover {
-            opacity: 0.85;
-            transform: translateY(-1px);
-        }
-
-        .btn-ghost {
-            display: inline-block;
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--gray-1);
-            padding: 16px 24px;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .btn-ghost:hover {
-            color: var(--white);
-        }
-
-        /* --- MARQUEE STRIP --- */
-        .strip {
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 20px 0;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .strip-inner {
-            display: inline-block;
-            animation: scroll 30s linear infinite;
-        }
-
-        .strip-item {
-            display: inline-block;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--gray-2);
-            padding: 0 40px;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-
-        .strip-item .dot {
-            display: inline-block;
-            width: 4px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 50%;
-            margin-right: 16px;
-            vertical-align: middle;
-        }
-
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* --- STATEMENT --- */
-        .statement {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 140px 32px;
-        }
-
-        .statement .headline-lg span {
-            color: var(--gray-2);
-        }
-
-        /* --- THREE COLUMN --- */
-        .problems {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 32px 140px;
-        }
-
-        .problems .label {
-            margin-bottom: 64px;
-        }
-
-        .prob-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2px;
-        }
-
-        .prob-card {
-            background: var(--gray-4);
-            padding: 48px 36px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .prob-card .num {
-            font-size: 64px;
-            font-weight: 800;
-            color: rgba(255, 77, 0, 0.15);
-            line-height: 1;
-            margin-bottom: 24px;
-            letter-spacing: -0.04em;
-        }
-
-        .prob-card .headline-md {
-            margin-bottom: 12px;
-        }
-
-        /* --- PIPELINE --- */
-        .pipeline {
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .pipeline-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 120px 32px;
-        }
-
-        .pipeline-inner .label {
-            margin-bottom: 16px;
-        }
-
-        .pipeline-inner .headline-lg {
-            margin-bottom: 80px;
-        }
-
-        .pipe-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2px;
-        }
-
-        .pipe-step {
-            background: var(--gray-4);
-            padding: 48px 36px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            position: relative;
-        }
-
-        .pipe-step .step-num {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 20px;
-        }
-
-        .pipe-step .step-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--white);
-            margin-bottom: 12px;
-            letter-spacing: -0.02em;
-        }
-
-        .pipe-step .step-desc {
-            font-size: 15px;
-            color: var(--gray-1);
-            line-height: 1.5;
-        }
-
-        /* --- BIG QUOTE --- */
-        .big-quote {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 160px 32px;
-            text-align: center;
-        }
-
-        .big-quote blockquote {
-            font-size: clamp(28px, 4vw, 48px);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.15;
-            color: var(--white);
-        }
-
-        .big-quote blockquote span {
-            color: var(--accent);
-        }
-
-        .big-quote .attribution {
-            margin-top: 24px;
-            font-size: 14px;
-            color: var(--gray-2);
-        }
-
-        /* --- FORMATS --- */
-        .formats {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 32px 140px;
-        }
-
-        .formats .label {
-            margin-bottom: 16px;
-        }
-
-        .formats .headline-lg {
-            margin-bottom: 64px;
-        }
-
-        .format-row {
-            display: flex;
-            gap: 2px;
-        }
-
-        .format-card {
-            flex: 1;
-            background: var(--gray-4);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 48px 36px;
-            text-align: center;
-        }
-
-        .format-card .ext {
-            font-size: 36px;
-            font-weight: 800;
-            color: var(--accent);
-            letter-spacing: -0.03em;
-            margin-bottom: 8px;
-        }
-
-        .format-card .ext-desc {
-            font-size: 14px;
-            color: var(--gray-1);
-        }
-
-        /* --- SECURITY --- */
-        .security {
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .security-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 120px 32px;
-        }
-
-        .security-inner .label {
-            margin-bottom: 16px;
-        }
-
-        .security-inner .headline-lg {
-            margin-bottom: 64px;
-        }
-
-        .sec-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2px;
-        }
-
-        .sec-card {
-            background: var(--gray-4);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 36px 28px;
-        }
-
-        .sec-card .sec-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--white);
-            margin-bottom: 8px;
-        }
-
-        .sec-card .sec-desc {
-            font-size: 14px;
-            color: var(--gray-2);
-            line-height: 1.45;
-        }
-
-        /* --- CTA --- */
-        .cta-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 160px 32px;
-            text-align: center;
-        }
-
-        .cta-section .headline-lg {
-            margin-bottom: 16px;
-        }
-
-        .cta-section .body-lg {
-            max-width: 420px;
-            margin: 0 auto 48px;
-        }
-
-        .cta-contact {
-            margin-top: 24px;
-            font-size: 14px;
-            color: var(--gray-2);
-        }
-
-        .cta-contact a {
-            color: var(--gray-1);
-            text-decoration: underline;
-            text-underline-offset: 3px;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 32px;
-            text-align: center;
-        }
-
-        footer p {
-            font-size: 13px;
-            color: var(--gray-2);
-        }
-
-        footer a {
-            color: var(--gray-1);
-            text-decoration: none;
-        }
-
-        /* --- FADE IN --- */
-        .fade-in {
+        .hero-enter {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            animation: heroEnter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .hero-delay-1 { animation-delay: 0.1s; }
+        .hero-delay-2 { animation-delay: 0.3s; }
+        .hero-delay-3 { animation-delay: 0.5s; }
+        .hero-delay-4 { animation-delay: 0.7s; }
+
+        /* Scroll reveal */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(1.5rem); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { opacity: 0; }
+        .reveal.visible { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .stagger > *:nth-child(1) { animation-delay: 0ms; }
+        .stagger > *:nth-child(2) { animation-delay: 80ms; }
+        .stagger > *:nth-child(3) { animation-delay: 160ms; }
+        .stagger > *:nth-child(4) { animation-delay: 240ms; }
+        .stagger > *:nth-child(5) { animation-delay: 320ms; }
+        .stagger > *:nth-child(6) { animation-delay: 400ms; }
+
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        .badge-float {
+            animation: float 5s ease-in-out infinite;
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* Flow connector lines */
+        .flow-line-l { border-top: 2px dashed rgba(255,158,31,0.3); }
+        .flow-line-r { border-top: 2px solid #F27A2E; }
+
+        /* Flow diagram SVG lines */
+        .flow-diagram {
+            position: relative;
         }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 960px) {
-            .hero {
-                flex-direction: column;
-                padding: 160px 32px 80px;
-                gap: 48px;
-                text-align: center;
-            }
-
-            .hero-text {
-                order: 1;
-            }
-
-            .hero-visual {
-                order: 2;
-            }
-
-            .hero .body-lg {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .hero-ctas {
-                justify-content: center;
-            }
-
-            .doc-compare {
-                max-width: 460px;
-                margin: 0 auto;
-            }
+        .flow-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
-
-        @media (max-width: 768px) {
-            .hero {
-                padding: 140px 24px 80px;
-            }
-
-            .hero-ctas {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .prob-grid,
-            .pipe-row {
-                grid-template-columns: 1fr;
-            }
-
-            .format-row {
-                flex-direction: column;
-            }
-
-            .sec-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .statement {
-                padding: 100px 24px;
-            }
-
-            .big-quote {
-                padding: 100px 24px;
-            }
-
-            .cta-section {
-                padding: 100px 24px;
-            }
-
-            .doc-before {
-                width: 180px;
-                height: 250px;
-            }
-
-            .doc-after {
-                width: 200px;
-                height: 270px;
-            }
-
-            .doc-arrow {
-                left: 175px;
-                top: 125px;
-            }
-
-            .doc-compare {
-                height: 360px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .sec-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .doc-before {
-                width: 150px;
-                height: 210px;
-                padding: 16px 14px;
-            }
-
-            .doc-after {
-                width: 170px;
-                height: 230px;
-                padding: 16px 14px;
-            }
-
-            .doc-arrow {
-                left: 145px;
-                top: 105px;
-            }
-
-            .doc-compare {
-                height: 310px;
-            }
+        .flow-left-col, .flow-right-col, .flow-hub {
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
 
-<body>
+<body class="font-sans antialiased bg-white text-zinc-900 overflow-x-hidden scroll-smooth">
 
     <!-- NAV -->
-    <nav>
-        <div class="nav-inner">
-            <a href="#" class="wordmark">contrl<span>.</span></a>
-            <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="nav-cta">Request demo</a>
+    <nav class="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-xl border-b border-zinc-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold tracking-tight">contrl<span class="text-accent">.</span></a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#features" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">기능</a>
+                <a href="#why" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">왜 contrl</a>
+                <a href="#faq" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">FAQ</a>
+            </div>
+            <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="bg-zinc-900 text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-zinc-800 transition-colors">데모 예약</a>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-text">
-            <p class="label">Document automation</p>
-            <h1 class="headline-hero">Take back<br><span class="accent">contrl.</span></h1>
-            <p class="body-lg">Your templates. Your format. Your company's DNA. Contrl generates documents that are
-                indistinguishable from your best work.</p>
-            <div class="hero-ctas">
-                <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="btn-primary">Book a demo</a>
-                <a href="#how" class="btn-ghost">How it works &darr;</a>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <div class="doc-compare">
-                <!-- Before: messy AI-generated doc -->
-                <div class="doc-before">
-                    <div class="doc-title-bar"></div>
-                    <div class="doc-line"></div>
-                    <div class="doc-line"></div>
-                    <div class="doc-line"></div>
-                    <div class="doc-line"></div>
-                    <div class="doc-line"></div>
-                    <div class="doc-line"></div>
-                    <div class="doc-line"></div>
-                    <div class="doc-line"></div>
-                    <!-- Red strikes -->
-                    <div class="strike strike-1"></div>
-                    <div class="strike strike-2"></div>
-                    <div class="strike strike-3"></div>
-                    <div class="broken-badge">Format broken</div>
-                </div>
-
-                <!-- Arrow -->
-                <div class="doc-arrow">
-                    <svg viewBox="0 0 40 24" fill="none">
-                        <path d="M2 12h32M28 5l8 7-8 7" stroke="#ff4d00" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </div>
-
-                <!-- After: clean contrl output -->
-                <div class="doc-after">
-                    <div class="doc-header">
-                        <div class="doc-logo"></div>
-                        <div class="doc-company"></div>
+    <!-- 1. HERO -->
+    <section class="min-h-[100dvh] pt-16 bg-surface flex items-center relative overflow-x-clip overflow-y-visible">
+        <!-- 은은한 오렌지 그라데이션 -->
+        <div class="absolute top-0 right-0 w-[900px] h-[900px] bg-gradient-to-bl from-accent/10 via-accent/4 to-transparent rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-tr from-accent/6 to-transparent rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 lg:py-0 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Left: Text -->
+                <div>
+                    <h1 class="hero-enter hero-delay-1 text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-tight text-zinc-900 mb-8" style="font-family: 'Freesentation', 'Pretendard', sans-serif;">
+                        PPT 템플릿만 있다면,<br>제안서 초안이 자동으로 뚝딱
+                    </h1>
+                    <p class="hero-enter hero-delay-2 text-base md:text-lg text-zinc-500 leading-relaxed max-w-md mb-10">
+                        당신의 템플릿, 당신의 포맷, 당신의 회사 DNA. Contrl은 최고의 결과물과 구분할 수 없는 문서를 자동으로 생성합니다.
+                    </p>
+                    <div class="hero-enter hero-delay-3 flex flex-wrap items-center gap-4">
+                        <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="inline-flex items-center gap-2 bg-accent text-white font-semibold px-7 py-3.5 rounded-full text-base hover:opacity-90 transition-opacity">
+                            <iconify-icon icon="solar:calendar-bold" width="18"></iconify-icon>
+                            데모 예약하기
+                        </a>
+                        <a href="#features" class="inline-flex items-center gap-2 border border-zinc-200 text-zinc-700 font-semibold px-7 py-3.5 rounded-full text-base hover:border-zinc-300 transition-colors">
+                            작동 방식 보기
+                        </a>
                     </div>
-                    <div class="doc-title-clean"></div>
-                    <div class="doc-subtitle-clean"></div>
-                    <div class="doc-divider"></div>
-                    <div class="doc-line-clean w100"></div>
-                    <div class="doc-line-clean w90"></div>
-                    <div class="doc-line-clean w100"></div>
-                    <div class="doc-line-clean w70"></div>
-                    <div class="doc-line-clean w100"></div>
-                    <div class="doc-line-clean w80"></div>
-                    <div class="doc-line-clean w100"></div>
-                    <div class="doc-line-clean w60"></div>
-                    <div class="clean-badge">Format preserved</div>
                 </div>
+                <!-- Right: Video + floating badges -->
+                <div class="hero-enter hero-delay-2 relative">
+                    <!-- Warm glow behind video -->
+                    <div class="absolute -inset-16 bg-gradient-to-br from-accent/10 via-accent/5 to-transparent rounded-full blur-[80px] pointer-events-none"></div>
 
-                <!-- Labels -->
-                <div class="doc-label doc-label-before">Before</div>
-                <div class="doc-label doc-label-after">After</div>
+                    <!-- Video -->
+                    <div class="relative rounded-3xl overflow-hidden bg-zinc-800" style="box-shadow: 0 25px 60px -15px rgba(0,0,0,0.15);">
+                        <div class="aspect-video flex items-center justify-center relative">
+                            <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                                <source src="" type="video/mp4">
+                            </video>
+                            <span class="text-xs font-medium tracking-widest uppercase text-zinc-500 absolute">영상 준비 중</span>
+                        </div>
+                    </div>
+
+                    <!-- Floating badges -->
+                    <div class="hidden lg:flex absolute -left-16 top-1/3 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 0s;">
+                        <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
+                            <iconify-icon icon="solar:document-bold-duotone" width="16" class="text-accent"></iconify-icon>
+                        </div>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap">포맷 완벽 보존</span>
+                    </div>
+
+                    <div class="hidden lg:flex absolute right-6 -bottom-8 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 1s;">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+                            <iconify-icon icon="solar:check-circle-bold-duotone" width="16" class="text-emerald-500"></iconify-icon>
+                        </div>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap">할루시네이션 없음</span>
+                    </div>
+
+                    <div class="hidden lg:flex absolute right-12 -top-8 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 0.5s;">
+                        <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
+                            <iconify-icon icon="solar:lock-bold-duotone" width="16" class="text-accent"></iconify-icon>
+                        </div>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap">로컬 우선</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- MARQUEE STRIP -->
-    <div class="strip">
-        <div class="strip-inner">
-            <span class="strip-item"><span class="dot"></span>Pixel-perfect formatting</span>
-            <span class="strip-item"><span class="dot"></span>Deterministic output</span>
-            <span class="strip-item"><span class="dot"></span>Local-first security</span>
-            <span class="strip-item"><span class="dot"></span>PPTX · DOCX · XLSX</span>
-            <span class="strip-item"><span class="dot"></span>Document DNA extraction</span>
-            <span class="strip-item"><span class="dot"></span>Zero format degradation</span>
-            <span class="strip-item"><span class="dot"></span>Pixel-perfect formatting</span>
-            <span class="strip-item"><span class="dot"></span>Deterministic output</span>
-            <span class="strip-item"><span class="dot"></span>Local-first security</span>
-            <span class="strip-item"><span class="dot"></span>PPTX · DOCX · XLSX</span>
-            <span class="strip-item"><span class="dot"></span>Document DNA extraction</span>
-            <span class="strip-item"><span class="dot"></span>Zero format degradation</span>
-        </div>
-    </div>
-
-    <!-- STATEMENT -->
-    <section class="statement fade-in">
-        <h2 class="headline-lg">Your best proposal writer quits tomorrow. <span>The next one writes exactly like them.
-                Day one.</span></h2>
-    </section>
-
-    <!-- PROBLEMS -->
-    <section class="problems fade-in">
-        <p class="label">The problem</p>
-        <div class="prob-grid">
-            <div class="prob-card">
-                <div class="num">01</div>
-                <h3 class="headline-md">Knowledge leaves with people</h3>
-                <p class="body-md">Templates survive. The judgment to fill them doesn't. When seniors leave, years of
-                    document instinct walk out the door.</p>
+    <!-- 2. FEATURES (작동 방식) -->
+    <section id="features" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal mb-20 text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;">작동 방식</h2>
+                <p class="text-base text-zinc-500 leading-relaxed max-w-md mx-auto">세 단계로 완성합니다. 템플릿을 올리면 Contrl이 알아서 처리합니다.</p>
             </div>
-            <div class="prob-card">
-                <div class="num">02</div>
-                <h3 class="headline-md">Quality is a lottery</h3>
-                <p class="body-md">A veteran produces polished proposals. A new hire produces rough drafts. Same
-                    company. Different standards. Every single time.</p>
-            </div>
-            <div class="prob-card">
-                <div class="num">03</div>
-                <h3 class="headline-md">AI destroys your format</h3>
-                <p class="body-md">ChatGPT generates content. Then breaks your layout, fonts, and structure. You spend
-                    hours fixing what should have been preserved.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- PIPELINE -->
-    <div class="pipeline" id="how">
-        <div class="pipeline-inner fade-in">
-            <p class="label">How it works</p>
-            <h2 class="headline-lg">Three steps. Zero guesswork.</h2>
-            <div class="pipe-row">
-                <div class="pipe-step">
-                    <div class="step-num">Step 01</div>
-                    <div class="step-title">Upload</div>
-                    <div class="step-desc">Feed Contrl your existing templates. Proposals, reports, contracts — any
-                        format your company uses.</div>
+            <!-- Flow diagram -->
+            <div class="reveal grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-4 items-center flow-diagram" id="flowDiagram">
+                <!-- Left: Inputs -->
+                <div class="flex flex-col gap-4 stagger flow-left-col lg:pr-8">
+                    <div class="flow-card-wrap reveal" data-flow="left">
+                        <div class="bg-white rounded-2xl p-5 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <iconify-icon icon="solar:document-add-bold-duotone" width="20" class="text-accent"></iconify-icon>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">템플릿 업로드</h4>
+                                <p class="text-sm text-zinc-500 leading-relaxed">제안서, 보고서, 계약서 등 기존 문서</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-card-wrap reveal">
+                        <div class="bg-white rounded-2xl p-5 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <iconify-icon icon="solar:dna-bold-duotone" width="20" class="text-accent"></iconify-icon>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">문서 DNA 추출</h4>
+                                <p class="text-sm text-zinc-500 leading-relaxed">구조, 톤, 변수, 서식 규칙 자동 매핑</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-card-wrap reveal">
+                        <div class="bg-white rounded-2xl p-5 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <iconify-icon icon="solar:pen-new-square-bold-duotone" width="20" class="text-accent"></iconify-icon>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">새 데이터 입력</h4>
+                                <p class="text-sm text-zinc-500 leading-relaxed">프로젝트별 내용과 변수 값 전달</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="pipe-step">
-                    <div class="step-num">Step 02</div>
-                    <div class="step-title">Extract DNA</div>
-                    <div class="step-desc">Contrl maps your structure, tone, variables, and formatting rules. Every
-                        detail captured automatically.</div>
-                </div>
-                <div class="pipe-step">
-                    <div class="step-num">Step 03</div>
-                    <div class="step-title">Generate</div>
-                    <div class="step-desc">New documents assembled deterministically. No hallucination. No format drift.
-                        Same spec = same output.</div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- BIG QUOTE -->
-    <section class="big-quote fade-in">
-        <blockquote>&ldquo;AI that doesn&rsquo;t improvise.<br>It <span>preserves</span>.&rdquo;</blockquote>
-        <p class="attribution">The Contrl approach to document generation</p>
-    </section>
+                <!-- Center: Hub -->
+                <div class="flex items-center justify-center px-2 lg:px-0 relative flow-hub">
+                    <div id="hubCenter" class="w-32 h-32 lg:w-36 lg:h-36 rounded-3xl bg-gradient-to-br from-accent/10 to-accent/5 border-2 border-accent/15 flex items-center justify-center">
+                        <div class="w-24 h-24 lg:w-28 lg:h-28 rounded-2xl bg-white shadow-lg flex items-center justify-center">
+                            <span class="text-lg lg:text-xl font-bold tracking-tight">contrl<span class="text-accent">.</span></span>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- FORMATS -->
-    <section class="formats fade-in">
-        <p class="label">One pipeline</p>
-        <h2 class="headline-lg">Every format. Controlled.</h2>
-        <div class="format-row">
-            <div class="format-card">
-                <div class="ext">.pptx</div>
-                <div class="ext-desc">Presentations &amp; proposals</div>
-            </div>
-            <div class="format-card">
-                <div class="ext">.docx</div>
-                <div class="ext-desc">Reports &amp; plans</div>
-            </div>
-            <div class="format-card">
-                <div class="ext">.xlsx</div>
-                <div class="ext-desc">Data sheets &amp; analysis</div>
+                <!-- Right: Outputs -->
+                <div class="flex flex-col gap-4 stagger flow-right-col lg:pl-8">
+                    <div class="flow-card-wrap reveal">
+                        <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <h4 class="font-bold text-lg mb-2">PPTX / DOCX / XLSX</h4>
+                                    <p class="text-sm text-zinc-500 leading-relaxed">원본과 동일한 포맷으로 새 문서를 자동 생성합니다. 할루시네이션 없이 결정론적으로 조립합니다.</p>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
+                                    <iconify-icon icon="solar:check-circle-bold-duotone" width="20" class="text-emerald-500"></iconify-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-card-wrap reveal">
+                        <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <h4 class="font-bold text-lg mb-2">포맷 완벽 보존</h4>
+                                <p class="text-sm text-zinc-500 leading-relaxed">레이아웃, 폰트, 스타일이 원본 그대로. 같은 입력이면 같은 결과를 보장합니다.</p>
+                            </div>
+                            <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <iconify-icon icon="solar:shield-check-bold-duotone" width="20" class="text-accent"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- SECURITY -->
-    <div class="security">
-        <div class="security-inner fade-in">
-            <p class="label">Trust</p>
-            <h2 class="headline-lg">Your documents never leave.</h2>
-            <div class="sec-grid">
-                <div class="sec-card">
-                    <div class="sec-title">Local-first</div>
-                    <div class="sec-desc">Files stay on your machine. Always.</div>
+    <!-- 3. WHY -->
+    <section id="why" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-surface">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;">왜 contrl인가</h2>
+                <p class="text-base md:text-lg text-zinc-500 leading-relaxed max-w-xl mx-auto">최고의 제안서 작성자가 내일 퇴사해도, 그 다음 사람은 첫날부터 똑같이 씁니다.</p>
+            </div>
+            <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-5 stagger">
+                <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
+                    <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
+                        <iconify-icon icon="solar:user-minus-linear" width="20" class="text-accent"></iconify-icon>
+                    </div>
+                    <div class="mt-5">
+                        <h3 class="text-lg font-bold mb-2">노하우는 사람과 함께 떠납니다</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">시니어가 떠나면 수년간 쌓은 문서 감각도 함께 사라집니다.</p>
+                    </div>
                 </div>
-                <div class="sec-card">
-                    <div class="sec-title">On-premise</div>
-                    <div class="sec-desc">Self-hosted deployment available.</div>
+                <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
+                    <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
+                        <iconify-icon icon="solar:ranking-linear" width="20" class="text-accent"></iconify-icon>
+                    </div>
+                    <div class="mt-5">
+                        <h3 class="text-lg font-bold mb-2">품질이 복불복입니다</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">같은 회사, 다른 기준. 사람마다 결과물이 다릅니다.</p>
+                    </div>
                 </div>
-                <div class="sec-card">
-                    <div class="sec-title">No data training</div>
-                    <div class="sec-desc">Your documents are never used to train models.</div>
+                <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
+                    <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
+                        <iconify-icon icon="solar:danger-triangle-linear" width="20" class="text-accent"></iconify-icon>
+                    </div>
+                    <div class="mt-5">
+                        <h3 class="text-lg font-bold mb-2">AI가 포맷을 망가뜨립니다</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">ChatGPT는 내용을 만들지만 레이아웃을 깨뜨립니다.</p>
+                    </div>
                 </div>
-                <div class="sec-card">
-                    <div class="sec-title">Deterministic</div>
-                    <div class="sec-desc">Same input. Same output. Guaranteed.</div>
+                <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
+                    <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
+                        <iconify-icon icon="solar:lock-linear" width="20" class="text-accent"></iconify-icon>
+                    </div>
+                    <div class="mt-5">
+                        <h3 class="text-lg font-bold mb-2">로컬 우선 보안</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">파일은 항상 내 컴퓨터에만 머뭅니다.</p>
+                    </div>
+                </div>
+                <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
+                    <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
+                        <iconify-icon icon="solar:server-linear" width="20" class="text-accent"></iconify-icon>
+                    </div>
+                    <div class="mt-5">
+                        <h3 class="text-lg font-bold mb-2">온프레미스 배포</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">자체 서버 배포를 지원합니다.</p>
+                    </div>
+                </div>
+                <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
+                    <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
+                        <iconify-icon icon="solar:verified-check-linear" width="20" class="text-accent"></iconify-icon>
+                    </div>
+                    <div class="mt-5">
+                        <h3 class="text-lg font-bold mb-2">결정론적 생성</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">같은 입력. 같은 결과. 보장합니다.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- CTA -->
-    <section class="cta-section fade-in">
-        <h2 class="headline-lg">See it with your own templates.</h2>
-        <p class="body-lg">15 minutes. Your documents. No slides, no fluff.</p>
-        <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="btn-primary">Book a demo</a>
-        <p class="cta-contact"><a href="mailto:junho@proact.team">junho@proact.team</a></p>
+    <!-- 4. FAQ -->
+    <section id="faq" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-3xl mx-auto">
+            <div class="reveal text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;">자주 묻는 질문</h2>
+                <p class="text-base text-zinc-500">궁금한 점이 있으신가요?</p>
+            </div>
+            <div class="stagger">
+                <div class="reveal border-t border-zinc-200 faq-item">
+                    <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors">어떤 파일 포맷을 지원하나요?</span>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
+                    </button>
+                    <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed">PPTX, DOCX, XLSX를 지원합니다. 원본 템플릿의 서식, 스타일, 구조를 정확히 보존하면서 새 문서를 생성합니다.</p>
+                    </div>
+                </div>
+                <div class="reveal border-t border-zinc-200 faq-item">
+                    <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors">ChatGPT 같은 AI 도구와 뭐가 다른가요?</span>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
+                    </button>
+                    <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed">범용 AI와 달리 Contrl은 즉흥적으로 만들지 않습니다. 문서의 DNA를 추출하고 결정론적으로 결과물을 생성합니다. 같은 입력이면 같은 결과. 포맷 손상도, 할루시네이션도 없습니다.</p>
+                    </div>
+                </div>
+                <div class="reveal border-t border-zinc-200 faq-item">
+                    <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors">데이터는 안전한가요?</span>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
+                    </button>
+                    <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed">Contrl은 로컬 우선으로 동작하며, 파일이 외부로 전송되지 않습니다. 온프레미스 배포도 가능하고, 문서가 모델 학습에 사용되는 일은 절대 없습니다.</p>
+                    </div>
+                </div>
+                <div class="reveal border-t border-zinc-200 faq-item">
+                    <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors">설정은 얼마나 걸리나요?</span>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
+                    </button>
+                    <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed">템플릿을 업로드하면 바로 사용할 수 있습니다. 별도의 학습 기간이나 복잡한 설정이 필요 없습니다.</p>
+                    </div>
+                </div>
+                <div class="reveal border-t border-b border-zinc-200 faq-item">
+                    <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors">우리 문서로 직접 테스트해볼 수 있나요?</span>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
+                    </button>
+                    <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed">네. 15분 데모를 예약하시면 실제 템플릿으로 Contrl을 실행해 드립니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CTA Card (Glance-style orange card) -->
+    <section class="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-surface">
+        <div class="max-w-3xl mx-auto">
+            <div class="reveal bg-gradient-to-br from-accent to-[#e88a10] rounded-[2rem] px-8 py-16 md:px-16 md:py-20 text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;">직접 확인해 보세요</h2>
+                <p class="text-base text-white/70 leading-relaxed mb-8 max-w-md mx-auto">15분이면 충분합니다. 당신의 문서로, 바로 결과를 보여드립니다.</p>
+                <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="inline-flex items-center gap-2 bg-white text-accent font-semibold px-8 py-3.5 rounded-full text-base hover:bg-white/90 transition-colors">
+                    데모 예약하기
+                    <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
+                </a>
+            </div>
+        </div>
     </section>
 
     <!-- FOOTER -->
-    <footer>
-        <p>contrl by <a href="https://proact.team">Proact.Team</a> &middot; 2026</p>
+    <footer class="border-t border-zinc-100 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div>
+                    <a href="#" class="text-xl font-bold tracking-tight">contrl<span class="text-accent">.</span></a>
+                    <p class="text-sm text-zinc-400 mt-3 leading-relaxed max-w-xs">문서 자동화의 새로운 기준. 당신의 템플릿으로 완벽한 문서를 만듭니다.</p>
+                </div>
+                <div>
+                    <h4 class="text-sm font-semibold text-zinc-900 mb-4">Product</h4>
+                    <div class="space-y-3">
+                        <a href="#features" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">작동 방식</a>
+                        <a href="#why" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">왜 contrl</a>
+                        <a href="#faq" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">FAQ</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-sm font-semibold text-zinc-900 mb-4">문의</h4>
+                    <div class="space-y-3">
+                        <a href="mailto:junho@proact.team" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">junho@proact.team</a>
+                        <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">데모 예약</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-zinc-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-zinc-400">&copy; 2026 contrl by Proact.Team. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
-    <!-- SCROLL FADE-IN -->
     <script>
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-        }, { threshold: 0.12 });
-        document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Flow diagram SVG curved lines
+        function drawFlowLines() {
+            const diagram = document.getElementById('flowDiagram');
+            const hub = document.getElementById('hubCenter');
+            if (!diagram || !hub || window.innerWidth < 1024) {
+                const existing = document.querySelector('.flow-svg');
+                if (existing) existing.remove();
+                return;
+            }
+            let svg = document.querySelector('.flow-svg');
+            if (!svg) {
+                svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.classList.add('flow-svg');
+                diagram.appendChild(svg);
+            }
+            svg.innerHTML = '';
+            const dRect = diagram.getBoundingClientRect();
+            const hRect = hub.getBoundingClientRect();
+            const hLx = hRect.left - dRect.left;
+            const hRx = hRect.right - dRect.left;
+            const hCy = hRect.top + hRect.height / 2 - dRect.top;
+
+            // Left cards -> hub left side (curved, dashed)
+            document.querySelectorAll('.flow-left-col .flow-card-wrap').forEach(card => {
+                const cRect = card.getBoundingClientRect();
+                const sx = cRect.right - dRect.left;
+                const sy = cRect.top + cRect.height / 2 - dRect.top;
+                const ex = hLx;
+                const ey = hCy;
+                const midX = sx + (ex - sx) * 0.6;
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M ${sx} ${sy} C ${midX} ${sy}, ${midX} ${ey}, ${ex} ${ey}`);
+                path.setAttribute('stroke', 'rgba(242,122,46,0.2)');
+                path.setAttribute('stroke-width', '2');
+                path.setAttribute('stroke-dasharray', '6 4');
+                path.setAttribute('fill', 'none');
+                svg.appendChild(path);
+            });
+
+            // Hub right side -> right cards (curved, solid)
+            document.querySelectorAll('.flow-right-col .flow-card-wrap').forEach(card => {
+                const cRect = card.getBoundingClientRect();
+                const sx = hRx;
+                const sy = hCy;
+                const ex = cRect.left - dRect.left;
+                const ey = cRect.top + cRect.height / 2 - dRect.top;
+                const midX = sx + (ex - sx) * 0.4;
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M ${sx} ${sy} C ${midX} ${sy}, ${midX} ${ey}, ${ex} ${ey}`);
+                path.setAttribute('stroke', 'rgba(242,122,46,0.35)');
+                path.setAttribute('stroke-width', '2.5');
+                path.setAttribute('fill', 'none');
+                svg.appendChild(path);
+            });
+        }
+        window.addEventListener('load', () => setTimeout(drawFlowLines, 500));
+        window.addEventListener('resize', drawFlowLines);
+
+        // FAQ
+        function toggleFaq(btn) {
+            const item = btn.closest('.faq-item');
+            const answer = item.querySelector('.faq-answer');
+            const chevron = item.querySelector('.faq-chevron');
+            const isOpen = item.classList.contains('open');
+            // Close all
+            document.querySelectorAll('.faq-item.open').forEach(other => {
+                if (other !== item) {
+                    other.classList.remove('open');
+                    other.querySelector('.faq-answer').style.maxHeight = '0';
+                    other.querySelector('.faq-chevron').style.transform = '';
+                }
+            });
+            if (isOpen) {
+                item.classList.remove('open');
+                answer.style.maxHeight = '0';
+                chevron.style.transform = '';
+            } else {
+                item.classList.add('open');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                chevron.style.transform = 'rotate(180deg)';
+            }
+        }
     </script>
 
 </body>
