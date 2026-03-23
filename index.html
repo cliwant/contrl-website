@@ -25,6 +25,7 @@
         }
     </script>
     <style>
+        html { scroll-behavior: smooth; }
         @font-face {
             font-family: 'Freesentation';
             src: url('/fonts/Freesentation-8ExtraBold.ttf') format('truetype');
@@ -123,13 +124,19 @@
 
 <body class="font-sans antialiased bg-white text-zinc-900 overflow-x-hidden scroll-smooth">
 
+    <!-- TOP BANNER -->
+    <div class="fixed top-0 left-0 right-0 z-50 bg-zinc-900 text-white text-center py-2.5 text-sm font-medium">
+        <span data-i18n="banner">Closed Beta 3/30 오픈 — 선착순 마감 전에 신청하세요</span>
+        <a href="https://tally.so/r/b5dqO2" target="_blank" class="ml-3 inline-flex items-center gap-1 underline underline-offset-2 hover:text-accent transition-colors font-semibold" data-i18n="banner-cta">신청하기 →</a>
+    </div>
+
     <!-- NAV -->
-    <nav class="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-xl border-b border-zinc-100">
+    <nav class="fixed top-[40px] left-0 right-0 z-40 bg-white/80 backdrop-blur-xl border-b border-zinc-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="#" class="text-xl font-bold tracking-tight">contrl<span class="text-accent">.</span></a>
             <div class="hidden md:flex items-center gap-8">
-                <a href="#features" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-features">기능</a>
-                <a href="#why" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-why">왜 contrl</a>
+                <a href="#features" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-features">Features</a>
+                <a href="#why" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-why">Why contrl</a>
                 <a href="#faq" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-faq">FAQ</a>
             </div>
             <div class="flex items-center gap-3">
@@ -139,13 +146,13 @@
                     <span id="langEn" class="relative z-10 w-10 h-7 flex items-center justify-center rounded-full transition-all duration-300 text-zinc-400 font-medium text-[11px]">EN</span>
                     <span id="langSlider" class="absolute left-1 top-1 w-10 h-7 rounded-full transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]" style="background: rgba(255,255,255,0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 0 0 0.5px rgba(255,255,255,0.5), inset 0 1px 1px rgba(255,255,255,0.6);"></span>
                 </button>
-                <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="bg-zinc-900 text-white text-sm font-semibold py-2.5 rounded-full hover:bg-zinc-800 transition-colors text-center w-[100px]" data-i18n="nav-cta">데모 예약</a>
+                <a href="https://tally.so/r/b5dqO2" class="bg-zinc-900 text-white text-sm font-semibold py-2.5 rounded-full hover:bg-zinc-800 transition-colors text-center w-[100px]" data-i18n="nav-cta">Beta 신청</a>
             </div>
         </div>
     </nav>
 
     <!-- 1. HERO -->
-    <section class="min-h-[100dvh] pt-16 bg-[#f9f6f2] flex items-center relative overflow-x-clip overflow-y-visible">
+    <section class="min-h-[100dvh] pt-[96px] bg-[#f9f6f2] flex items-center relative overflow-x-clip overflow-y-visible">
         <!-- 은은한 오렌지 그라데이션 (Glance 스타일) -->
         <div class="absolute top-[10%] right-[5%] w-[800px] h-[800px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(242,122,46,0.12) 0%, rgba(242,122,46,0.06) 40%, transparent 70%); filter: blur(60px);"></div>
         <div class="absolute bottom-[15%] right-[15%] w-[500px] h-[500px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(242,122,46,0.08) 0%, transparent 60%); filter: blur(80px);"></div>
@@ -159,15 +166,15 @@
                         우리 회사 PPT 템플릿 그대로,<br>제안서 초안 자동 작성
                     </h1>
                     <p class="hero-enter hero-delay-2 text-base md:text-lg text-zinc-500 leading-relaxed max-w-md mb-10" data-i18n="hero-sub">
-                        Claude, Gamma, Genspark로는 불가능했던 초안 퀄리티를 경험해보세요.
+                        제안서 담당자가 원하던 바로 그 초안, 직접 확인해보세요.
                     </p>
                     <div class="hero-enter hero-delay-3 flex flex-wrap items-center gap-4">
-                        <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-7 py-3.5 rounded-full text-base">
-                            <span data-i18n="hero-cta">데모 예약하기</span>
+                        <a href="https://tally.so/r/b5dqO2" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-7 py-3.5 rounded-full text-base">
+                            <span data-i18n="hero-cta">Closed Beta 신청</span>
                             <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
                         </a>
                         <a href="#features" class="inline-flex items-center gap-2 border border-zinc-200 text-zinc-700 font-semibold px-7 py-3.5 rounded-full text-base hover:border-zinc-300 transition-colors">
-                            <span data-i18n="hero-cta2">작동 방식 보기</span>
+                            <span data-i18n="hero-cta2">See How It Works</span>
                         </a>
                     </div>
                 </div>
@@ -206,16 +213,16 @@
 
                     <div class="hidden lg:flex absolute right-6 -bottom-8 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 1s;">
                         <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
-                            <iconify-icon icon="solar:check-circle-bold-duotone" width="16" class="text-emerald-500"></iconify-icon>
+                            <iconify-icon icon="solar:shield-check-bold-duotone" width="16" class="text-emerald-500"></iconify-icon>
                         </div>
-                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-hallu">할루시네이션 없음</span>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-hallu">AI 검증 프로세스</span>
                     </div>
 
                     <div class="hidden lg:flex absolute right-12 -top-8 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 0.5s;">
                         <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
-                            <iconify-icon icon="solar:lock-bold-duotone" width="16" class="text-accent"></iconify-icon>
+                            <iconify-icon icon="solar:routing-bold-duotone" width="16" class="text-accent"></iconify-icon>
                         </div>
-                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-local">로컬 우선</span>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-local">제안 전략 설계</span>
                     </div>
                 </div>
             </div>
@@ -226,8 +233,8 @@
     <section id="features" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="reveal mb-20 text-center">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="flow-title">작동 방식</h2>
-                <p class="text-base text-zinc-500 leading-relaxed max-w-lg mx-auto" data-i18n="flow-sub">AI가 먼저 초안과 의도 가설을 제안하고, 작성자는 의도를 수정하며, reviewer는 맥락과 함께 검토합니다.</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="flow-title">How It Works</h2>
+                <p class="text-base text-zinc-500 leading-relaxed max-w-lg mx-auto" data-i18n="flow-sub">Win Theme 설정부터 차별화 설계, 검증까지. 하나의 흐름으로 완성합니다.</p>
             </div>
             <!-- Flow diagram -->
             <div class="reveal grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-4 items-center flow-diagram" id="flowDiagram">
@@ -240,7 +247,7 @@
                             </div>
                             <div>
                                 <h4 class="font-semibold mb-1" data-i18n="flow-in1-title">Template</h4>
-                                <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-in1-desc">기존 제안서, 보고서, 계약서 등 문서 양식</p>
+                                <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-in1-desc">과거 제안서 PPT에서 우리 회사의 DNA와 양식을 학습합니다.</p>
                             </div>
                         </div>
                     </div>
@@ -251,7 +258,7 @@
                             </div>
                             <div>
                                 <h4 class="font-semibold mb-1" data-i18n="flow-in2-title">Reference</h4>
-                                <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-in2-desc">프로젝트 맥락, 데이터, 참고 자료</p>
+                                <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-in2-desc">제안요청서(RFP)를 분석해 고객의 의도를 면밀히 파악합니다.</p>
                             </div>
                         </div>
                     </div>
@@ -272,8 +279,8 @@
                         <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
                             <div class="flex items-start justify-between gap-4">
                                 <div>
-                                    <h4 class="font-bold text-lg mb-2" data-i18n="flow-out1-title">의도가 연결된 초안</h4>
-                                    <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-out1-desc">각 문단의 존재 이유와 역할이 명시된 문서를 자동 생성합니다.</p>
+                                    <h4 class="font-bold text-lg mb-2" data-i18n="flow-out1-title">Win Theme 기반 초안</h4>
+                                    <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-out1-desc">제안요청서(RFP)를 분석해 Win Theme을 설정하고, 그에 맞는 초안을 설계합니다.</p>
                                 </div>
                                 <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
                                     <iconify-icon icon="solar:document-bold-duotone" width="20" class="text-emerald-500"></iconify-icon>
@@ -285,8 +292,8 @@
                         <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
                             <div class="flex items-start justify-between gap-4">
                                 <div>
-                                    <h4 class="font-bold text-lg mb-2" data-i18n="flow-out2-title">Source Tracing</h4>
-                                    <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-out2-desc">초안의 각 문단이 어떤 참고 문서의 어느 부분을 근거로 작성됐는지 출처를 보여줍니다.</p>
+                                    <h4 class="font-bold text-lg mb-2" data-i18n="flow-out2-title">차별화 설계</h4>
+                                    <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-out2-desc">RFP의 핵심 요구사항과 우리 강점을 연결해, 차별화 포인트를 초안에 녹입니다.</p>
                                 </div>
                                 <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
                                     <iconify-icon icon="solar:link-round-bold-duotone" width="20" class="text-accent"></iconify-icon>
@@ -298,8 +305,8 @@
                         <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
                             <div class="flex items-start justify-between gap-4">
                                 <div>
-                                    <h4 class="font-bold text-lg mb-2" data-i18n="flow-out3-title">Reviewer Summary</h4>
-                                    <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-out3-desc">리뷰어를 위한 의도 요약과 검토 요청 쟁점을 함께 전달합니다.</p>
+                                    <h4 class="font-bold text-lg mb-2" data-i18n="flow-out3-title">검증 리포트</h4>
+                                    <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-out3-desc">AI가 왜 그렇게 작성했는지, 근거와 출처를 함께 확인할 수 있습니다.</p>
                                 </div>
                                 <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
                                     <iconify-icon icon="solar:chat-round-check-bold-duotone" width="20" class="text-blue-500"></iconify-icon>
@@ -316,8 +323,8 @@
     <section class="py-24 md:py-32 px-4 sm:px-6 lg:px-8" style="background-color: #FCFCFC;">
         <div class="max-w-7xl mx-auto">
             <div class="reveal mb-20 text-center">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="feat-title">핵심 기능</h2>
-                <p class="text-base text-zinc-500 leading-relaxed max-w-lg mx-auto" data-i18n="feat-sub">문서 작성의 각 단계에서 contrl이 돕는 구체적인 기능들입니다.</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="feat-title">Key Features</h2>
+                <p class="text-base text-zinc-500 leading-relaxed max-w-lg mx-auto" data-i18n="feat-sub">제안서 작성의 각 단계에서 contrl이 제공하는 핵심 기능입니다.</p>
             </div>
 
             <!-- Row 1: 문단별 의도 태깅 -->
@@ -363,7 +370,7 @@
                         <iconify-icon icon="solar:tag-bold-duotone" width="24" class="text-accent"></iconify-icon>
                     </div>
                     <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat1-title">Win Theme</h3>
-                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat1-desc">RFP 분석부터 Win Theme(차별화 전략)까지, 빠르게 완성하세요.</p>
+                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat1-desc">RFP를 분석해 고객의 핵심 요구사항을 파악하고, 우리 자산과 매칭해 Win Theme(차별화 전략)을 설계합니다. AI가 스토리 방향을 제안하고, 빈 퍼즐과 차별화 포인트까지 짚어줍니다.</p>
                 </div>
             </div>
 
@@ -374,7 +381,7 @@
                         <iconify-icon icon="solar:link-round-bold-duotone" width="24" class="text-accent"></iconify-icon>
                     </div>
                     <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat2-title">Template + PPT</h3>
-                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat2-desc">우리 회사의 양식 그대로, 바로 제출할 수 있는 PPT가 나옵니다.</p>
+                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat2-desc">우리 회사의 양식 그대로, 바로 제출할 수 있는 PPT가 나옵니다. 과거 제안서에서 회사의 톤, 구조, 차별화 요소를 학습해 다른 누구의 것이 아닌 우리만의 제안서를 만듭니다.</p>
                 </div>
                 <div class="order-1 lg:order-2 bg-white rounded-3xl p-8 flex items-center justify-center aspect-[4/3] shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
                     <div class="w-full max-w-xs space-y-3">
@@ -437,7 +444,7 @@
                         <iconify-icon icon="solar:brain-bold-duotone" width="24" class="text-accent"></iconify-icon>
                     </div>
                     <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat3-title">Security</h3>
-                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat3-desc">제안서는 모두 로컬에서, 외부 유출을 사전에 차단합니다.</p>
+                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat3-desc">제안서는 모두 로컬에서 처리되며, 클라우드 업로드 없이 외부 유출을 사전에 차단합니다. 민감한 제안 정보가 회사 밖으로 나가지 않습니다.</p>
                 </div>
             </div>
         </div>
@@ -447,8 +454,8 @@
     <section id="why" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="reveal text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="why-title">왜 contrl인가</h2>
-                <p class="text-base md:text-lg text-zinc-500 leading-relaxed max-w-xl mx-auto" data-i18n="why-sub">AI가 초안을 쉽게 만들어주지만, 생각이 덜 된 문서를 완성본처럼 보이게 만들고 있습니다.</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="why-title">Why contrl</h2>
+                <p class="text-base md:text-lg text-zinc-500 leading-relaxed max-w-xl mx-auto" data-i18n="why-sub">제안서 작성, 이런 문제 겪고 계시지 않나요?</p>
             </div>
             <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-5 stagger">
                 <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
@@ -456,53 +463,26 @@
                         <iconify-icon icon="solar:ghost-linear" width="20" class="text-accent"></iconify-icon>
                     </div>
                     <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2" data-i18n="why1-title">의도가 사라진 문서</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why1-desc">AI가 매끈한 초안을 만들지만, 각 문단이 왜 존재하는지는 아무도 모릅니다.</p>
+                        <h3 class="text-lg font-bold mb-2" data-i18n="why1-title">전략 없는 제안서</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why1-desc">RFP 요구사항을 나열만 할 뿐, Win Theme이나 차별화 전략 없이 제안서를 작성하고 있습니다.</p>
                     </div>
                 </div>
                 <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
                     <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:user-check-linear" width="20" class="text-accent"></iconify-icon>
+                        <iconify-icon icon="solar:copy-linear" width="20" class="text-accent"></iconify-icon>
                     </div>
                     <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2" data-i18n="why2-title">리뷰어의 숨은 노동</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why2-desc">리뷰어는 텍스트를 고치는 게 아니라, 작성자의 판단을 역추론하느라 시간을 씁니다.</p>
+                        <h3 class="text-lg font-bold mb-2" data-i18n="why2-title">매번 처음부터</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why2-desc">과거 제안서의 강점과 노하우가 축적되지 않아, 매번 백지에서 시작합니다.</p>
                     </div>
                 </div>
                 <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
                     <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:magic-stick-3-linear" width="20" class="text-accent"></iconify-icon>
+                        <iconify-icon icon="solar:shield-check-linear" width="20" class="text-accent"></iconify-icon>
                     </div>
                     <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2" data-i18n="why3-title">완성본의 착각</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why3-desc">AI 초안은 너무 매끈해서, 사고 공백이 가려집니다. 작성자도 리뷰어도 속습니다.</p>
-                    </div>
-                </div>
-                <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
-                    <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:refresh-circle-linear" width="20" class="text-accent"></iconify-icon>
-                    </div>
-                    <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2" data-i18n="why4-title">반복되는 피드백</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why4-desc">같은 지적이 매번 반복되지만, writing memory로 축적되지 않습니다.</p>
-                    </div>
-                </div>
-                <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
-                    <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:diploma-linear" width="20" class="text-accent"></iconify-icon>
-                    </div>
-                    <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2" data-i18n="why5-title">셀프 리뷰 부재</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why5-desc">작성자가 자기 문서를 리뷰어 기준으로 점검할 도구가 없습니다.</p>
-                    </div>
-                </div>
-                <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
-                    <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:buildings-linear" width="20" class="text-accent"></iconify-icon>
-                    </div>
-                    <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2" data-i18n="why6-title">협업의 블랙박스</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why6-desc">의도, 판단, 맥락이 문서 안에 남지 않아, 작성자와 리뷰어 사이가 단절됩니다.</p>
+                        <h3 class="text-lg font-bold mb-2" data-i18n="why3-title">검증 없는 초안</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why3-desc">AI가 만든 초안이 왜 그렇게 작성됐는지 근거를 확인할 수 없어, 리뷰와 수정에 더 많은 시간이 듭니다.</p>
                     </div>
                 </div>
             </div>
@@ -513,53 +493,53 @@
     <section id="faq" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#f9f6f2]">
         <div class="max-w-3xl mx-auto">
             <div class="reveal text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="faq-title">자주 묻는 질문</h2>
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="faq-title">FAQ</h2>
                 <p class="text-base text-zinc-500" data-i18n="faq-sub">궁금한 점이 있으신가요?</p>
             </div>
             <div class="stagger">
                 <div class="reveal border-t border-zinc-200 faq-item">
                     <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq1-q">어떤 문제를 풀고 있나요?</span>
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq1-q">contrl은 어떤 문제를 풀고 있나요?</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq1-a">현재 AI writing workflow에서 작성자의 의도가 문서 구조 안에 남지 않아, 작성자와 리뷰어 모두 맥락을 잃어버리는 문제를 풀고 있습니다. AI는 그럴듯한 초안을 빠르게 만들어주지만, 각 문단이 왜 존재하는지가 사라집니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq1-a">제안서를 쓸 때 RFP 요구사항을 나열만 하고, 차별화 전략 없이 작성하는 문제를 풀고 있습니다. contrl은 RFP 분석 → Win Theme 설정 → 차별화 설계 → 검증까지 하나의 흐름으로 연결해, 전략이 담긴 제안서를 만듭니다.</p>
                     </div>
                 </div>
                 <div class="reveal border-t border-zinc-200 faq-item">
                     <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq2-q">왜 input을 더 잘 받는 것만으로는 부족한가요?</span>
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq2-q">어떤 파일 형식을 지원하나요?</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq2-a">의도는 작성 전에 완성되는 정보가 아닙니다. 초안을 보고 반응하고 수정하면서 계속 변하고 구체화됩니다. 처음에 의도를 잘 받아도 문단과 명시적으로 연결되지 않으면 결국 맥락을 잃게 됩니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq2-a">현재 PowerPoint(.pptx) 형식을 지원합니다. 우리 회사의 기존 PPT 템플릿을 그대로 업로드하면, 양식과 디자인을 유지한 채 제안서 초안이 생성됩니다.</p>
                     </div>
                 </div>
                 <div class="reveal border-t border-zinc-200 faq-item">
                     <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq3-q">왜 사용자에게 의도를 직접 쓰게 하지 않나요?</span>
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq3-q">데이터 보안은 어떻게 되나요?</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq3-a">사람들은 제로베이스에서 의도를 완벽하게 입력하는 데 익숙하지 않습니다. 대신 초안을 보고 "이건 아니다", "이 역할이 틀렸다"고 반응하는 데는 훨씬 능숙합니다. 그래서 contrl은 intent authoring이 아니라 intent correction UX를 지향합니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq3-a">모든 처리는 로컬에서 이루어집니다. 클라우드에 업로드되지 않으며, 제안서 데이터가 외부로 유출되지 않습니다.</p>
                     </div>
                 </div>
                 <div class="reveal border-t border-zinc-200 faq-item">
                     <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq4-q">초기 고객은 누구인가요?</span>
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq4-q">누구를 위한 제품인가요?</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq4-a">리뷰어에게 reject 당하고 싶지 않은 작성자입니다. 더 생각해 보인 문서를 제출하고 싶고, 불필요한 재작업을 줄이고 싶은 분들이 첫 번째 사용자입니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq4-a">입찰 제안서를 작성하는 실무 담당자입니다. RFP를 받고 제안서를 만들어야 하는데, 매번 백지에서 시작하거나 전략 없이 요구사항만 나열하고 계신 분들이 첫 번째 사용자입니다.</p>
                     </div>
                 </div>
                 <div class="reveal border-t border-b border-zinc-200 faq-item">
                     <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq5-q">핵심 경험은 무엇인가요?</span>
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq5-q">Closed Beta는 어떻게 참여하나요?</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq5-a">AI가 초안과 함께 문단별 intent map을 제안합니다. 작성자는 텍스트뿐 아니라 각 문단의 목적과 역할을 보며 수정합니다. 리뷰어는 전체 의도 구조를 먼저 본 뒤 문서를 검토하고, 피드백은 문장 수정이 아닌 의도 수정으로도 남길 수 있습니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq5-a">상단의 Closed Beta 신청 버튼을 통해 신청하시면 됩니다. 3월 30일부터 4주간 무료로 운영되며, 별도의 회원가입이나 결제 없이 초대 기반으로 진행됩니다.</p>
                     </div>
                 </div>
             </div>
@@ -570,10 +550,10 @@
     <section class="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#524438]">
         <div class="max-w-3xl mx-auto text-center">
             <div class="reveal">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="cta-title">생각이 남는 문서를 써보세요</h2>
-                <p class="text-base text-white/60 leading-relaxed mb-8 max-w-md mx-auto" data-i18n-html="cta-sub">문서를 대신 써주는 AI가 아니라,<br>의도가 남는 문서를 쓰게 해주는 AI입니다.</p>
-                <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-8 py-3.5 rounded-full text-base">
-                    <span data-i18n="cta-btn">데모 예약하기</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="cta-title">이기는 제안서, 지금 시작하세요</h2>
+                <p class="text-base text-white/60 leading-relaxed mb-8 max-w-md mx-auto" data-i18n-html="cta-sub">RFP 분석부터 Win Theme, 차별화, 검증까지.<br>전략이 담긴 제안서를 하나의 흐름으로.</p>
+                <a href="https://tally.so/r/b5dqO2" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-8 py-3.5 rounded-full text-base">
+                    <span data-i18n="cta-btn">Closed Beta 신청</span>
                     <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
                 </a>
             </div>
@@ -586,13 +566,13 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div>
                     <a href="#" class="text-xl font-bold tracking-tight">contrl<span class="text-accent">.</span></a>
-                    <p class="text-sm text-zinc-400 mt-3 leading-relaxed max-w-xs" data-i18n="footer-desc">텍스트를 생성하는 AI가 아니라, 작성자의 의도를 문서에 남기는 AI.</p>
+                    <p class="text-sm text-zinc-400 mt-3 leading-relaxed max-w-xs" data-i18n="footer-desc">우리 회사 템플릿 그대로, 전략이 담긴 제안서를 자동으로 설계하는 AI.</p>
                 </div>
                 <div>
                     <h4 class="text-sm font-semibold text-zinc-900 mb-4">Product</h4>
                     <div class="space-y-3">
-                        <a href="#features" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-features">작동 방식</a>
-                        <a href="#why" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-why">왜 contrl</a>
+                        <a href="#features" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-features">How It Works</a>
+                        <a href="#why" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-why">Why contrl</a>
                         <a href="#faq" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-faq">FAQ</a>
                     </div>
                 </div>
@@ -600,7 +580,7 @@
                     <h4 class="text-sm font-semibold text-zinc-900 mb-4" data-i18n="footer-contact-title">문의</h4>
                     <div class="space-y-3">
                         <a href="mailto:junho@proact.team" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">junho@proact.team</a>
-                        <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-demo">데모 예약</a>
+                        <a href="https://tally.so/r/b5dqO2" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-demo">Beta 신청</a>
                     </div>
                 </div>
             </div>
@@ -759,69 +739,65 @@
                 'nav-features': 'Features',
                 'nav-why': 'Why contrl',
                 'nav-faq': 'FAQ',
-                'nav-cta': 'Book Demo',
+                'banner': 'Closed Beta opens 3/30 — Sign up before spots fill',
+                'banner-cta': 'Apply now →',
+                'nav-cta': 'Apply for Beta',
                 'hero-title': 'Your template, as is.<br>Your winning proposal, architected.',
-                'hero-sub': 'Experience draft quality impossible with Claude, Gamma, or Genspark.',
-                'hero-cta': 'Book a Demo',
+                'hero-sub': 'Built for proposal teams. Experience the draft quality you\'ve been looking for.',
+                'hero-cta': 'Apply for Closed Beta',
                 'hero-cta2': 'See How It Works',
                 'badge-format': 'Format Preserved',
-                'badge-hallu': 'No Hallucination',
-                'badge-local': 'Local First',
+                'badge-hallu': 'AI Verification',
+                'badge-local': 'Proposal Strategy',
                 'flow-title': 'How It Works',
-                'flow-sub': 'AI proposes a draft with intent hypotheses. The writer refines intent. The reviewer checks with full context.',
+                'flow-sub': 'From Win Theme to differentiation to verification. Completed in one flow.',
                 'flow-in1-title': 'Template',
-                'flow-in1-desc': 'Existing document formats — proposals, reports, contracts',
+                'flow-in1-desc': 'Learns your company\'s DNA and format from past proposal PPTs.',
                 'flow-in2-title': 'Reference',
-                'flow-in2-desc': 'Project context, data, and reference materials',
-                'flow-out1-title': 'Intent-linked Draft',
-                'flow-out1-desc': 'Automatically generates documents where each paragraph\'s purpose and role is clearly stated.',
-                'flow-out2-title': 'Source Tracing',
-                'flow-out2-desc': 'Shows which reference document and section each paragraph was based on.',
-                'flow-out3-title': 'Reviewer Summary',
-                'flow-out3-desc': 'Delivers intent summaries and key review points for reviewers.',
+                'flow-in2-desc': 'Analyzes the RFP to deeply understand the client\'s intent.',
+                'flow-out1-title': 'Win Theme Draft',
+                'flow-out1-desc': 'Analyzes the RFP to set a Win Theme, then architects a draft around it.',
+                'flow-out2-title': 'Differentiation',
+                'flow-out2-desc': 'Connects RFP requirements to your strengths, weaving differentiators into the draft.',
+                'flow-out3-title': 'Verification Report',
+                'flow-out3-desc': 'See exactly why AI wrote what it did — with sources and rationale.',
                 'feat-title': 'Key Features',
-                'feat-sub': 'Concrete features that contrl provides at each stage of document writing.',
+                'feat-sub': 'Core capabilities that contrl provides at each stage of proposal writing.',
                 'feat1-title': 'Win Theme',
-                'feat1-desc': 'From RFP to Win Theme, in one flow.',
+                'feat1-desc': 'Analyze the RFP to identify key requirements, match them with your assets, and design a Win Theme. AI proposes story direction and highlights gaps and differentiators.',
                 'feat2-title': 'Template + PPT',
-                'feat2-desc': 'Your template. Your voice. Your discriminators — not someone else\'s.',
+                'feat2-desc': 'Your company\'s format, as is — ready-to-submit PPT output. Learns your tone, structure, and differentiators from past proposals to create a proposal that\'s uniquely yours.',
                 'feat3-title': 'Security',
-                'feat3-desc': 'No cloud. No upload. Everything runs on your machine.',
+                'feat3-desc': 'All processing happens locally — no cloud uploads, no data leaving your machine. Your sensitive proposal data stays within your company.',
                 'why-title': 'Why contrl',
-                'why-sub': 'AI makes drafts easy, but it\'s making half-thought documents look like finished products.',
-                'why1-title': 'Documents Without Intent',
-                'why1-desc': 'AI creates polished drafts, but no one knows why each paragraph exists.',
-                'why2-title': 'Reviewer\'s Hidden Labor',
-                'why2-desc': 'Reviewers spend time reverse-engineering the writer\'s judgment, not editing text.',
-                'why3-title': 'The Illusion of Completion',
-                'why3-desc': 'AI drafts look so polished that gaps in thinking are hidden. Both writers and reviewers are fooled.',
-                'why4-title': 'Repeated Feedback',
-                'why4-desc': 'The same corrections repeat endlessly but never accumulate as writing memory.',
-                'why5-title': 'No Self-Review',
-                'why5-desc': 'Writers have no tool to check their own documents from a reviewer\'s perspective.',
-                'why6-title': 'Collaboration Black Box',
-                'why6-desc': 'Intent, judgment, and context don\'t stay in the document, disconnecting writers and reviewers.',
+                'why-sub': 'Sound familiar? These are the problems proposal teams face every day.',
+                'why1-title': 'Proposals Without Strategy',
+                'why1-desc': 'You list RFP requirements but write without a Win Theme or differentiation strategy.',
+                'why2-title': 'Starting From Scratch Every Time',
+                'why2-desc': 'Past proposal strengths and know-how aren\'t accumulated — you start from a blank page every time.',
+                'why3-title': 'Unverifiable AI Drafts',
+                'why3-desc': 'You can\'t see why AI wrote what it did. Without rationale, review and revision take even longer.',
                 'faq-title': 'Frequently Asked Questions',
                 'faq-sub': 'Have questions?',
-                'faq1-q': 'What problem are you solving?',
-                'faq1-a': 'In current AI writing workflows, the writer\'s intent doesn\'t remain in the document structure, causing both writers and reviewers to lose context. AI quickly creates plausible drafts, but why each paragraph exists disappears.',
-                'faq2-q': 'Why isn\'t better input collection enough?',
-                'faq2-a': 'Intent isn\'t information that\'s complete before writing. It continuously changes and becomes concrete as you see, react to, and revise drafts. Even if intent is well-captured initially, it\'s lost if not explicitly linked to paragraphs.',
-                'faq3-q': 'Why not have users write intent directly?',
-                'faq3-a': 'People aren\'t great at writing perfect intent from scratch. But they\'re much better at reacting — "that\'s not right" or "that role is wrong." That\'s why contrl focuses on intent correction UX, not intent authoring.',
-                'faq4-q': 'Who are your initial customers?',
-                'faq4-a': 'Writers who don\'t want to be rejected by reviewers. People who want to submit more thoughtful documents and reduce unnecessary rework are our first users.',
-                'faq5-q': 'What\'s the core experience?',
-                'faq5-a': 'AI proposes a paragraph-level intent map alongside the draft. Writers revise not just text but each paragraph\'s purpose and role. Reviewers see the full intent structure first, then review the document. Feedback can be given as intent corrections, not just text edits.',
-                'cta-title': 'Write documents that keep your thinking.',
-                'cta-sub': 'Not AI that writes documents for you,<br>but AI that keeps your intent in every document.',
-                'cta-btn': 'Book a Demo',
-                'footer-desc': 'Not AI that generates text, but AI that preserves the writer\'s intent in documents.',
+                'faq1-q': 'What problem does contrl solve?',
+                'faq1-a': 'Proposals often just list RFP requirements without a differentiation strategy. contrl connects the entire flow — RFP analysis → Win Theme → differentiation design → verification — to create proposals with real strategy.',
+                'faq2-q': 'What file formats are supported?',
+                'faq2-a': 'Currently PowerPoint (.pptx). Upload your company\'s existing PPT template, and contrl generates a proposal draft that preserves your format and design.',
+                'faq3-q': 'How is data security handled?',
+                'faq3-a': 'All processing happens locally. Nothing is uploaded to the cloud, and your proposal data never leaves your machine.',
+                'faq4-q': 'Who is this product for?',
+                'faq4-a': 'Proposal managers who write bid proposals. If you receive RFPs and find yourself starting from scratch or listing requirements without strategy every time, you\'re our first user.',
+                'faq5-q': 'How do I join the Closed Beta?',
+                'faq5-a': 'Click the "Apply for Closed Beta" button above. The beta runs for 4 weeks starting March 30, free of charge — no sign-up or payment required. Access is invite-based.',
+                'cta-title': 'Start writing winning proposals.',
+                'cta-sub': 'From RFP analysis to Win Theme, differentiation, and verification.<br>Strategy-driven proposals in one flow.',
+                'cta-btn': 'Apply for Closed Beta',
+                'footer-desc': 'Your template, as is. AI that architects strategy-driven proposals automatically.',
                 'footer-features': 'How It Works',
                 'footer-why': 'Why contrl',
                 'footer-faq': 'FAQ',
                 'footer-contact-title': 'Contact',
-                'footer-demo': 'Book Demo',
+                'footer-demo': 'Apply for Beta',
             },
             ko: {
                 'hero-title': '우리 회사 PPT 템플릿 그대로,<br>제안서 초안 자동 작성',
