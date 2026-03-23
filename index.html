@@ -31,6 +31,33 @@
             font-weight: 800;
             font-display: swap;
         }
+        /* 3D pill button */
+        .btn-3d {
+            background: linear-gradient(180deg, #ffb35a 0%, #F27A2E 50%, #d9662a 100%);
+            box-shadow:
+                0 4px 0 0 #c45a22,
+                0 6px 12px rgba(242,122,46,0.35),
+                inset 0 1px 1px rgba(255,255,255,0.4);
+            text-decoration: none;
+            transition: all 0.15s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        .btn-3d:hover {
+            transform: translateY(-1px);
+            box-shadow:
+                0 5px 0 0 #c45a22,
+                0 8px 16px rgba(242,122,46,0.4),
+                inset 0 1px 1px rgba(255,255,255,0.4);
+        }
+        .btn-3d:active {
+            transform: translateY(2px);
+            box-shadow:
+                0 1px 0 0 #c45a22,
+                0 2px 6px rgba(242,122,46,0.25),
+                inset 0 1px 1px rgba(255,255,255,0.2);
+        }
+
         * { word-break: keep-all; }
         h1, h2, h3, h4 { text-wrap: balance; }
 
@@ -101,43 +128,53 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="#" class="text-xl font-bold tracking-tight">contrl<span class="text-accent">.</span></a>
             <div class="hidden md:flex items-center gap-8">
-                <a href="#features" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">기능</a>
-                <a href="#why" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">왜 contrl</a>
-                <a href="#faq" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">FAQ</a>
+                <a href="#features" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-features">기능</a>
+                <a href="#why" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-why">왜 contrl</a>
+                <a href="#faq" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-faq">FAQ</a>
             </div>
-            <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="bg-zinc-900 text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-zinc-800 transition-colors">데모 예약</a>
+            <div class="flex items-center gap-3">
+                <!-- Lang toggle -->
+                <button id="langToggle" onclick="toggleLang()" class="flex items-center rounded-full p-1 text-xs font-semibold h-9 w-[92px] relative" style="background: rgba(0,0,0,0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: inset 0 1px 2px rgba(0,0,0,0.06), inset 0 -1px 1px rgba(255,255,255,0.3), 0 1px 3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.35);">
+                    <span id="langKo" class="relative z-10 w-10 h-7 flex items-center justify-center rounded-full transition-all duration-300 text-zinc-800 font-bold text-[11px]">KO</span>
+                    <span id="langEn" class="relative z-10 w-10 h-7 flex items-center justify-center rounded-full transition-all duration-300 text-zinc-400 font-medium text-[11px]">EN</span>
+                    <span id="langSlider" class="absolute left-1 top-1 w-10 h-7 rounded-full transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]" style="background: rgba(255,255,255,0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 0 0 0.5px rgba(255,255,255,0.5), inset 0 1px 1px rgba(255,255,255,0.6);"></span>
+                </button>
+                <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="bg-zinc-900 text-white text-sm font-semibold py-2.5 rounded-full hover:bg-zinc-800 transition-colors text-center w-[100px]" data-i18n="nav-cta">데모 예약</a>
+            </div>
         </div>
     </nav>
 
     <!-- 1. HERO -->
-    <section class="min-h-[100dvh] pt-16 bg-surface flex items-center relative overflow-x-clip overflow-y-visible">
-        <!-- 은은한 오렌지 그라데이션 -->
-        <div class="absolute top-0 right-0 w-[900px] h-[900px] bg-gradient-to-bl from-accent/10 via-accent/4 to-transparent rounded-full blur-[100px] pointer-events-none"></div>
-        <div class="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-tr from-accent/6 to-transparent rounded-full blur-[120px] pointer-events-none"></div>
+    <section class="min-h-[100dvh] pt-16 bg-[#f9f6f2] flex items-center relative overflow-x-clip overflow-y-visible">
+        <!-- 은은한 오렌지 그라데이션 (Glance 스타일) -->
+        <div class="absolute top-[10%] right-[5%] w-[800px] h-[800px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(242,122,46,0.12) 0%, rgba(242,122,46,0.06) 40%, transparent 70%); filter: blur(60px);"></div>
+        <div class="absolute bottom-[15%] right-[15%] w-[500px] h-[500px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(242,122,46,0.08) 0%, transparent 60%); filter: blur(80px);"></div>
+
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 lg:py-0 relative">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <!-- Left: Text -->
                 <div>
-                    <h1 class="hero-enter hero-delay-1 text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-tight text-zinc-900 mb-8" style="font-family: 'Freesentation', 'Pretendard', sans-serif;">
+                    <h1 class="hero-enter hero-delay-1 text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-tight text-zinc-900 mb-8" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="hero-title">
                         PPT 템플릿만 있다면,<br>제안서 초안이 자동으로 뚝딱
                     </h1>
-                    <p class="hero-enter hero-delay-2 text-base md:text-lg text-zinc-500 leading-relaxed max-w-md mb-10">
-                        당신의 템플릿, 당신의 포맷, 당신의 회사 DNA. Contrl은 최고의 결과물과 구분할 수 없는 문서를 자동으로 생성합니다.
+                    <p class="hero-enter hero-delay-2 text-base md:text-lg text-zinc-500 leading-relaxed max-w-md mb-10" data-i18n="hero-sub">
+                        Claude, Gamma, Genspark로는 불가능했던 초안 퀄리티를 경험해보세요.
                     </p>
                     <div class="hero-enter hero-delay-3 flex flex-wrap items-center gap-4">
-                        <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="inline-flex items-center gap-2 bg-accent text-white font-semibold px-7 py-3.5 rounded-full text-base hover:opacity-90 transition-opacity">
+                        <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-7 py-3.5 rounded-full text-base">
                             <iconify-icon icon="solar:calendar-bold" width="18"></iconify-icon>
-                            데모 예약하기
+                            <span data-i18n="hero-cta">데모 예약하기</span>
                         </a>
                         <a href="#features" class="inline-flex items-center gap-2 border border-zinc-200 text-zinc-700 font-semibold px-7 py-3.5 rounded-full text-base hover:border-zinc-300 transition-colors">
-                            작동 방식 보기
+                            <span data-i18n="hero-cta2">작동 방식 보기</span>
                         </a>
                     </div>
                 </div>
                 <!-- Right: Video + floating badges -->
                 <div class="hero-enter hero-delay-2 relative">
                     <!-- Warm glow behind video -->
-                    <div class="absolute -inset-16 bg-gradient-to-br from-accent/10 via-accent/5 to-transparent rounded-full blur-[80px] pointer-events-none"></div>
+                    <div class="absolute -inset-12 rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(242,122,46,0.15) 0%, rgba(242,122,46,0.05) 50%, transparent 70%); filter: blur(50px);"></div>
 
                     <!-- Video -->
                     <div class="relative rounded-3xl overflow-hidden bg-zinc-800" style="box-shadow: 0 25px 60px -15px rgba(0,0,0,0.15);">
@@ -154,21 +191,21 @@
                         <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
                             <iconify-icon icon="solar:document-bold-duotone" width="16" class="text-accent"></iconify-icon>
                         </div>
-                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap">포맷 완벽 보존</span>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-format">포맷 완벽 보존</span>
                     </div>
 
                     <div class="hidden lg:flex absolute right-6 -bottom-8 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 1s;">
                         <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
                             <iconify-icon icon="solar:check-circle-bold-duotone" width="16" class="text-emerald-500"></iconify-icon>
                         </div>
-                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap">할루시네이션 없음</span>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-hallu">할루시네이션 없음</span>
                     </div>
 
                     <div class="hidden lg:flex absolute right-12 -top-8 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 0.5s;">
                         <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
                             <iconify-icon icon="solar:lock-bold-duotone" width="16" class="text-accent"></iconify-icon>
                         </div>
-                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap">로컬 우선</span>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-local">로컬 우선</span>
                     </div>
                 </div>
             </div>
@@ -179,8 +216,8 @@
     <section id="features" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="reveal mb-20 text-center">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;">작동 방식</h2>
-                <p class="text-base text-zinc-500 leading-relaxed max-w-md mx-auto">세 단계로 완성합니다. 템플릿을 올리면 Contrl이 알아서 처리합니다.</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="flow-title">작동 방식</h2>
+                <p class="text-base text-zinc-500 leading-relaxed max-w-lg mx-auto" data-i18n="flow-sub">AI가 먼저 초안과 의도 가설을 제안하고, 작성자는 의도를 수정하며, reviewer는 맥락과 함께 검토합니다.</p>
             </div>
             <!-- Flow diagram -->
             <div class="reveal grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-4 items-center flow-diagram" id="flowDiagram">
@@ -189,33 +226,22 @@
                     <div class="flow-card-wrap reveal" data-flow="left">
                         <div class="bg-white rounded-2xl p-5 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex items-start gap-4">
                             <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                                <iconify-icon icon="solar:document-add-bold-duotone" width="20" class="text-accent"></iconify-icon>
+                                <iconify-icon icon="solar:layers-bold-duotone" width="20" class="text-accent"></iconify-icon>
                             </div>
                             <div>
-                                <h4 class="font-semibold mb-1">템플릿 업로드</h4>
-                                <p class="text-sm text-zinc-500 leading-relaxed">제안서, 보고서, 계약서 등 기존 문서</p>
+                                <h4 class="font-semibold mb-1" data-i18n="flow-in1-title">Template</h4>
+                                <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-in1-desc">기존 제안서, 보고서, 계약서 등 문서 양식</p>
                             </div>
                         </div>
                     </div>
                     <div class="flow-card-wrap reveal">
                         <div class="bg-white rounded-2xl p-5 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex items-start gap-4">
                             <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                                <iconify-icon icon="solar:dna-bold-duotone" width="20" class="text-accent"></iconify-icon>
+                                <iconify-icon icon="solar:bookmark-bold-duotone" width="20" class="text-accent"></iconify-icon>
                             </div>
                             <div>
-                                <h4 class="font-semibold mb-1">문서 DNA 추출</h4>
-                                <p class="text-sm text-zinc-500 leading-relaxed">구조, 톤, 변수, 서식 규칙 자동 매핑</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flow-card-wrap reveal">
-                        <div class="bg-white rounded-2xl p-5 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                                <iconify-icon icon="solar:pen-new-square-bold-duotone" width="20" class="text-accent"></iconify-icon>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1">새 데이터 입력</h4>
-                                <p class="text-sm text-zinc-500 leading-relaxed">프로젝트별 내용과 변수 값 전달</p>
+                                <h4 class="font-semibold mb-1" data-i18n="flow-in2-title">Reference</h4>
+                                <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-in2-desc">프로젝트 맥락, 데이터, 참고 자료</p>
                             </div>
                         </div>
                     </div>
@@ -236,11 +262,11 @@
                         <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
                             <div class="flex items-start justify-between gap-4">
                                 <div>
-                                    <h4 class="font-bold text-lg mb-2">PPTX / DOCX / XLSX</h4>
-                                    <p class="text-sm text-zinc-500 leading-relaxed">원본과 동일한 포맷으로 새 문서를 자동 생성합니다. 할루시네이션 없이 결정론적으로 조립합니다.</p>
+                                    <h4 class="font-bold text-lg mb-2" data-i18n="flow-out1-title">의도가 연결된 초안</h4>
+                                    <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-out1-desc">각 문단의 존재 이유와 역할이 명시된 문서를 자동 생성합니다.</p>
                                 </div>
                                 <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
-                                    <iconify-icon icon="solar:check-circle-bold-duotone" width="20" class="text-emerald-500"></iconify-icon>
+                                    <iconify-icon icon="solar:document-bold-duotone" width="20" class="text-emerald-500"></iconify-icon>
                                 </div>
                             </div>
                         </div>
@@ -249,11 +275,25 @@
                         <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
                             <div class="flex items-start justify-between gap-4">
                                 <div>
-                                    <h4 class="font-bold text-lg mb-2">포맷 완벽 보존</h4>
-                                <p class="text-sm text-zinc-500 leading-relaxed">레이아웃, 폰트, 스타일이 원본 그대로. 같은 입력이면 같은 결과를 보장합니다.</p>
+                                    <h4 class="font-bold text-lg mb-2" data-i18n="flow-out2-title">Source Tracing</h4>
+                                    <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-out2-desc">초안의 각 문단이 어떤 참고 문서의 어느 부분을 근거로 작성됐는지 출처를 보여줍니다.</p>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                    <iconify-icon icon="solar:link-round-bold-duotone" width="20" class="text-accent"></iconify-icon>
+                                </div>
                             </div>
-                            <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                                <iconify-icon icon="solar:shield-check-bold-duotone" width="20" class="text-accent"></iconify-icon>
+                        </div>
+                    </div>
+                    <div class="flow-card-wrap reveal">
+                        <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <h4 class="font-bold text-lg mb-2" data-i18n="flow-out3-title">Reviewer Summary</h4>
+                                    <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-out3-desc">리뷰어를 위한 의도 요약과 검토 요청 쟁점을 함께 전달합니다.</p>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
+                                    <iconify-icon icon="solar:chat-round-check-bold-duotone" width="20" class="text-blue-500"></iconify-icon>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -262,66 +302,197 @@
         </div>
     </section>
 
+    <!-- 2.5 FEATURE SHOWCASE (zig-zag) -->
+    <section class="py-24 md:py-32 px-4 sm:px-6 lg:px-8" style="background-color: #FCFCFC;">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal mb-20 text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="feat-title">핵심 기능</h2>
+                <p class="text-base text-zinc-500 leading-relaxed max-w-lg mx-auto" data-i18n="feat-sub">문서 작성의 각 단계에서 contrl이 돕는 구체적인 기능들입니다.</p>
+            </div>
+
+            <!-- Row 1: 문단별 의도 태깅 -->
+            <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20 lg:mb-28">
+                <div class="bg-white rounded-3xl p-8 flex items-center justify-center aspect-[4/3] shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+                    <div class="w-full max-w-xs space-y-3">
+                        <div class="flex items-start gap-3 p-3 rounded-xl bg-zinc-50 border border-zinc-100">
+                            <div class="w-1.5 h-full min-h-[40px] bg-accent/40 rounded-full flex-shrink-0 mt-0.5"></div>
+                            <div class="flex-1">
+                                <div class="h-2.5 bg-zinc-200 rounded-full w-full mb-2"></div>
+                                <div class="h-2.5 bg-zinc-200 rounded-full w-3/4 mb-3"></div>
+                                <div class="flex items-center gap-1.5">
+                                    <div class="px-2 py-0.5 rounded-full bg-accent/10 text-[9px] font-bold text-accent">목적: 고객 불안 해소</div>
+                                    <div class="px-2 py-0.5 rounded-full bg-blue-50 text-[9px] font-bold text-blue-500">독자: 의사결정자</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 rounded-xl bg-red-50/50 border border-red-100/50">
+                            <div class="w-1.5 h-full min-h-[40px] bg-red-300/50 rounded-full flex-shrink-0 mt-0.5"></div>
+                            <div class="flex-1">
+                                <div class="h-2.5 bg-zinc-200 rounded-full w-full mb-2"></div>
+                                <div class="h-2.5 bg-zinc-200 rounded-full w-2/3 mb-3"></div>
+                                <div class="flex items-center gap-1.5">
+                                    <div class="px-2 py-0.5 rounded-full bg-red-50 text-[9px] font-bold text-red-400">⚠ 의도 불일치</div>
+                                    <div class="px-2 py-0.5 rounded-full bg-zinc-100 text-[9px] font-bold text-zinc-400">제품 설명에 치우침</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 rounded-xl bg-zinc-50 border border-zinc-100">
+                            <div class="w-1.5 h-full min-h-[40px] bg-emerald-300/50 rounded-full flex-shrink-0 mt-0.5"></div>
+                            <div class="flex-1">
+                                <div class="h-2.5 bg-zinc-200 rounded-full w-full mb-2"></div>
+                                <div class="h-2.5 bg-zinc-200 rounded-full w-4/5 mb-3"></div>
+                                <div class="flex items-center gap-1.5">
+                                    <div class="px-2 py-0.5 rounded-full bg-emerald-50 text-[9px] font-bold text-emerald-500">목적: 실행 촉구</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="w-12 h-12 rounded-xl border border-accent/20 flex items-center justify-center mb-5">
+                        <iconify-icon icon="solar:tag-bold-duotone" width="24" class="text-accent"></iconify-icon>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n-html="feat1-title">문단마다 의도 태그가<br>자동으로 붙습니다.</h3>
+                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat1-desc">AI가 각 문단의 목적, 대상 독자, 기대 반응을 자동 태깅합니다. 의도와 실제 내용이 어긋나면 경고로 알려줘서, 제출 전에 스스로 약점을 발견할 수 있습니다.</p>
+                </div>
+            </div>
+
+            <!-- Row 2: 출처 추적 + 근거 하이라이트 -->
+            <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="w-12 h-12 rounded-xl border border-accent/20 flex items-center justify-center mb-5">
+                        <iconify-icon icon="solar:link-round-bold-duotone" width="24" class="text-accent"></iconify-icon>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n-html="feat2-title">이 문장이 어디서 왔는지<br>근거를 바로 확인합니다.</h3>
+                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat2-desc">초안의 각 문단을 클릭하면 참고 문서의 어느 부분을 근거로 작성됐는지 하이라이트로 보여줍니다. 근거가 없는 문장은 별도 표시되어 할루시네이션을 즉시 잡아냅니다.</p>
+                </div>
+                <div class="order-1 lg:order-2 bg-white rounded-3xl p-8 flex items-center justify-center aspect-[4/3] shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+                    <div class="w-full max-w-xs space-y-3">
+                        <div class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-3">Source Tracing</div>
+                        <div class="p-3 rounded-xl bg-accent/5 border border-accent/15">
+                            <div class="h-2.5 bg-zinc-200 rounded-full w-full mb-1.5"></div>
+                            <div class="h-2.5 bg-accent/20 rounded-full w-3/5 mb-2"></div>
+                            <div class="flex items-center gap-1.5">
+                                <div class="w-3 h-3 rounded bg-accent/20 flex-shrink-0"></div>
+                                <span class="text-[9px] text-accent font-semibold">제안서_v3.pptx — 슬라이드 4</span>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-blue-50/50 border border-blue-100/50">
+                            <div class="h-2.5 bg-zinc-200 rounded-full w-full mb-1.5"></div>
+                            <div class="h-2.5 bg-blue-100 rounded-full w-2/3 mb-2"></div>
+                            <div class="flex items-center gap-1.5">
+                                <div class="w-3 h-3 rounded bg-blue-200/50 flex-shrink-0"></div>
+                                <span class="text-[9px] text-blue-500 font-semibold">시장분석_보고서.docx — 3페이지</span>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-red-50/30 border border-red-100/30">
+                            <div class="h-2.5 bg-zinc-200 rounded-full w-full mb-1.5"></div>
+                            <div class="h-2.5 bg-zinc-100 rounded-full w-1/2 mb-2"></div>
+                            <div class="flex items-center gap-1.5">
+                                <div class="w-3 h-3 rounded bg-red-200/50 flex-shrink-0"></div>
+                                <span class="text-[9px] text-red-400 font-semibold">⚠ 근거 없음 — 확인 필요</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 3: Image left, Text right — 피드백 메모리 -->
+            <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mt-20 lg:mt-28">
+                <div class="bg-white rounded-3xl p-8 flex items-center justify-center aspect-[4/3] shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+                    <div class="w-full max-w-xs space-y-3">
+                        <div class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-3">Writing Memory</div>
+                        <div class="p-3 rounded-xl bg-zinc-50 border border-zinc-100">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-5 h-5 rounded-full bg-zinc-200 flex-shrink-0"></div>
+                                <span class="text-[10px] font-semibold text-zinc-500">김팀장 · 3월 15일</span>
+                            </div>
+                            <div class="text-[10px] text-zinc-400 leading-relaxed">"결론이 너무 늦게 나옵니다. 핵심 메시지를 첫 문단에 배치하세요."</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-zinc-50 border border-zinc-100">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-5 h-5 rounded-full bg-zinc-200 flex-shrink-0"></div>
+                                <span class="text-[10px] font-semibold text-zinc-500">박이사 · 3월 8일</span>
+                            </div>
+                            <div class="text-[10px] text-zinc-400 leading-relaxed">"고객 관점이 아니라 우리 관점으로 쓰여 있습니다."</div>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-accent/5 border border-accent/15 flex items-center gap-2">
+                            <iconify-icon icon="solar:lightbulb-bolt-bold-duotone" width="14" class="text-accent"></iconify-icon>
+                            <span class="text-[9px] font-semibold text-accent">다음 초안 생성 시 자동 반영됨</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="w-12 h-12 rounded-xl border border-accent/20 flex items-center justify-center mb-5">
+                        <iconify-icon icon="solar:brain-bold-duotone" width="24" class="text-accent"></iconify-icon>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n-html="feat3-title">템플릿과 레퍼런스만 넣으면<br>초안이 바로 나옵니다.</h3>
+                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat3-desc">기존 문서 양식과 참고 자료를 넣으면, 구조와 톤을 유지한 초안이 자동 생성됩니다. 이전 리뷰어 피드백까지 writing memory로 반영되어, 쓸수록 더 정확한 초안이 만들어집니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 3. WHY -->
-    <section id="why" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-surface">
+    <section id="why" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="reveal text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;">왜 contrl인가</h2>
-                <p class="text-base md:text-lg text-zinc-500 leading-relaxed max-w-xl mx-auto">최고의 제안서 작성자가 내일 퇴사해도, 그 다음 사람은 첫날부터 똑같이 씁니다.</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="why-title">왜 contrl인가</h2>
+                <p class="text-base md:text-lg text-zinc-500 leading-relaxed max-w-xl mx-auto" data-i18n="why-sub">AI가 초안을 쉽게 만들어주지만, 생각이 덜 된 문서를 완성본처럼 보이게 만들고 있습니다.</p>
             </div>
             <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-5 stagger">
                 <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
                     <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:user-minus-linear" width="20" class="text-accent"></iconify-icon>
+                        <iconify-icon icon="solar:ghost-linear" width="20" class="text-accent"></iconify-icon>
                     </div>
                     <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2">노하우는 사람과 함께 떠납니다</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed">시니어가 떠나면 수년간 쌓은 문서 감각도 함께 사라집니다.</p>
+                        <h3 class="text-lg font-bold mb-2" data-i18n="why1-title">의도가 사라진 문서</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why1-desc">AI가 매끈한 초안을 만들지만, 각 문단이 왜 존재하는지는 아무도 모릅니다.</p>
                     </div>
                 </div>
                 <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
                     <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:ranking-linear" width="20" class="text-accent"></iconify-icon>
+                        <iconify-icon icon="solar:user-check-linear" width="20" class="text-accent"></iconify-icon>
                     </div>
                     <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2">품질이 복불복입니다</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed">같은 회사, 다른 기준. 사람마다 결과물이 다릅니다.</p>
+                        <h3 class="text-lg font-bold mb-2" data-i18n="why2-title">리뷰어의 숨은 노동</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why2-desc">리뷰어는 텍스트를 고치는 게 아니라, 작성자의 판단을 역추론하느라 시간을 씁니다.</p>
                     </div>
                 </div>
                 <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
                     <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:danger-triangle-linear" width="20" class="text-accent"></iconify-icon>
+                        <iconify-icon icon="solar:magic-stick-3-linear" width="20" class="text-accent"></iconify-icon>
                     </div>
                     <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2">AI가 포맷을 망가뜨립니다</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed">ChatGPT는 내용을 만들지만 레이아웃을 깨뜨립니다.</p>
+                        <h3 class="text-lg font-bold mb-2" data-i18n="why3-title">완성본의 착각</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why3-desc">AI 초안은 너무 매끈해서, 사고 공백이 가려집니다. 작성자도 리뷰어도 속습니다.</p>
                     </div>
                 </div>
                 <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
                     <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:lock-linear" width="20" class="text-accent"></iconify-icon>
+                        <iconify-icon icon="solar:refresh-circle-linear" width="20" class="text-accent"></iconify-icon>
                     </div>
                     <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2">로컬 우선 보안</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed">파일은 항상 내 컴퓨터에만 머뭅니다.</p>
+                        <h3 class="text-lg font-bold mb-2" data-i18n="why4-title">반복되는 피드백</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why4-desc">같은 지적이 매번 반복되지만, writing memory로 축적되지 않습니다.</p>
                     </div>
                 </div>
                 <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
                     <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:server-linear" width="20" class="text-accent"></iconify-icon>
+                        <iconify-icon icon="solar:diploma-linear" width="20" class="text-accent"></iconify-icon>
                     </div>
                     <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2">온프레미스 배포</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed">자체 서버 배포를 지원합니다.</p>
+                        <h3 class="text-lg font-bold mb-2" data-i18n="why5-title">셀프 리뷰 부재</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why5-desc">작성자가 자기 문서를 리뷰어 기준으로 점검할 도구가 없습니다.</p>
                     </div>
                 </div>
                 <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
                     <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:verified-check-linear" width="20" class="text-accent"></iconify-icon>
+                        <iconify-icon icon="solar:buildings-linear" width="20" class="text-accent"></iconify-icon>
                     </div>
                     <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2">결정론적 생성</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed">같은 입력. 같은 결과. 보장합니다.</p>
+                        <h3 class="text-lg font-bold mb-2" data-i18n="why6-title">협업의 블랙박스</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why6-desc">의도, 판단, 맥락이 문서 안에 남지 않아, 작성자와 리뷰어 사이가 단절됩니다.</p>
                     </div>
                 </div>
             </div>
@@ -329,56 +500,56 @@
     </section>
 
     <!-- 4. FAQ -->
-    <section id="faq" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="faq" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#f9f6f2]">
         <div class="max-w-3xl mx-auto">
             <div class="reveal text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;">자주 묻는 질문</h2>
-                <p class="text-base text-zinc-500">궁금한 점이 있으신가요?</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="faq-title">자주 묻는 질문</h2>
+                <p class="text-base text-zinc-500" data-i18n="faq-sub">궁금한 점이 있으신가요?</p>
             </div>
             <div class="stagger">
                 <div class="reveal border-t border-zinc-200 faq-item">
                     <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors">어떤 파일 포맷을 지원하나요?</span>
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq1-q">어떤 문제를 풀고 있나요?</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed">PPTX, DOCX, XLSX를 지원합니다. 원본 템플릿의 서식, 스타일, 구조를 정확히 보존하면서 새 문서를 생성합니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq1-a">현재 AI writing workflow에서 작성자의 의도가 문서 구조 안에 남지 않아, 작성자와 리뷰어 모두 맥락을 잃어버리는 문제를 풀고 있습니다. AI는 그럴듯한 초안을 빠르게 만들어주지만, 각 문단이 왜 존재하는지가 사라집니다.</p>
                     </div>
                 </div>
                 <div class="reveal border-t border-zinc-200 faq-item">
                     <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors">ChatGPT 같은 AI 도구와 뭐가 다른가요?</span>
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq2-q">왜 input을 더 잘 받는 것만으로는 부족한가요?</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed">범용 AI와 달리 Contrl은 즉흥적으로 만들지 않습니다. 문서의 DNA를 추출하고 결정론적으로 결과물을 생성합니다. 같은 입력이면 같은 결과. 포맷 손상도, 할루시네이션도 없습니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq2-a">의도는 작성 전에 완성되는 정보가 아닙니다. 초안을 보고 반응하고 수정하면서 계속 변하고 구체화됩니다. 처음에 의도를 잘 받아도 문단과 명시적으로 연결되지 않으면 결국 맥락을 잃게 됩니다.</p>
                     </div>
                 </div>
                 <div class="reveal border-t border-zinc-200 faq-item">
                     <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors">데이터는 안전한가요?</span>
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq3-q">왜 사용자에게 의도를 직접 쓰게 하지 않나요?</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed">Contrl은 로컬 우선으로 동작하며, 파일이 외부로 전송되지 않습니다. 온프레미스 배포도 가능하고, 문서가 모델 학습에 사용되는 일은 절대 없습니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq3-a">사람들은 제로베이스에서 의도를 완벽하게 입력하는 데 익숙하지 않습니다. 대신 초안을 보고 "이건 아니다", "이 역할이 틀렸다"고 반응하는 데는 훨씬 능숙합니다. 그래서 contrl은 intent authoring이 아니라 intent correction UX를 지향합니다.</p>
                     </div>
                 </div>
                 <div class="reveal border-t border-zinc-200 faq-item">
                     <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors">설정은 얼마나 걸리나요?</span>
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq4-q">초기 고객은 누구인가요?</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed">템플릿을 업로드하면 바로 사용할 수 있습니다. 별도의 학습 기간이나 복잡한 설정이 필요 없습니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq4-a">리뷰어에게 reject 당하고 싶지 않은 작성자입니다. 더 생각해 보인 문서를 제출하고 싶고, 불필요한 재작업을 줄이고 싶은 분들이 첫 번째 사용자입니다.</p>
                     </div>
                 </div>
                 <div class="reveal border-t border-b border-zinc-200 faq-item">
                     <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors">우리 문서로 직접 테스트해볼 수 있나요?</span>
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq5-q">핵심 경험은 무엇인가요?</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed">네. 15분 데모를 예약하시면 실제 템플릿으로 Contrl을 실행해 드립니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq5-a">AI가 초안과 함께 문단별 intent map을 제안합니다. 작성자는 텍스트뿐 아니라 각 문단의 목적과 역할을 보며 수정합니다. 리뷰어는 전체 의도 구조를 먼저 본 뒤 문서를 검토하고, 피드백은 문장 수정이 아닌 의도 수정으로도 남길 수 있습니다.</p>
                     </div>
                 </div>
             </div>
@@ -386,13 +557,13 @@
     </section>
 
     <!-- 5. CTA Card (Glance-style orange card) -->
-    <section class="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-surface">
-        <div class="max-w-3xl mx-auto">
-            <div class="reveal bg-gradient-to-br from-accent to-[#e88a10] rounded-[2rem] px-8 py-16 md:px-16 md:py-20 text-center">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;">직접 확인해 보세요</h2>
-                <p class="text-base text-white/70 leading-relaxed mb-8 max-w-md mx-auto">15분이면 충분합니다. 당신의 문서로, 바로 결과를 보여드립니다.</p>
-                <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="inline-flex items-center gap-2 bg-white text-accent font-semibold px-8 py-3.5 rounded-full text-base hover:bg-white/90 transition-colors">
-                    데모 예약하기
+    <section class="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#524438]">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="reveal">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="cta-title">생각이 남는 문서를 써보세요</h2>
+                <p class="text-base text-white/60 leading-relaxed mb-8 max-w-md mx-auto" data-i18n-html="cta-sub">문서를 대신 써주는 AI가 아니라,<br>의도가 남는 문서를 쓰게 해주는 AI입니다.</p>
+                <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-8 py-3.5 rounded-full text-base">
+                    <span data-i18n="cta-btn">데모 예약하기</span>
                     <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
                 </a>
             </div>
@@ -405,21 +576,21 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div>
                     <a href="#" class="text-xl font-bold tracking-tight">contrl<span class="text-accent">.</span></a>
-                    <p class="text-sm text-zinc-400 mt-3 leading-relaxed max-w-xs">문서 자동화의 새로운 기준. 당신의 템플릿으로 완벽한 문서를 만듭니다.</p>
+                    <p class="text-sm text-zinc-400 mt-3 leading-relaxed max-w-xs" data-i18n="footer-desc">텍스트를 생성하는 AI가 아니라, 작성자의 의도를 문서에 남기는 AI.</p>
                 </div>
                 <div>
                     <h4 class="text-sm font-semibold text-zinc-900 mb-4">Product</h4>
                     <div class="space-y-3">
-                        <a href="#features" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">작동 방식</a>
-                        <a href="#why" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">왜 contrl</a>
-                        <a href="#faq" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">FAQ</a>
+                        <a href="#features" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-features">작동 방식</a>
+                        <a href="#why" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-why">왜 contrl</a>
+                        <a href="#faq" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-faq">FAQ</a>
                     </div>
                 </div>
                 <div>
-                    <h4 class="text-sm font-semibold text-zinc-900 mb-4">문의</h4>
+                    <h4 class="text-sm font-semibold text-zinc-900 mb-4" data-i18n="footer-contact-title">문의</h4>
                     <div class="space-y-3">
                         <a href="mailto:junho@proact.team" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">junho@proact.team</a>
-                        <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">데모 예약</a>
+                        <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-demo">데모 예약</a>
                     </div>
                 </div>
             </div>
@@ -521,6 +692,129 @@
                 answer.style.maxHeight = answer.scrollHeight + 'px';
                 chevron.style.transform = 'rotate(180deg)';
             }
+        }
+        // i18n
+        const translations = {
+            en: {
+                'nav-features': 'Features',
+                'nav-why': 'Why contrl',
+                'nav-faq': 'FAQ',
+                'nav-cta': 'Book Demo',
+                'hero-title': 'With just a PPT template,<br>your proposal draft writes itself.',
+                'hero-sub': 'Experience draft quality impossible with Claude, Gamma, or Genspark.',
+                'hero-cta': 'Book a Demo',
+                'hero-cta2': 'See How It Works',
+                'badge-format': 'Format Preserved',
+                'badge-hallu': 'No Hallucination',
+                'badge-local': 'Local First',
+                'flow-title': 'How It Works',
+                'flow-sub': 'AI proposes a draft with intent hypotheses. The writer refines intent. The reviewer checks with full context.',
+                'flow-in1-title': 'Template',
+                'flow-in1-desc': 'Existing document formats — proposals, reports, contracts',
+                'flow-in2-title': 'Reference',
+                'flow-in2-desc': 'Project context, data, and reference materials',
+                'flow-out1-title': 'Intent-linked Draft',
+                'flow-out1-desc': 'Automatically generates documents where each paragraph\'s purpose and role is clearly stated.',
+                'flow-out2-title': 'Source Tracing',
+                'flow-out2-desc': 'Shows which reference document and section each paragraph was based on.',
+                'flow-out3-title': 'Reviewer Summary',
+                'flow-out3-desc': 'Delivers intent summaries and key review points for reviewers.',
+                'feat-title': 'Key Features',
+                'feat-sub': 'Concrete features that contrl provides at each stage of document writing.',
+                'feat1-title': 'Intent tags are automatically<br>added to every paragraph.',
+                'feat1-desc': 'AI auto-tags each paragraph\'s purpose, target audience, and expected response. When intent and content diverge, it alerts you — so you can catch weaknesses before submission.',
+                'feat2-title': 'See exactly where<br>each sentence came from.',
+                'feat2-desc': 'Click any paragraph in the draft to see which part of the reference documents it was based on, highlighted. Sentences without evidence are flagged to catch hallucinations instantly.',
+                'feat3-title': 'Just add a template and references,<br>and the draft appears.',
+                'feat3-desc': 'Input your document template and reference materials, and a draft that maintains your structure and tone is auto-generated. Previous reviewer feedback is reflected via writing memory, making each draft more accurate.',
+                'why-title': 'Why contrl',
+                'why-sub': 'AI makes drafts easy, but it\'s making half-thought documents look like finished products.',
+                'why1-title': 'Documents Without Intent',
+                'why1-desc': 'AI creates polished drafts, but no one knows why each paragraph exists.',
+                'why2-title': 'Reviewer\'s Hidden Labor',
+                'why2-desc': 'Reviewers spend time reverse-engineering the writer\'s judgment, not editing text.',
+                'why3-title': 'The Illusion of Completion',
+                'why3-desc': 'AI drafts look so polished that gaps in thinking are hidden. Both writers and reviewers are fooled.',
+                'why4-title': 'Repeated Feedback',
+                'why4-desc': 'The same corrections repeat endlessly but never accumulate as writing memory.',
+                'why5-title': 'No Self-Review',
+                'why5-desc': 'Writers have no tool to check their own documents from a reviewer\'s perspective.',
+                'why6-title': 'Collaboration Black Box',
+                'why6-desc': 'Intent, judgment, and context don\'t stay in the document, disconnecting writers and reviewers.',
+                'faq-title': 'Frequently Asked Questions',
+                'faq-sub': 'Have questions?',
+                'faq1-q': 'What problem are you solving?',
+                'faq1-a': 'In current AI writing workflows, the writer\'s intent doesn\'t remain in the document structure, causing both writers and reviewers to lose context. AI quickly creates plausible drafts, but why each paragraph exists disappears.',
+                'faq2-q': 'Why isn\'t better input collection enough?',
+                'faq2-a': 'Intent isn\'t information that\'s complete before writing. It continuously changes and becomes concrete as you see, react to, and revise drafts. Even if intent is well-captured initially, it\'s lost if not explicitly linked to paragraphs.',
+                'faq3-q': 'Why not have users write intent directly?',
+                'faq3-a': 'People aren\'t great at writing perfect intent from scratch. But they\'re much better at reacting — "that\'s not right" or "that role is wrong." That\'s why contrl focuses on intent correction UX, not intent authoring.',
+                'faq4-q': 'Who are your initial customers?',
+                'faq4-a': 'Writers who don\'t want to be rejected by reviewers. People who want to submit more thoughtful documents and reduce unnecessary rework are our first users.',
+                'faq5-q': 'What\'s the core experience?',
+                'faq5-a': 'AI proposes a paragraph-level intent map alongside the draft. Writers revise not just text but each paragraph\'s purpose and role. Reviewers see the full intent structure first, then review the document. Feedback can be given as intent corrections, not just text edits.',
+                'cta-title': 'Write documents that keep your thinking.',
+                'cta-sub': 'Not AI that writes documents for you,<br>but AI that keeps your intent in every document.',
+                'cta-btn': 'Book a Demo',
+                'footer-desc': 'Not AI that generates text, but AI that preserves the writer\'s intent in documents.',
+                'footer-features': 'How It Works',
+                'footer-why': 'Why contrl',
+                'footer-faq': 'FAQ',
+                'footer-contact-title': 'Contact',
+                'footer-demo': 'Book Demo',
+            },
+            ko: {
+                'hero-title': 'PPT 템플릿만 있다면,<br>제안서 초안이 자동으로 뚝딱',
+            }
+        };
+
+        let currentLang = 'ko';
+        // Store original Korean text
+        const koTexts = {};
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            koTexts[el.getAttribute('data-i18n')] = el.textContent;
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(el => {
+            koTexts[el.getAttribute('data-i18n-html')] = el.innerHTML;
+        });
+
+        function toggleLang() {
+            currentLang = currentLang === 'ko' ? 'en' : 'ko';
+            const slider = document.getElementById('langSlider');
+            const koLabel = document.getElementById('langKo');
+            const enLabel = document.getElementById('langEn');
+
+            if (currentLang === 'en') {
+                slider.style.transform = 'translateX(100%)';
+                koLabel.classList.remove('text-zinc-800', 'font-bold');
+                koLabel.classList.add('text-zinc-400', 'font-medium');
+                enLabel.classList.remove('text-zinc-400', 'font-medium');
+                enLabel.classList.add('text-zinc-800', 'font-bold');
+            } else {
+                slider.style.transform = 'translateX(0)';
+                enLabel.classList.remove('text-zinc-800', 'font-bold');
+                enLabel.classList.add('text-zinc-400', 'font-medium');
+                koLabel.classList.remove('text-zinc-400', 'font-medium');
+                koLabel.classList.add('text-zinc-800', 'font-bold');
+            }
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (currentLang === 'en' && translations.en[key]) {
+                    el.textContent = translations.en[key];
+                } else {
+                    el.textContent = koTexts[key];
+                }
+            });
+            document.querySelectorAll('[data-i18n-html]').forEach(el => {
+                const key = el.getAttribute('data-i18n-html');
+                if (currentLang === 'en' && translations.en[key]) {
+                    el.innerHTML = translations.en[key];
+                } else {
+                    el.innerHTML = koTexts[key];
+                }
+            });
+            document.documentElement.lang = currentLang;
         }
     </script>
 
