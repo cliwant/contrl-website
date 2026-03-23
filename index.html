@@ -125,9 +125,9 @@
 <body class="font-sans antialiased bg-white text-zinc-900 overflow-x-hidden scroll-smooth">
 
     <!-- TOP BANNER -->
-    <div class="fixed top-0 left-0 right-0 z-50 bg-zinc-900 text-white text-center py-2.5 text-sm font-medium">
-        <span data-i18n="banner">Closed Beta 3/30 오픈 — 선착순 마감 전에 신청하세요</span>
-        <a href="https://tally.so/r/b5dqO2" target="_blank" class="ml-3 inline-flex items-center gap-1 underline underline-offset-2 hover:text-accent transition-colors font-semibold" data-i18n="banner-cta">신청하기 →</a>
+    <div class="fixed top-0 left-0 right-0 z-50 bg-[#524438] text-white text-center py-2.5 text-sm font-medium">
+        <span data-i18n-html="banner"><span class="font-extrabold tracking-tight">Closed Beta 3/30 오픈</span> <span class="ml-2.5 font-light opacity-80">선착순 마감 전에 신청하세요</span></span>
+        <a href="https://tally.so/r/b5dqO2" target="_blank" class="ml-2.5 inline-flex items-center gap-1 bg-white text-[#524438] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-white/90 transition-colors" data-i18n="banner-cta">신청하기 →</a>
     </div>
 
     <!-- NAV -->
@@ -154,6 +154,7 @@
                     </div>
                 </div>
                 </button>
+                <a href="https://tally.so/r/b5dqO2" class="bg-zinc-900 text-white text-sm font-semibold py-2.5 px-6 rounded-full hover:bg-zinc-800 transition-colors text-center w-[130px] whitespace-nowrap text-xs" data-i18n="nav-cta">Beta 신청</a>
             </div>
         </div>
     </nav>
@@ -169,7 +170,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <!-- Left: Text -->
                 <div>
-                    <h1 class="hero-enter hero-delay-1 text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-tight text-zinc-900 mb-8" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="hero-title">
+                    <h1 class="hero-enter hero-delay-1 text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight leading-[12] text-zinc-900 mb-8" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="hero-title">
                         우리 회사 PPT 템플릿 그대로,<br>제안서 초안 자동 작성
                     </h1>
                     <p class="hero-enter hero-delay-2 text-base md:text-lg text-zinc-500 leading-relaxed max-w-md mb-10" data-i18n="hero-sub">
@@ -193,15 +194,9 @@
                     <!-- Video -->
                     <div class="relative rounded-3xl overflow-hidden bg-zinc-800 cursor-pointer group" style="box-shadow: 0 25px 60px -15px rgba(0,0,0,0.15);" onclick="toggleVideo(event)">
                         <div class="aspect-video flex items-center justify-center relative">
-                            <video id="heroVideo" autoplay muted loop playsinline class="w-full h-full object-cover">
-                                <source src="/demo.mp4" type="video/mp4">
+                            <video id="heroVideo" controls playsinline preload="metadata" class="w-full h-full object-cover" poster="">
+                                <source src="/demo.mp4#t=9.5" type="video/mp4">
                             </video>
-                            <div id="playPauseBtn" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                                <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);">
-                                    <iconify-icon id="playIcon" icon="solar:play-bold" width="20" class="text-white hidden"></iconify-icon>
-                                    <iconify-icon id="pauseIcon" icon="solar:pause-bold" width="20" class="text-white"></iconify-icon>
-                                </div>
-                            </div>
                             <!-- Expand button -->
                             <button onclick="event.stopPropagation(); openVideoModal()" class="absolute bottom-3 right-3 w-9 h-9 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);">
                                 <iconify-icon icon="solar:full-screen-bold" width="16" class="text-white"></iconify-icon>
@@ -336,41 +331,8 @@
 
             <!-- Row 1: 문단별 의도 태깅 -->
             <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20 lg:mb-28">
-                <div class="bg-white rounded-3xl p-8 flex items-center justify-center aspect-[4/3] shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
-                    <div class="w-full max-w-xs space-y-3">
-                        <div class="flex items-start gap-3 p-3 rounded-xl bg-zinc-50 border border-zinc-100">
-                            <div class="w-1.5 h-full min-h-[40px] bg-accent/40 rounded-full flex-shrink-0 mt-0.5"></div>
-                            <div class="flex-1">
-                                <div class="h-2.5 bg-zinc-200 rounded-full w-full mb-2"></div>
-                                <div class="h-2.5 bg-zinc-200 rounded-full w-3/4 mb-3"></div>
-                                <div class="flex items-center gap-1.5">
-                                    <div class="px-2 py-0.5 rounded-full bg-accent/10 text-[9px] font-bold text-accent">목적: 고객 불안 해소</div>
-                                    <div class="px-2 py-0.5 rounded-full bg-blue-50 text-[9px] font-bold text-blue-500">독자: 의사결정자</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3 p-3 rounded-xl bg-red-50/50 border border-red-100/50">
-                            <div class="w-1.5 h-full min-h-[40px] bg-red-300/50 rounded-full flex-shrink-0 mt-0.5"></div>
-                            <div class="flex-1">
-                                <div class="h-2.5 bg-zinc-200 rounded-full w-full mb-2"></div>
-                                <div class="h-2.5 bg-zinc-200 rounded-full w-2/3 mb-3"></div>
-                                <div class="flex items-center gap-1.5">
-                                    <div class="px-2 py-0.5 rounded-full bg-red-50 text-[9px] font-bold text-red-400">⚠ 의도 불일치</div>
-                                    <div class="px-2 py-0.5 rounded-full bg-zinc-100 text-[9px] font-bold text-zinc-400">제품 설명에 치우침</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3 p-3 rounded-xl bg-zinc-50 border border-zinc-100">
-                            <div class="w-1.5 h-full min-h-[40px] bg-emerald-300/50 rounded-full flex-shrink-0 mt-0.5"></div>
-                            <div class="flex-1">
-                                <div class="h-2.5 bg-zinc-200 rounded-full w-full mb-2"></div>
-                                <div class="h-2.5 bg-zinc-200 rounded-full w-4/5 mb-3"></div>
-                                <div class="flex items-center gap-1.5">
-                                    <div class="px-2 py-0.5 rounded-full bg-emerald-50 text-[9px] font-bold text-emerald-500">목적: 실행 촉구</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
+                    <img src="/images/feat1.png" alt="Win Theme - RFP 분석" class="w-full h-auto">
                 </div>
                 <div>
                     <div class="w-12 h-12 rounded-xl border border-accent/20 flex items-center justify-center mb-5">
@@ -398,65 +360,19 @@
                         <li>바로 제출할 수 있는 PPT로 산출됩니다.</li>
                     </ul>
                 </div>
-                <div class="order-1 lg:order-2 bg-white rounded-3xl p-8 flex items-center justify-center aspect-[4/3] shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
-                    <div class="w-full max-w-xs space-y-3">
-                        <div class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-3">Source Tracing</div>
-                        <div class="p-3 rounded-xl bg-accent/5 border border-accent/15">
-                            <div class="h-2.5 bg-zinc-200 rounded-full w-full mb-1.5"></div>
-                            <div class="h-2.5 bg-accent/20 rounded-full w-3/5 mb-2"></div>
-                            <div class="flex items-center gap-1.5">
-                                <div class="w-3 h-3 rounded bg-accent/20 flex-shrink-0"></div>
-                                <span class="text-[9px] text-accent font-semibold">제안서_v3.pptx — 슬라이드 4</span>
-                            </div>
-                        </div>
-                        <div class="p-3 rounded-xl bg-blue-50/50 border border-blue-100/50">
-                            <div class="h-2.5 bg-zinc-200 rounded-full w-full mb-1.5"></div>
-                            <div class="h-2.5 bg-blue-100 rounded-full w-2/3 mb-2"></div>
-                            <div class="flex items-center gap-1.5">
-                                <div class="w-3 h-3 rounded bg-blue-200/50 flex-shrink-0"></div>
-                                <span class="text-[9px] text-blue-500 font-semibold">시장분석_보고서.docx — 3페이지</span>
-                            </div>
-                        </div>
-                        <div class="p-3 rounded-xl bg-red-50/30 border border-red-100/30">
-                            <div class="h-2.5 bg-zinc-200 rounded-full w-full mb-1.5"></div>
-                            <div class="h-2.5 bg-zinc-100 rounded-full w-1/2 mb-2"></div>
-                            <div class="flex items-center gap-1.5">
-                                <div class="w-3 h-3 rounded bg-red-200/50 flex-shrink-0"></div>
-                                <span class="text-[9px] text-red-400 font-semibold">⚠ 근거 없음 — 확인 필요</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="order-1 lg:order-2 rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
+                    <img src="/images/feat2.png" alt="Template + PPT 생성" class="w-full h-auto">
                 </div>
             </div>
 
             <!-- Row 3: Image left, Text right — 피드백 메모리 -->
             <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mt-20 lg:mt-28">
-                <div class="bg-white rounded-3xl p-8 flex items-center justify-center aspect-[4/3] shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
-                    <div class="w-full max-w-xs space-y-3">
-                        <div class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-3">Writing Memory</div>
-                        <div class="p-3 rounded-xl bg-zinc-50 border border-zinc-100">
-                            <div class="flex items-center gap-2 mb-2">
-                                <div class="w-5 h-5 rounded-full bg-zinc-200 flex-shrink-0"></div>
-                                <span class="text-[10px] font-semibold text-zinc-500">김팀장 · 3월 15일</span>
-                            </div>
-                            <div class="text-[10px] text-zinc-400 leading-relaxed">"결론이 너무 늦게 나옵니다. 핵심 메시지를 첫 문단에 배치하세요."</div>
-                        </div>
-                        <div class="p-3 rounded-xl bg-zinc-50 border border-zinc-100">
-                            <div class="flex items-center gap-2 mb-2">
-                                <div class="w-5 h-5 rounded-full bg-zinc-200 flex-shrink-0"></div>
-                                <span class="text-[10px] font-semibold text-zinc-500">박이사 · 3월 8일</span>
-                            </div>
-                            <div class="text-[10px] text-zinc-400 leading-relaxed">"고객 관점이 아니라 우리 관점으로 쓰여 있습니다."</div>
-                        </div>
-                        <div class="p-2.5 rounded-xl bg-accent/5 border border-accent/15 flex items-center gap-2">
-                            <iconify-icon icon="solar:lightbulb-bolt-bold-duotone" width="14" class="text-accent"></iconify-icon>
-                            <span class="text-[9px] font-semibold text-accent">다음 초안 생성 시 자동 반영됨</span>
-                        </div>
-                    </div>
+                <div class="rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
+                    <img src="/images/feat3.png" alt="Security - 로컬 처리" class="w-full h-auto">
                 </div>
                 <div>
                     <div class="w-12 h-12 rounded-xl border border-accent/20 flex items-center justify-center mb-5">
-                        <iconify-icon icon="solar:lock-bold-duotone" width="24" class="text-accent"></iconify-icon>
+                        <iconify-icon icon="solar:shield-keyhole-bold-duotone" width="24" class="text-accent"></iconify-icon>
                     </div>
                     <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat3-title">Security — 완전한 로컬 처리</h3>
                     <ul class="text-base text-zinc-500 leading-relaxed space-y-2" data-i18n-html="feat3-desc">
@@ -712,6 +628,10 @@
                 chevron.style.transform = 'rotate(180deg)';
             }
         }
+        // Set video thumbnail at 9.5s
+        const heroVid = document.getElementById('heroVideo');
+        heroVid.addEventListener('loadedmetadata', () => { heroVid.currentTime = 9.5; });
+
         // Video play/pause
         function toggleVideo(e) {
             const v = document.getElementById('heroVideo');
@@ -758,11 +678,11 @@
                 'nav-features': 'Features',
                 'nav-why': 'Why contrl',
                 'nav-faq': 'FAQ',
-                'banner': 'Closed Beta opens 3/30 — Sign up before spots fill',
+                'banner': '<span class="font-extrabold tracking-tight">Closed Beta opens 3/30</span> <span class="font-light opacity-80">Sign up before spots fill</span>',
                 'banner-cta': 'Apply now →',
                 'nav-cta': 'Apply for Beta',
-                'hero-title': 'Your template, as is.<br>Your winning proposal, architected.',
-                'hero-sub': 'Built for proposal teams. Experience the draft quality you\'ve been looking for.',
+                'hero-title': 'Proposal drafts that fit<br>your template. Automatically.',
+                'hero-sub': 'Built for proposal teams, not general AI users.',
                 'hero-cta': 'Apply for Closed Beta',
                 'hero-cta2': 'See How It Works',
                 'badge-format': 'Format Preserved',
