@@ -141,10 +141,18 @@
             </div>
             <div class="flex items-center gap-3">
                 <!-- Lang toggle -->
-                <button id="langToggle" onclick="toggleLang()" class="flex items-center rounded-full p-1 text-xs font-semibold h-9 w-[92px] relative" style="background: rgba(0,0,0,0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: inset 0 1px 2px rgba(0,0,0,0.06), inset 0 -1px 1px rgba(255,255,255,0.3), 0 1px 3px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.35);">
-                    <span id="langKo" class="relative z-10 w-10 h-7 flex items-center justify-center rounded-full transition-all duration-300 text-zinc-800 font-bold text-[11px]">KO</span>
-                    <span id="langEn" class="relative z-10 w-10 h-7 flex items-center justify-center rounded-full transition-all duration-300 text-zinc-400 font-medium text-[11px]">EN</span>
-                    <span id="langSlider" class="absolute left-1 top-1 w-10 h-7 rounded-full transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]" style="background: rgba(255,255,255,0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 0 0 0.5px rgba(255,255,255,0.5), inset 0 1px 1px rgba(255,255,255,0.6);"></span>
+                <div class="relative group">
+                    <button class="flex items-center justify-center rounded-full text-xs font-semibold h-7 px-2 hover:bg-zinc-100 transition-colors gap-1">
+                        <span id="langLabel" class="text-zinc-500 text-[11px] font-semibold">KO</span>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" width="10" class="text-zinc-400"></iconify-icon>
+                    </button>
+                    <div class="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg border border-zinc-100 py-1 min-w-[44px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <button onclick="setLang('en')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">English</button>
+                        <button onclick="setLang('zh')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">中文</button>
+                        <button onclick="setLang('ko')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">한국어</button>
+                        <button onclick="setLang('ja')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">日本語</button>
+                    </div>
+                </div>
                 </button>
             </div>
         </div>
@@ -812,12 +820,133 @@
             },
             ko: {
                 'hero-title': '우리 회사 PPT 템플릿 그대로,<br>제안서 초안 자동 작성',
+            },
+            zh: {
+                'banner': 'Closed Beta 3/30 开放 — 名额有限，尽快申请',
+                'banner-cta': '立即申请 →',
+                'hero-title': '保留公司PPT模板，<br>自动撰写提案初稿',
+                'hero-sub': '专为提案团队打造，体验您一直在寻找的初稿质量。',
+                'hero-cta': '申请 Closed Beta',
+                'hero-cta2': 'See How It Works',
+                'badge-format': '格式完整保留',
+                'badge-hallu': 'AI验证流程',
+                'badge-local': '提案战略设计',
+                'flow-title': 'How It Works',
+                'flow-sub': '从Win Theme到差异化再到验证，一个流程完成。',
+                'flow-in1-title': 'Template',
+                'flow-in1-desc': '从过去的提案PPT中学习公司的DNA和格式。',
+                'flow-in2-title': 'Reference',
+                'flow-in2-desc': '分析RFP（提案邀请书），深入了解客户意图。',
+                'flow-out1-title': 'Win Theme 初稿',
+                'flow-out1-desc': '分析RFP设定Win Theme，围绕它设计初稿。',
+                'flow-out2-title': '差异化设计',
+                'flow-out2-desc': '将RFP核心需求与我方优势对接，将差异化融入初稿。',
+                'flow-out3-title': '验证报告',
+                'flow-out3-desc': '查看AI为何如此撰写——附带来源和依据。',
+                'feat-title': 'Key Features',
+                'feat-sub': 'contrl在提案撰写各阶段提供的核心功能。',
+                'feat1-title': 'Win Theme — 制胜战略设计',
+                'feat1-desc': '<li>自动分析RFP核心需求。</li><li>匹配自有资产设计Win Theme。</li><li>识别空白点和差异化优势。</li>',
+                'feat2-title': 'Template + PPT — 保留自有格式',
+                'feat2-desc': '<li>保留公司PPT格式生成初稿。</li><li>从过往提案学习语气和结构。</li><li>输出可直接提交的PPT。</li>',
+                'feat3-title': 'Security — 完全本地处理',
+                'feat3-desc': '<li>所有处理在本地完成。</li><li>不上传至云端。</li><li>敏感提案信息不离开公司。</li>',
+                'why-title': 'Why contrl',
+                'why-sub': '解决提案撰写中的难题。',
+                'why1-title': '厚重的RFP，时间不够',
+                'why1-desc': '仅分析数百页RFP提取核心需求就需要数天。',
+                'why2-title': '制胜战略，从何开始？',
+                'why2-desc': '需要制定Win Theme和差异化战略，却没有系统方法。',
+                'why3-title': '自有模板，未被利用的资产',
+                'why3-desc': '过往提案积累了丰富经验，却每次都从零开始。',
+                'faq-title': 'FAQ',
+                'faq-sub': '有疑问吗？',
+                'faq1-q': 'contrl解决什么问题？',
+                'faq1-a': '提案往往只罗列RFP需求而缺乏差异化战略。contrl将RFP分析→Win Theme→差异化设计→验证连成一个流程，创建有战略的提案。',
+                'faq2-q': '支持哪些文件格式？',
+                'faq2-a': '目前支持PowerPoint(.pptx)。上传公司现有PPT模板，contrl会保留格式和设计生成提案初稿。',
+                'faq3-q': '数据安全如何保障？',
+                'faq3-a': '所有处理在本地进行，不上传至云端，提案数据不会离开您的设备。',
+                'faq4-q': '产品面向谁？',
+                'faq4-a': '撰写投标提案的实务负责人。如果您收到RFP后每次都从零开始或只是罗列需求，您就是我们的第一批用户。',
+                'faq5-q': '如何参加Closed Beta？',
+                'faq5-a': '点击上方"申请Closed Beta"按钮。Beta从3月30日起运行4周，免费使用，无需注册或付费，基于邀请制。',
+                'cta-title': '开始撰写制胜提案。',
+                'cta-sub': '从RFP分析到Win Theme、差异化和验证。<br>战略驱动的提案，一个流程完成。',
+                'cta-btn': '申请 Closed Beta',
+                'footer-desc': '保留您的模板，AI自动设计战略驱动的提案。',
+                'footer-features': 'How It Works',
+                'footer-why': 'Why contrl',
+                'footer-faq': 'FAQ',
+                'footer-contact-title': 'Contact',
+                'footer-demo': '申请Beta',
+            },
+            ja: {
+                'banner': 'Closed Beta 3/30 開始 — 先着順、お早めにお申し込みください',
+                'banner-cta': '申し込む →',
+                'hero-title': '自社のPPTテンプレートそのまま、<br>提案書の初稿を自動作成',
+                'hero-sub': '提案チームのために設計。探し求めていた初稿クオリティを体験してください。',
+                'hero-cta': 'Closed Beta 申し込み',
+                'hero-cta2': 'See How It Works',
+                'badge-format': 'フォーマット完全保持',
+                'badge-hallu': 'AI検証プロセス',
+                'badge-local': '提案戦略設計',
+                'flow-title': 'How It Works',
+                'flow-sub': 'Win Themeから差別化、検証まで。ひとつの流れで完成します。',
+                'flow-in1-title': 'Template',
+                'flow-in1-desc': '過去の提案書PPTから自社のDNAとフォーマットを学習します。',
+                'flow-in2-title': 'Reference',
+                'flow-in2-desc': 'RFP（提案依頼書）を分析し、顧客の意図を深く把握します。',
+                'flow-out1-title': 'Win Theme 初稿',
+                'flow-out1-desc': 'RFPを分析してWin Themeを設定し、それに沿った初稿を設計します。',
+                'flow-out2-title': '差別化設計',
+                'flow-out2-desc': 'RFPの核心要件と自社の強みを結び付け、差別化ポイントを初稿に反映します。',
+                'flow-out3-title': '検証レポート',
+                'flow-out3-desc': 'AIがなぜそう書いたのか——根拠と出典とともに確認できます。',
+                'feat-title': 'Key Features',
+                'feat-sub': '提案書作成の各段階でcontrlが提供するコア機能です。',
+                'feat1-title': 'Win Theme — 勝つ戦略設計',
+                'feat1-desc': '<li>RFPの核心要件を自動分析します。</li><li>自社資産とマッチングしWin Themeを設計します。</li><li>空白部分と差別化ポイントまで提案します。</li>',
+                'feat2-title': 'Template + PPT — 自社フォーマットそのまま',
+                'feat2-desc': '<li>自社PPTフォーマットを維持したまま初稿を生成します。</li><li>過去の提案書からトーンと構造を学習します。</li><li>そのまま提出可能なPPTで出力されます。</li>',
+                'feat3-title': 'Security — 完全ローカル処理',
+                'feat3-desc': '<li>すべての処理はローカルで完結します。</li><li>クラウドにアップロードされません。</li><li>機密提案情報が社外に出ることはありません。</li>',
+                'why-title': 'Why contrl',
+                'why-sub': '提案書作成の難しい部分を解決します。',
+                'why1-title': '分厚いRFP、足りない時間',
+                'why1-desc': '数百ページのRFPを分析して核心要件を抽出するだけで数日かかります。',
+                'why2-title': '勝つ戦略、どこから？',
+                'why2-desc': 'Win Themeを設定し差別化戦略を立てる必要がありますが、体系的な方法がありません。',
+                'why3-title': '自社テンプレート、活用されない資産',
+                'why3-desc': '過去の提案書にノウハウが蓄積されていますが、毎回ゼロから作っています。',
+                'faq-title': 'FAQ',
+                'faq-sub': 'ご質問はありますか？',
+                'faq1-q': 'contrlはどんな問題を解決しますか？',
+                'faq1-a': '提案書はRFP要件を羅列するだけで差別化戦略がないことが多いです。contrlはRFP分析→Win Theme→差別化設計→検証をひとつの流れで繋ぎ、戦略のある提案書を作ります。',
+                'faq2-q': '対応ファイル形式は？',
+                'faq2-a': '現在PowerPoint(.pptx)に対応しています。自社の既存PPTテンプレートをアップロードすると、フォーマットとデザインを維持した提案書初稿が生成されます。',
+                'faq3-q': 'データセキュリティは？',
+                'faq3-a': 'すべての処理はローカルで行われます。クラウドへのアップロードはなく、提案データがデバイスの外に出ることはありません。',
+                'faq4-q': '誰向けの製品ですか？',
+                'faq4-a': '入札提案書を作成する実務担当者です。RFPを受け取り毎回ゼロから始めたり要件を羅列するだけの方が、最初のユーザーです。',
+                'faq5-q': 'Closed Betaへの参加方法は？',
+                'faq5-a': '上部の「Closed Beta申し込み」ボタンからお申し込みください。3月30日から4週間無料で運営され、登録や決済不要の招待制です。',
+                'cta-title': '勝てる提案書を、今すぐ始めましょう。',
+                'cta-sub': 'RFP分析からWin Theme、差別化、検証まで。<br>戦略が込められた提案書をひとつの流れで。',
+                'cta-btn': 'Closed Beta 申し込み',
+                'footer-desc': '自社テンプレートそのまま、戦略的な提案書を自動設計するAI。',
+                'footer-features': 'How It Works',
+                'footer-why': 'Why contrl',
+                'footer-faq': 'FAQ',
+                'footer-contact-title': 'Contact',
+                'footer-demo': 'Beta申し込み',
             }
         };
 
         // Detect browser language
         const browserLang = (navigator.language || navigator.userLanguage || 'ko').slice(0, 2);
-        let currentLang = browserLang === 'ko' ? 'ko' : 'en';
+        const supportedLangs = ['ko', 'en', 'zh', 'ja'];
+        let currentLang = supportedLangs.includes(browserLang) ? browserLang : 'en';
 
         // Store original Korean text
         const koTexts = {};
@@ -828,39 +957,24 @@
             koTexts[el.getAttribute('data-i18n-html')] = el.innerHTML;
         });
 
+        const langLabels = { ko: 'KO', en: 'EN', zh: 'CN', ja: 'JA' };
 
-        function toggleLang() {
-            currentLang = currentLang === 'ko' ? 'en' : 'ko';
-            const slider = document.getElementById('langSlider');
-            const koLabel = document.getElementById('langKo');
-            const enLabel = document.getElementById('langEn');
-
-            if (currentLang === 'en') {
-                slider.style.transform = 'translateX(100%)';
-                koLabel.classList.remove('text-zinc-800', 'font-bold');
-                koLabel.classList.add('text-zinc-400', 'font-medium');
-                enLabel.classList.remove('text-zinc-400', 'font-medium');
-                enLabel.classList.add('text-zinc-800', 'font-bold');
-            } else {
-                slider.style.transform = 'translateX(0)';
-                enLabel.classList.remove('text-zinc-800', 'font-bold');
-                enLabel.classList.add('text-zinc-400', 'font-medium');
-                koLabel.classList.remove('text-zinc-400', 'font-medium');
-                koLabel.classList.add('text-zinc-800', 'font-bold');
-            }
+        function setLang(lang) {
+            currentLang = lang;
+            document.getElementById('langLabel').textContent = langLabels[lang];
 
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (currentLang === 'en' && translations.en[key]) {
-                    el.textContent = translations.en[key];
+                if (currentLang !== 'ko' && translations[currentLang] && translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
                 } else {
                     el.textContent = koTexts[key];
                 }
             });
             document.querySelectorAll('[data-i18n-html]').forEach(el => {
                 const key = el.getAttribute('data-i18n-html');
-                if (currentLang === 'en' && translations.en[key]) {
-                    el.innerHTML = translations.en[key];
+                if (currentLang !== 'ko' && translations[currentLang] && translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
                 } else {
                     el.innerHTML = koTexts[key];
                 }
@@ -868,10 +982,18 @@
             document.documentElement.lang = currentLang;
         }
 
+        function toggleLang() {
+            const langs = ['ko', 'en', 'zh', 'ja'];
+            const next = langs[(langs.indexOf(currentLang) + 1) % langs.length];
+            setLang(next);
+        }
+
         // Apply detected language on load
-        if (currentLang === 'en') {
+        document.getElementById('langLabel').textContent = langLabels[currentLang];
+        if (currentLang !== 'ko') {
+            const detectedLang = currentLang;
             currentLang = 'ko';
-            toggleLang();
+            setLang(detectedLang);
         }
     </script>
 
