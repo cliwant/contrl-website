@@ -156,15 +156,15 @@
                 <!-- Left: Text -->
                 <div>
                     <h1 class="hero-enter hero-delay-1 text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-tight text-zinc-900 mb-8" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="hero-title">
-                        PPT 템플릿만 있다면,<br>제안서 초안이 자동으로 뚝딱
+                        우리 회사 PPT 템플릿 그대로,<br>제안서 초안 자동 작성
                     </h1>
                     <p class="hero-enter hero-delay-2 text-base md:text-lg text-zinc-500 leading-relaxed max-w-md mb-10" data-i18n="hero-sub">
                         Claude, Gamma, Genspark로는 불가능했던 초안 퀄리티를 경험해보세요.
                     </p>
                     <div class="hero-enter hero-delay-3 flex flex-wrap items-center gap-4">
                         <a href="https://calendar.app.google/yGKdcEiRhSRX1c987" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-7 py-3.5 rounded-full text-base">
-                            <iconify-icon icon="solar:calendar-bold" width="18"></iconify-icon>
                             <span data-i18n="hero-cta">데모 예약하기</span>
+                            <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
                         </a>
                         <a href="#features" class="inline-flex items-center gap-2 border border-zinc-200 text-zinc-700 font-semibold px-7 py-3.5 rounded-full text-base hover:border-zinc-300 transition-colors">
                             <span data-i18n="hero-cta2">작동 방식 보기</span>
@@ -177,14 +177,24 @@
                     <div class="absolute -inset-12 rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(242,122,46,0.15) 0%, rgba(242,122,46,0.05) 50%, transparent 70%); filter: blur(50px);"></div>
 
                     <!-- Video -->
-                    <div class="relative rounded-3xl overflow-hidden bg-zinc-800" style="box-shadow: 0 25px 60px -15px rgba(0,0,0,0.15);">
+                    <div class="relative rounded-3xl overflow-hidden bg-zinc-800 cursor-pointer group" style="box-shadow: 0 25px 60px -15px rgba(0,0,0,0.15);" onclick="toggleVideo(event)">
                         <div class="aspect-video flex items-center justify-center relative">
-                            <video autoplay muted loop playsinline class="w-full h-full object-cover">
-                                <source src="" type="video/mp4">
+                            <video id="heroVideo" autoplay muted loop playsinline class="w-full h-full object-cover">
+                                <source src="/demo.mp4" type="video/mp4">
                             </video>
-                            <span class="text-xs font-medium tracking-widest uppercase text-zinc-500 absolute">영상 준비 중</span>
+                            <div id="playPauseBtn" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                                <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);">
+                                    <iconify-icon id="playIcon" icon="solar:play-bold" width="20" class="text-white hidden"></iconify-icon>
+                                    <iconify-icon id="pauseIcon" icon="solar:pause-bold" width="20" class="text-white"></iconify-icon>
+                                </div>
+                            </div>
+                            <!-- Expand button -->
+                            <button onclick="event.stopPropagation(); openVideoModal()" class="absolute bottom-3 right-3 w-9 h-9 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);">
+                                <iconify-icon icon="solar:full-screen-bold" width="16" class="text-white"></iconify-icon>
+                            </button>
                         </div>
                     </div>
+
 
                     <!-- Floating badges -->
                     <div class="hidden lg:flex absolute -left-16 top-1/3 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 0s;">
@@ -352,8 +362,8 @@
                     <div class="w-12 h-12 rounded-xl border border-accent/20 flex items-center justify-center mb-5">
                         <iconify-icon icon="solar:tag-bold-duotone" width="24" class="text-accent"></iconify-icon>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n-html="feat1-title">문단마다 의도 태그가<br>자동으로 붙습니다.</h3>
-                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat1-desc">AI가 각 문단의 목적, 대상 독자, 기대 반응을 자동 태깅합니다. 의도와 실제 내용이 어긋나면 경고로 알려줘서, 제출 전에 스스로 약점을 발견할 수 있습니다.</p>
+                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat1-title">Win Theme</h3>
+                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat1-desc">RFP 분석부터 Win Theme(차별화 전략)까지, 빠르게 완성하세요.</p>
                 </div>
             </div>
 
@@ -363,8 +373,8 @@
                     <div class="w-12 h-12 rounded-xl border border-accent/20 flex items-center justify-center mb-5">
                         <iconify-icon icon="solar:link-round-bold-duotone" width="24" class="text-accent"></iconify-icon>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n-html="feat2-title">이 문장이 어디서 왔는지<br>근거를 바로 확인합니다.</h3>
-                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat2-desc">초안의 각 문단을 클릭하면 참고 문서의 어느 부분을 근거로 작성됐는지 하이라이트로 보여줍니다. 근거가 없는 문장은 별도 표시되어 할루시네이션을 즉시 잡아냅니다.</p>
+                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat2-title">Template + PPT</h3>
+                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat2-desc">우리 회사의 양식 그대로, 바로 제출할 수 있는 PPT가 나옵니다.</p>
                 </div>
                 <div class="order-1 lg:order-2 bg-white rounded-3xl p-8 flex items-center justify-center aspect-[4/3] shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
                     <div class="w-full max-w-xs space-y-3">
@@ -426,8 +436,8 @@
                     <div class="w-12 h-12 rounded-xl border border-accent/20 flex items-center justify-center mb-5">
                         <iconify-icon icon="solar:brain-bold-duotone" width="24" class="text-accent"></iconify-icon>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n-html="feat3-title">템플릿과 레퍼런스만 넣으면<br>초안이 바로 나옵니다.</h3>
-                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat3-desc">기존 문서 양식과 참고 자료를 넣으면, 구조와 톤을 유지한 초안이 자동 생성됩니다. 이전 리뷰어 피드백까지 writing memory로 반영되어, 쓸수록 더 정확한 초안이 만들어집니다.</p>
+                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat3-title">Security</h3>
+                    <p class="text-base text-zinc-500 leading-relaxed" data-i18n="feat3-desc">제안서는 모두 로컬에서, 외부 유출을 사전에 차단합니다.</p>
                 </div>
             </div>
         </div>
@@ -602,6 +612,16 @@
         </div>
     </footer>
 
+    <!-- Video Modal -->
+    <div id="videoModal" class="fixed inset-0 z-[999] hidden items-center justify-center p-6" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);" onclick="closeVideoModal(event)">
+        <button onclick="event.stopPropagation(); closeVideoModal()" class="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center text-white/70 hover:text-white transition-colors z-10" style="background: rgba(255,255,255,0.1);">
+            <iconify-icon icon="solar:close-circle-bold" width="24"></iconify-icon>
+        </button>
+        <video id="modalVideo" muted loop playsinline controls class="max-w-[90vw] max-h-[85vh] rounded-2xl" style="box-shadow: 0 30px 80px rgba(0,0,0,0.5);">
+            <source src="/demo.mp4" type="video/mp4">
+        </video>
+    </div>
+
     <script>
         // Scroll reveal
         const observer = new IntersectionObserver((entries) => {
@@ -693,6 +713,46 @@
                 chevron.style.transform = 'rotate(180deg)';
             }
         }
+        // Video play/pause
+        function toggleVideo(e) {
+            const v = document.getElementById('heroVideo');
+            const playIcon = document.getElementById('playIcon');
+            const pauseIcon = document.getElementById('pauseIcon');
+            if (v.paused) {
+                v.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+            } else {
+                v.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+            }
+        }
+
+        // Video modal
+        function openVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const modalV = document.getElementById('modalVideo');
+            const heroV = document.getElementById('heroVideo');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            modalV.currentTime = heroV.currentTime;
+            modalV.play();
+            document.body.style.overflow = 'hidden';
+        }
+        function closeVideoModal(e) {
+            if (e && e.target !== e.currentTarget && !e.target.closest('button')) return;
+            const modal = document.getElementById('videoModal');
+            const modalV = document.getElementById('modalVideo');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            modalV.pause();
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeVideoModal();
+        });
+
         // i18n
         const translations = {
             en: {
@@ -700,7 +760,7 @@
                 'nav-why': 'Why contrl',
                 'nav-faq': 'FAQ',
                 'nav-cta': 'Book Demo',
-                'hero-title': 'With just a PPT template,<br>your proposal draft writes itself.',
+                'hero-title': 'Your template, as is.<br>Your winning proposal, architected.',
                 'hero-sub': 'Experience draft quality impossible with Claude, Gamma, or Genspark.',
                 'hero-cta': 'Book a Demo',
                 'hero-cta2': 'See How It Works',
@@ -721,12 +781,12 @@
                 'flow-out3-desc': 'Delivers intent summaries and key review points for reviewers.',
                 'feat-title': 'Key Features',
                 'feat-sub': 'Concrete features that contrl provides at each stage of document writing.',
-                'feat1-title': 'Intent tags are automatically<br>added to every paragraph.',
-                'feat1-desc': 'AI auto-tags each paragraph\'s purpose, target audience, and expected response. When intent and content diverge, it alerts you — so you can catch weaknesses before submission.',
-                'feat2-title': 'See exactly where<br>each sentence came from.',
-                'feat2-desc': 'Click any paragraph in the draft to see which part of the reference documents it was based on, highlighted. Sentences without evidence are flagged to catch hallucinations instantly.',
-                'feat3-title': 'Just add a template and references,<br>and the draft appears.',
-                'feat3-desc': 'Input your document template and reference materials, and a draft that maintains your structure and tone is auto-generated. Previous reviewer feedback is reflected via writing memory, making each draft more accurate.',
+                'feat1-title': 'Win Theme',
+                'feat1-desc': 'From RFP to Win Theme, in one flow.',
+                'feat2-title': 'Template + PPT',
+                'feat2-desc': 'Your template. Your voice. Your discriminators — not someone else\'s.',
+                'feat3-title': 'Security',
+                'feat3-desc': 'No cloud. No upload. Everything runs on your machine.',
                 'why-title': 'Why contrl',
                 'why-sub': 'AI makes drafts easy, but it\'s making half-thought documents look like finished products.',
                 'why1-title': 'Documents Without Intent',
@@ -764,11 +824,14 @@
                 'footer-demo': 'Book Demo',
             },
             ko: {
-                'hero-title': 'PPT 템플릿만 있다면,<br>제안서 초안이 자동으로 뚝딱',
+                'hero-title': '우리 회사 PPT 템플릿 그대로,<br>제안서 초안 자동 작성',
             }
         };
 
-        let currentLang = 'ko';
+        // Detect browser language
+        const browserLang = (navigator.language || navigator.userLanguage || 'ko').slice(0, 2);
+        let currentLang = browserLang === 'ko' ? 'ko' : 'en';
+
         // Store original Korean text
         const koTexts = {};
         document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -777,6 +840,7 @@
         document.querySelectorAll('[data-i18n-html]').forEach(el => {
             koTexts[el.getAttribute('data-i18n-html')] = el.innerHTML;
         });
+
 
         function toggleLang() {
             currentLang = currentLang === 'ko' ? 'en' : 'ko';
@@ -815,6 +879,12 @@
                 }
             });
             document.documentElement.lang = currentLang;
+        }
+
+        // Apply detected language on load
+        if (currentLang === 'en') {
+            currentLang = 'ko';
+            toggleLang();
         }
     </script>
 
