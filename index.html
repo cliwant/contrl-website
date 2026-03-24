@@ -149,9 +149,12 @@
                     </button>
                     <div class="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg border border-zinc-100 py-1 min-w-[44px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                         <button onclick="setLang('en')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">English</button>
-                        <button onclick="setLang('zh')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">中文</button>
                         <button onclick="setLang('ko')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">한국어</button>
+                        <button onclick="setLang('zh')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">中文</button>
                         <button onclick="setLang('ja')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">日本語</button>
+                        <button onclick="setLang('fr')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">Français</button>
+                        <button onclick="setLang('es')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">Español</button>
+                        <button onclick="setLang('ar')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">العربية</button>
                     </div>
                 </div>
                 </button>
@@ -194,9 +197,20 @@
                     <!-- Video -->
                     <div class="relative rounded-3xl overflow-hidden bg-zinc-800 cursor-pointer group" style="box-shadow: 0 25px 60px -15px rgba(0,0,0,0.15);" onclick="toggleVideo(event)">
                         <div class="aspect-video flex items-center justify-center relative">
-                            <video id="heroVideo" autoplay muted loop playsinline class="w-full h-full object-cover"
+                            <video id="heroVideo" muted loop playsinline class="w-full h-full object-cover">
                                 <source src="/demo.mp4#t=9.5" type="video/mp4">
                             </video>
+                            <!-- Play/Pause overlay -->
+                            <div id="playIcon" class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);">
+                                    <iconify-icon icon="solar:play-bold" width="28" class="text-white ml-1"></iconify-icon>
+                                </div>
+                            </div>
+                            <div id="pauseIcon" class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none hidden">
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);">
+                                    <iconify-icon icon="solar:pause-bold" width="28" class="text-white"></iconify-icon>
+                                </div>
+                            </div>
                             <!-- Expand button -->
                             <button onclick="event.stopPropagation(); openVideoModal()" class="absolute bottom-3 right-3 w-9 h-9 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);">
                                 <iconify-icon icon="solar:full-screen-bold" width="16" class="text-white"></iconify-icon>
@@ -628,9 +642,12 @@
                 chevron.style.transform = 'rotate(180deg)';
             }
         }
-        // Set video thumbnail at 9.5s
+        // Set video thumbnail at 9.5s (paused by default)
         const heroVid = document.getElementById('heroVideo');
-        heroVid.addEventListener('loadedmetadata', () => { heroVid.currentTime = 9.5; });
+        heroVid.addEventListener('loadedmetadata', () => {
+            heroVid.currentTime = 9.5;
+            heroVid.pause();
+        });
 
         // Video play/pause
         function toggleVideo(e) {
@@ -638,6 +655,7 @@
             const playIcon = document.getElementById('playIcon');
             const pauseIcon = document.getElementById('pauseIcon');
             if (v.paused) {
+                v.muted = false;
                 v.play();
                 playIcon.classList.add('hidden');
                 pauseIcon.classList.remove('hidden');
@@ -861,12 +879,204 @@
                 'footer-faq': 'FAQ',
                 'footer-contact-title': 'Contact',
                 'footer-demo': 'Beta申し込み',
+            },
+            fr: {
+                'nav-features': 'Fonctionnalités',
+                'nav-why': 'Pourquoi contrl',
+                'nav-faq': 'FAQ',
+                'banner': '<span class="font-extrabold tracking-tight">Bêta fermée ouvre le 30/03</span> <span class="ml-2.5 font-light opacity-80">Inscrivez-vous avant que les places ne soient prises</span>',
+                'banner-cta': 'Postuler →',
+                'nav-cta': 'Postuler à la Bêta',
+                'hero-title': 'Votre modèle, tel quel.<br>Votre proposition gagnante, architecturée.',
+                'hero-sub': 'Conçu pour les équipes de propositions. Découvrez la qualité de rédaction que vous recherchiez.',
+                'hero-cta': 'Postuler à la Bêta Fermée',
+                'hero-cta2': 'Voir comment ça marche',
+                'badge-format': 'Format préservé',
+                'badge-hallu': 'Vérification IA',
+                'badge-local': 'Stratégie de proposition',
+                'flow-title': 'Comment ça marche',
+                'flow-sub': 'Du Win Theme à la différenciation puis à la vérification. Tout en un seul flux.',
+                'flow-in1-title': 'Modèle',
+                'flow-in1-desc': 'Apprend l\'ADN et le format de votre entreprise à partir de vos PPT précédents.',
+                'flow-in2-title': 'Référence',
+                'flow-in2-desc': 'Analyse l\'appel d\'offres pour comprendre en profondeur les attentes du client.',
+                'flow-out1-title': 'Brouillon Win Theme',
+                'flow-out1-desc': 'Analyse l\'appel d\'offres pour définir un Win Theme, puis construit le brouillon autour.',
+                'flow-out2-title': 'Différenciation',
+                'flow-out2-desc': 'Relie les exigences de l\'appel d\'offres à vos atouts, intégrant les différenciateurs dans le brouillon.',
+                'flow-out3-title': 'Rapport de vérification',
+                'flow-out3-desc': 'Voyez exactement pourquoi l\'IA a écrit ce qu\'elle a écrit — avec sources et justification.',
+                'feat-title': 'Fonctionnalités clés',
+                'feat-sub': 'Les capacités essentielles que contrl offre à chaque étape de la rédaction de propositions.',
+                'feat1-title': 'Win Theme — Conception de stratégie gagnante',
+                'feat1-desc': '<li>Analyse automatiquement les exigences clés de l\'appel d\'offres.</li><li>Associe vos atouts pour concevoir un Win Theme.</li><li>Identifie les lacunes et les différenciateurs.</li>',
+                'feat2-title': 'Modèle + PPT — Votre format, préservé',
+                'feat2-desc': '<li>Génère des brouillons en préservant votre format PPT.</li><li>Apprend le ton et la structure de vos propositions passées.</li><li>Produit des fichiers PPT prêts à soumettre.</li>',
+                'feat3-title': 'Sécurité — Vos propositions, protégées',
+                'feat3-desc': '<li>Tout le traitement est effectué localement.</li><li>Rien n\'est téléchargé vers le cloud.</li><li>Les données sensibles ne quittent jamais votre entreprise.</li>',
+                'why-title': 'Pourquoi contrl',
+                'why-sub': 'Nous résolvons les parties difficiles de la rédaction de propositions.',
+                'why1-title': 'Des appels d\'offres volumineux, pas assez de temps',
+                'why1-desc': 'Il faut des jours juste pour analyser des centaines de pages et extraire les exigences clés.',
+                'why2-title': 'Stratégie gagnante — par où commencer ?',
+                'why2-desc': 'Vous avez besoin d\'un Win Theme et d\'une stratégie de différenciation, mais il n\'y a pas de méthode systématique.',
+                'why3-title': 'Modèles — des atouts inexploités',
+                'why3-desc': 'Vos propositions passées contiennent un savoir-faire précieux, mais vous repartez de zéro à chaque fois.',
+                'faq-title': 'Questions fréquentes',
+                'faq-sub': 'Vous avez des questions ?',
+                'faq1-q': 'Quel problème contrl résout-il ?',
+                'faq1-a': 'Les propositions se contentent souvent de lister les exigences sans stratégie de différenciation. contrl connecte tout le flux — analyse de l\'appel d\'offres → Win Theme → différenciation → vérification — pour créer des propositions avec une vraie stratégie.',
+                'faq2-q': 'Quels formats de fichiers sont supportés ?',
+                'faq2-a': 'Actuellement PowerPoint (.pptx). Téléchargez votre modèle PPT existant, et contrl génère un brouillon qui préserve votre format et design.',
+                'faq3-q': 'Comment la sécurité des données est-elle gérée ?',
+                'faq3-a': 'Tout le traitement se fait localement. Rien n\'est téléchargé vers le cloud, et vos données ne quittent jamais votre machine.',
+                'faq4-q': 'À qui s\'adresse ce produit ?',
+                'faq4-a': 'Aux responsables de propositions qui rédigent des réponses aux appels d\'offres. Si vous recevez des appels d\'offres et repartez de zéro à chaque fois, vous êtes notre premier utilisateur.',
+                'faq5-q': 'Comment rejoindre la Bêta Fermée ?',
+                'faq5-a': 'Cliquez sur le bouton « Postuler à la Bêta Fermée » ci-dessus. La bêta dure 4 semaines à partir du 30 mars, gratuitement — sans inscription ni paiement. L\'accès est sur invitation.',
+                'cta-title': 'Commencez à rédiger des propositions gagnantes.',
+                'cta-sub': 'De l\'analyse de l\'appel d\'offres au Win Theme, à la différenciation et à la vérification.<br>Des propositions stratégiques en un seul flux.',
+                'cta-btn': 'Postuler à la Bêta Fermée',
+                'footer-desc': 'Votre modèle, tel quel. L\'IA qui architecture automatiquement des propositions stratégiques.',
+                'footer-features': 'Fonctionnalités',
+                'footer-why': 'Pourquoi contrl',
+                'footer-faq': 'FAQ',
+                'footer-contact-title': 'Contact',
+                'footer-demo': 'Postuler à la Bêta',
+            },
+            es: {
+                'nav-features': 'Características',
+                'nav-why': 'Por qué contrl',
+                'nav-faq': 'FAQ',
+                'banner': '<span class="font-extrabold tracking-tight">Beta cerrada abre el 30/03</span> <span class="ml-2.5 font-light opacity-80">Regístrate antes de que se agoten los cupos</span>',
+                'banner-cta': 'Aplicar ahora →',
+                'nav-cta': 'Aplicar a la Beta',
+                'hero-title': 'Tu plantilla, tal cual.<br>Tu propuesta ganadora, diseñada.',
+                'hero-sub': 'Diseñado para equipos de propuestas. Experimenta la calidad de borrador que estabas buscando.',
+                'hero-cta': 'Aplicar a la Beta Cerrada',
+                'hero-cta2': 'Ver cómo funciona',
+                'badge-format': 'Formato preservado',
+                'badge-hallu': 'Verificación IA',
+                'badge-local': 'Estrategia de propuesta',
+                'flow-title': 'Cómo funciona',
+                'flow-sub': 'Del Win Theme a la diferenciación y verificación. Todo en un solo flujo.',
+                'flow-in1-title': 'Plantilla',
+                'flow-in1-desc': 'Aprende el ADN y formato de tu empresa a partir de PPTs de propuestas anteriores.',
+                'flow-in2-title': 'Referencia',
+                'flow-in2-desc': 'Analiza la licitación para comprender a fondo la intención del cliente.',
+                'flow-out1-title': 'Borrador Win Theme',
+                'flow-out1-desc': 'Analiza la licitación para establecer un Win Theme y diseña el borrador en torno a él.',
+                'flow-out2-title': 'Diferenciación',
+                'flow-out2-desc': 'Conecta los requisitos de la licitación con tus fortalezas, integrando diferenciadores en el borrador.',
+                'flow-out3-title': 'Informe de verificación',
+                'flow-out3-desc': 'Ve exactamente por qué la IA escribió lo que escribió — con fuentes y justificación.',
+                'feat-title': 'Características clave',
+                'feat-sub': 'Capacidades esenciales que contrl ofrece en cada etapa de la redacción de propuestas.',
+                'feat1-title': 'Win Theme — Diseño de estrategia ganadora',
+                'feat1-desc': '<li>Analiza automáticamente los requisitos clave de la licitación.</li><li>Asocia tus activos para diseñar un Win Theme.</li><li>Identifica brechas y diferenciadores.</li>',
+                'feat2-title': 'Plantilla + PPT — Tu formato, preservado',
+                'feat2-desc': '<li>Genera borradores preservando tu formato PPT.</li><li>Aprende el tono y estructura de propuestas anteriores.</li><li>Produce archivos PPT listos para enviar.</li>',
+                'feat3-title': 'Seguridad — Tus propuestas, protegidas',
+                'feat3-desc': '<li>Todo el procesamiento se realiza localmente.</li><li>Nada se sube a la nube.</li><li>Los datos sensibles nunca salen de tu empresa.</li>',
+                'why-title': 'Por qué contrl',
+                'why-sub': 'Resolvemos las partes difíciles de la redacción de propuestas.',
+                'why1-title': 'Licitaciones extensas, poco tiempo',
+                'why1-desc': 'Se necesitan días solo para analizar cientos de páginas y extraer los requisitos clave.',
+                'why2-title': 'Estrategia ganadora — ¿por dónde empezar?',
+                'why2-desc': 'Necesitas un Win Theme y una estrategia de diferenciación, pero no hay un método sistemático.',
+                'why3-title': 'Plantillas — activos sin explotar',
+                'why3-desc': 'Las propuestas anteriores contienen know-how valioso, pero terminas empezando de cero cada vez.',
+                'faq-title': 'Preguntas frecuentes',
+                'faq-sub': '¿Tienes preguntas?',
+                'faq1-q': '¿Qué problema resuelve contrl?',
+                'faq1-a': 'Las propuestas a menudo solo listan requisitos sin estrategia de diferenciación. contrl conecta todo el flujo — análisis de licitación → Win Theme → diferenciación → verificación — para crear propuestas con estrategia real.',
+                'faq2-q': '¿Qué formatos de archivo se soportan?',
+                'faq2-a': 'Actualmente PowerPoint (.pptx). Sube tu plantilla PPT existente, y contrl genera un borrador que preserva tu formato y diseño.',
+                'faq3-q': '¿Cómo se maneja la seguridad de datos?',
+                'faq3-a': 'Todo el procesamiento ocurre localmente. Nada se sube a la nube, y tus datos nunca salen de tu máquina.',
+                'faq4-q': '¿Para quién es este producto?',
+                'faq4-a': 'Para responsables de propuestas que redactan licitaciones. Si recibes licitaciones y empiezas de cero cada vez o solo listas requisitos sin estrategia, eres nuestro primer usuario.',
+                'faq5-q': '¿Cómo me uno a la Beta Cerrada?',
+                'faq5-a': 'Haz clic en el botón "Aplicar a la Beta Cerrada" arriba. La beta dura 4 semanas desde el 30 de marzo, gratis — sin registro ni pago. El acceso es por invitación.',
+                'cta-title': 'Empieza a redactar propuestas ganadoras.',
+                'cta-sub': 'Del análisis de licitación al Win Theme, diferenciación y verificación.<br>Propuestas con estrategia en un solo flujo.',
+                'cta-btn': 'Aplicar a la Beta Cerrada',
+                'footer-desc': 'Tu plantilla, tal cual. IA que diseña automáticamente propuestas con estrategia.',
+                'footer-features': 'Características',
+                'footer-why': 'Por qué contrl',
+                'footer-faq': 'FAQ',
+                'footer-contact-title': 'Contacto',
+                'footer-demo': 'Aplicar a la Beta',
+            },
+            ar: {
+                'nav-features': 'المميزات',
+                'nav-why': 'لماذا contrl',
+                'nav-faq': 'الأسئلة الشائعة',
+                'banner': '<span class="font-extrabold tracking-tight">النسخة التجريبية المغلقة تبدأ 30/03</span> <span class="ml-2.5 font-light opacity-80">سجّل قبل نفاد الأماكن</span>',
+                'banner-cta': 'قدّم الآن →',
+                'nav-cta': 'قدّم للنسخة التجريبية',
+                'hero-title': 'قالبك، كما هو.<br>عرضك الفائز، مُصمَّم باحترافية.',
+                'hero-sub': 'مصمم لفرق العروض التقديمية. اكتشف جودة المسودة التي كنت تبحث عنها.',
+                'hero-cta': 'قدّم للنسخة التجريبية المغلقة',
+                'hero-cta2': 'شاهد كيف يعمل',
+                'badge-format': 'الحفاظ على التنسيق',
+                'badge-hallu': 'التحقق بالذكاء الاصطناعي',
+                'badge-local': 'استراتيجية العرض',
+                'flow-title': 'كيف يعمل',
+                'flow-sub': 'من Win Theme إلى التمايز ثم التحقق. كل ذلك في تدفق واحد.',
+                'flow-in1-title': 'القالب',
+                'flow-in1-desc': 'يتعلم هوية شركتك وتنسيقها من عروض PPT السابقة.',
+                'flow-in2-title': 'المرجع',
+                'flow-in2-desc': 'يحلل طلب العرض لفهم نية العميل بعمق.',
+                'flow-out1-title': 'مسودة Win Theme',
+                'flow-out1-desc': 'يحلل طلب العرض لتحديد Win Theme، ثم يبني المسودة حوله.',
+                'flow-out2-title': 'التمايز',
+                'flow-out2-desc': 'يربط متطلبات طلب العرض بنقاط قوتك، ويدمج عوامل التمايز في المسودة.',
+                'flow-out3-title': 'تقرير التحقق',
+                'flow-out3-desc': 'اطلع على سبب كتابة الذكاء الاصطناعي لما كتبه — مع المصادر والمبررات.',
+                'feat-title': 'المميزات الرئيسية',
+                'feat-sub': 'القدرات الأساسية التي يوفرها contrl في كل مرحلة من كتابة العروض.',
+                'feat1-title': 'Win Theme — تصميم استراتيجية الفوز',
+                'feat1-desc': '<li>يحلل تلقائياً المتطلبات الرئيسية لطلب العرض.</li><li>يطابق أصولك لتصميم Win Theme.</li><li>يكشف الثغرات وعوامل التمايز.</li>',
+                'feat2-title': 'القالب + PPT — تنسيقك، محفوظ',
+                'feat2-desc': '<li>ينشئ مسودات مع الحفاظ على تنسيق PPT الخاص بك.</li><li>يتعلم الأسلوب والبنية من العروض السابقة.</li><li>ينتج ملفات PPT جاهزة للتقديم.</li>',
+                'feat3-title': 'الأمان — عروضك، محمية',
+                'feat3-desc': '<li>تتم جميع المعالجات محلياً.</li><li>لا يتم رفع أي شيء إلى السحابة.</li><li>البيانات الحساسة لا تغادر شركتك أبداً.</li>',
+                'why-title': 'لماذا contrl',
+                'why-sub': 'نحل الأجزاء الصعبة في كتابة العروض.',
+                'why1-title': 'طلبات عروض ضخمة، وقت غير كافٍ',
+                'why1-desc': 'يستغرق الأمر أياماً فقط لتحليل مئات الصفحات واستخراج المتطلبات الرئيسية.',
+                'why2-title': 'استراتيجية الفوز — من أين تبدأ؟',
+                'why2-desc': 'تحتاج إلى Win Theme واستراتيجية تمايز، لكن لا توجد طريقة منهجية لبنائها.',
+                'why3-title': 'القوالب — أصول غير مستغلة',
+                'why3-desc': 'العروض السابقة تحتوي على خبرات قيمة، لكنك تبدأ من الصفر في كل مرة.',
+                'faq-title': 'الأسئلة الشائعة',
+                'faq-sub': 'لديك أسئلة؟',
+                'faq1-q': 'ما المشكلة التي يحلها contrl؟',
+                'faq1-a': 'غالباً ما تكتفي العروض بسرد متطلبات طلب العرض دون استراتيجية تمايز. contrl يربط التدفق بالكامل — تحليل طلب العرض ← Win Theme ← تصميم التمايز ← التحقق — لإنشاء عروض ذات استراتيجية حقيقية.',
+                'faq2-q': 'ما صيغ الملفات المدعومة؟',
+                'faq2-a': 'حالياً PowerPoint (.pptx). ارفع قالب PPT الخاص بشركتك، وسيقوم contrl بإنشاء مسودة تحافظ على التنسيق والتصميم.',
+                'faq3-q': 'كيف يتم التعامل مع أمان البيانات؟',
+                'faq3-a': 'تتم جميع المعالجات محلياً. لا يتم رفع أي شيء إلى السحابة، وبياناتك لا تغادر جهازك أبداً.',
+                'faq4-q': 'لمن هذا المنتج؟',
+                'faq4-a': 'لمديري العروض الذين يكتبون عروض المناقصات. إذا كنت تتلقى طلبات عروض وتبدأ من الصفر كل مرة، فأنت المستخدم الأول لنا.',
+                'faq5-q': 'كيف أنضم إلى النسخة التجريبية المغلقة؟',
+                'faq5-a': 'انقر على زر "قدّم للنسخة التجريبية المغلقة" أعلاه. تستمر النسخة التجريبية لمدة 4 أسابيع بدءاً من 30 مارس، مجاناً — بدون تسجيل أو دفع. الوصول بالدعوة فقط.',
+                'cta-title': 'ابدأ بكتابة عروض فائزة.',
+                'cta-sub': 'من تحليل طلب العرض إلى Win Theme والتمايز والتحقق.<br>عروض مدفوعة بالاستراتيجية في تدفق واحد.',
+                'cta-btn': 'قدّم للنسخة التجريبية المغلقة',
+                'footer-desc': 'قالبك، كما هو. ذكاء اصطناعي يصمم عروضاً استراتيجية تلقائياً.',
+                'footer-features': 'المميزات',
+                'footer-why': 'لماذا contrl',
+                'footer-faq': 'الأسئلة الشائعة',
+                'footer-contact-title': 'تواصل معنا',
+                'footer-demo': 'قدّم للنسخة التجريبية',
             }
         };
 
         // Detect browser language
         const browserLang = ((navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage || 'en').slice(0, 2);
-        const supportedLangs = ['ko', 'en', 'zh', 'ja'];
+        const supportedLangs = ['ko', 'en', 'zh', 'ja', 'fr', 'es', 'ar'];
         let currentLang = supportedLangs.includes(browserLang) ? browserLang : 'en';
 
         // Store original Korean text
@@ -878,7 +1088,7 @@
             koTexts[el.getAttribute('data-i18n-html')] = el.innerHTML;
         });
 
-        const langLabels = { ko: 'KO', en: 'EN', zh: 'CN', ja: 'JA' };
+        const langLabels = { ko: 'KO', en: 'EN', zh: 'CN', ja: 'JA', fr: 'FR', es: 'ES', ar: 'AR' };
 
         function setLang(lang) {
             currentLang = lang;
@@ -902,7 +1112,14 @@
             });
             document.documentElement.lang = currentLang;
 
-            // 중문/일문일 때 Noto Sans CJK 폰트 적용
+            // RTL for Arabic
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.documentElement.dir = 'ltr';
+            }
+
+            // CJK fonts
             if (lang === 'zh') {
                 document.body.style.fontFamily = "'Noto Sans SC', sans-serif";
             } else if (lang === 'ja') {
@@ -932,7 +1149,7 @@
         }
 
         function toggleLang() {
-            const langs = ['ko', 'en', 'zh', 'ja'];
+            const langs = ['ko', 'en', 'zh', 'ja', 'fr', 'es', 'ar'];
             const next = langs[(langs.indexOf(currentLang) + 1) % langs.length];
             setLang(next);
         }
