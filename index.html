@@ -200,7 +200,7 @@
                     <!-- Video -->
                     <div class="relative rounded-3xl overflow-hidden bg-zinc-800 cursor-pointer group" style="box-shadow: 0 25px 60px -15px rgba(0,0,0,0.15);" onclick="toggleVideo(event)">
                         <div class="aspect-video flex items-center justify-center relative">
-                            <video id="heroVideo" muted loop playsinline preload="auto" class="w-full h-full object-cover">
+                            <video id="heroVideo" muted loop playsinline preload="auto" poster="/poster.jpg" class="w-full h-full object-cover">
                                 <source src="/demo.mp4" type="video/mp4">
                             </video>
                             <!-- Play/Pause overlay -->
@@ -736,10 +736,6 @@
             fetch('/demo.mp4').then(r => r.blob()).then(blob => {
                 const url = URL.createObjectURL(blob);
                 heroV.src = url;
-                heroV.addEventListener('loadedmetadata', function onMeta() {
-                    heroV.currentTime = 9.5;
-                    heroV.removeEventListener('loadedmetadata', onMeta);
-                });
             });
             heroV.addEventListener('timeupdate', function() {
                 const progress = (heroV.currentTime / heroV.duration) * 100;
