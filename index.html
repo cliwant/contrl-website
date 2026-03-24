@@ -128,7 +128,7 @@
     <!-- TOP BANNER -->
     <div class="fixed top-0 left-0 right-0 z-50 bg-[#524438] text-white text-center py-2.5 text-sm font-medium">
         <span data-i18n-html="banner"><span class="font-extrabold tracking-tight">Closed Beta 3/30 오픈</span> <span class="ml-2.5 font-light opacity-80">선착순 마감 전에 신청하세요</span></span>
-        <a href="https://tally.so/r/b5dqO2" target="_blank" class="ml-2.5 inline-flex items-center gap-1 bg-white text-[#524438] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-white/90 transition-colors" data-i18n="banner-cta">신청하기 →</a>
+        <a href="https://tally.so/r/b5dqO2" data-tally-link target="_blank" class="ml-2.5 inline-flex items-center gap-1 bg-white text-[#524438] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-white/90 transition-colors" data-i18n="banner-cta">신청하기 →</a>
     </div>
 
     <!-- NAV -->
@@ -155,7 +155,6 @@
                     </div>
                 </div>
                 </button>
-                <a href="https://tally.so/r/b5dqO2" class="bg-zinc-900 text-white text-sm font-semibold py-2.5 px-6 rounded-full hover:bg-zinc-800 transition-colors text-center w-[130px] whitespace-nowrap text-xs" data-i18n="nav-cta">Beta 신청</a>
             </div>
         </div>
     </nav>
@@ -171,14 +170,14 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <!-- Left: Text -->
                 <div>
-                    <h1 class="hero-enter hero-delay-1 text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-tight text-zinc-900 mb-8" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="hero-title">
+                    <h1 class="hero-enter hero-delay-1 text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-zinc-900 mb-8" style="font-family: 'Freesentation', 'Pretendard', sans-serif; line-height: 1.35;" data-i18n-html="hero-title">
                         우리 회사 PPT 템플릿 그대로,<br>제안서 초안 자동 작성
                     </h1>
                     <p class="hero-enter hero-delay-2 text-base md:text-lg text-zinc-500 leading-relaxed max-w-md mb-10" data-i18n="hero-sub">
                         제안서 담당자가 원하던 바로 그 초안, 직접 확인해보세요.
                     </p>
                     <div class="hero-enter hero-delay-3 flex flex-wrap items-center gap-4">
-                        <a href="https://tally.so/r/b5dqO2" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-7 py-3.5 rounded-full text-base">
+                        <a href="https://tally.so/r/b5dqO2" data-tally-link target="_blank" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-7 py-3.5 rounded-full text-base">
                             <span data-i18n="hero-cta">Closed Beta 신청</span>
                             <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
                         </a>
@@ -195,7 +194,7 @@
                     <!-- Video -->
                     <div class="relative rounded-3xl overflow-hidden bg-zinc-800 cursor-pointer group" style="box-shadow: 0 25px 60px -15px rgba(0,0,0,0.15);" onclick="toggleVideo(event)">
                         <div class="aspect-video flex items-center justify-center relative">
-                            <video id="heroVideo" controls playsinline preload="metadata" class="w-full h-full object-cover" poster="">
+                            <video id="heroVideo" autoplay muted loop playsinline class="w-full h-full object-cover"
                                 <source src="/demo.mp4#t=9.5" type="video/mp4">
                             </video>
                             <!-- Expand button -->
@@ -211,7 +210,7 @@
                         <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
                             <iconify-icon icon="solar:document-bold-duotone" width="16" class="text-accent"></iconify-icon>
                         </div>
-                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-format">포맷 완벽 보존</span>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-format">자사 양식 보존</span>
                     </div>
 
                     <div class="hidden lg:flex absolute right-6 -bottom-8 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 1s;">
@@ -375,7 +374,7 @@
                     <div class="w-12 h-12 rounded-xl border border-accent/20 flex items-center justify-center mb-5">
                         <iconify-icon icon="solar:shield-keyhole-bold-duotone" width="24" class="text-accent"></iconify-icon>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat3-title">Security — 완전한 로컬 처리</h3>
+                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat3-title">Security — 자사 제안서 보호</h3>
                     <ul class="text-base text-zinc-500 leading-relaxed space-y-2" data-i18n-html="feat3-desc">
                         <li>모든 처리는 로컬에서 완결됩니다.</li>
                         <li>클라우드에 업로드되지 않습니다.</li>
@@ -488,7 +487,7 @@
             <div class="reveal">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="cta-title">이기는 제안서, 지금 시작하세요</h2>
                 <p class="text-base text-white/60 leading-relaxed mb-8 max-w-md mx-auto" data-i18n-html="cta-sub">RFP 분석부터 Win Theme, 차별화, 검증까지.<br>전략이 담긴 제안서를 하나의 흐름으로.</p>
-                <a href="https://tally.so/r/b5dqO2" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-8 py-3.5 rounded-full text-base">
+                <a href="https://tally.so/r/b5dqO2" data-tally-link target="_blank" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-8 py-3.5 rounded-full text-base">
                     <span data-i18n="cta-btn">Closed Beta 신청</span>
                     <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
                 </a>
@@ -516,7 +515,7 @@
                     <h4 class="text-sm font-semibold text-zinc-900 mb-4" data-i18n="footer-contact-title">문의</h4>
                     <div class="space-y-3">
                         <a href="mailto:sales@cliwant.com" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">sales@cliwant.com</a>
-                        <a href="https://tally.so/r/b5dqO2" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-demo">Beta 신청</a>
+                        <a href="https://tally.so/r/b5dqO2" data-tally-link target="_blank" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-demo">Beta 신청</a>
                     </div>
                 </div>
             </div>
@@ -682,8 +681,8 @@
                 'banner': '<span class="font-extrabold tracking-tight">Closed Beta opens 3/30</span> <span class="font-light opacity-80">Sign up before spots fill</span>',
                 'banner-cta': 'Apply now →',
                 'nav-cta': 'Apply for Beta',
-                'hero-title': 'Proposal drafts that fit<br>your template. Automatically.',
-                'hero-sub': 'Built for proposal teams, not general AI users.',
+                'hero-title': 'Your template, as is.<br>Your winning proposal, architected.',
+                'hero-sub': 'Built for proposal teams. Experience the draft quality you\'ve been looking for.',
                 'hero-cta': 'Apply for Closed Beta',
                 'hero-cta2': 'See How It Works',
                 'badge-format': 'Format Preserved',
@@ -707,7 +706,7 @@
                 'feat1-desc': '<li>Analyzes the RFP to automatically extract key requirements.</li><li>Matches your assets to design a Win Theme.</li><li>Surfaces gaps and differentiators for you.</li>',
                 'feat2-title': 'Template + PPT — Your Format, Preserved',
                 'feat2-desc': '<li>Generates drafts while preserving your PPT format.</li><li>Learns tone and structure from past proposals.</li><li>Outputs ready-to-submit PPT files.</li>',
-                'feat3-title': 'Security — Fully Local Processing',
+                'feat3-title': 'Security — Your Proposals, Protected',
                 'feat3-desc': '<li>All processing is completed locally.</li><li>Nothing is uploaded to the cloud.</li><li>Sensitive proposal data never leaves your company.</li>',
                 'why-title': 'Why contrl',
                 'why-sub': 'We solve the hard parts of proposal writing.',
@@ -771,7 +770,7 @@
                 'feat1-desc': '<li>自动分析RFP核心需求。</li><li>匹配自有资产设计Win Theme。</li><li>识别空白点和差异化优势。</li>',
                 'feat2-title': 'Template + PPT — 保留自有格式',
                 'feat2-desc': '<li>保留公司PPT格式生成初稿。</li><li>从过往提案学习语气和结构。</li><li>输出可直接提交的PPT。</li>',
-                'feat3-title': 'Security — 完全本地处理',
+                'feat3-title': 'Security — 提案书安全保护',
                 'feat3-desc': '<li>所有处理在本地完成。</li><li>不上传至云端。</li><li>敏感提案信息不离开公司。</li>',
                 'why-title': 'Why contrl',
                 'why-sub': '解决提案撰写中的难题。',
@@ -806,8 +805,7 @@
             ja: {
                 'banner': '<span class="font-extrabold tracking-tight">Closed Beta 3/30 開始</span> <span class="ml-2.5 font-light opacity-80">先着順、お早めにお申し込みください</span>',
                 'banner-cta': '申し込む →',
-                'nav-cta': 'Beta申込',
-                'hero-title': '自社のPPTテンプレートそのまま、<br>提案書の初稿を自動作成',
+                'hero-title': '自社テンプレートそのまま、<br>提案書を自動作成',
                 'hero-sub': '提案チームのために設計。探し求めていた初稿クオリティを体験してください。',
                 'hero-cta': 'Closed Beta 申し込み',
                 'hero-cta2': 'See How It Works',
@@ -832,7 +830,7 @@
                 'feat1-desc': '<li>RFPの核心要件を自動分析します。</li><li>自社資産とマッチングしWin Themeを設計します。</li><li>空白部分と差別化ポイントまで提案します。</li>',
                 'feat2-title': 'Template + PPT — 自社フォーマットそのまま',
                 'feat2-desc': '<li>自社PPTフォーマットを維持したまま初稿を生成します。</li><li>過去の提案書からトーンと構造を学習します。</li><li>そのまま提出可能なPPTで出力されます。</li>',
-                'feat3-title': 'Security — 完全ローカル処理',
+                'feat3-title': 'Security — 提案書の安全保護',
                 'feat3-desc': '<li>すべての処理はローカルで完結します。</li><li>クラウドにアップロードされません。</li><li>機密提案情報が社外に出ることはありません。</li>',
                 'why-title': 'Why contrl',
                 'why-sub': '提案書作成の難しい部分を解決します。',
@@ -867,7 +865,7 @@
         };
 
         // Detect browser language
-        const browserLang = (navigator.language || navigator.userLanguage || 'ko').slice(0, 2);
+        const browserLang = ((navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage || 'en').slice(0, 2);
         const supportedLangs = ['ko', 'en', 'zh', 'ja'];
         let currentLang = supportedLangs.includes(browserLang) ? browserLang : 'en';
 
@@ -925,6 +923,12 @@
                     heroTitle.style.fontSize = 'clamp(2rem, 4vw, 2.75rem)';
                 }
             }
+
+            // Switch Tally form links by language
+            const tallyUrl = currentLang === 'ko' ? 'https://tally.so/r/b5dqO2' : 'https://tally.so/r/NpL5Gj';
+            document.querySelectorAll('[data-tally-link]').forEach(el => {
+                el.href = tallyUrl;
+            });
         }
 
         function toggleLang() {
