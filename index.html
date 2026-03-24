@@ -9,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap">
     <script>
         tailwind.config = {
             theme: {
@@ -170,7 +171,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <!-- Left: Text -->
                 <div>
-                    <h1 class="hero-enter hero-delay-1 text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight leading-[12] text-zinc-900 mb-8" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="hero-title">
+                    <h1 class="hero-enter hero-delay-1 text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-tight text-zinc-900 mb-8" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="hero-title">
                         우리 회사 PPT 템플릿 그대로,<br>제안서 초안 자동 작성
                     </h1>
                     <p class="hero-enter hero-delay-2 text-base md:text-lg text-zinc-500 leading-relaxed max-w-md mb-10" data-i18n="hero-sub">
@@ -506,7 +507,7 @@
                 <div>
                     <h4 class="text-sm font-semibold text-zinc-900 mb-4">Product</h4>
                     <div class="space-y-3">
-                        <a href="#features" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-features">How It Works</a>
+                        <a href="#features" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-features">Features</a>
                         <a href="#why" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-why">Why contrl</a>
                         <a href="#faq" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-faq">FAQ</a>
                     </div>
@@ -732,7 +733,7 @@
                 'cta-sub': 'From RFP analysis to Win Theme, differentiation, and verification.<br>Strategy-driven proposals in one flow.',
                 'cta-btn': 'Apply for Closed Beta',
                 'footer-desc': 'Your template, as is. AI that architects strategy-driven proposals automatically.',
-                'footer-features': 'How It Works',
+                'footer-features': 'Features',
                 'footer-why': 'Why contrl',
                 'footer-faq': 'FAQ',
                 'footer-contact-title': 'Contact',
@@ -742,8 +743,9 @@
                 'hero-title': '우리 회사 PPT 템플릿 그대로,<br>제안서 초안 자동 작성',
             },
             zh: {
-                'banner': 'Closed Beta 3/30 开放 — 名额有限，尽快申请',
+                'banner': '<span class="font-extrabold tracking-tight">Closed Beta 3/30 开放</span> <span class="ml-2.5 font-light opacity-80">名额有限，尽快申请</span>',
                 'banner-cta': '立即申请 →',
+                'nav-cta': '申请Beta',
                 'hero-title': '保留公司PPT模板，<br>自动撰写提案初稿',
                 'hero-sub': '专为提案团队打造，体验您一直在寻找的初稿质量。',
                 'hero-cta': '申请 Closed Beta',
@@ -795,15 +797,16 @@
                 'cta-sub': '从RFP分析到Win Theme、差异化和验证。<br>战略驱动的提案，一个流程完成。',
                 'cta-btn': '申请 Closed Beta',
                 'footer-desc': '保留您的模板，AI自动设计战略驱动的提案。',
-                'footer-features': 'How It Works',
+                'footer-features': 'Features',
                 'footer-why': 'Why contrl',
                 'footer-faq': 'FAQ',
                 'footer-contact-title': 'Contact',
                 'footer-demo': '申请Beta',
             },
             ja: {
-                'banner': 'Closed Beta 3/30 開始 — 先着順、お早めにお申し込みください',
+                'banner': '<span class="font-extrabold tracking-tight">Closed Beta 3/30 開始</span> <span class="ml-2.5 font-light opacity-80">先着順、お早めにお申し込みください</span>',
                 'banner-cta': '申し込む →',
+                'nav-cta': 'Beta申込',
                 'hero-title': '自社のPPTテンプレートそのまま、<br>提案書の初稿を自動作成',
                 'hero-sub': '提案チームのために設計。探し求めていた初稿クオリティを体験してください。',
                 'hero-cta': 'Closed Beta 申し込み',
@@ -833,10 +836,10 @@
                 'feat3-desc': '<li>すべての処理はローカルで完結します。</li><li>クラウドにアップロードされません。</li><li>機密提案情報が社外に出ることはありません。</li>',
                 'why-title': 'Why contrl',
                 'why-sub': '提案書作成の難しい部分を解決します。',
-                'why1-title': '分厚いRFP、足りない時間',
-                'why1-desc': '数百ページのRFPを分析して核心要件を抽出するだけで数日かかります。',
+                'why1-title': '膨大なRFP、足りない時間',
+                'why1-desc': 'RFPの分析と要件抽出だけで数日を費やしています。',
                 'why2-title': '勝つ戦略、どこから？',
-                'why2-desc': 'Win Themeを設定し差別化戦略を立てる必要がありますが、体系的な方法がありません。',
+                'why2-desc': '差別化戦略（Win Theme）を体系的に立てる方法がありません。',
                 'why3-title': '自社テンプレート、活用されない資産',
                 'why3-desc': '過去の提案書にノウハウが蓄積されていますが、毎回ゼロから作っています。',
                 'faq-title': 'FAQ',
@@ -855,7 +858,7 @@
                 'cta-sub': 'RFP分析からWin Theme、差別化、検証まで。<br>戦略が込められた提案書をひとつの流れで。',
                 'cta-btn': 'Closed Beta 申し込み',
                 'footer-desc': '自社テンプレートそのまま、戦略的な提案書を自動設計するAI。',
-                'footer-features': 'How It Works',
+                'footer-features': 'Features',
                 'footer-why': 'Why contrl',
                 'footer-faq': 'FAQ',
                 'footer-contact-title': 'Contact',
@@ -900,6 +903,28 @@
                 }
             });
             document.documentElement.lang = currentLang;
+
+            // 중문/일문일 때 Noto Sans CJK 폰트 적용
+            if (lang === 'zh') {
+                document.body.style.fontFamily = "'Noto Sans SC', sans-serif";
+            } else if (lang === 'ja') {
+                document.body.style.fontFamily = "'Noto Sans JP', sans-serif";
+            } else {
+                document.body.style.fontFamily = "";
+            }
+
+            // 영어일 때 히어로 타이틀 폰트 크기 조정 (두줄 유지)
+            const heroTitle = document.querySelector('[data-i18n-html="hero-title"]');
+            if (heroTitle) {
+                if (lang === 'ko') {
+                    heroTitle.className = heroTitle.className.replace(/text-4xl md:text-5xl lg:text-\[[\d.]+rem\]/g, '').trim();
+                    heroTitle.classList.add('text-4xl', 'md:text-5xl');
+                    heroTitle.style.fontSize = '';
+                } else {
+                    heroTitle.classList.remove('text-4xl', 'md:text-5xl');
+                    heroTitle.style.fontSize = 'clamp(2rem, 4vw, 2.75rem)';
+                }
+            }
         }
 
         function toggleLang() {
