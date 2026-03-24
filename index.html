@@ -99,6 +99,9 @@
         .badge-float {
             animation: float 5s ease-in-out infinite;
         }
+        .animate-float-slow {
+            animation: float 4s ease-in-out infinite;
+        }
 
         /* Flow connector lines */
         .flow-line-l { border-top: 2px dashed rgba(255,158,31,0.3); }
@@ -197,8 +200,8 @@
                     <!-- Video -->
                     <div class="relative rounded-3xl overflow-hidden bg-zinc-800 cursor-pointer group" style="box-shadow: 0 25px 60px -15px rgba(0,0,0,0.15);" onclick="toggleVideo(event)">
                         <div class="aspect-video flex items-center justify-center relative">
-                            <video id="heroVideo" muted loop playsinline class="w-full h-full object-cover">
-                                <source src="/demo.mp4#t=9.5" type="video/mp4">
+                            <video id="heroVideo" muted loop playsinline preload="auto" class="w-full h-full object-cover">
+                                <source src="/demo.mp4" type="video/mp4">
                             </video>
                             <!-- Play/Pause overlay -->
                             <div id="playIcon" class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
@@ -212,9 +215,24 @@
                                 </div>
                             </div>
                             <!-- Expand button -->
-                            <button onclick="event.stopPropagation(); openVideoModal()" class="absolute bottom-3 right-3 w-9 h-9 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);">
+                            <button onclick="event.stopPropagation(); openVideoModal()" class="absolute bottom-10 right-3 w-9 h-9 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);">
                                 <iconify-icon icon="solar:full-screen-bold" width="16" class="text-white"></iconify-icon>
                             </button>
+                            <!-- Custom timeline -->
+                            <div class="absolute bottom-0 left-0 right-0 z-20 px-3 pb-2 pt-6" style="background: linear-gradient(transparent, rgba(0,0,0,0.4));" onclick="event.stopPropagation();">
+                                <div class="flex items-center gap-2">
+                                    <span id="videoTime" class="text-white text-xs font-mono min-w-[70px]">0:00 / 0:00</span>
+                                    <div id="timelineBar" class="flex-1 relative cursor-pointer group/bar py-2" onmousedown="startSeek(event)" ontouchstart="startSeek(event)">
+                                        <div class="h-1 bg-white/30 rounded-full relative">
+                                            <div id="videoProgress" class="h-full bg-white rounded-full pointer-events-none" style="width: 0%;"></div>
+                                        </div>
+                                        <div id="seekHandle" class="absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-white rounded-full shadow pointer-events-none opacity-0 group-hover/bar:opacity-100 transition-opacity" style="left: 0%;"></div>
+                                    </div>
+                                    <button onclick="event.stopPropagation(); toggleMute()" class="text-white/80 hover:text-white">
+                                        <iconify-icon id="muteIcon" icon="solar:volume-cross-bold" width="16"></iconify-icon>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -353,7 +371,7 @@
                         <iconify-icon icon="solar:tag-bold-duotone" width="24" class="text-accent"></iconify-icon>
                     </div>
                     <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat1-title">Win Theme — 이기는 전략 설계</h3>
-                    <ul class="text-base text-zinc-500 leading-relaxed space-y-2" data-i18n-html="feat1-desc">
+                    <ul class="text-base text-zinc-500 leading-snug space-y-1" data-i18n-html="feat1-desc">
                         <li>RFP를 분석해 핵심 요구사항을 자동으로 추출합니다.</li>
                         <li>자사 자산과 매칭해 Win Theme을 설계합니다.</li>
                         <li>빈 퍼즐과 차별화 포인트까지 짚어줍니다.</li>
@@ -368,7 +386,7 @@
                         <iconify-icon icon="solar:link-round-bold-duotone" width="24" class="text-accent"></iconify-icon>
                     </div>
                     <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat2-title">Template + PPT — 자사 양식 그대로</h3>
-                    <ul class="text-base text-zinc-500 leading-relaxed space-y-2" data-i18n-html="feat2-desc">
+                    <ul class="text-base text-zinc-500 leading-snug space-y-1" data-i18n-html="feat2-desc">
                         <li>자사 PPT 양식을 그대로 유지한 채 초안을 생성합니다.</li>
                         <li>과거 제안서에서 톤과 구조를 학습합니다.</li>
                         <li>바로 제출할 수 있는 PPT로 산출됩니다.</li>
@@ -381,15 +399,59 @@
 
             <!-- Row 3: Image left, Text right — 피드백 메모리 -->
             <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mt-20 lg:mt-28">
-                <div class="rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
-                    <img src="/images/feat3.png" alt="Security - 로컬 처리" class="w-full h-auto">
+                <div class="rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] bg-gradient-to-br from-[#fef8f0] to-[#fdf2e6] flex flex-col items-center justify-center py-12 px-8 relative" style="min-height: 420px;">
+                    <!-- Grid background -->
+                    <svg class="absolute inset-0 w-full h-full opacity-[0.06]" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0L0 0 0 40" fill="none" stroke="#F27A2E" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg>
+                    <!-- Floating icons - document formats + security, balanced around shield -->
+                    <div class="absolute top-[12%] left-[16%] bg-white rounded-xl shadow-md px-4 py-2 flex items-center gap-2 animate-float-slow"><iconify-icon icon="solar:presentation-graph-bold-duotone" width="22" style="color:#E06630;"></iconify-icon><span class="text-xs text-zinc-500 font-semibold">.pptx</span></div>
+                    <div class="absolute top-[10%] right-[16%] bg-white rounded-xl shadow-md px-4 py-2 flex items-center gap-2 animate-float-slow" style="animation-delay: 0.6s;"><iconify-icon icon="solar:file-text-bold-duotone" width="22" style="color:#3B7DD8;"></iconify-icon><span class="text-xs text-zinc-500 font-semibold">.docx</span></div>
+                    <div class="absolute bottom-[18%] left-[12%] bg-white rounded-xl shadow-md px-4 py-2 flex items-center gap-2 animate-float-slow" style="animation-delay: 1.2s;"><iconify-icon icon="solar:chart-square-bold-duotone" width="22" style="color:#2E9E5A;"></iconify-icon><span class="text-xs text-zinc-500 font-semibold">.xlsx</span></div>
+                    <div class="absolute top-[42%] left-[5%] w-12 h-12 bg-white rounded-xl shadow-md flex items-center justify-center animate-float-slow" style="animation-delay: 0.9s;"><iconify-icon icon="solar:lock-keyhole-bold-duotone" width="24" class="text-accent"></iconify-icon></div>
+                    <div class="absolute top-[42%] right-[5%] bg-white rounded-xl shadow-md px-3 py-2 flex items-center gap-1.5 animate-float-slow" style="animation-delay: 1.5s;"><iconify-icon icon="solar:laptop-bold-duotone" width="18" class="text-accent"></iconify-icon><span class="text-[10px] text-zinc-400 font-medium">LOCAL</span></div>
+                    <div class="absolute bottom-[16%] right-[14%] w-12 h-12 bg-white rounded-xl shadow-md flex items-center justify-center animate-float-slow" style="animation-delay: 0.3s;"><iconify-icon icon="solar:document-bold-duotone" width="24" class="text-accent"></iconify-icon></div>
+                    <!-- Central shield -->
+                    <div class="relative z-10">
+                        <!-- Ellipse shadow base -->
+                        <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-44 h-6 rounded-full" style="background: radial-gradient(ellipse, rgba(242,122,46,0.15) 0%, transparent 70%);"></div>
+                        <!-- Circle around shield -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] rounded-full border-2 border-[#F27A2E]/20 opacity-40"></div>
+                        <!-- Shield SVG -->
+                        <svg width="190" height="230" viewBox="0 0 140 170" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-xl relative z-10">
+                            <defs>
+                                <linearGradient id="shieldMain" x1="20" y1="0" x2="120" y2="170" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#F9A84D"/>
+                                    <stop offset="100%" stop-color="#F27A2E"/>
+                                </linearGradient>
+                                <linearGradient id="shieldLeft" x1="15" y1="30" x2="70" y2="160" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#FBC078"/>
+                                    <stop offset="100%" stop-color="#F27A2E"/>
+                                </linearGradient>
+                                <linearGradient id="shieldShine" x1="30" y1="10" x2="70" y2="120" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="white" stop-opacity="0.4"/>
+                                    <stop offset="100%" stop-color="white" stop-opacity="0"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- Shield body -->
+                            <path d="M70 8 L128 38 L124 112 Q104 148 70 164 Q36 148 16 112 L12 38 Z" fill="url(#shieldMain)"/>
+                            <!-- Shield left face -->
+                            <path d="M70 8 L12 38 L16 112 Q36 148 70 164 Z" fill="url(#shieldLeft)"/>
+                            <!-- Shield shine -->
+                            <path d="M70 8 L12 38 L16 112 Q36 148 70 164 Z" fill="url(#shieldShine)"/>
+                            <!-- Lock body -->
+                            <rect x="48" y="72" width="44" height="36" rx="6" fill="white" opacity="0.95"/>
+                            <!-- Lock shackle -->
+                            <path d="M56 72 V60 Q56 48 70 48 Q84 48 84 60 V72" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" opacity="0.95"/>
+                            <!-- Lock checkmark -->
+                            <path d="M60 90 L67 97 L80 82" stroke="#F27A2E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </div>
                 </div>
                 <div>
                     <div class="w-12 h-12 rounded-xl border border-accent/20 flex items-center justify-center mb-5">
                         <iconify-icon icon="solar:shield-keyhole-bold-duotone" width="24" class="text-accent"></iconify-icon>
                     </div>
                     <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat3-title">Security — 자사 제안서 보호</h3>
-                    <ul class="text-base text-zinc-500 leading-relaxed space-y-2" data-i18n-html="feat3-desc">
+                    <ul class="text-base text-zinc-500 leading-snug space-y-1" data-i18n-html="feat3-desc">
                         <li>모든 처리는 로컬에서 완결됩니다.</li>
                         <li>클라우드에 업로드되지 않습니다.</li>
                         <li>민감한 제안 정보가 회사 밖으로 나가지 않습니다.</li>
@@ -651,6 +713,7 @@
 
         // Video play/pause
         function toggleVideo(e) {
+            if (isSeeking) return;
             const v = document.getElementById('heroVideo');
             const playIcon = document.getElementById('playIcon');
             const pauseIcon = document.getElementById('pauseIcon');
@@ -659,11 +722,81 @@
                 v.play();
                 playIcon.classList.add('hidden');
                 pauseIcon.classList.remove('hidden');
+                document.getElementById('muteIcon').setAttribute('icon', 'solar:volume-loud-bold');
             } else {
                 v.pause();
                 playIcon.classList.remove('hidden');
                 pauseIcon.classList.add('hidden');
             }
+        }
+
+        // Video timeline - load as blob for full seekability
+        const heroV = document.getElementById('heroVideo');
+        if (heroV) {
+            fetch('/demo.mp4').then(r => r.blob()).then(blob => {
+                const url = URL.createObjectURL(blob);
+                heroV.src = url;
+                heroV.addEventListener('loadedmetadata', function onMeta() {
+                    heroV.currentTime = 9.5;
+                    heroV.removeEventListener('loadedmetadata', onMeta);
+                });
+            });
+            heroV.addEventListener('timeupdate', function() {
+                const progress = (heroV.currentTime / heroV.duration) * 100;
+                document.getElementById('videoProgress').style.width = progress + '%';
+                document.getElementById('seekHandle').style.left = progress + '%';
+                const cur = formatTime(heroV.currentTime);
+                const dur = formatTime(heroV.duration);
+                document.getElementById('videoTime').textContent = cur + ' / ' + dur;
+            });
+        }
+        function formatTime(s) {
+            if (isNaN(s)) return '0:00';
+            const m = Math.floor(s / 60);
+            const sec = Math.floor(s % 60);
+            return m + ':' + (sec < 10 ? '0' : '') + sec;
+        }
+        let isSeeking = false;
+        function startSeek(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            isSeeking = true;
+            const bar = document.getElementById('timelineBar');
+            const v = document.getElementById('heroVideo');
+            if (!v.duration || isNaN(v.duration)) return;
+            function doSeek(clientX) {
+                const rect = bar.getBoundingClientRect();
+                const pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+                v.currentTime = pct * v.duration;
+                document.getElementById('videoProgress').style.width = (pct * 100) + '%';
+                document.getElementById('seekHandle').style.left = (pct * 100) + '%';
+            }
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            doSeek(clientX);
+            function onMove(ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                const x = ev.touches ? ev.touches[0].clientX : ev.clientX;
+                doSeek(x);
+            }
+            function onUp(ev) {
+                ev.stopPropagation();
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp, true);
+                document.removeEventListener('touchmove', onMove);
+                document.removeEventListener('touchend', onUp, true);
+                setTimeout(function() { isSeeking = false; }, 100);
+            }
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onUp, true);
+            document.addEventListener('touchmove', onMove);
+            document.addEventListener('touchend', onUp, true);
+        }
+        function toggleMute() {
+            const v = document.getElementById('heroVideo');
+            v.muted = !v.muted;
+            const icon = document.getElementById('muteIcon');
+            icon.setAttribute('icon', v.muted ? 'solar:volume-cross-bold' : 'solar:volume-loud-bold');
         }
 
         // Video modal
@@ -726,6 +859,8 @@
                 'feat2-desc': '<li>Generates drafts while preserving your PPT format.</li><li>Learns tone and structure from past proposals.</li><li>Outputs ready-to-submit PPT files.</li>',
                 'feat3-title': 'Security — Your Proposals, Protected',
                 'feat3-desc': '<li>All processing is completed locally.</li><li>Nothing is uploaded to the cloud.</li><li>Sensitive proposal data never leaves your company.</li>',
+                'security-badge': 'Local Security',
+                'security-badge-sub': 'Ensure proposal security at all times',
                 'why-title': 'Why contrl',
                 'why-sub': 'We solve the hard parts of proposal writing.',
                 'why1-title': 'Thick RFPs, Not Enough Time',
