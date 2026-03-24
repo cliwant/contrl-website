@@ -12,7 +12,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>contrl — 문서 자동화의 새로운 기준</title>
+    <title>contrl — A New Standard in Document Automation</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
@@ -205,39 +205,38 @@
                     <!-- Warm glow behind video -->
                     <div class="absolute -inset-12 rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(242,122,46,0.15) 0%, rgba(242,122,46,0.05) 50%, transparent 70%); filter: blur(50px);"></div>
 
-                    <!-- Video -->
-                    <div class="relative rounded-3xl overflow-hidden bg-zinc-800 cursor-pointer group" style="box-shadow: 0 25px 60px -15px rgba(0,0,0,0.15);" onclick="toggleVideo(event)">
-                        <div class="aspect-video flex items-center justify-center relative">
-                            <video id="heroVideo" muted loop playsinline preload="auto" poster="/poster.jpg" class="w-full h-full object-cover">
-                                <source src="/demo.mp4" type="video/mp4">
+                    <!-- Video (Local) -->
+                    <div class="relative rounded-3xl overflow-hidden bg-zinc-800 group" style="box-shadow: 0 25px 60px -15px rgba(0,0,0,0.15);">
+                        <div class="aspect-video relative">
+                            <video id="heroVideo" class="w-full h-full object-cover" poster="poster.jpg" preload="metadata" playsinline>
+                                <source src="demo.mp4" type="video/mp4">
                             </video>
-                            <!-- Play/Pause overlay -->
-                            <div id="playIcon" class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                            <!-- Click overlay for play/pause -->
+                            <div class="absolute inset-0 z-10 cursor-pointer" onclick="vidTogglePlay()"></div>
+                            <!-- Play icon (shown when paused) -->
+                            <div id="vidPlayIcon" class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
                                 <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);">
                                     <iconify-icon icon="solar:play-bold" width="28" class="text-white ml-1"></iconify-icon>
                                 </div>
                             </div>
-                            <div id="pauseIcon" class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none hidden">
+                            <!-- Pause icon (shown on hover when playing) -->
+                            <div id="vidPauseIcon" class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none hidden">
                                 <div class="w-16 h-16 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);">
                                     <iconify-icon icon="solar:pause-bold" width="28" class="text-white"></iconify-icon>
                                 </div>
                             </div>
-                            <!-- Expand button -->
-                            <button onclick="event.stopPropagation(); openVideoModal()" class="absolute bottom-10 right-3 w-9 h-9 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);">
-                                <iconify-icon icon="solar:full-screen-bold" width="16" class="text-white"></iconify-icon>
-                            </button>
-                            <!-- Custom timeline -->
-                            <div class="absolute bottom-0 left-0 right-0 z-20 px-3 pb-2 pt-6" style="background: linear-gradient(transparent, rgba(0,0,0,0.4));" onclick="event.stopPropagation();">
+                            <!-- Custom controls bar -->
+                            <div class="absolute bottom-0 left-0 right-0 z-30 px-3 pb-2 pt-6" style="background: linear-gradient(transparent, rgba(0,0,0,0.4));">
                                 <div class="flex items-center gap-2">
-                                    <span id="videoTime" class="text-white text-xs font-mono min-w-[70px]">0:00 / 0:00</span>
-                                    <div id="timelineBar" class="flex-1 relative cursor-pointer group/bar py-2" onmousedown="startSeek(event)" ontouchstart="startSeek(event)">
+                                    <span id="vidTime" class="text-white text-xs font-mono min-w-[70px]">0:00 / 0:00</span>
+                                    <div id="vidTimeline" class="flex-1 relative cursor-pointer group/bar py-2" onmousedown="vidStartSeek(event)" ontouchstart="vidStartSeek(event)">
                                         <div class="h-1 bg-white/30 rounded-full relative">
-                                            <div id="videoProgress" class="h-full bg-white rounded-full pointer-events-none" style="width: 0%;"></div>
+                                            <div id="vidProgress" class="h-full bg-white rounded-full pointer-events-none" style="width: 0%;"></div>
                                         </div>
-                                        <div id="seekHandle" class="absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-white rounded-full shadow pointer-events-none opacity-0 group-hover/bar:opacity-100 transition-opacity" style="left: 0%;"></div>
+                                        <div id="vidHandle" class="absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-white rounded-full shadow pointer-events-none opacity-0 group-hover/bar:opacity-100 transition-opacity" style="left: 0%;"></div>
                                     </div>
-                                    <button onclick="event.stopPropagation(); toggleMute()" class="text-white/80 hover:text-white">
-                                        <iconify-icon id="muteIcon" icon="solar:volume-cross-bold" width="16"></iconify-icon>
+                                    <button onclick="vidToggleMute()" class="text-white/80 hover:text-white z-40">
+                                        <iconify-icon id="vidMuteIcon" icon="solar:volume-cross-bold" width="16"></iconify-icon>
                                     </button>
                                 </div>
                             </div>
@@ -611,15 +610,6 @@
         </div>
     </footer>
 
-    <!-- Video Modal -->
-    <div id="videoModal" class="fixed inset-0 z-[999] hidden items-center justify-center p-6" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);" onclick="closeVideoModal(event)">
-        <button onclick="event.stopPropagation(); closeVideoModal()" class="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center text-white/70 hover:text-white transition-colors z-10" style="background: rgba(255,255,255,0.1);">
-            <iconify-icon icon="solar:close-circle-bold" width="24"></iconify-icon>
-        </button>
-        <video id="modalVideo" muted loop playsinline controls class="max-w-[90vw] max-h-[85vh] rounded-2xl" style="box-shadow: 0 30px 80px rgba(0,0,0,0.5);">
-            <source src="/demo.mp4" type="video/mp4">
-        </video>
-    </div>
 
     <script>
         // Scroll reveal
@@ -712,120 +702,89 @@
                 chevron.style.transform = 'rotate(180deg)';
             }
         }
-        // Set video thumbnail at 9.5s (paused by default)
-        const heroVid = document.getElementById('heroVideo');
-        heroVid.addEventListener('loadedmetadata', () => {
-            heroVid.currentTime = 9.5;
-            heroVid.pause();
+
+        // Local Video Player
+        var vid = document.getElementById('heroVideo');
+        var vidIsSeeking = false;
+
+        vid.addEventListener('play', function() {
+            document.getElementById('vidPlayIcon').classList.add('hidden');
+            document.getElementById('vidPauseIcon').classList.remove('hidden');
+        });
+        vid.addEventListener('pause', function() {
+            document.getElementById('vidPlayIcon').classList.remove('hidden');
+            document.getElementById('vidPauseIcon').classList.add('hidden');
+        });
+        vid.addEventListener('timeupdate', function() {
+            if (vidIsSeeking) return;
+            var cur = vid.currentTime;
+            var dur = vid.duration || 0;
+            if (dur > 0) {
+                var pct = (cur / dur) * 100;
+                document.getElementById('vidProgress').style.width = pct + '%';
+                document.getElementById('vidHandle').style.left = pct + '%';
+                document.getElementById('vidTime').textContent = vidFormatTime(cur) + ' / ' + vidFormatTime(dur);
+            }
+        });
+        vid.addEventListener('volumechange', function() {
+            var icon = document.getElementById('vidMuteIcon');
+            if (vid.muted || vid.volume === 0) {
+                icon.setAttribute('icon', 'solar:volume-cross-bold');
+            } else {
+                icon.setAttribute('icon', 'solar:volume-loud-bold');
+            }
         });
 
-        // Video play/pause
-        function toggleVideo(e) {
-            if (isSeeking) return;
-            const v = document.getElementById('heroVideo');
-            const playIcon = document.getElementById('playIcon');
-            const pauseIcon = document.getElementById('pauseIcon');
-            if (v.paused) {
-                v.muted = false;
-                v.play();
-                playIcon.classList.add('hidden');
-                pauseIcon.classList.remove('hidden');
-                document.getElementById('muteIcon').setAttribute('icon', 'solar:volume-loud-bold');
+        function vidTogglePlay() {
+            if (vid.paused) {
+                vid.play();
             } else {
-                v.pause();
-                playIcon.classList.remove('hidden');
-                pauseIcon.classList.add('hidden');
+                vid.pause();
             }
         }
 
-        // Video timeline - load as blob for full seekability
-        const heroV = document.getElementById('heroVideo');
-        if (heroV) {
-            fetch('/demo.mp4').then(r => r.blob()).then(blob => {
-                const url = URL.createObjectURL(blob);
-                heroV.src = url;
-            });
-            heroV.addEventListener('timeupdate', function() {
-                const progress = (heroV.currentTime / heroV.duration) * 100;
-                document.getElementById('videoProgress').style.width = progress + '%';
-                document.getElementById('seekHandle').style.left = progress + '%';
-                const cur = formatTime(heroV.currentTime);
-                const dur = formatTime(heroV.duration);
-                document.getElementById('videoTime').textContent = cur + ' / ' + dur;
-            });
+        function vidToggleMute() {
+            vid.muted = !vid.muted;
         }
-        function formatTime(s) {
-            if (isNaN(s)) return '0:00';
-            const m = Math.floor(s / 60);
-            const sec = Math.floor(s % 60);
+
+        function vidFormatTime(s) {
+            var m = Math.floor(s / 60);
+            var sec = Math.floor(s % 60);
             return m + ':' + (sec < 10 ? '0' : '') + sec;
         }
-        let isSeeking = false;
-        function startSeek(e) {
+
+        function vidStartSeek(e) {
             e.preventDefault();
             e.stopPropagation();
-            isSeeking = true;
-            const bar = document.getElementById('timelineBar');
-            const v = document.getElementById('heroVideo');
-            if (!v.duration || isNaN(v.duration)) return;
+            vidIsSeeking = true;
+            var bar = document.getElementById('vidTimeline');
             function doSeek(clientX) {
-                const rect = bar.getBoundingClientRect();
-                const pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-                v.currentTime = pct * v.duration;
-                document.getElementById('videoProgress').style.width = (pct * 100) + '%';
-                document.getElementById('seekHandle').style.left = (pct * 100) + '%';
+                var rect = bar.getBoundingClientRect();
+                var pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+                var dur = vid.duration || 0;
+                vid.currentTime = pct * dur;
+                document.getElementById('vidProgress').style.width = (pct * 100) + '%';
+                document.getElementById('vidHandle').style.left = (pct * 100) + '%';
             }
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            var clientX = e.touches ? e.touches[0].clientX : e.clientX;
             doSeek(clientX);
             function onMove(ev) {
                 ev.preventDefault();
-                ev.stopPropagation();
-                const x = ev.touches ? ev.touches[0].clientX : ev.clientX;
+                var x = ev.touches ? ev.touches[0].clientX : ev.clientX;
                 doSeek(x);
             }
-            function onUp(ev) {
-                ev.stopPropagation();
+            function onUp() {
                 document.removeEventListener('mousemove', onMove);
                 document.removeEventListener('mouseup', onUp, true);
                 document.removeEventListener('touchmove', onMove);
                 document.removeEventListener('touchend', onUp, true);
-                setTimeout(function() { isSeeking = false; }, 100);
+                setTimeout(function() { vidIsSeeking = false; }, 100);
             }
             document.addEventListener('mousemove', onMove);
             document.addEventListener('mouseup', onUp, true);
-            document.addEventListener('touchmove', onMove);
+            document.addEventListener('touchmove', onMove, { passive: false });
             document.addEventListener('touchend', onUp, true);
         }
-        function toggleMute() {
-            const v = document.getElementById('heroVideo');
-            v.muted = !v.muted;
-            const icon = document.getElementById('muteIcon');
-            icon.setAttribute('icon', v.muted ? 'solar:volume-cross-bold' : 'solar:volume-loud-bold');
-        }
-
-        // Video modal
-        function openVideoModal() {
-            const modal = document.getElementById('videoModal');
-            const modalV = document.getElementById('modalVideo');
-            const heroV = document.getElementById('heroVideo');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            modalV.currentTime = heroV.currentTime;
-            modalV.play();
-            document.body.style.overflow = 'hidden';
-        }
-        function closeVideoModal(e) {
-            if (e && e.target !== e.currentTarget && !e.target.closest('button')) return;
-            const modal = document.getElementById('videoModal');
-            const modalV = document.getElementById('modalVideo');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            modalV.pause();
-            document.body.style.overflow = '';
-        }
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeVideoModal();
-        });
 
         // i18n
         const translations = {
