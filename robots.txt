@@ -33,6 +33,7 @@ User-agent: Amazonbot
 Allow: /
 
 Sitemap: https://contrl.ai/sitemap.xml
+RSS: https://contrl.ai/rss.xml
 
 # LLM-specific content
 # See https://contrl.ai/llms.txt for AI-readable product documentation

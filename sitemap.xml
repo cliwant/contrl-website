@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
     <url>
         <loc>https://contrl.ai/</loc>
-        <lastmod>2026-03-24</lastmod>
+        <lastmod>2026-03-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/"/>
@@ -11,5 +13,56 @@
         <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/"/>
         <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/"/>
+        <image:image>
+            <image:loc>https://contrl.ai/images/feat1.png</image:loc>
+            <image:title>contrl AI 제안서 작성 - RFP 분석 및 Win Theme 도출 화면</image:title>
+            <image:caption>contrl AI proposal writing platform - RFP analysis and win theme extraction screen showing automated proposal strategy generation</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://contrl.ai/images/feat2.png</image:loc>
+            <image:title>contrl AI PPT 제안서 자동 생성 결과 - 템플릿 포맷 보존</image:title>
+            <image:caption>contrl AI-generated proposal draft in PowerPoint format with company template preservation - 45 slides automatically created</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://contrl.ai/images/feat3.png</image:loc>
+            <image:title>contrl 템플릿 업로드 - PPT 템플릿과 RFP 파일 업로드 화면</image:title>
+            <image:caption>contrl template upload interface - Upload your company PPT template and RFP document to start AI proposal generation</image:caption>
+        </image:image>
+        <video:video>
+            <video:thumbnail_loc>https://contrl.ai/poster.jpg</video:thumbnail_loc>
+            <video:title>contrl AI 제안서 자동 작성 데모 - AI Proposal Writing Demo</video:title>
+            <video:description>contrl 플랫폼 데모 영상. PPT 템플릿과 RFP를 업로드하면 AI가 Win Theme을 분석하고 제출 가능한 제안서 초안을 자동 생성합니다. Demo of contrl AI proposal writing platform showing end-to-end proposal generation from RFP analysis to PowerPoint output.</video:description>
+            <video:content_loc>https://contrl.ai/demo.mp4</video:content_loc>
+        </video:video>
+    </url>
+    <url>
+        <loc>https://contrl.ai/#features</loc>
+        <lastmod>2026-03-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://contrl.ai/#how-it-works</loc>
+        <lastmod>2026-03-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://contrl.ai/#why</loc>
+        <lastmod>2026-03-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://contrl.ai/#faq</loc>
+        <lastmod>2026-03-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://contrl.ai/llms.txt</loc>
+        <lastmod>2026-03-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
     </url>
 </urlset>
