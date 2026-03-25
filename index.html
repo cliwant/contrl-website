@@ -497,6 +497,7 @@
                 <a href="#features" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-features">Features</a>
                 <a href="#why" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-why">Why contrl</a>
                 <a href="#faq" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-faq">FAQ</a>
+                <a id="blog-link" href="https://blog.cliwant.com/" target="_blank" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">Blog</a>
             </div>
             <div class="flex items-center gap-3">
                 <!-- Lang toggle -->
@@ -939,6 +940,7 @@
                         <a href="#features" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-features">Features</a>
                         <a href="#why" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-why">Why contrl</a>
                         <a href="#faq" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-faq">FAQ</a>
+                        <a id="footer-blog-link" href="https://blog.cliwant.com/" target="_blank" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">Blog</a>
                     </div>
                 </div>
                 <div>
@@ -1597,6 +1599,13 @@
             document.querySelectorAll('[data-tally-link]').forEach(el => {
                 el.href = tallyUrl;
             });
+
+            // Switch Blog links by language (한국어 → blog.cliwant.com, 그 외 → blog.contrl.ai)
+            const blogUrl = currentLang === 'ko' ? 'https://blog.cliwant.com/' : 'https://blog.contrl.ai/';
+            const blogLink = document.getElementById('blog-link');
+            const footerBlogLink = document.getElementById('footer-blog-link');
+            if (blogLink) blogLink.href = blogUrl;
+            if (footerBlogLink) footerBlogLink.href = blogUrl;
         }
 
         function toggleLang() {
