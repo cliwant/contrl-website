@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contrl for Windows</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <script>
+        (function () {
+            const localHosts = new Set(['localhost', '127.0.0.1', '[::1]']);
+            const target = localHosts.has(window.location.hostname)
+                ? 'https://contrl.ai/downloads/windows/latest.exe'
+                : '/downloads/windows/latest.exe';
+
+            window.location.replace(target);
+        }());
+    </script>
+</head>
+<body>
+    <noscript>
+        <p>
+            Your download should start automatically.
+            <a href="https://contrl.ai/downloads/windows/latest.exe">Continue</a>
+        </p>
+    </noscript>
+</body>
+</html>

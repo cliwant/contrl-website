@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contrl for macOS</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #f6f0e8;
+            --card: rgba(255, 255, 255, 0.72);
+            --text: #2f241b;
+            --muted: #74685f;
+            --accent: #d84a10;
+            --line: rgba(47, 36, 27, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background:
+                radial-gradient(circle at top left, rgba(216, 74, 16, 0.16), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(47, 36, 27, 0.08), transparent 28%),
+                linear-gradient(180deg, #fcf8f2 0%, var(--bg) 100%);
+            color: var(--text);
+            font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        main {
+            width: min(100%, 760px);
+            padding: 40px 32px;
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            background: var(--card);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 28px 80px rgba(47, 36, 27, 0.12);
+            text-align: center;
+        }
+
+        .eyebrow {
+            margin: 0 0 14px;
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(32px, 6vw, 44px);
+            line-height: 1.08;
+            letter-spacing: -0.04em;
+            font-family: "Freesentation", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+            text-wrap: balance;
+        }
+
+        p {
+            margin: 18px 0 0;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 28px;
+            padding: 12px 20px;
+            border-radius: 999px;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            box-shadow: 0 14px 30px rgba(216, 74, 16, 0.22);
+        }
+
+        a:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 34px rgba(216, 74, 16, 0.28);
+        }
+
+        @media (max-width: 640px) {
+            main {
+                width: min(100%, 520px);
+                padding: 36px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <p class="eyebrow">contrl downloads</p>
+        <h1>macOS version is coming soon</h1>
+        <p>We are preparing the macOS release. Please check back soon.</p>
+        <a href="/">Back to contrl.ai</a>
+    </main>
+</body>
+</html>
