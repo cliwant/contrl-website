@@ -12,7 +12,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>contrl — A New Standard in Document Automation</title>
+    <title>contrl — AI Win Theme Editor</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://contrl.ai/">
     <link rel="alternate" type="text/plain" href="https://contrl.ai/llms.txt" title="LLM-readable documentation">
@@ -464,26 +464,7 @@
             animation: float 4s ease-in-out infinite;
         }
 
-        /* Flow connector lines */
-        .flow-line-l { border-top: 2px dashed rgba(255,158,31,0.3); }
-        .flow-line-r { border-top: 2px solid #F27A2E; }
-
-        /* Flow diagram SVG lines */
-        .flow-diagram {
-            position: relative;
-        }
-        .flow-svg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .flow-left-col, .flow-right-col, .flow-hub {
-            position: relative;
-            z-index: 1;
-        }
+        /* (flow diagram styles removed — now CSS-only horizontal steps) */
     </style>
 </head>
 
@@ -538,11 +519,12 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <!-- Left: Text -->
                 <div>
+                    <p class="hero-enter hero-delay-1 text-sm md:text-base font-semibold text-accent tracking-wide uppercase mb-4" data-i18n="hero-label">AI Win Theme Editor</p>
                     <h1 class="hero-enter hero-delay-1 text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-zinc-900 mb-8" style="font-family: 'Freesentation', 'Pretendard', sans-serif; line-height: 1.35;" data-i18n-html="hero-title">
-                        우리 회사 PPT 템플릿 그대로,<br>제안서 초안 자동 작성
+                        이기는 제안서를,<br>누구나.
                     </h1>
                     <p class="hero-enter hero-delay-2 text-base md:text-lg text-zinc-500 leading-relaxed max-w-md mb-10" data-i18n="hero-sub">
-                        제안서 담당자가 원하던 바로 그 초안, 직접 확인해보세요.
+                        고객 니즈와 우리 강점을 연결한 전략이, 제안서 마지막 Slide까지 관통합니다.
                     </p>
                     <div class="hero-enter hero-delay-3 flex flex-wrap items-center gap-4">
                         <a href="https://tally.so/r/b5dqO2" data-tally-link target="_blank" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-7 py-3.5 rounded-full text-base">
@@ -599,115 +581,96 @@
 
 
                     <!-- Floating badges -->
+                    <!-- 왼쪽: 이기는 전략 설계 -->
                     <div class="hidden lg:flex absolute -left-16 top-1/3 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 0s;">
                         <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
                             <iconify-icon icon="solar:document-bold-duotone" width="16" class="text-accent"></iconify-icon>
                         </div>
-                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-format">자사 양식 보존</span>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-format">이기는 전략 설계</span>
                     </div>
 
-                    <div class="hidden lg:flex absolute right-6 -bottom-8 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 1s;">
-                        <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
-                            <iconify-icon icon="solar:shield-check-bold-duotone" width="16" class="text-emerald-500"></iconify-icon>
-                        </div>
-                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-hallu">AI 검증 프로세스</span>
-                    </div>
-
+                    <!-- 오른쪽 위: RFP → Slide 관통 -->
                     <div class="hidden lg:flex absolute right-12 -top-8 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 0.5s;">
                         <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
                             <iconify-icon icon="solar:routing-bold-duotone" width="16" class="text-accent"></iconify-icon>
                         </div>
-                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-local">제안 전략 설계</span>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-hallu">RFP → Slide 관통</span>
+                    </div>
+
+                    <!-- 오른쪽 아래: 자사 제안서 보호 -->
+                    <div class="hidden lg:flex absolute right-6 -bottom-8 z-30 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 1s;">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+                            <iconify-icon icon="solar:shield-check-bold-duotone" width="16" class="text-emerald-500"></iconify-icon>
+                        </div>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-local">자사 제안서 보호</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 2. FEATURES (작동 방식) -->
+    <!-- 2. FEATURES (작동 방식) — RFP → Win Theme → Storyline → Slide -->
     <section id="features" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white" aria-label="contrl 핵심 기능 - AI 제안서 작성 핵심 기능 소개 Key Features of AI Proposal Writing Platform">
         <div class="max-w-7xl mx-auto">
             <div class="reveal mb-20 text-center">
                 <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="flow-title">How It Works</h2>
-                <p class="text-base text-zinc-500 leading-relaxed max-w-lg mx-auto" data-i18n="flow-sub">Win Theme 설정부터 차별화 설계, 검증까지. 하나의 흐름으로 완성합니다.</p>
+                <p class="text-base text-zinc-500 leading-relaxed max-w-lg mx-auto" data-i18n="flow-sub">하나의 전략이 끊어지지 않고, 마지막 Slide까지 관통합니다.</p>
             </div>
-            <!-- Flow diagram -->
-            <div class="reveal grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-4 items-center flow-diagram" id="flowDiagram">
-                <!-- Left: Inputs -->
-                <div class="flex flex-col gap-4 stagger flow-left-col lg:pr-8">
-                    <div class="flow-card-wrap reveal" data-flow="left">
-                        <div class="bg-white rounded-2xl p-5 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                                <iconify-icon icon="solar:layers-bold-duotone" width="20" class="text-accent"></iconify-icon>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1" data-i18n="flow-in1-title">Template</h4>
-                                <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-in1-desc">과거 제안서 PPT에서 우리 회사의 DNA와 양식을 학습합니다.</p>
-                            </div>
+            <!-- 4-step horizontal flow -->
+            <div class="reveal relative">
+                <!-- Horizontal connecting line (desktop) -->
+                <div class="hidden md:block absolute top-[24px] left-[12.5%] right-[12.5%] h-0.5 z-0" style="background: linear-gradient(90deg, rgba(242,122,46,0.15), rgba(242,122,46,0.6), rgba(242,122,46,0.6), rgba(242,122,46,0.15));"></div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-5 stagger">
+                    <!-- Step 1: RFP -->
+                    <div class="reveal flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-white border-2 border-accent flex items-center justify-center mb-5 relative z-10 shadow-sm">
+                            <span class="text-accent font-bold text-sm">01</span>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] text-center w-full">
+                            <iconify-icon icon="solar:document-text-bold-duotone" width="28" class="text-accent mb-3"></iconify-icon>
+                            <h4 class="font-bold text-lg mb-2" data-i18n="flow-s1-title">RFP 분석</h4>
+                            <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-s1-desc">고객의 핵심 니즈와 요구사항을 파악합니다.</p>
                         </div>
                     </div>
-                    <div class="flow-card-wrap reveal">
-                        <div class="bg-white rounded-2xl p-5 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                                <iconify-icon icon="solar:bookmark-bold-duotone" width="20" class="text-accent"></iconify-icon>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1" data-i18n="flow-in2-title">Reference</h4>
-                                <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-in2-desc">제안요청서(RFP)를 분석해 고객의 의도를 면밀히 파악합니다.</p>
-                            </div>
+                    <!-- Step 2: Win Theme -->
+                    <div class="reveal flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-white border-2 border-accent flex items-center justify-center mb-5 relative z-10 shadow-sm">
+                            <span class="text-accent font-bold text-sm">02</span>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] text-center w-full">
+                            <iconify-icon icon="solar:target-bold-duotone" width="28" class="text-accent mb-3"></iconify-icon>
+                            <h4 class="font-bold text-lg mb-2" data-i18n="flow-s2-title">Win Theme</h4>
+                            <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-s2-desc">고객 니즈와 우리 강점을 연결해 이기는 전략을 설계합니다.</p>
+                        </div>
+                    </div>
+                    <!-- Step 3: Storyline -->
+                    <div class="reveal flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-white border-2 border-accent flex items-center justify-center mb-5 relative z-10 shadow-sm">
+                            <span class="text-accent font-bold text-sm">03</span>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] text-center w-full">
+                            <iconify-icon icon="solar:routing-bold-duotone" width="28" class="text-accent mb-3"></iconify-icon>
+                            <h4 class="font-bold text-lg mb-2" data-i18n="flow-s3-title">Storyline</h4>
+                            <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-s3-desc">Win Theme이 모든 장표에 관통하는 스토리라인을 설계합니다.</p>
+                        </div>
+                    </div>
+                    <!-- Step 4: Slide -->
+                    <div class="reveal flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-white border-2 border-accent flex items-center justify-center mb-5 relative z-10 shadow-sm">
+                            <span class="text-accent font-bold text-sm">04</span>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] text-center w-full">
+                            <iconify-icon icon="solar:presentation-graph-bold-duotone" width="28" class="text-accent mb-3"></iconify-icon>
+                            <h4 class="font-bold text-lg mb-2" data-i18n="flow-s4-title">Slide</h4>
+                            <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-s4-desc">우리 회사 템플릿 그대로, 전략이 담긴 슬라이드를 생성합니다.</p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Center: Hub -->
-                <div class="flex items-center justify-center px-2 lg:px-0 relative flow-hub">
-                    <div id="hubCenter" class="w-32 h-32 lg:w-36 lg:h-36 rounded-3xl bg-gradient-to-br from-accent/10 to-accent/5 border-2 border-accent/15 flex items-center justify-center">
-                        <div class="w-24 h-24 lg:w-28 lg:h-28 rounded-2xl bg-white shadow-lg flex items-center justify-center">
-                            <span class="text-lg lg:text-xl font-bold tracking-tight">contrl<span class="text-accent">.</span></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right: Outputs -->
-                <div class="flex flex-col gap-4 stagger flow-right-col lg:pl-8">
-                    <div class="flow-card-wrap reveal">
-                        <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
-                            <div class="flex items-start justify-between gap-4">
-                                <div>
-                                    <h4 class="font-bold text-lg mb-2" data-i18n="flow-out1-title">Win Theme 기반 초안</h4>
-                                    <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-out1-desc">제안요청서(RFP)를 분석해 Win Theme을 설정하고, 그에 맞는 초안을 설계합니다.</p>
-                                </div>
-                                <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
-                                    <iconify-icon icon="solar:document-bold-duotone" width="20" class="text-emerald-500"></iconify-icon>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flow-card-wrap reveal">
-                        <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
-                            <div class="flex items-start justify-between gap-4">
-                                <div>
-                                    <h4 class="font-bold text-lg mb-2" data-i18n="flow-out2-title">차별화 설계</h4>
-                                    <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-out2-desc">RFP의 핵심 요구사항과 우리 강점을 연결해, 차별화 포인트를 초안에 녹입니다.</p>
-                                </div>
-                                <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                                    <iconify-icon icon="solar:link-round-bold-duotone" width="20" class="text-accent"></iconify-icon>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flow-card-wrap reveal">
-                        <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
-                            <div class="flex items-start justify-between gap-4">
-                                <div>
-                                    <h4 class="font-bold text-lg mb-2" data-i18n="flow-out3-title">검증 리포트</h4>
-                                    <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-out3-desc">AI가 왜 그렇게 작성했는지, 근거와 출처를 함께 확인할 수 있습니다.</p>
-                                </div>
-                                <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
-                                    <iconify-icon icon="solar:chat-round-check-bold-duotone" width="20" class="text-blue-500"></iconify-icon>
-                                </div>
-                            </div>
-                        </div>
+                <!-- "관통" badge -->
+                <div class="mt-10 text-center">
+                    <div class="inline-flex items-center gap-2 bg-accent/5 border border-accent/15 rounded-full px-6 py-2.5">
+                        <iconify-icon icon="solar:arrow-right-linear" width="16" class="text-accent"></iconify-icon>
+                        <span class="text-sm font-semibold text-accent" data-i18n="flow-through">하나의 전략이 끊어지지 않고 관통합니다</span>
                     </div>
                 </div>
             </div>
@@ -719,7 +682,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="reveal mb-20 text-center">
                 <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="feat-title">Key Features</h2>
-                <p class="text-base text-zinc-500 leading-relaxed max-w-lg mx-auto" data-i18n="feat-sub">제안서 작성의 각 단계에서 contrl이 제공하는 핵심 기능입니다.</p>
+                <p class="text-base text-zinc-500 leading-relaxed max-w-lg mx-auto" data-i18n="feat-sub">RFP에서 Slide까지, 이기는 전략을 관통시키는 핵심 기능입니다.</p>
             </div>
 
             <!-- Row 1: 문단별 의도 태깅 -->
@@ -733,8 +696,8 @@
                     </div>
                     <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat1-title">Win Theme — 이기는 전략 설계</h3>
                     <ul class="text-base text-zinc-500 leading-snug space-y-1" data-i18n-html="feat1-desc">
-                        <li>RFP를 분석해 핵심 요구사항을 자동으로 추출합니다.</li>
-                        <li>자사 자산과 매칭해 Win Theme을 설계합니다.</li>
+                        <li>RFP에서 고객의 핵심 니즈를 추출합니다.</li>
+                        <li>우리 강점과 연결해 Win Theme을 설계합니다.</li>
                         <li>빈 퍼즐과 차별화 포인트까지 짚어줍니다.</li>
                     </ul>
                 </div>
@@ -744,13 +707,13 @@
             <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <div class="order-2 lg:order-1">
                     <div class="w-12 h-12 rounded-xl border border-accent/20 flex items-center justify-center mb-5">
-                        <iconify-icon icon="solar:link-round-bold-duotone" width="24" class="text-accent"></iconify-icon>
+                        <iconify-icon icon="solar:routing-bold-duotone" width="24" class="text-accent"></iconify-icon>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat2-title">Template + PPT — 자사 양식 그대로</h3>
+                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4" data-i18n="feat2-title">Storyline → Slide — 전략이 관통하는 제안서</h3>
                     <ul class="text-base text-zinc-500 leading-snug space-y-1" data-i18n-html="feat2-desc">
-                        <li>자사 PPT 양식을 그대로 유지한 채 초안을 생성합니다.</li>
-                        <li>과거 제안서에서 톤과 구조를 학습합니다.</li>
-                        <li>바로 제출할 수 있는 PPT로 산출됩니다.</li>
+                        <li>Win Theme이 제안서 마지막 장까지 끊어지지 않고 관통합니다.</li>
+                        <li>스토리라인에 맞춰 각 슬라이드의 메시지를 설계합니다.</li>
+                        <li>우리 회사 PPT 템플릿 그대로 결과물이 산출됩니다.</li>
                     </ul>
                 </div>
                 <div class="order-1 lg:order-2 rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
@@ -827,34 +790,34 @@
         <div class="max-w-7xl mx-auto">
             <div class="reveal text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="why-title">Why contrl</h2>
-                <p class="text-base md:text-lg text-zinc-500 leading-relaxed max-w-xl mx-auto" data-i18n="why-sub">제안서의 어려운 부분을 해결합니다.</p>
+                <p class="text-base md:text-lg text-zinc-500 leading-relaxed max-w-xl mx-auto" data-i18n="why-sub">제안서가 지는 진짜 이유, 그리고 CONTRL이 존재하는 이유.</p>
             </div>
             <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-5 stagger">
                 <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
                     <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:ghost-linear" width="20" class="text-accent"></iconify-icon>
+                        <iconify-icon icon="solar:link-broken-linear" width="20" class="text-accent"></iconify-icon>
                     </div>
                     <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2" data-i18n="why1-title">두꺼운 RFP, 부족한 시간</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why1-desc">수백 페이지 RFP를 분석해 핵심 요구사항을 뽑아내는 데만 며칠이 걸립니다.</p>
+                        <h3 class="text-lg font-bold mb-2" data-i18n="why1-title">전략이 관통하지 못하는 제안서</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why1-desc">고객 니즈와 우리 강점을 연결한 이기는 전략이, 제안서 마지막 Slide까지 관통하지 못합니다.</p>
                     </div>
                 </div>
                 <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
                     <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:copy-linear" width="20" class="text-accent"></iconify-icon>
+                        <iconify-icon icon="solar:users-group-rounded-linear" width="20" class="text-accent"></iconify-icon>
                     </div>
                     <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2" data-i18n="why2-title">이기는 전략, 어디서부터?</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why2-desc">Win Theme을 잡고 차별화 전략을 세워야 하는데, 체계적인 방법이 없습니다.</p>
+                        <h3 class="text-lg font-bold mb-2" data-i18n="why2-title">경험 많은 소수만의 역량이었다</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why2-desc">이기는 전략을 세우고 끝까지 관통시키는 건, 경험 많은 소수만 할 수 있었습니다. CONTRL은 그 역량을 모든 사람에게 줍니다.</p>
                     </div>
                 </div>
                 <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
                     <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:shield-check-linear" width="20" class="text-accent"></iconify-icon>
+                        <iconify-icon icon="solar:cpu-bolt-linear" width="20" class="text-accent"></iconify-icon>
                     </div>
                     <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2" data-i18n="why3-title">자사 템플릿, 활용 못 하는 자산</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why3-desc">과거 제안서에 노하우가 쌓여 있지만, 매번 새로 만들 뿐 체계적으로 활용하지 못합니다.</p>
+                        <h3 class="text-lg font-bold mb-2" data-i18n="why3-title">범용 AI로는 안 되는 연결고리</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why3-desc">ChatGPT, Claude 같은 범용 AI가 있지만, RFP에서 Win Theme, Storyline, Slide까지 관통시키는 건 범용 AI로는 안 됩니다.</p>
                     </div>
                 </div>
             </div>
@@ -875,7 +838,7 @@
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq1-a">제안서를 쓸 때 RFP 요구사항을 나열만 하고, 차별화 전략 없이 작성하는 문제를 풀고 있습니다. contrl은 RFP 분석 → Win Theme 설정 → 차별화 설계 → 검증까지 하나의 흐름으로 연결해, 전략이 담긴 제안서를 만듭니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq1-a">제안서가 지는 이유는 하나입니다. 고객 니즈와 우리 강점을 연결한 이기는 전략이, 제안서 마지막 Slide까지 관통하지 못하기 때문입니다. contrl은 RFP → Win Theme → Storyline → Slide까지 하나의 전략이 끊어지지 않고 관통하게 합니다.</p>
                     </div>
                 </div>
                 <div class="reveal border-t border-zinc-200 faq-item">
@@ -902,7 +865,7 @@
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq4-a">입찰 제안서를 작성하는 실무 담당자입니다. RFP를 받고 제안서를 만들어야 하는데, 매번 백지에서 시작하거나 전략 없이 요구사항만 나열하고 계신 분들이 첫 번째 사용자입니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq4-a">제안서를 쓰는 누구나입니다. 직급 불문, 경험 불문. 이기는 전략을 세우고 그걸 제안서 끝까지 관통시키는 건, 경험 많은 소수만 할 수 있었습니다. CONTRL은 그 역량을 모든 사람에게 줍니다.</p>
                     </div>
                 </div>
                 <div class="reveal border-t border-b border-zinc-200 faq-item">
@@ -922,8 +885,8 @@
     <section class="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#524438]">
         <div class="max-w-3xl mx-auto text-center">
             <div class="reveal">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="cta-title">이기는 제안서, 지금 시작하세요</h2>
-                <p class="text-base text-white/60 leading-relaxed mb-8 max-w-md mx-auto" data-i18n-html="cta-sub">RFP 분석부터 Win Theme, 차별화, 검증까지.<br>전략이 담긴 제안서를 하나의 흐름으로.</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4" style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="cta-title">이기는 제안서를, 누구나. 지금 시작하세요.</h2>
+                <p class="text-base text-white/60 leading-relaxed mb-8 max-w-md mx-auto" data-i18n-html="cta-sub">RFP → Win Theme → Storyline → Slide.<br>하나의 전략이 끊어지지 않고 관통합니다.</p>
                 <a href="https://tally.so/r/b5dqO2" data-tally-link target="_blank" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-8 py-3.5 rounded-full text-base">
                     <span data-i18n="cta-btn">Closed Beta 신청</span>
                     <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
@@ -938,7 +901,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div>
                     <a href="#" class="text-xl font-bold tracking-tight">contrl<span class="text-accent">.</span></a>
-                    <p class="text-sm text-zinc-400 mt-3 leading-relaxed max-w-xs" data-i18n="footer-desc">우리 회사 템플릿 그대로, 전략이 담긴 제안서를 자동으로 설계하는 AI.</p>
+                    <p class="text-sm text-zinc-400 mt-3 leading-relaxed max-w-xs" data-i18n="footer-desc">이기는 제안서를 누구나 만들 수 있게 하는 AI Win Theme Editor.</p>
                     <div class="mt-4 space-y-1 text-xs text-zinc-400 leading-relaxed">
                         <p><span class="font-semibold text-zinc-500 mr-2">US</span>12130 Millennium Dr #300, Los Angeles, CA 90094</p>
                         <p><span class="font-semibold text-zinc-500 mr-2">SG</span>21 Collyer Quay, Downtown Core, Central, 049320</p>
@@ -985,64 +948,6 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // Flow diagram SVG curved lines
-        function drawFlowLines() {
-            const diagram = document.getElementById('flowDiagram');
-            const hub = document.getElementById('hubCenter');
-            if (!diagram || !hub || window.innerWidth < 1024) {
-                const existing = document.querySelector('.flow-svg');
-                if (existing) existing.remove();
-                return;
-            }
-            let svg = document.querySelector('.flow-svg');
-            if (!svg) {
-                svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                svg.classList.add('flow-svg');
-                diagram.appendChild(svg);
-            }
-            svg.innerHTML = '';
-            const dRect = diagram.getBoundingClientRect();
-            const hRect = hub.getBoundingClientRect();
-            const hLx = hRect.left - dRect.left;
-            const hRx = hRect.right - dRect.left;
-            const hCy = hRect.top + hRect.height / 2 - dRect.top;
-
-            // Left cards -> hub left side (curved, dashed)
-            document.querySelectorAll('.flow-left-col .flow-card-wrap').forEach(card => {
-                const cRect = card.getBoundingClientRect();
-                const sx = cRect.right - dRect.left;
-                const sy = cRect.top + cRect.height / 2 - dRect.top;
-                const ex = hLx;
-                const ey = hCy;
-                const midX = sx + (ex - sx) * 0.6;
-                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                path.setAttribute('d', `M ${sx} ${sy} C ${midX} ${sy}, ${midX} ${ey}, ${ex} ${ey}`);
-                path.setAttribute('stroke', 'rgba(242,122,46,0.2)');
-                path.setAttribute('stroke-width', '2');
-                path.setAttribute('stroke-dasharray', '6 4');
-                path.setAttribute('fill', 'none');
-                svg.appendChild(path);
-            });
-
-            // Hub right side -> right cards (curved, solid)
-            document.querySelectorAll('.flow-right-col .flow-card-wrap').forEach(card => {
-                const cRect = card.getBoundingClientRect();
-                const sx = hRx;
-                const sy = hCy;
-                const ex = cRect.left - dRect.left;
-                const ey = cRect.top + cRect.height / 2 - dRect.top;
-                const midX = sx + (ex - sx) * 0.4;
-                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                path.setAttribute('d', `M ${sx} ${sy} C ${midX} ${sy}, ${midX} ${ey}, ${ex} ${ey}`);
-                path.setAttribute('stroke', 'rgba(242,122,46,0.35)');
-                path.setAttribute('stroke-width', '2.5');
-                path.setAttribute('fill', 'none');
-                svg.appendChild(path);
-            });
-        }
-        window.addEventListener('load', () => setTimeout(drawFlowLines, 500));
-        window.addEventListener('resize', drawFlowLines);
 
         // FAQ
         function toggleFaq(btn) {
@@ -1161,123 +1066,119 @@
                 'banner': '<span class="font-extrabold tracking-tight">Closed Beta opens 3/30</span> <span class="font-light opacity-80">Sign up before spots fill</span>',
                 'banner-cta': 'Apply now →',
                 'nav-cta': 'Apply for Beta',
-                'hero-title': 'Your template, as is.<br>Your winning proposal, architected.',
-                'hero-sub': 'Built for proposal teams. Experience the draft quality you\'ve been looking for.',
+                'hero-label': 'AI Win Theme Editor',
+                'hero-title': 'Winning proposals,<br>by anyone.',
+                'hero-sub': 'A winning strategy that connects client needs to your strengths — driven through every last slide.',
                 'hero-cta': 'Apply for Closed Beta',
                 'hero-cta2': 'See How It Works',
-                'badge-format': 'Format Preserved',
-                'badge-hallu': 'AI Verification',
-                'badge-local': 'Proposal Strategy',
+                'badge-format': 'Winning Strategy Design',
+                'badge-hallu': 'RFP → Slide Driven',
+                'badge-local': 'Proposal Protection',
                 'flow-title': 'How It Works',
-                'flow-sub': 'From Win Theme to differentiation to verification. Completed in one flow.',
-                'flow-in1-title': 'Template',
-                'flow-in1-desc': 'Learns your company\'s DNA and format from past proposal PPTs.',
-                'flow-in2-title': 'Reference',
-                'flow-in2-desc': 'Analyzes the RFP to deeply understand the client\'s intent.',
-                'flow-out1-title': 'Win Theme Draft',
-                'flow-out1-desc': 'Analyzes the RFP to set a Win Theme, then architects a draft around it.',
-                'flow-out2-title': 'Differentiation',
-                'flow-out2-desc': 'Connects RFP requirements to your strengths, weaving differentiators into the draft.',
-                'flow-out3-title': 'Verification Report',
-                'flow-out3-desc': 'See exactly why AI wrote what it did — with sources and rationale.',
+                'flow-sub': 'One strategy, unbroken — driven through to the last slide.',
+                'flow-s1-title': 'RFP Analysis',
+                'flow-s1-desc': 'Identifies the client\'s core needs and requirements.',
+                'flow-s2-title': 'Win Theme',
+                'flow-s2-desc': 'Connects client needs to your strengths to design a winning strategy.',
+                'flow-s3-title': 'Storyline',
+                'flow-s3-desc': 'Designs a storyline that drives the Win Theme through every slide.',
+                'flow-s4-title': 'Slide',
+                'flow-s4-desc': 'Generates strategy-driven slides in your company\'s own template.',
+                'flow-through': 'One strategy, unbroken — driven through to the end',
                 'feat-title': 'Key Features',
-                'feat-sub': 'Core capabilities that contrl provides at each stage of proposal writing.',
+                'feat-sub': 'Core capabilities that drive your winning strategy from RFP to Slide.',
                 'feat1-title': 'Win Theme — Winning Strategy Design',
-                'feat1-desc': '<li>Analyzes the RFP to automatically extract key requirements.</li><li>Matches your assets to design a Win Theme.</li><li>Surfaces gaps and differentiators for you.</li>',
-                'feat2-title': 'Template + PPT — Your Format, Preserved',
-                'feat2-desc': '<li>Generates drafts while preserving your PPT format.</li><li>Learns tone and structure from past proposals.</li><li>Outputs ready-to-submit PPT files.</li>',
+                'feat1-desc': '<li>Extracts core client needs from the RFP.</li><li>Connects your strengths to design the Win Theme.</li><li>Surfaces gaps and differentiators for you.</li>',
+                'feat2-title': 'Storyline → Slide — Strategy-Driven Proposal',
+                'feat2-desc': '<li>The Win Theme drives through every slide, unbroken.</li><li>Each slide\'s message is designed around the strategy.</li><li>Output in your company\'s own PPT template.</li>',
                 'feat3-title': 'Security — Your Proposals, Protected',
                 'feat3-desc': '<li>All processing is completed locally.</li><li>Nothing is uploaded to the cloud.</li><li>Sensitive proposal data never leaves your company.</li>',
-                'security-badge': 'Local Security',
-                'security-badge-sub': 'Ensure proposal security at all times',
                 'why-title': 'Why contrl',
-                'why-sub': 'We solve the hard parts of proposal writing.',
-                'why1-title': 'Thick RFPs, Not Enough Time',
-                'why1-desc': 'It takes days just to analyze hundreds of pages and extract key requirements.',
-                'why2-title': 'Winning Strategy — Where to Start?',
-                'why2-desc': 'You need a Win Theme and differentiation strategy, but there\'s no systematic way to build one.',
-                'why3-title': 'Templates — Untapped Assets',
-                'why3-desc': 'Past proposals hold valuable know-how, but you end up starting fresh instead of leveraging them.',
+                'why-sub': 'The real reason proposals lose, and why CONTRL exists.',
+                'why1-title': 'Strategy That Doesn\'t Reach the Last Slide',
+                'why1-desc': 'A winning strategy connecting client needs to your strengths fails to drive through to the last slide of the proposal.',
+                'why2-title': 'A Skill Only the Experienced Few Had',
+                'why2-desc': 'Building a winning strategy and driving it through to the end was something only experienced few could do. CONTRL gives that capability to everyone.',
+                'why3-title': 'Generic AI Can\'t Bridge This Gap',
+                'why3-desc': 'ChatGPT, Claude — generic AI exists, but driving the link from RFP to Win Theme, Storyline, and Slide isn\'t something generic AI can do.',
                 'faq-title': 'Frequently Asked Questions',
                 'faq-sub': 'Have questions?',
                 'faq1-q': 'What problem does contrl solve?',
-                'faq1-a': 'Proposals often just list RFP requirements without a differentiation strategy. contrl connects the entire flow — RFP analysis → Win Theme → differentiation design → verification — to create proposals with real strategy.',
+                'faq1-a': 'Proposals lose for one reason: the winning strategy connecting client needs to your strengths doesn\'t drive through to the last slide. contrl ensures RFP → Win Theme → Storyline → Slide flows as one unbroken strategy.',
                 'faq2-q': 'What file formats are supported?',
                 'faq2-a': 'Currently PowerPoint (.pptx). Upload your company\'s existing PPT template, and contrl generates a proposal draft that preserves your format and design.',
                 'faq3-q': 'How is data security handled?',
                 'faq3-a': 'All processing happens locally. Nothing is uploaded to the cloud, and your proposal data never leaves your machine.',
                 'faq4-q': 'Who is this product for?',
-                'faq4-a': 'Proposal managers who write bid proposals. If you receive RFPs and find yourself starting from scratch or listing requirements without strategy every time, you\'re our first user.',
+                'faq4-a': 'Anyone who writes proposals. Regardless of title or experience. Building a winning strategy and driving it through was only possible for the experienced few. CONTRL gives that capability to everyone.',
                 'faq5-q': 'How do I join the Closed Beta?',
                 'faq5-a': 'Click the "Apply for Closed Beta" button above. The beta runs for 4 weeks starting March 30, free of charge — no sign-up or payment required. Access is invite-based.',
-                'cta-title': 'Start writing winning proposals.',
-                'cta-sub': 'From RFP analysis to Win Theme, differentiation, and verification.<br>Strategy-driven proposals in one flow.',
+                'cta-title': 'Winning proposals, by anyone. Start now.',
+                'cta-sub': 'RFP → Win Theme → Storyline → Slide.<br>One strategy, unbroken — driven through to the end.',
                 'cta-btn': 'Apply for Closed Beta',
-                'footer-desc': 'Your template, as is. AI that architects strategy-driven proposals automatically.',
+                'footer-desc': 'AI Win Theme Editor that lets anyone create winning proposals.',
                 'footer-features': 'Features',
                 'footer-why': 'Why contrl',
                 'footer-faq': 'FAQ',
                 'footer-contact-title': 'Contact',
                 'footer-demo': 'Apply for Beta',
             },
-            ko: {
-                'hero-title': '우리 회사 PPT 템플릿 그대로,<br>제안서 초안 자동 작성',
-            },
+            ko: {},
             zh: {
                 'banner': '<span class="font-extrabold tracking-tight">Closed Beta 3/30 开放</span> <span class="ml-2.5 font-light opacity-80">名额有限，尽快申请</span>',
                 'banner-cta': '立即申请 →',
                 'nav-cta': '申请Beta',
-                'hero-title': '保留公司PPT模板，<br>自动撰写提案初稿',
-                'hero-sub': '专为提案团队打造，体验您一直在寻找的初稿质量。',
+                'hero-label': 'AI Win Theme Editor',
+                'hero-title': '制胜提案，<br>人人可做。',
+                'hero-sub': '将客户需求与我方优势连接的制胜战略，贯穿到提案最后一页。',
                 'hero-cta': '申请 Closed Beta',
                 'hero-cta2': 'See How It Works',
-                'badge-format': '格式完整保留',
-                'badge-hallu': 'AI验证流程',
-                'badge-local': '提案战略设计',
+                'badge-format': '制胜战略设计',
+                'badge-hallu': 'RFP → Slide 贯穿',
+                'badge-local': '提案安全保护',
                 'flow-title': 'How It Works',
-                'flow-sub': '从Win Theme到差异化再到验证，一个流程完成。',
-                'flow-in1-title': 'Template',
-                'flow-in1-desc': '从过去的提案PPT中学习公司的DNA和格式。',
-                'flow-in2-title': 'Reference',
-                'flow-in2-desc': '分析RFP（提案邀请书），深入了解客户意图。',
-                'flow-out1-title': 'Win Theme 初稿',
-                'flow-out1-desc': '分析RFP设定Win Theme，围绕它设计初稿。',
-                'flow-out2-title': '差异化设计',
-                'flow-out2-desc': '将RFP核心需求与我方优势对接，将差异化融入初稿。',
-                'flow-out3-title': '验证报告',
-                'flow-out3-desc': '查看AI为何如此撰写——附带来源和依据。',
+                'flow-sub': '一个战略，不间断地贯穿到最后一页Slide。',
+                'flow-s1-title': 'RFP分析',
+                'flow-s1-desc': '识别客户的核心需求和要求。',
+                'flow-s2-title': 'Win Theme',
+                'flow-s2-desc': '将客户需求与我方优势连接，设计制胜战略。',
+                'flow-s3-title': 'Storyline',
+                'flow-s3-desc': '设计让Win Theme贯穿每一页的故事线。',
+                'flow-s4-title': 'Slide',
+                'flow-s4-desc': '保留公司模板，生成承载战略的幻灯片。',
+                'flow-through': '一个战略，不间断地贯穿到底',
                 'feat-title': 'Key Features',
-                'feat-sub': 'contrl在提案撰写各阶段提供的核心功能。',
+                'feat-sub': '从RFP到Slide，驱动制胜战略的核心功能。',
                 'feat1-title': 'Win Theme — 制胜战略设计',
-                'feat1-desc': '<li>自动分析RFP核心需求。</li><li>匹配自有资产设计Win Theme。</li><li>识别空白点和差异化优势。</li>',
-                'feat2-title': 'Template + PPT — 保留自有格式',
-                'feat2-desc': '<li>保留公司PPT格式生成初稿。</li><li>从过往提案学习语气和结构。</li><li>输出可直接提交的PPT。</li>',
+                'feat1-desc': '<li>从RFP中提取客户核心需求。</li><li>连接我方优势设计Win Theme。</li><li>识别空白点和差异化优势。</li>',
+                'feat2-title': 'Storyline → Slide — 战略贯穿的提案',
+                'feat2-desc': '<li>Win Theme不间断地贯穿到提案最后一页。</li><li>围绕战略设计每一页的核心信息。</li><li>以公司PPT模板原样输出。</li>',
                 'feat3-title': 'Security — 提案书安全保护',
                 'feat3-desc': '<li>所有处理在本地完成。</li><li>不上传至云端。</li><li>敏感提案信息不离开公司。</li>',
                 'why-title': 'Why contrl',
-                'why-sub': '解决提案撰写中的难题。',
-                'why1-title': '厚重的RFP，时间不够',
-                'why1-desc': '仅分析数百页RFP提取核心需求就需要数天。',
-                'why2-title': '制胜战略，从何开始？',
-                'why2-desc': '需要制定Win Theme和差异化战略，却没有系统方法。',
-                'why3-title': '自有模板，未被利用的资产',
-                'why3-desc': '过往提案积累了丰富经验，却每次都从零开始。',
+                'why-sub': '提案失败的真正原因，以及CONTRL存在的理由。',
+                'why1-title': '战略无法贯穿的提案',
+                'why1-desc': '将客户需求与我方优势连接的制胜战略，无法贯穿到提案最后一页。',
+                'why2-title': '曾经只有少数人才能做到',
+                'why2-desc': '制定制胜战略并贯穿到底，曾经只有经验丰富的少数人才能做到。CONTRL将这种能力赋予每个人。',
+                'why3-title': '通用AI做不到的连接',
+                'why3-desc': 'ChatGPT、Claude等通用AI存在，但从RFP到Win Theme、Storyline、Slide的贯穿，通用AI做不到。',
                 'faq-title': 'FAQ',
                 'faq-sub': '有疑问吗？',
                 'faq1-q': 'contrl解决什么问题？',
-                'faq1-a': '提案往往只罗列RFP需求而缺乏差异化战略。contrl将RFP分析→Win Theme→差异化设计→验证连成一个流程，创建有战略的提案。',
+                'faq1-a': '提案失败只有一个原因：将客户需求与我方优势连接的制胜战略，无法贯穿到最后一页。contrl确保RFP→Win Theme→Storyline→Slide作为一个不间断的战略流程。',
                 'faq2-q': '支持哪些文件格式？',
                 'faq2-a': '目前支持PowerPoint(.pptx)。上传公司现有PPT模板，contrl会保留格式和设计生成提案初稿。',
                 'faq3-q': '数据安全如何保障？',
                 'faq3-a': '所有处理在本地进行，不上传至云端，提案数据不会离开您的设备。',
                 'faq4-q': '产品面向谁？',
-                'faq4-a': '撰写投标提案的实务负责人。如果您收到RFP后每次都从零开始或只是罗列需求，您就是我们的第一批用户。',
+                'faq4-a': '写提案的任何人。不论职级，不论经验。制定制胜战略并贯穿到底，曾经只有少数人能做到。CONTRL将这种能力赋予每个人。',
                 'faq5-q': '如何参加Closed Beta？',
                 'faq5-a': '点击上方"申请Closed Beta"按钮。Beta从3月30日起运行4周，免费使用，无需注册或付费，基于邀请制。',
-                'cta-title': '开始撰写制胜提案。',
-                'cta-sub': '从RFP分析到Win Theme、差异化和验证。<br>战略驱动的提案，一个流程完成。',
+                'cta-title': '制胜提案，人人可做。立即开始。',
+                'cta-sub': 'RFP → Win Theme → Storyline → Slide。<br>一个战略，不间断地贯穿到底。',
                 'cta-btn': '申请 Closed Beta',
-                'footer-desc': '保留您的模板，AI自动设计战略驱动的提案。',
+                'footer-desc': '让任何人都能制作制胜提案的AI Win Theme Editor。',
                 'footer-features': 'Features',
                 'footer-why': 'Why contrl',
                 'footer-faq': 'FAQ',
@@ -1287,57 +1188,57 @@
             ja: {
                 'banner': '<span class="font-extrabold tracking-tight">Closed Beta 3/30 開始</span> <span class="ml-2.5 font-light opacity-80">先着順、お早めにお申し込みください</span>',
                 'banner-cta': '申し込む →',
-                'hero-title': '自社テンプレートそのまま、<br>提案書を自動作成',
-                'hero-sub': '提案チームのために設計。探し求めていた初稿クオリティを体験してください。',
+                'hero-label': 'AI Win Theme Editor',
+                'hero-title': '勝てる提案書を、<br>誰でも。',
+                'hero-sub': '顧客ニーズと自社の強みを繋ぐ戦略が、提案書の最後のSlideまで貫通します。',
                 'hero-cta': 'Closed Beta 申し込み',
                 'hero-cta2': 'See How It Works',
-                'badge-format': 'フォーマット完全保持',
-                'badge-hallu': 'AI検証プロセス',
-                'badge-local': '提案戦略設計',
+                'badge-format': '勝つ戦略設計',
+                'badge-hallu': 'RFP → Slide 貫通',
+                'badge-local': '提案書保護',
                 'flow-title': 'How It Works',
-                'flow-sub': 'Win Themeから差別化、検証まで。ひとつの流れで完成します。',
-                'flow-in1-title': 'Template',
-                'flow-in1-desc': '過去の提案書PPTから自社のDNAとフォーマットを学習します。',
-                'flow-in2-title': 'Reference',
-                'flow-in2-desc': 'RFP（提案依頼書）を分析し、顧客の意図を深く把握します。',
-                'flow-out1-title': 'Win Theme 初稿',
-                'flow-out1-desc': 'RFPを分析してWin Themeを設定し、それに沿った初稿を設計します。',
-                'flow-out2-title': '差別化設計',
-                'flow-out2-desc': 'RFPの核心要件と自社の強みを結び付け、差別化ポイントを初稿に反映します。',
-                'flow-out3-title': '検証レポート',
-                'flow-out3-desc': 'AIがなぜそう書いたのか——根拠と出典とともに確認できます。',
+                'flow-sub': 'ひとつの戦略が途切れることなく、最後のSlideまで貫通します。',
+                'flow-s1-title': 'RFP分析',
+                'flow-s1-desc': '顧客の核心ニーズと要件を把握します。',
+                'flow-s2-title': 'Win Theme',
+                'flow-s2-desc': '顧客ニーズと自社の強みを繋ぎ、勝つ戦略を設計します。',
+                'flow-s3-title': 'Storyline',
+                'flow-s3-desc': 'Win Themeがすべてのスライドに貫通するストーリーラインを設計します。',
+                'flow-s4-title': 'Slide',
+                'flow-s4-desc': '自社テンプレートそのまま、戦略が込められたスライドを生成します。',
+                'flow-through': 'ひとつの戦略が途切れることなく貫通します',
                 'feat-title': 'Key Features',
-                'feat-sub': '提案書作成の各段階でcontrlが提供するコア機能です。',
+                'feat-sub': 'RFPからSlideまで、勝つ戦略を貫通させるコア機能。',
                 'feat1-title': 'Win Theme — 勝つ戦略設計',
-                'feat1-desc': '<li>RFPの核心要件を自動分析します。</li><li>自社資産とマッチングしWin Themeを設計します。</li><li>空白部分と差別化ポイントまで提案します。</li>',
-                'feat2-title': 'Template + PPT — 自社フォーマットそのまま',
-                'feat2-desc': '<li>自社PPTフォーマットを維持したまま初稿を生成します。</li><li>過去の提案書からトーンと構造を学習します。</li><li>そのまま提出可能なPPTで出力されます。</li>',
+                'feat1-desc': '<li>RFPから顧客の核心ニーズを抽出します。</li><li>自社の強みと繋げてWin Themeを設計します。</li><li>空白部分と差別化ポイントまで提示します。</li>',
+                'feat2-title': 'Storyline → Slide — 戦略が貫通する提案書',
+                'feat2-desc': '<li>Win Themeが提案書の最後のページまで途切れなく貫通します。</li><li>ストーリーラインに沿って各スライドのメッセージを設計します。</li><li>自社PPTテンプレートそのまま出力されます。</li>',
                 'feat3-title': 'Security — 提案書の安全保護',
                 'feat3-desc': '<li>すべての処理はローカルで完結します。</li><li>クラウドにアップロードされません。</li><li>機密提案情報が社外に出ることはありません。</li>',
                 'why-title': 'Why contrl',
-                'why-sub': '提案書作成の難しい部分を解決します。',
-                'why1-title': '膨大なRFP、足りない時間',
-                'why1-desc': 'RFPの分析と要件抽出だけで数日を費やしています。',
-                'why2-title': '勝つ戦略、どこから？',
-                'why2-desc': '差別化戦略（Win Theme）を体系的に立てる方法がありません。',
-                'why3-title': '自社テンプレート、活用されない資産',
-                'why3-desc': '過去の提案書にノウハウが蓄積されていますが、毎回ゼロから作っています。',
+                'why-sub': '提案書が負ける本当の理由、そしてCONTRLが存在する理由。',
+                'why1-title': '戦略が貫通しない提案書',
+                'why1-desc': '顧客ニーズと自社の強みを繋ぐ勝つ戦略が、提案書の最後のSlideまで貫通しません。',
+                'why2-title': '経験豊富な少数だけの能力だった',
+                'why2-desc': '勝つ戦略を立て最後まで貫通させることは、経験豊富な少数だけができました。CONTRLはその能力をすべての人に与えます。',
+                'why3-title': '汎用AIでは繋げないリンク',
+                'why3-desc': 'ChatGPT、Claudeなどの汎用AIはありますが、RFPからWin Theme、Storyline、Slideまで貫通させることは汎用AIではできません。',
                 'faq-title': 'FAQ',
                 'faq-sub': 'ご質問はありますか？',
                 'faq1-q': 'contrlはどんな問題を解決しますか？',
-                'faq1-a': '提案書はRFP要件を羅列するだけで差別化戦略がないことが多いです。contrlはRFP分析→Win Theme→差別化設計→検証をひとつの流れで繋ぎ、戦略のある提案書を作ります。',
+                'faq1-a': '提案書が負ける理由はひとつ。顧客ニーズと自社の強みを繋ぐ戦略が最後のSlideまで貫通しないからです。contrlはRFP→Win Theme→Storyline→Slideをひとつの途切れない戦略として流します。',
                 'faq2-q': '対応ファイル形式は？',
                 'faq2-a': '現在PowerPoint(.pptx)に対応しています。自社の既存PPTテンプレートをアップロードすると、フォーマットとデザインを維持した提案書初稿が生成されます。',
                 'faq3-q': 'データセキュリティは？',
                 'faq3-a': 'すべての処理はローカルで行われます。クラウドへのアップロードはなく、提案データがデバイスの外に出ることはありません。',
                 'faq4-q': '誰向けの製品ですか？',
-                'faq4-a': '入札提案書を作成する実務担当者です。RFPを受け取り毎回ゼロから始めたり要件を羅列するだけの方が、最初のユーザーです。',
+                'faq4-a': '提案書を書くすべての人です。役職不問、経験不問。勝つ戦略を立て最後まで貫通させることは、経験豊富な少数だけの能力でした。CONTRLはその能力をすべての人に与えます。',
                 'faq5-q': 'Closed Betaへの参加方法は？',
                 'faq5-a': '上部の「Closed Beta申し込み」ボタンからお申し込みください。3月30日から4週間無料で運営され、登録や決済不要の招待制です。',
-                'cta-title': '勝てる提案書を、今すぐ始めましょう。',
-                'cta-sub': 'RFP分析からWin Theme、差別化、検証まで。<br>戦略が込められた提案書をひとつの流れで。',
+                'cta-title': '勝てる提案書を、誰でも。今すぐ始めましょう。',
+                'cta-sub': 'RFP → Win Theme → Storyline → Slide。<br>ひとつの戦略が途切れることなく貫通します。',
                 'cta-btn': 'Closed Beta 申し込み',
-                'footer-desc': '自社テンプレートそのまま、戦略的な提案書を自動設計するAI。',
+                'footer-desc': '誰でも勝てる提案書を作れるAI Win Theme Editor。',
                 'footer-features': 'Features',
                 'footer-why': 'Why contrl',
                 'footer-faq': 'FAQ',
@@ -1351,57 +1252,57 @@
                 'banner': '<span class="font-extrabold tracking-tight">Bêta fermée ouvre le 30/03</span> <span class="ml-2.5 font-light opacity-80">Inscrivez-vous avant que les places ne soient prises</span>',
                 'banner-cta': 'Postuler →',
                 'nav-cta': 'Postuler à la Bêta',
-                'hero-title': 'Votre modèle, tel quel.<br>Votre proposition gagnante, architecturée.',
-                'hero-sub': 'Conçu pour les équipes de propositions. Découvrez la qualité de rédaction que vous recherchiez.',
+                'hero-label': 'AI Win Theme Editor',
+                'hero-title': 'Des propositions gagnantes,<br>par tous.',
+                'hero-sub': 'Une stratégie gagnante reliant besoins clients et vos forces — portée jusqu\'à la dernière slide.',
                 'hero-cta': 'Postuler à la Bêta Fermée',
                 'hero-cta2': 'Voir comment ça marche',
-                'badge-format': 'Format préservé',
-                'badge-hallu': 'Vérification IA',
-                'badge-local': 'Stratégie de proposition',
+                'badge-format': 'Stratégie gagnante',
+                'badge-hallu': 'RFP → Slide porté',
+                'badge-local': 'Protection des propositions',
                 'flow-title': 'Comment ça marche',
-                'flow-sub': 'Du Win Theme à la différenciation puis à la vérification. Tout en un seul flux.',
-                'flow-in1-title': 'Modèle',
-                'flow-in1-desc': 'Apprend l\'ADN et le format de votre entreprise à partir de vos PPT précédents.',
-                'flow-in2-title': 'Référence',
-                'flow-in2-desc': 'Analyse l\'appel d\'offres pour comprendre en profondeur les attentes du client.',
-                'flow-out1-title': 'Brouillon Win Theme',
-                'flow-out1-desc': 'Analyse l\'appel d\'offres pour définir un Win Theme, puis construit le brouillon autour.',
-                'flow-out2-title': 'Différenciation',
-                'flow-out2-desc': 'Relie les exigences de l\'appel d\'offres à vos atouts, intégrant les différenciateurs dans le brouillon.',
-                'flow-out3-title': 'Rapport de vérification',
-                'flow-out3-desc': 'Voyez exactement pourquoi l\'IA a écrit ce qu\'elle a écrit — avec sources et justification.',
+                'flow-sub': 'Une stratégie, sans interruption — portée jusqu\'à la dernière slide.',
+                'flow-s1-title': 'Analyse AO',
+                'flow-s1-desc': 'Identifie les besoins et exigences clés du client.',
+                'flow-s2-title': 'Win Theme',
+                'flow-s2-desc': 'Relie les besoins clients à vos forces pour concevoir une stratégie gagnante.',
+                'flow-s3-title': 'Storyline',
+                'flow-s3-desc': 'Conçoit un fil conducteur portant le Win Theme à travers chaque slide.',
+                'flow-s4-title': 'Slide',
+                'flow-s4-desc': 'Génère des slides stratégiques dans le modèle de votre entreprise.',
+                'flow-through': 'Une stratégie, sans interruption — portée jusqu\'au bout',
                 'feat-title': 'Fonctionnalités clés',
-                'feat-sub': 'Les capacités essentielles que contrl offre à chaque étape de la rédaction de propositions.',
+                'feat-sub': 'Les capacités essentielles qui portent votre stratégie gagnante de l\'AO au Slide.',
                 'feat1-title': 'Win Theme — Conception de stratégie gagnante',
-                'feat1-desc': '<li>Analyse automatiquement les exigences clés de l\'appel d\'offres.</li><li>Associe vos atouts pour concevoir un Win Theme.</li><li>Identifie les lacunes et les différenciateurs.</li>',
-                'feat2-title': 'Modèle + PPT — Votre format, préservé',
-                'feat2-desc': '<li>Génère des brouillons en préservant votre format PPT.</li><li>Apprend le ton et la structure de vos propositions passées.</li><li>Produit des fichiers PPT prêts à soumettre.</li>',
+                'feat1-desc': '<li>Extrait les besoins clés du client à partir de l\'appel d\'offres.</li><li>Relie vos forces pour concevoir le Win Theme.</li><li>Identifie les lacunes et différenciateurs.</li>',
+                'feat2-title': 'Storyline → Slide — Proposition portée par la stratégie',
+                'feat2-desc': '<li>Le Win Theme porte chaque slide, sans interruption.</li><li>Le message de chaque slide est conçu autour de la stratégie.</li><li>Résultat dans votre modèle PPT d\'entreprise.</li>',
                 'feat3-title': 'Sécurité — Vos propositions, protégées',
                 'feat3-desc': '<li>Tout le traitement est effectué localement.</li><li>Rien n\'est téléchargé vers le cloud.</li><li>Les données sensibles ne quittent jamais votre entreprise.</li>',
                 'why-title': 'Pourquoi contrl',
-                'why-sub': 'Nous résolvons les parties difficiles de la rédaction de propositions.',
-                'why1-title': 'Des appels d\'offres volumineux, pas assez de temps',
-                'why1-desc': 'Il faut des jours juste pour analyser des centaines de pages et extraire les exigences clés.',
-                'why2-title': 'Stratégie gagnante — par où commencer ?',
-                'why2-desc': 'Vous avez besoin d\'un Win Theme et d\'une stratégie de différenciation, mais il n\'y a pas de méthode systématique.',
-                'why3-title': 'Modèles — des atouts inexploités',
-                'why3-desc': 'Vos propositions passées contiennent un savoir-faire précieux, mais vous repartez de zéro à chaque fois.',
+                'why-sub': 'La vraie raison pour laquelle les propositions perdent, et pourquoi CONTRL existe.',
+                'why1-title': 'La stratégie ne porte pas jusqu\'à la fin',
+                'why1-desc': 'La stratégie gagnante reliant besoins clients et vos forces ne porte pas jusqu\'à la dernière slide.',
+                'why2-title': 'Un savoir-faire réservé à quelques experts',
+                'why2-desc': 'Construire une stratégie gagnante et la porter jusqu\'au bout n\'était possible que pour quelques experts. CONTRL donne cette capacité à tous.',
+                'why3-title': 'L\'IA générique ne peut pas faire ce lien',
+                'why3-desc': 'ChatGPT, Claude — l\'IA générique existe, mais porter le lien de l\'AO au Win Theme, Storyline et Slide n\'est pas à sa portée.',
                 'faq-title': 'Questions fréquentes',
                 'faq-sub': 'Vous avez des questions ?',
                 'faq1-q': 'Quel problème contrl résout-il ?',
-                'faq1-a': 'Les propositions se contentent souvent de lister les exigences sans stratégie de différenciation. contrl connecte tout le flux — analyse de l\'appel d\'offres → Win Theme → différenciation → vérification — pour créer des propositions avec une vraie stratégie.',
+                'faq1-a': 'Les propositions perdent pour une seule raison : la stratégie gagnante ne porte pas jusqu\'à la dernière slide. contrl assure que AO → Win Theme → Storyline → Slide fonctionne comme une stratégie ininterrompue.',
                 'faq2-q': 'Quels formats de fichiers sont supportés ?',
                 'faq2-a': 'Actuellement PowerPoint (.pptx). Téléchargez votre modèle PPT existant, et contrl génère un brouillon qui préserve votre format et design.',
                 'faq3-q': 'Comment la sécurité des données est-elle gérée ?',
                 'faq3-a': 'Tout le traitement se fait localement. Rien n\'est téléchargé vers le cloud, et vos données ne quittent jamais votre machine.',
                 'faq4-q': 'À qui s\'adresse ce produit ?',
-                'faq4-a': 'Aux responsables de propositions qui rédigent des réponses aux appels d\'offres. Si vous recevez des appels d\'offres et repartez de zéro à chaque fois, vous êtes notre premier utilisateur.',
+                'faq4-a': 'À toute personne qui rédige des propositions. Sans distinction de poste ou d\'expérience. CONTRL donne à tous la capacité de construire et porter une stratégie gagnante.',
                 'faq5-q': 'Comment rejoindre la Bêta Fermée ?',
                 'faq5-a': 'Cliquez sur le bouton « Postuler à la Bêta Fermée » ci-dessus. La bêta dure 4 semaines à partir du 30 mars, gratuitement — sans inscription ni paiement. L\'accès est sur invitation.',
-                'cta-title': 'Commencez à rédiger des propositions gagnantes.',
-                'cta-sub': 'De l\'analyse de l\'appel d\'offres au Win Theme, à la différenciation et à la vérification.<br>Des propositions stratégiques en un seul flux.',
+                'cta-title': 'Des propositions gagnantes, par tous. Commencez maintenant.',
+                'cta-sub': 'RFP → Win Theme → Storyline → Slide.<br>Une stratégie, sans interruption — portée jusqu\'au bout.',
                 'cta-btn': 'Postuler à la Bêta Fermée',
-                'footer-desc': 'Votre modèle, tel quel. L\'IA qui architecture automatiquement des propositions stratégiques.',
+                'footer-desc': 'AI Win Theme Editor qui permet à tous de créer des propositions gagnantes.',
                 'footer-features': 'Fonctionnalités',
                 'footer-why': 'Pourquoi contrl',
                 'footer-faq': 'FAQ',
@@ -1415,57 +1316,57 @@
                 'banner': '<span class="font-extrabold tracking-tight">Beta cerrada abre el 30/03</span> <span class="ml-2.5 font-light opacity-80">Regístrate antes de que se agoten los cupos</span>',
                 'banner-cta': 'Aplicar ahora →',
                 'nav-cta': 'Aplicar a la Beta',
-                'hero-title': 'Tu plantilla, tal cual.<br>Tu propuesta ganadora, diseñada.',
-                'hero-sub': 'Diseñado para equipos de propuestas. Experimenta la calidad de borrador que estabas buscando.',
+                'hero-label': 'AI Win Theme Editor',
+                'hero-title': 'Propuestas ganadoras,<br>por cualquiera.',
+                'hero-sub': 'Una estrategia ganadora que conecta las necesidades del cliente con tus fortalezas — llevada hasta la última slide.',
                 'hero-cta': 'Aplicar a la Beta Cerrada',
                 'hero-cta2': 'Ver cómo funciona',
-                'badge-format': 'Formato preservado',
-                'badge-hallu': 'Verificación IA',
-                'badge-local': 'Estrategia de propuesta',
+                'badge-format': 'Estrategia ganadora',
+                'badge-hallu': 'RFP → Slide continuo',
+                'badge-local': 'Protección de propuestas',
                 'flow-title': 'Cómo funciona',
-                'flow-sub': 'Del Win Theme a la diferenciación y verificación. Todo en un solo flujo.',
-                'flow-in1-title': 'Plantilla',
-                'flow-in1-desc': 'Aprende el ADN y formato de tu empresa a partir de PPTs de propuestas anteriores.',
-                'flow-in2-title': 'Referencia',
-                'flow-in2-desc': 'Analiza la licitación para comprender a fondo la intención del cliente.',
-                'flow-out1-title': 'Borrador Win Theme',
-                'flow-out1-desc': 'Analiza la licitación para establecer un Win Theme y diseña el borrador en torno a él.',
-                'flow-out2-title': 'Diferenciación',
-                'flow-out2-desc': 'Conecta los requisitos de la licitación con tus fortalezas, integrando diferenciadores en el borrador.',
-                'flow-out3-title': 'Informe de verificación',
-                'flow-out3-desc': 'Ve exactamente por qué la IA escribió lo que escribió — con fuentes y justificación.',
+                'flow-sub': 'Una estrategia, sin interrupciones — llevada hasta la última slide.',
+                'flow-s1-title': 'Análisis RFP',
+                'flow-s1-desc': 'Identifica las necesidades y requisitos clave del cliente.',
+                'flow-s2-title': 'Win Theme',
+                'flow-s2-desc': 'Conecta las necesidades del cliente con tus fortalezas para diseñar una estrategia ganadora.',
+                'flow-s3-title': 'Storyline',
+                'flow-s3-desc': 'Diseña un hilo conductor que lleva el Win Theme a través de cada slide.',
+                'flow-s4-title': 'Slide',
+                'flow-s4-desc': 'Genera slides con estrategia en la plantilla de tu empresa.',
+                'flow-through': 'Una estrategia, sin interrupciones — llevada hasta el final',
                 'feat-title': 'Características clave',
-                'feat-sub': 'Capacidades esenciales que contrl ofrece en cada etapa de la redacción de propuestas.',
+                'feat-sub': 'Capacidades clave que llevan tu estrategia ganadora del RFP al Slide.',
                 'feat1-title': 'Win Theme — Diseño de estrategia ganadora',
-                'feat1-desc': '<li>Analiza automáticamente los requisitos clave de la licitación.</li><li>Asocia tus activos para diseñar un Win Theme.</li><li>Identifica brechas y diferenciadores.</li>',
-                'feat2-title': 'Plantilla + PPT — Tu formato, preservado',
-                'feat2-desc': '<li>Genera borradores preservando tu formato PPT.</li><li>Aprende el tono y estructura de propuestas anteriores.</li><li>Produce archivos PPT listos para enviar.</li>',
+                'feat1-desc': '<li>Extrae las necesidades clave del cliente del RFP.</li><li>Conecta tus fortalezas para diseñar el Win Theme.</li><li>Identifica brechas y diferenciadores.</li>',
+                'feat2-title': 'Storyline → Slide — Propuesta impulsada por estrategia',
+                'feat2-desc': '<li>El Win Theme se lleva sin interrupciones hasta la última slide.</li><li>El mensaje de cada slide se diseña alrededor de la estrategia.</li><li>Resultado en la plantilla PPT de tu empresa.</li>',
                 'feat3-title': 'Seguridad — Tus propuestas, protegidas',
                 'feat3-desc': '<li>Todo el procesamiento se realiza localmente.</li><li>Nada se sube a la nube.</li><li>Los datos sensibles nunca salen de tu empresa.</li>',
                 'why-title': 'Por qué contrl',
-                'why-sub': 'Resolvemos las partes difíciles de la redacción de propuestas.',
-                'why1-title': 'Licitaciones extensas, poco tiempo',
-                'why1-desc': 'Se necesitan días solo para analizar cientos de páginas y extraer los requisitos clave.',
-                'why2-title': 'Estrategia ganadora — ¿por dónde empezar?',
-                'why2-desc': 'Necesitas un Win Theme y una estrategia de diferenciación, pero no hay un método sistemático.',
-                'why3-title': 'Plantillas — activos sin explotar',
-                'why3-desc': 'Las propuestas anteriores contienen know-how valioso, pero terminas empezando de cero cada vez.',
+                'why-sub': 'La verdadera razón por la que las propuestas pierden, y por qué existe CONTRL.',
+                'why1-title': 'La estrategia no llega hasta la última slide',
+                'why1-desc': 'La estrategia ganadora que conecta necesidades del cliente con tus fortalezas no logra llegar hasta la última slide.',
+                'why2-title': 'Una habilidad que solo tenían unos pocos',
+                'why2-desc': 'Construir una estrategia ganadora y llevarla hasta el final solo lo podían hacer unos pocos con experiencia. CONTRL da esa capacidad a todos.',
+                'why3-title': 'La IA genérica no puede hacer esta conexión',
+                'why3-desc': 'ChatGPT, Claude — la IA genérica existe, pero llevar la conexión de RFP a Win Theme, Storyline y Slide no es algo que la IA genérica pueda hacer.',
                 'faq-title': 'Preguntas frecuentes',
                 'faq-sub': '¿Tienes preguntas?',
                 'faq1-q': '¿Qué problema resuelve contrl?',
-                'faq1-a': 'Las propuestas a menudo solo listan requisitos sin estrategia de diferenciación. contrl conecta todo el flujo — análisis de licitación → Win Theme → diferenciación → verificación — para crear propuestas con estrategia real.',
+                'faq1-a': 'Las propuestas pierden por una razón: la estrategia ganadora no llega hasta la última slide. contrl asegura que RFP → Win Theme → Storyline → Slide fluya como una estrategia ininterrumpida.',
                 'faq2-q': '¿Qué formatos de archivo se soportan?',
                 'faq2-a': 'Actualmente PowerPoint (.pptx). Sube tu plantilla PPT existente, y contrl genera un borrador que preserva tu formato y diseño.',
                 'faq3-q': '¿Cómo se maneja la seguridad de datos?',
                 'faq3-a': 'Todo el procesamiento ocurre localmente. Nada se sube a la nube, y tus datos nunca salen de tu máquina.',
                 'faq4-q': '¿Para quién es este producto?',
-                'faq4-a': 'Para responsables de propuestas que redactan licitaciones. Si recibes licitaciones y empiezas de cero cada vez o solo listas requisitos sin estrategia, eres nuestro primer usuario.',
+                'faq4-a': 'Para cualquiera que escriba propuestas. Sin importar cargo o experiencia. CONTRL da a todos la capacidad de construir y llevar una estrategia ganadora hasta el final.',
                 'faq5-q': '¿Cómo me uno a la Beta Cerrada?',
                 'faq5-a': 'Haz clic en el botón "Aplicar a la Beta Cerrada" arriba. La beta dura 4 semanas desde el 30 de marzo, gratis — sin registro ni pago. El acceso es por invitación.',
-                'cta-title': 'Empieza a redactar propuestas ganadoras.',
-                'cta-sub': 'Del análisis de licitación al Win Theme, diferenciación y verificación.<br>Propuestas con estrategia en un solo flujo.',
+                'cta-title': 'Propuestas ganadoras, por cualquiera. Empieza ahora.',
+                'cta-sub': 'RFP → Win Theme → Storyline → Slide.<br>Una estrategia, sin interrupciones — llevada hasta el final.',
                 'cta-btn': 'Aplicar a la Beta Cerrada',
-                'footer-desc': 'Tu plantilla, tal cual. IA que diseña automáticamente propuestas con estrategia.',
+                'footer-desc': 'AI Win Theme Editor que permite a cualquiera crear propuestas ganadoras.',
                 'footer-features': 'Características',
                 'footer-why': 'Por qué contrl',
                 'footer-faq': 'FAQ',
@@ -1479,57 +1380,57 @@
                 'banner': '<span class="font-extrabold tracking-tight">النسخة التجريبية المغلقة تبدأ 30/03</span> <span class="ml-2.5 font-light opacity-80">سجّل قبل نفاد الأماكن</span>',
                 'banner-cta': 'قدّم الآن →',
                 'nav-cta': 'قدّم للنسخة التجريبية',
-                'hero-title': 'قالبك، كما هو.<br>عرضك الفائز، مُصمَّم باحترافية.',
-                'hero-sub': 'مصمم لفرق العروض التقديمية. اكتشف جودة المسودة التي كنت تبحث عنها.',
+                'hero-label': 'AI Win Theme Editor',
+                'hero-title': 'عروض فائزة،<br>للجميع.',
+                'hero-sub': 'استراتيجية فوز تربط احتياجات العميل بنقاط قوتك — تمتد حتى آخر شريحة.',
                 'hero-cta': 'قدّم للنسخة التجريبية المغلقة',
                 'hero-cta2': 'شاهد كيف يعمل',
-                'badge-format': 'الحفاظ على التنسيق',
-                'badge-hallu': 'التحقق بالذكاء الاصطناعي',
-                'badge-local': 'استراتيجية العرض',
+                'badge-format': 'تصميم استراتيجية الفوز',
+                'badge-hallu': 'RFP → Slide ممتد',
+                'badge-local': 'حماية العروض',
                 'flow-title': 'كيف يعمل',
-                'flow-sub': 'من Win Theme إلى التمايز ثم التحقق. كل ذلك في تدفق واحد.',
-                'flow-in1-title': 'القالب',
-                'flow-in1-desc': 'يتعلم هوية شركتك وتنسيقها من عروض PPT السابقة.',
-                'flow-in2-title': 'المرجع',
-                'flow-in2-desc': 'يحلل طلب العرض لفهم نية العميل بعمق.',
-                'flow-out1-title': 'مسودة Win Theme',
-                'flow-out1-desc': 'يحلل طلب العرض لتحديد Win Theme، ثم يبني المسودة حوله.',
-                'flow-out2-title': 'التمايز',
-                'flow-out2-desc': 'يربط متطلبات طلب العرض بنقاط قوتك، ويدمج عوامل التمايز في المسودة.',
-                'flow-out3-title': 'تقرير التحقق',
-                'flow-out3-desc': 'اطلع على سبب كتابة الذكاء الاصطناعي لما كتبه — مع المصادر والمبررات.',
+                'flow-sub': 'استراتيجية واحدة، بلا انقطاع — تمتد حتى آخر شريحة.',
+                'flow-s1-title': 'تحليل RFP',
+                'flow-s1-desc': 'يحدد الاحتياجات والمتطلبات الأساسية للعميل.',
+                'flow-s2-title': 'Win Theme',
+                'flow-s2-desc': 'يربط احتياجات العميل بنقاط قوتك لتصميم استراتيجية فائزة.',
+                'flow-s3-title': 'Storyline',
+                'flow-s3-desc': 'يصمم خط سير يحمل Win Theme عبر كل شريحة.',
+                'flow-s4-title': 'Slide',
+                'flow-s4-desc': 'ينشئ شرائح حاملة للاستراتيجية بقالب شركتك.',
+                'flow-through': 'استراتيجية واحدة، بلا انقطاع — تمتد حتى النهاية',
                 'feat-title': 'المميزات الرئيسية',
-                'feat-sub': 'القدرات الأساسية التي يوفرها contrl في كل مرحلة من كتابة العروض.',
+                'feat-sub': 'القدرات الأساسية التي تحمل استراتيجيتك الفائزة من RFP إلى Slide.',
                 'feat1-title': 'Win Theme — تصميم استراتيجية الفوز',
-                'feat1-desc': '<li>يحلل تلقائياً المتطلبات الرئيسية لطلب العرض.</li><li>يطابق أصولك لتصميم Win Theme.</li><li>يكشف الثغرات وعوامل التمايز.</li>',
-                'feat2-title': 'القالب + PPT — تنسيقك، محفوظ',
-                'feat2-desc': '<li>ينشئ مسودات مع الحفاظ على تنسيق PPT الخاص بك.</li><li>يتعلم الأسلوب والبنية من العروض السابقة.</li><li>ينتج ملفات PPT جاهزة للتقديم.</li>',
+                'feat1-desc': '<li>يستخرج احتياجات العميل الأساسية من طلب العرض.</li><li>يربط نقاط قوتك لتصميم Win Theme.</li><li>يكشف الثغرات وعوامل التمايز.</li>',
+                'feat2-title': 'Storyline → Slide — عرض تقوده الاستراتيجية',
+                'feat2-desc': '<li>Win Theme يمتد بلا انقطاع حتى آخر شريحة.</li><li>رسالة كل شريحة مصممة حول الاستراتيجية.</li><li>النتيجة بقالب PPT شركتك.</li>',
                 'feat3-title': 'الأمان — عروضك، محمية',
                 'feat3-desc': '<li>تتم جميع المعالجات محلياً.</li><li>لا يتم رفع أي شيء إلى السحابة.</li><li>البيانات الحساسة لا تغادر شركتك أبداً.</li>',
                 'why-title': 'لماذا contrl',
-                'why-sub': 'نحل الأجزاء الصعبة في كتابة العروض.',
-                'why1-title': 'طلبات عروض ضخمة، وقت غير كافٍ',
-                'why1-desc': 'يستغرق الأمر أياماً فقط لتحليل مئات الصفحات واستخراج المتطلبات الرئيسية.',
-                'why2-title': 'استراتيجية الفوز — من أين تبدأ؟',
-                'why2-desc': 'تحتاج إلى Win Theme واستراتيجية تمايز، لكن لا توجد طريقة منهجية لبنائها.',
-                'why3-title': 'القوالب — أصول غير مستغلة',
-                'why3-desc': 'العروض السابقة تحتوي على خبرات قيمة، لكنك تبدأ من الصفر في كل مرة.',
+                'why-sub': 'السبب الحقيقي لخسارة العروض، ولماذا يوجد CONTRL.',
+                'why1-title': 'استراتيجية لا تصل إلى آخر شريحة',
+                'why1-desc': 'استراتيجية الفوز التي تربط احتياجات العميل بنقاط قوتك لا تمتد حتى آخر شريحة.',
+                'why2-title': 'مهارة كانت حكراً على قلة من الخبراء',
+                'why2-desc': 'بناء استراتيجية فائزة وحملها حتى النهاية كان ممكناً فقط لقلة من الخبراء. CONTRL يمنح هذه القدرة للجميع.',
+                'why3-title': 'الذكاء الاصطناعي العام لا يستطيع سد هذه الفجوة',
+                'why3-desc': 'ChatGPT وClaude موجودان، لكن حمل الرابط من RFP إلى Win Theme وStoryline وSlide ليس بمقدور الذكاء الاصطناعي العام.',
                 'faq-title': 'الأسئلة الشائعة',
                 'faq-sub': 'لديك أسئلة؟',
                 'faq1-q': 'ما المشكلة التي يحلها contrl؟',
-                'faq1-a': 'غالباً ما تكتفي العروض بسرد متطلبات طلب العرض دون استراتيجية تمايز. contrl يربط التدفق بالكامل — تحليل طلب العرض ← Win Theme ← تصميم التمايز ← التحقق — لإنشاء عروض ذات استراتيجية حقيقية.',
+                'faq1-a': 'العروض تخسر لسبب واحد: استراتيجية الفوز لا تمتد حتى آخر شريحة. contrl يضمن أن RFP → Win Theme → Storyline → Slide تسير كاستراتيجية واحدة بلا انقطاع.',
                 'faq2-q': 'ما صيغ الملفات المدعومة؟',
                 'faq2-a': 'حالياً PowerPoint (.pptx). ارفع قالب PPT الخاص بشركتك، وسيقوم contrl بإنشاء مسودة تحافظ على التنسيق والتصميم.',
                 'faq3-q': 'كيف يتم التعامل مع أمان البيانات؟',
                 'faq3-a': 'تتم جميع المعالجات محلياً. لا يتم رفع أي شيء إلى السحابة، وبياناتك لا تغادر جهازك أبداً.',
                 'faq4-q': 'لمن هذا المنتج؟',
-                'faq4-a': 'لمديري العروض الذين يكتبون عروض المناقصات. إذا كنت تتلقى طلبات عروض وتبدأ من الصفر كل مرة، فأنت المستخدم الأول لنا.',
+                'faq4-a': 'لأي شخص يكتب العروض. بغض النظر عن المنصب أو الخبرة. CONTRL يمنح الجميع القدرة على بناء وحمل استراتيجية فائزة حتى النهاية.',
                 'faq5-q': 'كيف أنضم إلى النسخة التجريبية المغلقة؟',
                 'faq5-a': 'انقر على زر "قدّم للنسخة التجريبية المغلقة" أعلاه. تستمر النسخة التجريبية لمدة 4 أسابيع بدءاً من 30 مارس، مجاناً — بدون تسجيل أو دفع. الوصول بالدعوة فقط.',
-                'cta-title': 'ابدأ بكتابة عروض فائزة.',
-                'cta-sub': 'من تحليل طلب العرض إلى Win Theme والتمايز والتحقق.<br>عروض مدفوعة بالاستراتيجية في تدفق واحد.',
+                'cta-title': 'عروض فائزة، للجميع. ابدأ الآن.',
+                'cta-sub': 'RFP → Win Theme → Storyline → Slide.<br>استراتيجية واحدة، بلا انقطاع — تمتد حتى النهاية.',
                 'cta-btn': 'قدّم للنسخة التجريبية المغلقة',
-                'footer-desc': 'قالبك، كما هو. ذكاء اصطناعي يصمم عروضاً استراتيجية تلقائياً.',
+                'footer-desc': 'AI Win Theme Editor يتيح للجميع إنشاء عروض فائزة.',
                 'footer-features': 'المميزات',
                 'footer-why': 'لماذا contrl',
                 'footer-faq': 'الأسئلة الشائعة',
@@ -1592,7 +1493,7 @@
                 document.body.style.fontFamily = "";
             }
 
-            // 영어일 때 히어로 타이틀 폰트 크기 조정 (두줄 유지)
+            // 한국어는 기본 크기, 다른 언어는 줄수 유지용 축소
             const heroTitle = document.querySelector('[data-i18n-html="hero-title"]');
             if (heroTitle) {
                 if (lang === 'ko') {
