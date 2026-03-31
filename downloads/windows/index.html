@@ -98,6 +98,36 @@
             box-shadow: 0 18px 34px rgba(216, 74, 16, 0.28);
         }
 
+        .video-section {
+            margin: 24px 0 32px;
+        }
+
+        .video-label {
+            margin: 0 0 12px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
         @media (max-width: 640px) {
             main {
                 width: min(100%, 520px);
@@ -111,6 +141,14 @@
         <p class="eyebrow">contrl downloads</p>
         <h1>Your download is starting</h1>
         <p>If it does not begin in a moment, use the button below.</p>
+
+        <div class="video-section">
+            <p class="video-label">Contrl Introduction</p>
+            <div class="video-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/KEXUX8sRdcc?si=YbCDPkuEXps_D4KO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+
         <div class="actions">
             <a id="download-link" class="button" href="https://contrl.ai/downloads/windows/latest.exe">Download for Windows</a>
         </div>
