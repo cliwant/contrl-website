@@ -1191,10 +1191,13 @@
             }
         };
 
-        // Detect browser language
-        const browserLang = ((navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage || 'en').slice(0, 2);
+        // Detect language: localStorage > browser language > fallback to 'en'
         const supportedLangs = ['ko', 'en', 'ja'];
-        let currentLang = supportedLangs.includes(browserLang) ? browserLang : 'en';
+        const savedLang = localStorage.getItem('contrl-lang');
+        const browserLang = ((navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage || 'en').slice(0, 2);
+        let currentLang = savedLang && supportedLangs.includes(savedLang)
+            ? savedLang
+            : supportedLangs.includes(browserLang) ? browserLang : 'en';
 
         // Store original Korean text
         const koTexts = {};
@@ -1207,8 +1210,9 @@
 
         const langLabels = { ko: '한국어', en: 'English', ja: '日本語' };
 
-        function setLang(lang) {
+        function setLang(lang, save) {
             currentLang = lang;
+            if (save !== false) localStorage.setItem('contrl-lang', lang);
             document.getElementById('langLabel').textContent = langLabels[lang];
 
             document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -1289,7 +1293,18 @@
         if (currentLang !== 'ko') {
             const detectedLang = currentLang;
             currentLang = 'ko';
-            setLang(detectedLang);
+            setLang(detectedLang, false);
+        }
+
+        // IP-based geo detection: if no saved preference and browser lang is not ja,
+        // check if user is in Japan and switch to Japanese
+        if (!savedLang && browserLang !== 'ja') {
+            fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(3000) })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.country_code === 'JP') setLang('ja');
+                })
+                .catch(() => {});
         }
     </script>
 
