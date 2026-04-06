@@ -138,14 +138,14 @@
 </head>
 <body>
     <main>
-        <p class="eyebrow">contrl downloads</p>
-        <h1>Your download is starting</h1>
-        <p>If it does not begin in a moment, use the button below.</p>
+        <p id="eyebrow" class="eyebrow">contrl downloads</p>
+        <h1 id="heading">Your download is starting</h1>
+        <p id="subtitle">If it does not begin in a moment, use the button below.</p>
 
         <div class="video-section">
-            <p class="video-label">Contrl Introduction</p>
+            <p id="video-label" class="video-label">Contrl Introduction</p>
             <div class="video-wrapper">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/KEXUX8sRdcc?si=YbCDPkuEXps_D4KO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe id="intro-video" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </div>
 
@@ -154,6 +154,55 @@
         </div>
     </main>
 
+    <script>
+        (function () {
+            var lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+
+            var i18n = {
+                ko: {
+                    title: 'contrl for Windows',
+                    eyebrow: 'contrl 다운로드',
+                    heading: '다운로드가 시작됩니다',
+                    subtitle: '잠시 후에도 시작되지 않으면 아래 버튼을 눌러주세요.',
+                    videoLabel: 'Contrl 소개 영상',
+                    button: 'Windows용 다운로드',
+                    videoId: 'KEXUX8sRdcc'
+                },
+                ja: {
+                    title: 'contrl for Windows',
+                    eyebrow: 'contrl ダウンロード',
+                    heading: 'ダウンロードを開始します',
+                    subtitle: 'しばらくしても始まらない場合は、下のボタンをクリックしてください。',
+                    videoLabel: 'Contrl 紹介動画',
+                    button: 'Windows版ダウンロード',
+                    videoId: 'cQxsMv2b7pc'
+                },
+                en: {
+                    title: 'contrl for Windows',
+                    eyebrow: 'contrl downloads',
+                    heading: 'Your download is starting',
+                    subtitle: 'If it does not begin in a moment, use the button below.',
+                    videoLabel: 'Contrl Introduction',
+                    button: 'Download for Windows',
+                    videoId: 'vRkBkjtaEF0'
+                }
+            };
+
+            var t;
+            if (lang.startsWith('ko')) t = i18n.ko;
+            else if (lang.startsWith('ja')) t = i18n.ja;
+            else t = i18n.en;
+
+            document.title = t.title;
+            document.documentElement.lang = lang.startsWith('ko') ? 'ko' : lang.startsWith('ja') ? 'ja' : 'en';
+            document.getElementById('eyebrow').textContent = t.eyebrow;
+            document.getElementById('heading').textContent = t.heading;
+            document.getElementById('subtitle').textContent = t.subtitle;
+            document.getElementById('video-label').textContent = t.videoLabel;
+            document.getElementById('download-link').textContent = t.button;
+            document.getElementById('intro-video').src = 'https://www.youtube.com/embed/' + t.videoId;
+        }());
+    </script>
     <script>
         (function () {
             const localHosts = new Set(['localhost', '127.0.0.1', '[::1]']);
