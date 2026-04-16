@@ -493,14 +493,15 @@
             <div class="flex items-center gap-3">
                 <!-- Lang toggle -->
                 <div class="relative group">
-                    <button class="flex items-center justify-center rounded-full text-xs font-semibold h-7 px-2 hover:bg-zinc-100 transition-colors gap-1">
-                        <span id="langLabel" class="text-zinc-500 text-[11px] font-semibold">KO</span>
+                    <button class="flex items-center gap-1.5 rounded-full text-xs font-semibold h-7 px-2.5 hover:bg-zinc-100 transition-colors">
+                        <iconify-icon icon="solar:globe-linear" width="14" class="text-zinc-500"></iconify-icon>
+                        <span class="text-zinc-600 text-[12px] font-semibold">Change Region</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="10" class="text-zinc-400"></iconify-icon>
                     </button>
-                    <div class="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg border border-zinc-100 py-1 min-w-[44px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                        <button onclick="setLang('en')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">English</button>
-                        <button onclick="setLang('ko')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">한국어</button>
-                        <button onclick="setLang('ja')" class="block w-full px-3 py-1.5 text-[11px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">日本語</button>
+                    <div id="langDropdown" class="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg border border-zinc-100 py-1 min-w-[120px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <button onclick="setLang('en')" id="lang-en" class="flex items-center justify-between w-full px-3 py-1.5 text-[12px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">English <span class="lang-check hidden text-accent">✓</span></button>
+                        <button onclick="setLang('ko')" id="lang-ko" class="flex items-center justify-between w-full px-3 py-1.5 text-[12px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">한국어 <span class="lang-check hidden text-accent">✓</span></button>
+                        <button onclick="setLang('ja')" id="lang-ja" class="flex items-center justify-between w-full px-3 py-1.5 text-[12px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">日本語 <span class="lang-check hidden text-accent">✓</span></button>
                     </div>
                 </div>
                 </button>
@@ -1209,11 +1210,16 @@
         });
 
         const langLabels = { ko: '한국어', en: 'English', ja: '日本語' };
+        function updateLangCheck(lang) {
+            document.querySelectorAll('.lang-check').forEach(el => el.classList.add('hidden'));
+            const active = document.getElementById('lang-' + lang);
+            if (active) active.querySelector('.lang-check').classList.remove('hidden');
+        }
 
         function setLang(lang, save) {
             currentLang = lang;
             if (save !== false) localStorage.setItem('contrl-lang', lang);
-            document.getElementById('langLabel').textContent = langLabels[lang];
+            updateLangCheck(lang);
 
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -1289,7 +1295,7 @@
         }
 
         // Apply detected language on load
-        document.getElementById('langLabel').textContent = langLabels[currentLang];
+        updateLangCheck(currentLang);
         if (currentLang !== 'ko') {
             const detectedLang = currentLang;
             currentLang = 'ko';
