@@ -39,6 +39,17 @@
   .term .p{color:#b78f5e;user-select:none}
   .term .c{color:#8fd0a0}
   .term .dim{color:#9a8d7d}
+  .cmdRow{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:2px 0}
+  .cmdRow code{flex:1;min-width:0;overflow-x:auto;white-space:pre;font-family:inherit}
+  .dimRow{color:#9a8d7d;padding:2px 0}
+  .copyBtn{flex:none;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);color:#e8d9c2;
+    font-size:10.5px;font-weight:700;border-radius:6px;padding:3px 11px;cursor:pointer;
+    font-family:Pretendard,Inter,ui-sans-serif,system-ui,sans-serif;transition:all .12s ease}
+  .copyBtn:hover{background:rgba(255,255,255,.16)}
+  .copyBtn.done{color:#8fd0a0;border-color:rgba(143,208,160,.6)}
+  .updateBox{background:var(--accent-light);border:1px solid #ecc9ad;border-radius:10px;padding:14px 16px;margin-top:12px}
+  .updateBox h4{margin:0 0 6px;font-size:13.5px;font-weight:800;color:var(--accent)}
+  .updateBox p{margin:0 0 10px;font-size:12.5px;color:#3c352e;line-height:1.55}
   .note{font-size:12.5px;color:var(--muted);background:var(--soft);border-radius:9px;padding:10px 13px;margin-top:10px;line-height:1.55}
   .note b{color:var(--ink)}
   .tabbar{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;box-shadow:var(--shadow)}
@@ -3304,11 +3315,23 @@ document.querySelectorAll(&quot;.subtab&quot;).forEach(function(btn){
       <h3>Install the CONTRL plugin</h3>
       <p>Open Claude Code in any folder and run these two commands:</p>
       <div class="term"><div class="dots"><i></i><i></i><i></i></div>
-<span class="p">&gt;</span> <span class="c">/plugin marketplace add cliwant/contrl-harness</span><br>
-<span class="dim">  ✓ Marketplace "contrl-harness" added</span><br>
-<span class="p">&gt;</span> <span class="c">/plugin install contrl@contrl-harness</span><br>
-<span class="dim">  ✓ Plugin "contrl" installed — 9 skills registered</span></div>
-      <div class="note"><b>Updating later:</b> run <code class="inline">/plugin marketplace update contrl-harness</code> to pull the newest version.</div>
+<div class="cmdRow"><code><span class="p">&gt;</span> <span class="c">/plugin marketplace add cliwant/contrl-harness</span></code><button type="button" class="copyBtn" data-copy="/plugin marketplace add cliwant/contrl-harness">Copy</button></div>
+<div class="dimRow">  ✓ Marketplace &quot;contrl-harness&quot; added</div>
+<div class="cmdRow"><code><span class="p">&gt;</span> <span class="c">/plugin install contrl@contrl-harness</span></code><button type="button" class="copyBtn" data-copy="/plugin install contrl@contrl-harness">Copy</button></div>
+<div class="dimRow">  ✓ Plugin &quot;contrl&quot; installed</div></div>
+      <div class="updateBox">
+        <h4>⬆ GeBIZ Singapore skill update — required for now</h4>
+        <p>The GeBIZ Singapore skill ships on an update branch that is not yet in the main plugin release. After installing above, switch to the update once. First, in a terminal:</p>
+        <div class="term"><div class="dots"><i></i><i></i><i></i></div>
+<div class="cmdRow"><code><span class="p">$</span> <span class="c">git clone -b feat/gebiz-sg-to-main https://github.com/cliwant/contrl-harness.git ~/contrl-harness-sg</span></code><button type="button" class="copyBtn" data-copy="git clone -b feat/gebiz-sg-to-main https://github.com/cliwant/contrl-harness.git ~/contrl-harness-sg">Copy</button></div></div>
+        <p style="margin-top:10px">Then, inside Claude Code:</p>
+        <div class="term"><div class="dots"><i></i><i></i><i></i></div>
+<div class="cmdRow"><code><span class="p">&gt;</span> <span class="c">/plugin marketplace remove contrl-harness</span></code><button type="button" class="copyBtn" data-copy="/plugin marketplace remove contrl-harness">Copy</button></div>
+<div class="cmdRow"><code><span class="p">&gt;</span> <span class="c">/plugin marketplace add ~/contrl-harness-sg</span></code><button type="button" class="copyBtn" data-copy="/plugin marketplace add ~/contrl-harness-sg">Copy</button></div>
+<div class="cmdRow"><code><span class="p">&gt;</span> <span class="c">/plugin install contrl@contrl-harness</span></code><button type="button" class="copyBtn" data-copy="/plugin install contrl@contrl-harness">Copy</button></div>
+<div class="dimRow">  ✓ Plugin &quot;contrl&quot; installed — GeBIZ skill registered</div></div>
+        <p style="margin:10px 0 0">Once this update is folded into the main release, this step disappears — a plain <code class="inline">/plugin marketplace update contrl-harness</code> will be enough.</p>
+      </div>
     </div>
   </div>
 
@@ -3318,8 +3341,8 @@ document.querySelectorAll(&quot;.subtab&quot;).forEach(function(btn){
       <h3>Connect the Cliwant Global MCP</h3>
       <p>This connector gives Claude live access to the Singapore GeBIZ notice index (titles, agencies, closing dates, documents). Add it with the URL Cliwant provides:</p>
       <div class="term"><div class="dots"><i></i><i></i><i></i></div>
-<span class="p">$</span> <span class="c">claude mcp add global-cliwant --transport http &lt;connector-URL-from-Cliwant&gt;</span><br>
-<span class="dim">  ✓ MCP server "global-cliwant" connected</span></div>
+<div class="cmdRow"><code><span class="p">$</span> <span class="c">claude mcp add global-cliwant --transport http &lt;connector-URL-from-Cliwant&gt;</span></code><button type="button" class="copyBtn" data-copy="claude mcp add global-cliwant --transport http &lt;connector-URL-from-Cliwant&gt;">Copy</button></div>
+<div class="dimRow">  ✓ MCP server &quot;global-cliwant&quot; connected</div></div>
       <div class="note">Using the Claude desktop app or claude.ai? You can also add it under <b>Settings → Connectors → Add custom connector</b> with the same URL.</div>
     </div>
   </div>
@@ -3330,9 +3353,9 @@ document.querySelectorAll(&quot;.subtab&quot;).forEach(function(btn){
       <h3>Create a workspace folder and start</h3>
       <p>Make an empty folder for your bid work (one folder can hold many tender projects), open Claude Code there, and search for opportunities:</p>
       <div class="term"><div class="dots"><i></i><i></i><i></i></div>
-<span class="p">$</span> <span class="c">mkdir gebiz-bids &amp;&amp; cd gebiz-bids &amp;&amp; claude</span><br>
-<span class="p">&gt;</span> <span class="c">/contrl:gebiz find AI chatbot tenders closing this month</span><br>
-<span class="dim">  Searching Singapore GeBIZ via Cliwant… 6 notices found</span></div>
+<div class="cmdRow"><code><span class="p">$</span> <span class="c">mkdir gebiz-bids &amp;&amp; cd gebiz-bids &amp;&amp; claude</span></code><button type="button" class="copyBtn" data-copy="mkdir gebiz-bids &amp;&amp; cd gebiz-bids &amp;&amp; claude">Copy</button></div>
+<div class="cmdRow"><code><span class="p">&gt;</span> <span class="c">/contrl:gebiz find AI chatbot tenders closing this month</span></code><button type="button" class="copyBtn" data-copy="/contrl:gebiz find AI chatbot tenders closing this month">Copy</button></div>
+<div class="dimRow">  Searching Singapore GeBIZ via Cliwant… 6 notices found</div></div>
       <div class="note"><b>That's it.</b> CONTRL shows the matching notices, you pick one, and the pipeline takes over — creating <code class="inline">projects/&lt;tender-name&gt;/</code> with all analysis artifacts inside your folder.</div>
     </div>
   </div>
@@ -3404,6 +3427,26 @@ document.querySelectorAll(&quot;.subtab&quot;).forEach(function(btn){
       var frame = view.querySelector("iframe.panelFrame");
       if (frame && frame.contentWindow) {
         frame.contentWindow.postMessage({ __guide: "report" }, "*");
+      }
+    });
+  });
+  document.querySelectorAll(".copyBtn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var text = btn.dataset.copy;
+      function done() {
+        btn.textContent = "Copied!";
+        btn.classList.add("done");
+        setTimeout(function () { btn.textContent = "Copy"; btn.classList.remove("done"); }, 1600);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+      } else { fallback(); }
+      function fallback() {
+        var ta = document.createElement("textarea");
+        ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand("copy"); } catch (e) {}
+        ta.remove(); done();
       }
     });
   });
