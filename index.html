@@ -489,12 +489,12 @@
             /* 각 카드가 따로 둥실 떠다니며 살짝 기울어진다 */
             animation: cardDrift 7s ease-in-out infinite;
         }
-        .slide-track > .slide-card:nth-child(1) { --tilt: -2deg; animation-delay: 0s;    animation-duration: 7s; }
-        .slide-track > .slide-card:nth-child(2) { --tilt:  1.5deg; animation-delay: -2.3s; animation-duration: 8s; }
-        .slide-track > .slide-card:nth-child(3) { --tilt: -1deg; animation-delay: -4.1s; animation-duration: 6.5s; }
-        .slide-col-down .slide-track > .slide-card:nth-child(1) { --tilt:  2deg; }
-        .slide-col-down .slide-track > .slide-card:nth-child(2) { --tilt: -1.5deg; }
-        .slide-col-down .slide-track > .slide-card:nth-child(3) { --tilt:  1deg; }
+        .slide-track > .slide-card:nth-child(3n+1) { --tilt: -2deg; animation-delay: 0s;    animation-duration: 7s; }
+        .slide-track > .slide-card:nth-child(3n+2) { --tilt:  1.5deg; animation-delay: -2.3s; animation-duration: 8s; }
+        .slide-track > .slide-card:nth-child(3n) { --tilt: -1deg; animation-delay: -4.1s; animation-duration: 6.5s; }
+        .slide-col-down .slide-track > .slide-card:nth-child(3n+1) { --tilt:  2deg; }
+        .slide-col-down .slide-track > .slide-card:nth-child(3n+2) { --tilt: -1.5deg; }
+        .slide-col-down .slide-track > .slide-card:nth-child(3n) { --tilt:  1deg; }
         @keyframes cardDrift {
             0%, 100% { transform: translate(0, 0) rotate(var(--tilt, 0deg)); }
             33%      { transform: translate(6px, -8px) rotate(calc(var(--tilt, 0deg) + 1deg)); }
@@ -601,26 +601,40 @@
                     <div class="slide-river relative h-[440px] sm:h-[520px] lg:h-[600px] overflow-hidden" aria-label="Contrl로 만든 고객사 제안서 슬라이드 예시">
                         <div class="slide-col slide-col-up">
                             <div class="slide-track">
-                                <img src="/images/slides/logistics.jpg" alt="누리물류 스마트 물류센터 통합관제 플랫폼 구축 제안서 (가상 예시)" class="slide-card">
-                                <img src="/images/slides/library.jpg" alt="시민참여형 디지털 도서관 서비스 고도화 제안서 (가상 예시)" class="slide-card">
-                                <img src="/images/slides/coastal-rnd.jpg" alt="연안 환경 모니터링 R&amp;D 기획 연구 제안서 (가상 예시)" class="slide-card">
+                                <img src="/images/slides/trend.jpg" alt="2026 소비 트렌드 리포트 제안서 표지" class="slide-card">
+                                <img src="/images/slides/partner.jpg" alt="기업의 성장을 이끄는 전략 파트너 제안서 표지" class="slide-card">
+                                <img src="/images/slides/city.jpg" alt="지속 가능한 도시 인프라 구축 전략 제안서" class="slide-card">
+                                <img src="/images/slides/brand.jpg" alt="라이프스타일 브랜드 스토리 제안서" class="slide-card">
+                                <img src="/images/slides/energy.jpg" alt="깨끗한 에너지 지속 가능한 미래 제안서" class="slide-card">
+                                <img src="/images/slides/drone.jpg" alt="드론 기반 통합 관제 솔루션 제안서 표지" class="slide-card">
                             </div>
                             <div class="slide-track" aria-hidden="true">
-                                <img src="/images/slides/logistics.jpg" alt="" class="slide-card">
-                                <img src="/images/slides/library.jpg" alt="" class="slide-card">
-                                <img src="/images/slides/coastal-rnd.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/trend.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/partner.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/city.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/brand.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/energy.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/drone.jpg" alt="" class="slide-card">
                             </div>
                         </div>
                         <div class="slide-col slide-col-down">
                             <div class="slide-track">
-                                <img src="/images/slides/dataportal.jpg" alt="공공데이터 개방 포털 재구축 제안서 (가상 예시)" class="slide-card">
-                                <img src="/images/slides/startup.jpg" alt="첫 매출 챌린지 창업 액셀러레이팅 프로그램 제안서 (가상 예시)" class="slide-card">
-                                <img src="/images/slides/local-brand.jpg" alt="지역 소상공인 브랜딩 지원 사업 제안서 (가상 예시)" class="slide-card">
+                                <img src="/images/slides/safety.jpg" alt="현장 안전 종합 가이드 제안서" class="slide-card">
+                                <img src="/images/slides/public.jpg" alt="AI로 만드는 더 효율적인 공공서비스 제안서" class="slide-card">
+                                <img src="/images/slides/ops.jpg" alt="서비스 운영 현황 대시보드 슬라이드" class="slide-card">
+                                <img src="/images/slides/global.jpg" alt="글로벌 기술 플랫폼 제안서 표지" class="slide-card">
+                                <img src="/images/slides/space.jpg" alt="공간이 만드는 새로운 경험 제안서" class="slide-card">
+                                <img src="/images/slides/kpi.jpg" alt="주요 성과 한눈에 보기 실적 슬라이드" class="slide-card">
+                                <img src="/images/slides/consumer.jpg" alt="새로운 소비자의 등장 챕터 슬라이드" class="slide-card">
                             </div>
                             <div class="slide-track" aria-hidden="true">
-                                <img src="/images/slides/dataportal.jpg" alt="" class="slide-card">
-                                <img src="/images/slides/startup.jpg" alt="" class="slide-card">
-                                <img src="/images/slides/local-brand.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/safety.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/public.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/ops.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/global.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/space.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/kpi.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/consumer.jpg" alt="" class="slide-card">
                             </div>
                         </div>
                     </div>
@@ -740,20 +754,34 @@
             </div>
             <div class="reveal show-marquee" aria-label="Contrl로 만든 고객사 제안서 슬라이드 예시">
                 <div class="show-track">
-                    <img src="/images/slides/logistics.jpg" alt="누리물류 스마트 물류센터 통합관제 플랫폼 구축 제안서 (가상 예시)" loading="lazy" class="show-card">
-                    <img src="/images/slides/library.jpg" alt="시민참여형 디지털 도서관 서비스 고도화 제안서 (가상 예시)" loading="lazy" class="show-card">
-                    <img src="/images/slides/dataportal.jpg" alt="공공데이터 개방 포털 재구축 제안서 (가상 예시)" loading="lazy" class="show-card">
-                    <img src="/images/slides/coastal-rnd.jpg" alt="연안 환경 모니터링 R&amp;D 기획 연구 제안서 (가상 예시)" loading="lazy" class="show-card">
-                    <img src="/images/slides/startup.jpg" alt="첫 매출 챌린지 창업 액셀러레이팅 프로그램 제안서 (가상 예시)" loading="lazy" class="show-card">
-                    <img src="/images/slides/local-brand.jpg" alt="지역 소상공인 브랜딩 지원 사업 제안서 (가상 예시)" loading="lazy" class="show-card">
+                    <img src="/images/slides/trend.jpg" alt="2026 소비 트렌드 리포트 제안서 표지" loading="lazy" class="show-card">
+                    <img src="/images/slides/safety.jpg" alt="현장 안전 종합 가이드 제안서" loading="lazy" class="show-card">
+                    <img src="/images/slides/consumer.jpg" alt="새로운 소비자의 등장 챕터 슬라이드" loading="lazy" class="show-card">
+                    <img src="/images/slides/city.jpg" alt="지속 가능한 도시 인프라 구축 전략 제안서" loading="lazy" class="show-card">
+                    <img src="/images/slides/partner.jpg" alt="기업의 성장을 이끄는 전략 파트너 제안서 표지" loading="lazy" class="show-card">
+                    <img src="/images/slides/drone.jpg" alt="드론 기반 통합 관제 솔루션 제안서 표지" loading="lazy" class="show-card">
+                    <img src="/images/slides/kpi.jpg" alt="주요 성과 한눈에 보기 실적 슬라이드" loading="lazy" class="show-card">
+                    <img src="/images/slides/public.jpg" alt="AI로 만드는 더 효율적인 공공서비스 제안서" loading="lazy" class="show-card">
+                    <img src="/images/slides/ops.jpg" alt="서비스 운영 현황 대시보드 슬라이드" loading="lazy" class="show-card">
+                    <img src="/images/slides/brand.jpg" alt="라이프스타일 브랜드 스토리 제안서" loading="lazy" class="show-card">
+                    <img src="/images/slides/global.jpg" alt="글로벌 기술 플랫폼 제안서 표지" loading="lazy" class="show-card">
+                    <img src="/images/slides/energy.jpg" alt="깨끗한 에너지 지속 가능한 미래 제안서" loading="lazy" class="show-card">
+                    <img src="/images/slides/space.jpg" alt="공간이 만드는 새로운 경험 제안서" loading="lazy" class="show-card">
                 </div>
                 <div class="show-track" aria-hidden="true">
-                    <img src="/images/slides/logistics.jpg" alt="" loading="lazy" class="show-card">
-                    <img src="/images/slides/library.jpg" alt="" loading="lazy" class="show-card">
-                    <img src="/images/slides/dataportal.jpg" alt="" loading="lazy" class="show-card">
-                    <img src="/images/slides/coastal-rnd.jpg" alt="" loading="lazy" class="show-card">
-                    <img src="/images/slides/startup.jpg" alt="" loading="lazy" class="show-card">
-                    <img src="/images/slides/local-brand.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/trend.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/safety.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/consumer.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/city.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/partner.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/drone.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/kpi.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/public.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/ops.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/brand.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/global.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/energy.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/space.jpg" alt="" loading="lazy" class="show-card">
                 </div>
             </div>
         </div>
