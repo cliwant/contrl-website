@@ -468,6 +468,31 @@
             animation: float 4s ease-in-out infinite;
         }
 
+        /* Hero: 제안서 슬라이드가 두 줄로 흐르는 콜라주 (위로/아래로 무한 스크롤) */
+        .slide-river {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+            mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+        }
+        .slide-col { position: relative; overflow: hidden; }
+        .slide-col-down { margin-top: -140px; }
+        .slide-track { display: flex; flex-direction: column; gap: 1rem; padding-bottom: 1rem; }
+        .slide-col-up .slide-track { animation: slideUp 34s linear infinite; }
+        .slide-col-down .slide-track { animation: slideDown 40s linear infinite; }
+        .slide-river:hover .slide-track { animation-play-state: paused; }
+        .slide-card {
+            display: block; width: 100%; height: auto;
+            border-radius: 14px; background: #fff;
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 18px 40px -18px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.06);
+            transform: rotate(-2deg);
+        }
+        .slide-col-down .slide-card { transform: rotate(2deg); }
+        @keyframes slideUp   { from { transform: translateY(0); }     to { transform: translateY(-100%); } }
+        @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+        @media (prefers-reduced-motion: reduce) { .slide-track { animation: none !important; } }
         /* (flow diagram styles removed — now CSS-only horizontal steps) */
     </style>
 </head>
@@ -534,57 +559,51 @@
                         </a>
                     </div>
                 </div>
-                <!-- Right: Video + floating badges -->
+                <!-- Right: 움직이는 제안서 슬라이드 콜라주 (소개서 03쪽) -->
                 <div class="hero-enter hero-delay-2 relative">
                     <div class="absolute -inset-12 rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(242,122,46,0.15) 0%, rgba(242,122,46,0.05) 50%, transparent 70%); filter: blur(50px);"></div>
 
-                    <div class="relative rounded-3xl overflow-hidden bg-zinc-800 group" style="box-shadow: 0 25px 60px -15px rgba(0,0,0,0.15);">
-                        <div class="aspect-video relative">
-                            <video id="heroVideo" class="w-full h-full object-cover" poster="poster.jpg" preload="metadata" playsinline>
-                                <source src="demo.mp4" type="video/mp4">
-                            </video>
-                            <div class="absolute inset-0 z-10 cursor-pointer" onclick="vidTogglePlay()"></div>
-                            <div id="vidPlayIcon" class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-                                <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);">
-                                    <iconify-icon icon="solar:play-bold" width="28" class="text-white ml-1"></iconify-icon>
-                                </div>
+                    <div class="slide-river relative h-[440px] sm:h-[520px] lg:h-[600px] overflow-hidden" aria-label="Contrl로 만든 고객사 제안서 슬라이드 예시">
+                        <div class="slide-col slide-col-up">
+                            <div class="slide-track">
+                                <img src="/images/slides/kep.jpg" alt="한전형 AI 플랫폼 구축용역 제안서 - 전략 및 방법론" class="slide-card">
+                                <img src="/images/slides/edu.jpg" alt="정신건강전문가 긴급지원사업 사례관리시스템 기능개선 제안서" class="slide-card">
+                                <img src="/images/slides/rnd.jpg" alt="방산 모빌리티 분야 R&amp;D 사업 기획 연구 제안서" class="slide-card">
                             </div>
-                            <div id="vidPauseIcon" class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none hidden">
-                                <div class="w-16 h-16 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);">
-                                    <iconify-icon icon="solar:pause-bold" width="28" class="text-white"></iconify-icon>
-                                </div>
+                            <div class="slide-track" aria-hidden="true">
+                                <img src="/images/slides/kep.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/edu.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/rnd.jpg" alt="" class="slide-card">
                             </div>
-                            <div class="absolute bottom-0 left-0 right-0 z-30 px-3 pb-2 pt-6" style="background: linear-gradient(transparent, rgba(0,0,0,0.4));">
-                                <div class="flex items-center gap-2">
-                                    <span id="vidTime" class="text-white text-xs font-mono min-w-[70px]">0:00 / 0:00</span>
-                                    <div id="vidTimeline" class="flex-1 relative cursor-pointer group/bar py-2" onmousedown="vidStartSeek(event)" ontouchstart="vidStartSeek(event)">
-                                        <div class="h-1 bg-white/30 rounded-full relative">
-                                            <div id="vidProgress" class="h-full bg-white rounded-full pointer-events-none" style="width: 0%;"></div>
-                                        </div>
-                                        <div id="vidHandle" class="absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-white rounded-full shadow pointer-events-none opacity-0 group-hover/bar:opacity-100 transition-opacity" style="left: 0%;"></div>
-                                    </div>
-                                    <button onclick="vidToggleMute()" class="text-white/80 hover:text-white z-40">
-                                        <iconify-icon id="vidMuteIcon" icon="solar:volume-cross-bold" width="16"></iconify-icon>
-                                    </button>
-                                </div>
+                        </div>
+                        <div class="slide-col slide-col-down">
+                            <div class="slide-track">
+                                <img src="/images/slides/web.jpg" alt="공공기관 서비스 중심 홈페이지 재구축 용역 제안서" class="slide-card">
+                                <img src="/images/slides/chapter.jpg" alt="예비창업자 1만원 챌린지 프로그램 제안서" class="slide-card">
+                                <img src="/images/slides/incu.jpg" alt="인큐베이팅 · 크라우드 펀딩 · 브랜딩 전문가 제안서" class="slide-card">
+                            </div>
+                            <div class="slide-track" aria-hidden="true">
+                                <img src="/images/slides/web.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/chapter.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/incu.jpg" alt="" class="slide-card">
                             </div>
                         </div>
                     </div>
 
                     <!-- Floating badges -->
-                    <div class="hidden lg:flex absolute -left-16 top-1/3 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 0s;">
+                    <div class="hidden lg:flex absolute -left-16 top-1/3 z-20 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 0s;">
                         <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
                             <iconify-icon icon="solar:pen-new-square-bold-duotone" width="16" class="text-accent"></iconify-icon>
                         </div>
                         <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-format">사람이 정하는 스토리</span>
                     </div>
-                    <div class="hidden lg:flex absolute right-12 -top-8 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 0.5s;">
+                    <div class="hidden lg:flex absolute right-12 -top-8 z-20 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 0.5s;">
                         <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
                             <iconify-icon icon="solar:pallete-2-bold-duotone" width="16" class="text-accent"></iconify-icon>
                         </div>
                         <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-hallu">고객사 디자인 시스템 그대로</span>
                     </div>
-                    <div class="hidden lg:flex absolute right-6 -bottom-8 z-30 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 1s;">
+                    <div class="hidden lg:flex absolute right-6 -bottom-8 z-20 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 1s;">
                         <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
                             <iconify-icon icon="solar:microphone-3-bold-duotone" width="16" class="text-emerald-500"></iconify-icon>
                         </div>
@@ -999,89 +1018,6 @@
                 answer.style.maxHeight = answer.scrollHeight + 'px';
                 chevron.style.transform = 'rotate(180deg)';
             }
-        }
-
-        // Local Video Player
-        var vid = document.getElementById('heroVideo');
-        var vidIsSeeking = false;
-
-        vid.addEventListener('play', function() {
-            document.getElementById('vidPlayIcon').classList.add('hidden');
-            document.getElementById('vidPauseIcon').classList.remove('hidden');
-        });
-        vid.addEventListener('pause', function() {
-            document.getElementById('vidPlayIcon').classList.remove('hidden');
-            document.getElementById('vidPauseIcon').classList.add('hidden');
-        });
-        vid.addEventListener('timeupdate', function() {
-            if (vidIsSeeking) return;
-            var cur = vid.currentTime;
-            var dur = vid.duration || 0;
-            if (dur > 0) {
-                var pct = (cur / dur) * 100;
-                document.getElementById('vidProgress').style.width = pct + '%';
-                document.getElementById('vidHandle').style.left = pct + '%';
-                document.getElementById('vidTime').textContent = vidFormatTime(cur) + ' / ' + vidFormatTime(dur);
-            }
-        });
-        vid.addEventListener('volumechange', function() {
-            var icon = document.getElementById('vidMuteIcon');
-            if (vid.muted || vid.volume === 0) {
-                icon.setAttribute('icon', 'solar:volume-cross-bold');
-            } else {
-                icon.setAttribute('icon', 'solar:volume-loud-bold');
-            }
-        });
-
-        function vidTogglePlay() {
-            if (vid.paused) {
-                vid.play();
-            } else {
-                vid.pause();
-            }
-        }
-
-        function vidToggleMute() {
-            vid.muted = !vid.muted;
-        }
-
-        function vidFormatTime(s) {
-            var m = Math.floor(s / 60);
-            var sec = Math.floor(s % 60);
-            return m + ':' + (sec < 10 ? '0' : '') + sec;
-        }
-
-        function vidStartSeek(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            vidIsSeeking = true;
-            var bar = document.getElementById('vidTimeline');
-            function doSeek(clientX) {
-                var rect = bar.getBoundingClientRect();
-                var pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-                var dur = vid.duration || 0;
-                vid.currentTime = pct * dur;
-                document.getElementById('vidProgress').style.width = (pct * 100) + '%';
-                document.getElementById('vidHandle').style.left = (pct * 100) + '%';
-            }
-            var clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            doSeek(clientX);
-            function onMove(ev) {
-                ev.preventDefault();
-                var x = ev.touches ? ev.touches[0].clientX : ev.clientX;
-                doSeek(x);
-            }
-            function onUp() {
-                document.removeEventListener('mousemove', onMove);
-                document.removeEventListener('mouseup', onUp, true);
-                document.removeEventListener('touchmove', onMove);
-                document.removeEventListener('touchend', onUp, true);
-                setTimeout(function() { vidIsSeeking = false; }, 100);
-            }
-            document.addEventListener('mousemove', onMove);
-            document.addEventListener('mouseup', onUp, true);
-            document.addEventListener('touchmove', onMove, { passive: false });
-            document.addEventListener('touchend', onUp, true);
         }
 
         // i18n
@@ -1690,18 +1626,6 @@
 
     <!-- AEO: Media metadata (images + video structured data for rich AI context) -->
     <div style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;" aria-hidden="true">
-        <div itemscope itemtype="https://schema.org/VideoObject">
-            <meta itemprop="name" content="contrl Demo — AI Proposal Generation from PPT Template">
-            <meta itemprop="description" content="Watch how contrl generates a submission-ready proposal draft from a company PPT template and RFP document. The demo shows: RFP upload and analysis, win theme extraction, slide outline review, and final PPTX generation — all preserving the original template formatting.">
-            <meta itemprop="thumbnailUrl" content="https://contrl.ai/poster.jpg">
-            <meta itemprop="contentUrl" content="https://contrl.ai/demo.mp4">
-            <meta itemprop="uploadDate" content="2026-03-20">
-            <meta itemprop="duration" content="PT1M">
-            <meta itemprop="encodingFormat" content="video/mp4">
-            <span itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-                <meta itemprop="name" content="Cliwant Inc.">
-                <meta itemprop="url" content="https://contrl.ai">
-            </span>
         </div>
         <div itemscope itemtype="https://schema.org/ImageObject">
             <meta itemprop="name" content="contrl RFP Analysis Screenshot — Key Financial Terms Extraction">

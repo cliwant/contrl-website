@@ -28,12 +28,6 @@
             <image:title>contrl 템플릿 업로드 - PPT 템플릿과 RFP 파일 업로드 화면</image:title>
             <image:caption>contrl template upload interface - Upload your company PPT template and RFP document to start AI proposal generation</image:caption>
         </image:image>
-        <video:video>
-            <video:thumbnail_loc>https://contrl.ai/poster.jpg</video:thumbnail_loc>
-            <video:title>contrl AI 제안서 자동 작성 데모 - AI Proposal Writing Demo</video:title>
-            <video:description>contrl 플랫폼 데모 영상. PPT 템플릿과 RFP를 업로드하면 AI가 Win Theme을 분석하고 제출 가능한 제안서 초안을 자동 생성합니다. Demo of contrl AI proposal writing platform showing end-to-end proposal generation from RFP analysis to PowerPoint output.</video:description>
-            <video:content_loc>https://contrl.ai/demo.mp4</video:content_loc>
-        </video:video>
     </url>
     <url>
         <loc>https://contrl.ai/#features</loc>
