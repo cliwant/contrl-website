@@ -12,7 +12,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>contrl — AI Win Theme Editor</title>
+    <title>contrl — 우리 회사 팀장님이 쓴 것 같은 AI 제안서</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://contrl.ai/">
     <link rel="alternate" type="text/plain" href="https://contrl.ai/llms.txt" title="LLM-readable documentation">
@@ -32,8 +32,8 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="contrl">
-    <meta property="og:title" content="contrl — AI Proposal & Document Automation Platform">
-    <meta property="og:description" content="Generate submission-ready proposal drafts from your own PPT templates. AI-powered RFP analysis, win theme extraction, and format-preserving document generation. Your proposal files never leave your machine.">
+    <meta property="og:title" content="contrl — 우리 회사 팀장님이 쓴 것 같은 AI 제안서">
+    <meta property="og:description" content="스토리는 사람이 만들고, AI는 그 뼈대에 재료와 살을 붙입니다. 고객사의 디자인 시스템으로, 사람이 직접 작성한 스토리 전개로. 무료 PoC로 품질을 먼저 확인하세요.">
     <meta property="og:url" content="https://contrl.ai/">
     <meta property="og:image" content="https://contrl.ai/og-image.png">
     <meta property="og:locale" content="ko_KR">
@@ -42,8 +42,8 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="contrl — AI Proposal & Document Automation">
-    <meta name="twitter:description" content="Your PPT template + RFP = submission-ready proposal draft. AI-powered, format-preserving. Your proposal files stay protected.">
+    <meta name="twitter:title" content="contrl — 우리 회사 팀장님이 쓴 것 같은 AI 제안서">
+    <meta name="twitter:description" content="스토리는 사람이, 재료와 살은 AI가. 고객사 디자인 시스템 그대로 나오는 제안서. 무료 PoC로 품질을 먼저 확인하세요.">
     <meta name="twitter:image" content="https://contrl.ai/og-image.png">
 
     <!-- Schema.org JSON-LD: Organization (E-E-A-T enhanced) -->
@@ -476,8 +476,8 @@
 
     <!-- TOP BANNER -->
     <div class="fixed top-0 left-0 right-0 z-50 bg-[#524438] text-white text-center py-2.5 text-sm font-medium">
-        <span data-i18n-html="banner"><span class="font-extrabold tracking-tight">오픈 전, 자사에 맞춤화된 Contrl을 경험해보세요</span></span>
-        <a href="https://tally.so/r/VL4JJv" data-tally-link target="_blank" class="ml-2.5 inline-flex items-center gap-1 bg-white text-[#524438] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-white/90 transition-colors" data-i18n="banner-cta">지금 시작하기 →</a>
+        <span data-i18n-html="banner"><span class="font-extrabold tracking-tight">무료 PoC · 지금 진행하는 제안서를 만들어 드립니다</span></span>
+        <a href="https://tally.so/r/VL4JJv" data-tally-link target="_blank" class="ml-2.5 inline-flex items-center gap-1 bg-white text-[#524438] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-white/90 transition-colors" data-i18n="banner-cta">무료 PoC 신청 →</a>
     </div>
 
     <!-- NAV -->
@@ -485,8 +485,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="#" class="text-xl font-bold tracking-tight">contrl<span class="text-accent">.</span></a>
             <div class="hidden md:flex items-center gap-8">
-                <a href="#features" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-features">Features</a>
-                <a href="#why" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-why">Why contrl</a>
+                <a href="#how" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-features">작동 방식</a>
+                <a href="#case" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-why">도입 사례</a>
                 <a href="#faq" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav-faq">FAQ</a>
                 <a id="blog-link" href="https://blog.cliwant.com/" target="_blank" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">Blog</a>
             </div>
@@ -504,65 +504,56 @@
                         <button onclick="setLang('ja')" id="lang-ja" class="flex items-center justify-between w-full px-3 py-1.5 text-[12px] font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-colors">日本語 <span class="lang-check hidden text-accent">✓</span></button>
                     </div>
                 </div>
-                </button>
             </div>
         </div>
     </nav>
 
     <!-- 1. HERO -->
     <section class="min-h-[100dvh] pt-[96px] bg-[#f9f6f2] flex items-center relative overflow-x-clip overflow-y-visible">
-        <!-- 은은한 오렌지 그라데이션 (Glance 스타일) -->
         <div class="absolute top-[10%] right-[5%] w-[800px] h-[800px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(242,122,46,0.12) 0%, rgba(242,122,46,0.06) 40%, transparent 70%); filter: blur(60px);"></div>
         <div class="absolute bottom-[15%] right-[15%] w-[500px] h-[500px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(242,122,46,0.08) 0%, transparent 60%); filter: blur(80px);"></div>
-
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 lg:py-0 relative">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <!-- Left: Text -->
                 <div>
-                    <p class="hero-enter hero-delay-1 text-sm md:text-base font-semibold text-accent tracking-wide uppercase mb-4" data-i18n="hero-label">AI Win Theme Editor</p>
+                    <p class="hero-enter hero-delay-1 text-sm md:text-base font-semibold text-accent tracking-wide uppercase mb-4" data-i18n="hero-label">AI 제안서 작성 · CONTRL</p>
                     <h1 class="hero-enter hero-delay-1 text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-zinc-900 mb-8" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif; line-height: 1.35;" data-i18n-html="hero-title">
-                        이기는 전략이,<br>제안서 끝까지 이어집니다.
+                        “우리 회사 팀장님이 쓴 것 같은<br>제안서를 만들고 싶었습니다.”
                     </h1>
                     <p class="hero-enter hero-delay-2 text-base md:text-lg text-zinc-500 leading-relaxed max-w-md mb-10" data-i18n-html="hero-sub">
-                        고객 니즈와 우리 강점을 연결한 전략이, 제안서 마지막 Slide까지 관통합니다.
+                        스토리는 사람이 만들고, AI는 그 뼈대에 재료와 살을 붙입니다.<br>고객사의 디자인 시스템으로, 사람이 직접 작성한 스토리 전개로.
                     </p>
                     <div class="hero-enter hero-delay-3 flex flex-wrap items-center gap-4">
                         <a href="https://tally.so/r/VL4JJv" data-tally-link target="_blank" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-7 py-3.5 rounded-full text-base">
-                            <span data-i18n="hero-cta">POC 신청</span>
+                            <span data-i18n="hero-cta">무료 PoC 신청</span>
                             <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
                         </a>
-                        <a href="#features" class="inline-flex items-center gap-2 border border-zinc-200 text-zinc-700 font-semibold px-7 py-3.5 rounded-full text-base hover:border-zinc-300 transition-colors">
-                            <span data-i18n="hero-cta2">See How It Works</span>
+                        <a href="#how" class="inline-flex items-center gap-2 border border-zinc-200 text-zinc-700 font-semibold px-7 py-3.5 rounded-full text-base hover:border-zinc-300 transition-colors">
+                            <span data-i18n="hero-cta2">작동 방식 보기</span>
                         </a>
                     </div>
                 </div>
                 <!-- Right: Video + floating badges -->
                 <div class="hero-enter hero-delay-2 relative">
-                    <!-- Warm glow behind video -->
                     <div class="absolute -inset-12 rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(242,122,46,0.15) 0%, rgba(242,122,46,0.05) 50%, transparent 70%); filter: blur(50px);"></div>
 
-                    <!-- Video (Local) -->
                     <div class="relative rounded-3xl overflow-hidden bg-zinc-800 group" style="box-shadow: 0 25px 60px -15px rgba(0,0,0,0.15);">
                         <div class="aspect-video relative">
                             <video id="heroVideo" class="w-full h-full object-cover" poster="poster.jpg" preload="metadata" playsinline>
                                 <source src="demo.mp4" type="video/mp4">
                             </video>
-                            <!-- Click overlay for play/pause -->
                             <div class="absolute inset-0 z-10 cursor-pointer" onclick="vidTogglePlay()"></div>
-                            <!-- Play icon (shown when paused) -->
                             <div id="vidPlayIcon" class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
                                 <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);">
                                     <iconify-icon icon="solar:play-bold" width="28" class="text-white ml-1"></iconify-icon>
                                 </div>
                             </div>
-                            <!-- Pause icon (shown on hover when playing) -->
                             <div id="vidPauseIcon" class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none hidden">
                                 <div class="w-16 h-16 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);">
                                     <iconify-icon icon="solar:pause-bold" width="28" class="text-white"></iconify-icon>
                                 </div>
                             </div>
-                            <!-- Custom controls bar -->
                             <div class="absolute bottom-0 left-0 right-0 z-30 px-3 pb-2 pt-6" style="background: linear-gradient(transparent, rgba(0,0,0,0.4));">
                                 <div class="flex items-center gap-2">
                                     <span id="vidTime" class="text-white text-xs font-mono min-w-[70px]">0:00 / 0:00</span>
@@ -580,455 +571,284 @@
                         </div>
                     </div>
 
-
                     <!-- Floating badges -->
-                    <!-- 왼쪽: 이기는 전략 설계 -->
                     <div class="hidden lg:flex absolute -left-16 top-1/3 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 0s;">
                         <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
-                            <iconify-icon icon="solar:document-bold-duotone" width="16" class="text-accent"></iconify-icon>
+                            <iconify-icon icon="solar:pen-new-square-bold-duotone" width="16" class="text-accent"></iconify-icon>
                         </div>
-                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-format">이기는 전략 설계</span>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-format">사람이 정하는 스토리</span>
                     </div>
-
-                    <!-- 오른쪽 위: RFP → Slide 관통 -->
                     <div class="hidden lg:flex absolute right-12 -top-8 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 0.5s;">
                         <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
-                            <iconify-icon icon="solar:routing-bold-duotone" width="16" class="text-accent"></iconify-icon>
+                            <iconify-icon icon="solar:pallete-2-bold-duotone" width="16" class="text-accent"></iconify-icon>
                         </div>
-                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-hallu">RFP → Slide 관통</span>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-hallu">고객사 디자인 시스템 그대로</span>
                     </div>
-
-                    <!-- 오른쪽 아래: 자사 제안서 보호 -->
                     <div class="hidden lg:flex absolute right-6 -bottom-8 z-30 items-center gap-2 bg-white rounded-full px-4 py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] badge-float" style="animation-delay: 1s;">
                         <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
-                            <iconify-icon icon="solar:shield-check-bold-duotone" width="16" class="text-emerald-500"></iconify-icon>
+                            <iconify-icon icon="solar:microphone-3-bold-duotone" width="16" class="text-emerald-500"></iconify-icon>
                         </div>
-                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-local">자사 제안서 보호</span>
+                        <span class="text-sm font-semibold text-zinc-700 whitespace-nowrap" data-i18n="badge-local">발표 스크립트까지 함께</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 1.5 HOT BUTTON — 페인포인트 -->
-    <section class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-zinc-900 relative overflow-hidden" aria-label="입찰 제안서 작성의 어려움 - 고객 페인포인트">
-        <!-- Background gradient -->
+    <!-- 2. VOICES — 현장에서 가장 많이 듣는 말 + 딸깍 그 다음 -->
+    <section class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-zinc-900 relative overflow-hidden" aria-label="입찰 제안서 작성의 어려움 - 현장의 목소리와 범용 AI의 한계">
         <div class="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none opacity-30" style="background: radial-gradient(circle, rgba(242,122,46,0.25) 0%, transparent 70%); filter: blur(80px);"></div>
         <div class="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none opacity-20" style="background: radial-gradient(circle, rgba(242,122,46,0.2) 0%, transparent 70%); filter: blur(80px);"></div>
 
         <div class="max-w-7xl mx-auto relative">
-            <div class="reveal text-center mb-16">
+            <div class="reveal text-center mb-14">
                 <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6">
-                    <iconify-icon icon="solar:danger-triangle-bold-duotone" width="16" class="text-accent"></iconify-icon>
-                    <span class="text-xs font-semibold text-white/70 tracking-wide uppercase" data-i18n="hot-label">Pain Point</span>
+                    <iconify-icon icon="solar:chat-round-dots-bold-duotone" width="16" class="text-accent"></iconify-icon>
+                    <span class="text-xs font-semibold text-white/70 tracking-wide" data-i18n="hot-label">현장에서 가장 많이 듣는 말</span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="hot-title">제안서 때문에,<br>매출의 상방이 막혀 있지 않나요?</h2>
-                <p class="text-base md:text-lg text-white/50 leading-relaxed max-w-xl mx-auto" data-i18n="hot-sub">입찰 기회는 매일 쏟아지지만, 모두가 같은 벽에 부딪힙니다.</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="hot-title">“저는 왜 AI를 써도<br>제안서가 어렵죠?”</h2>
             </div>
 
-            <div class="reveal grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                <!-- 회사/리더 카드 -->
-                <div class="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-10 hover:border-white/20 transition-colors">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-11 h-11 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center">
-                            <iconify-icon icon="solar:buildings-3-bold-duotone" width="22" class="text-accent"></iconify-icon>
-                        </div>
-                        <div>
-                            <p class="text-xs font-semibold text-accent uppercase tracking-wide" data-i18n="hot-role1">For Leaders</p>
-                            <h3 class="text-lg font-bold text-white" data-i18n="hot-title1">회사 / 대표 입장</h3>
-                        </div>
-                    </div>
-                    <p class="text-base text-white/80 font-semibold mb-5 leading-snug" data-i18n="hot-quote1">"할 수 있는 입찰은 더 많이 보이는데…"</p>
-                    <ul class="space-y-3 mb-6">
-                        <li class="flex items-start gap-2.5 text-sm text-white/60 leading-relaxed">
-                            <iconify-icon icon="solar:close-circle-bold" width="16" class="text-red-400 mt-0.5 flex-shrink-0"></iconify-icon>
-                            <span data-i18n="hot-item1-1">제안서를 잘 쓸 수 있는 사람이 부족하다</span>
-                        </li>
-                        <li class="flex items-start gap-2.5 text-sm text-white/60 leading-relaxed">
-                            <iconify-icon icon="solar:close-circle-bold" width="16" class="text-red-400 mt-0.5 flex-shrink-0"></iconify-icon>
-                            <span data-i18n="hot-item1-2">경력직 비중이 낮다</span>
-                        </li>
-                        <li class="flex items-start gap-2.5 text-sm text-white/60 leading-relaxed">
-                            <iconify-icon icon="solar:close-circle-bold" width="16" class="text-red-400 mt-0.5 flex-shrink-0"></iconify-icon>
-                            <span data-i18n="hot-item1-3">기존 프로젝트로 이미 인원이 모자라다</span>
-                        </li>
-                        <li class="flex items-start gap-2.5 text-sm text-white/60 leading-relaxed">
-                            <iconify-icon icon="solar:close-circle-bold" width="16" class="text-red-400 mt-0.5 flex-shrink-0"></iconify-icon>
-                            <span data-i18n="hot-item1-4">제안서를 써본 경험이 부족한 멤버가 많다</span>
-                        </li>
-                    </ul>
-                    <div class="pt-5 border-t border-white/10">
-                        <p class="text-sm font-bold text-accent" data-i18n="hot-result1">→ 입찰 참여를 못 하고, 매출의 상방이 막힌다</p>
-                    </div>
-                </div>
-
-                <!-- 실무자 카드 -->
-                <div class="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-10 hover:border-white/20 transition-colors">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-11 h-11 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center">
-                            <iconify-icon icon="solar:user-id-bold-duotone" width="22" class="text-accent"></iconify-icon>
-                        </div>
-                        <div>
-                            <p class="text-xs font-semibold text-accent uppercase tracking-wide" data-i18n="hot-role2">For Practitioners</p>
-                            <h3 class="text-lg font-bold text-white" data-i18n="hot-title2">실무자 입장</h3>
-                        </div>
-                    </div>
-                    <p class="text-base text-white/80 font-semibold mb-5 leading-snug" data-i18n="hot-quote2">"제안서, 진짜 하기 싫은 일이에요."</p>
-                    <ul class="space-y-3 mb-6">
-                        <li class="flex items-start gap-2.5 text-sm text-white/60 leading-relaxed">
-                            <iconify-icon icon="solar:close-circle-bold" width="16" class="text-red-400 mt-0.5 flex-shrink-0"></iconify-icon>
-                            <span data-i18n="hot-item2-1">복잡하고, 시간이 너무 많이 든다</span>
-                        </li>
-                        <li class="flex items-start gap-2.5 text-sm text-white/60 leading-relaxed">
-                            <iconify-icon icon="solar:close-circle-bold" width="16" class="text-red-400 mt-0.5 flex-shrink-0"></iconify-icon>
-                            <span data-i18n="hot-item2-2">가치 있는 일이라고 느껴지지 않는다</span>
-                        </li>
-                        <li class="flex items-start gap-2.5 text-sm text-white/60 leading-relaxed">
-                            <iconify-icon icon="solar:close-circle-bold" width="16" class="text-red-400 mt-0.5 flex-shrink-0"></iconify-icon>
-                            <span data-i18n="hot-item2-3">어떻게 시작해야 할지 답이 없다</span>
-                        </li>
-                        <li class="flex items-start gap-2.5 text-sm text-white/60 leading-relaxed">
-                            <iconify-icon icon="solar:close-circle-bold" width="16" class="text-red-400 mt-0.5 flex-shrink-0"></iconify-icon>
-                            <span data-i18n="hot-item2-4">누가 대신 해줬으면 좋겠다는 생각</span>
-                        </li>
-                    </ul>
-                    <div class="pt-5 border-t border-white/10">
-                        <p class="text-sm font-bold text-accent" data-i18n="hot-result2">→ 본능적으로 회피하게 되는 업무가 된다</p>
-                    </div>
-                </div>
+            <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-5 stagger mb-24">
+                <figure class="reveal bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl p-7 hover:border-white/20 transition-colors">
+                    <iconify-icon icon="solar:quote-up-square-bold-duotone" width="24" class="text-accent mb-4"></iconify-icon>
+                    <blockquote class="text-base text-white/85 font-semibold leading-relaxed" data-i18n="voice1">“GPT로 돌려 봤죠. 근데 발표에 들고 갈 내용이 아니에요.”</blockquote>
+                    <figcaption class="mt-5 text-xs text-white/40" data-i18n="voice1-who">리서치 기업 제안팀장</figcaption>
+                </figure>
+                <figure class="reveal bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl p-7 hover:border-white/20 transition-colors">
+                    <iconify-icon icon="solar:quote-up-square-bold-duotone" width="24" class="text-accent mb-4"></iconify-icon>
+                    <blockquote class="text-base text-white/85 font-semibold leading-relaxed" data-i18n="voice2">“AI로 만든 건 검수하는 데에 시간이 더 걸려요.”</blockquote>
+                    <figcaption class="mt-5 text-xs text-white/40" data-i18n="voice2-who">교육 기관 팀장</figcaption>
+                </figure>
+                <figure class="reveal bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl p-7 hover:border-white/20 transition-colors">
+                    <iconify-icon icon="solar:quote-up-square-bold-duotone" width="24" class="text-accent mb-4"></iconify-icon>
+                    <blockquote class="text-base text-white/85 font-semibold leading-relaxed" data-i18n="voice3">“신입한테 맡기면, 결국 제가 다시 써요.”</blockquote>
+                    <figcaption class="mt-5 text-xs text-white/40" data-i18n="voice3-who">IT 기업 대표</figcaption>
+                </figure>
             </div>
 
-            <!-- Bridge to solution -->
-            <div class="reveal mt-12 text-center">
-                <p class="text-base md:text-lg text-white/70 leading-relaxed" data-i18n-html="hot-bridge">Contrl은 이 벽을 무너뜨리기 위해 만들어졌습니다.<br><span class="text-accent font-semibold">입찰 기회는 그대로, 작성 캐파는 무한대로.</span></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 2. FEATURES (작동 방식) — RFP → Win Theme → Storyline → Slide -->
-    <section id="features" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white" aria-label="contrl 핵심 기능 - AI 제안서 작성 핵심 기능 소개 Key Features of AI Proposal Writing Platform">
-        <div class="max-w-7xl mx-auto">
-            <div class="reveal mb-20 text-center">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="flow-title">How It Works</h2>
-                <p class="text-base text-zinc-500 leading-relaxed max-w-lg mx-auto" data-i18n="flow-sub">하나의 전략이 끊어지지 않고, 마지막 Slide까지 관통합니다.</p>
-            </div>
-            <!-- 4-step horizontal flow -->
-            <div class="reveal relative">
-                <!-- Horizontal connecting line (desktop) -->
-                <div class="hidden md:block absolute top-[24px] left-[12.5%] right-[12.5%] h-0.5 z-0" style="background: linear-gradient(90deg, rgba(242,122,46,0.15), rgba(242,122,46,0.6), rgba(242,122,46,0.6), rgba(242,122,46,0.15));"></div>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-5 stagger">
-                    <!-- Step 1: RFP -->
-                    <div class="reveal flex flex-col items-center">
-                        <div class="w-12 h-12 rounded-full bg-white border-2 border-accent flex items-center justify-center mb-5 relative z-10 shadow-sm">
-                            <span class="text-accent font-bold text-sm">01</span>
-                        </div>
-                        <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] text-center w-full min-h-[180px] flex flex-col items-center justify-center">
-                            <iconify-icon icon="solar:document-text-bold-duotone" width="28" class="text-accent mb-3"></iconify-icon>
-                            <h4 class="font-bold text-lg mb-2" data-i18n="flow-s1-title">RFP 분석</h4>
-                            <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-s1-desc">고객의 핵심 니즈와 요구사항을 파악합니다.</p>
-                        </div>
-                    </div>
-                    <!-- Step 2: Win Theme -->
-                    <div class="reveal flex flex-col items-center">
-                        <div class="w-12 h-12 rounded-full bg-white border-2 border-accent flex items-center justify-center mb-5 relative z-10 shadow-sm">
-                            <span class="text-accent font-bold text-sm">02</span>
-                        </div>
-                        <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] text-center w-full min-h-[180px] flex flex-col items-center justify-center">
-                            <iconify-icon icon="solar:target-bold-duotone" width="28" class="text-accent mb-3"></iconify-icon>
-                            <h4 class="font-bold text-lg mb-2" data-i18n="flow-s2-title">Win Theme</h4>
-                            <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-s2-desc">고객 니즈와 우리 강점을 연결해 이기는 전략을 설계합니다.</p>
-                        </div>
-                    </div>
-                    <!-- Step 3: Storyline -->
-                    <div class="reveal flex flex-col items-center">
-                        <div class="w-12 h-12 rounded-full bg-white border-2 border-accent flex items-center justify-center mb-5 relative z-10 shadow-sm">
-                            <span class="text-accent font-bold text-sm">03</span>
-                        </div>
-                        <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] text-center w-full min-h-[180px] flex flex-col items-center justify-center">
-                            <iconify-icon icon="solar:routing-bold-duotone" width="28" class="text-accent mb-3"></iconify-icon>
-                            <h4 class="font-bold text-lg mb-2" data-i18n="flow-s3-title">Storyline</h4>
-                            <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-s3-desc">Win Theme이 모든 장표에 관통하는 스토리라인을 설계합니다.</p>
-                        </div>
-                    </div>
-                    <!-- Step 4: Slide -->
-                    <div class="reveal flex flex-col items-center">
-                        <div class="w-12 h-12 rounded-full bg-white border-2 border-accent flex items-center justify-center mb-5 relative z-10 shadow-sm">
-                            <span class="text-accent font-bold text-sm">04</span>
-                        </div>
-                        <div class="bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] text-center w-full min-h-[180px] flex flex-col items-center justify-center">
-                            <iconify-icon icon="solar:presentation-graph-bold-duotone" width="28" class="text-accent mb-3"></iconify-icon>
-                            <h4 class="font-bold text-lg mb-2" data-i18n="flow-s4-title">Slide</h4>
-                            <p class="text-sm text-zinc-500 leading-relaxed" data-i18n="flow-s4-desc">우리 회사 템플릿 그대로, 전략이 담긴 슬라이드를 생성합니다.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- "관통" badge -->
-                <div class="mt-10 text-center">
-                    <div class="inline-flex items-center gap-2 bg-accent/5 border border-accent/15 rounded-full px-6 py-2.5">
-                        <iconify-icon icon="solar:arrow-right-linear" width="16" class="text-accent"></iconify-icon>
-                        <span class="text-sm font-semibold text-accent" data-i18n="flow-through">하나의 전략이 끊어지지 않고 관통합니다</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 2.5 FEATURE SHOWCASE (zig-zag) -->
-    <section class="py-24 md:py-32 px-4 sm:px-6 lg:px-8" style="background-color: #FCFCFC;">
-        <div class="max-w-7xl mx-auto">
-            <div class="reveal mb-20 text-center">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="feat-title">Key Features</h2>
-                <p class="text-base text-zinc-500 leading-relaxed max-w-lg mx-auto" data-i18n="feat-sub">RFP에서 Slide까지, 이기는 전략을 관통시키는 핵심 기능입니다.</p>
-            </div>
-
-            <!-- Row 1: RFP 분석 — System Sync -->
-            <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20 lg:mb-28">
-                <div class="rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
-                    <img src="/images/feat1.png" alt="contrl AI 제안서 작성 플랫폼 - RFP 분석 화면에서 핵심 요건을 추출하고 Win Theme 차별화 전략을 자동 도출하는 모습. AI proposal writing platform analyzing RFP documents and extracting win themes automatically." class="w-full h-auto">
-                </div>
-                <div>
-                    <div class="inline-flex items-center gap-2 bg-accent/5 border border-accent/15 rounded-full px-3 py-1 mb-4">
-                        <span class="text-xs font-bold text-accent" data-i18n="feat1-step">STEP 01</span>
-                    </div>
-                    <div class="flex items-center gap-4 mb-3">
-                        <div class="w-12 h-12 rounded-xl border border-accent/20 flex items-center justify-center flex-shrink-0">
-                            <iconify-icon icon="solar:document-text-bold-duotone" width="24" class="text-accent"></iconify-icon>
-                        </div>
-                        <h3 class="text-2xl md:text-3xl font-bold tracking-tight whitespace-nowrap" data-i18n="feat1-title">RFP 분석</h3>
-                    </div>
-                    <p class="text-base text-zinc-500 leading-relaxed mb-6" data-i18n="feat1-lead">300장의 RFP를 한 줄 한 줄 읽지 않아도, 시스템과 대화하며 발주처의 진짜 니즈를 함께 파악합니다.</p>
-
-                    <!-- F/B/D Cards -->
-                    <div class="space-y-3">
-                        <div class="border border-zinc-100 rounded-xl p-4 bg-white">
-                            <div class="flex items-center gap-2 mb-1.5">
-                                <iconify-icon icon="solar:settings-bold-duotone" width="16" class="text-accent"></iconify-icon>
-                                <span class="text-xs font-bold text-accent uppercase tracking-wide" data-i18n="fbd-feature">Feature</span>
-                            </div>
-                            <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="feat1-f">RFP 문서 이면의 정보까지 함께 분석해 발주처의 진짜 요구사항을 이해합니다.</p>
-                        </div>
-                        <div class="border border-zinc-100 rounded-xl p-4 bg-white">
-                            <div class="flex items-center gap-2 mb-1.5">
-                                <iconify-icon icon="solar:star-bold-duotone" width="16" class="text-accent"></iconify-icon>
-                                <span class="text-xs font-bold text-accent uppercase tracking-wide" data-i18n="fbd-benefit">Benefit</span>
-                            </div>
-                            <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="feat1-b">눈이 빠져라 읽지 않아도 됩니다. 슥 훑어보고, 시스템 질문에 답만 하면 RFP가 이해됩니다.</p>
-                        </div>
-                        <div class="border border-accent/30 rounded-xl p-4 bg-orange-50/30">
-                            <div class="flex items-center gap-2 mb-1.5">
-                                <iconify-icon icon="solar:bolt-bold-duotone" width="16" class="text-accent"></iconify-icon>
-                                <span class="text-xs font-bold text-accent uppercase tracking-wide" data-i18n="fbd-diff">Differentiator</span>
-                            </div>
-                            <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="feat1-d">기존 AI는 "다 이해한 척"합니다. Contrl은 시스템의 이해도를 사용자와 <span class="font-bold">Sync</span>한 뒤에 제안서를 작성합니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Row 2: 제안 전략 구성 — APMP Win Theme -->
-            <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <!-- 딸깍, 그 다음에 벌어지는 일 -->
+            <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <div class="order-2 lg:order-1">
-                    <div class="inline-flex items-center gap-2 bg-accent/5 border border-accent/15 rounded-full px-3 py-1 mb-4">
-                        <span class="text-xs font-bold text-accent" data-i18n="feat2-step">STEP 02</span>
-                    </div>
-                    <div class="flex items-center gap-4 mb-3">
-                        <div class="w-12 h-12 rounded-xl border border-accent/20 flex items-center justify-center flex-shrink-0">
-                            <iconify-icon icon="solar:target-bold-duotone" width="24" class="text-accent"></iconify-icon>
-                        </div>
-                        <h3 class="text-2xl md:text-3xl font-bold tracking-tight whitespace-nowrap" data-i18n="feat2-title">제안 전략 구성</h3>
-                    </div>
-                    <p class="text-base text-zinc-500 leading-relaxed mb-4" data-i18n="feat2-lead">글로벌 표준 APMP 프레임워크에 기반해 "고객이 우리를 뽑아야 하는 이유(Win Theme)"를 정의하고, 슬라이드 단위로 명세합니다.</p>
-                    <!-- APMP Badge -->
-                    <div class="inline-flex items-center gap-2 bg-white border border-accent/20 rounded-full px-4 py-2 mb-6 shadow-sm">
-                        <iconify-icon icon="solar:diploma-verified-bold-duotone" width="18" class="text-accent"></iconify-icon>
-                        <span class="text-xs font-semibold text-zinc-700" data-i18n="feat2-badge">APMP 프레임워크 기반 · 글로벌 제안 표준 방법론</span>
-                    </div>
-
-                    <!-- F/B/D Cards -->
-                    <div class="space-y-3">
-                        <div class="border border-zinc-100 rounded-xl p-4 bg-white">
-                            <div class="flex items-center gap-2 mb-1.5">
-                                <iconify-icon icon="solar:settings-bold-duotone" width="16" class="text-accent"></iconify-icon>
-                                <span class="text-xs font-bold text-accent uppercase tracking-wide" data-i18n="fbd-feature-2">Feature</span>
-                            </div>
-                            <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="feat2-f">Hot Button · Feature · Benefit · Proof Point 구조로 Win Theme을 정의하고, 목차별 핵심 메시지(Theme Statement)를 Slide-by-Slide 명세합니다.</p>
-                        </div>
-                        <div class="border border-zinc-100 rounded-xl p-4 bg-white">
-                            <div class="flex items-center gap-2 mb-1.5">
-                                <iconify-icon icon="solar:star-bold-duotone" width="16" class="text-accent"></iconify-icon>
-                                <span class="text-xs font-bold text-accent uppercase tracking-wide" data-i18n="fbd-benefit-2">Benefit</span>
-                            </div>
-                            <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="feat2-b">베테랑만 가졌던 "이기는 제안 컨셉"을 누구나 가질 수 있습니다. 제안서 전반에 우리의 Positioning이 관통합니다.</p>
-                        </div>
-                        <div class="border border-accent/30 rounded-xl p-4 bg-orange-50/30">
-                            <div class="flex items-center gap-2 mb-1.5">
-                                <iconify-icon icon="solar:bolt-bold-duotone" width="16" class="text-accent"></iconify-icon>
-                                <span class="text-xs font-bold text-accent uppercase tracking-wide" data-i18n="fbd-diff-2">Differentiator</span>
-                            </div>
-                            <p class="text-sm text-zinc-700 leading-relaxed" data-i18n-html="feat2-d">GPT가 제멋대로 채우는 페이지를 Contrl은 <span class="font-bold">"설계"</span>해서 사용자가 의도한 그대로 슬라이드를 작성합니다.</p>
-                        </div>
-                    </div>
+                    <p class="text-xs font-semibold text-accent tracking-wide mb-3" data-i18n="click-label">✦ 딸깍, 그 다음에 벌어지는 일</p>
+                    <h3 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-8" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="click-title">쉬운 것 같지만 그렇지 않습니다</h3>
+                    <ol class="space-y-3">
+                        <li class="flex gap-4 bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4">
+                            <span class="text-sm font-bold text-accent pt-0.5 shrink-0">01</span>
+                            <div><p class="text-sm font-semibold text-white/90" data-i18n="click1-t">보기엔 그럴듯한데…</p><p class="text-sm text-white/50 mt-0.5" data-i18n="click1-d">화려한 PPT 페이지가 순식간에 나옵니다</p></div>
+                        </li>
+                        <li class="flex gap-4 bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4">
+                            <span class="text-sm font-bold text-accent pt-0.5 shrink-0">02</span>
+                            <div><p class="text-sm font-semibold text-white/90" data-i18n="click2-t">“우리가 하려던 얘기가 아닌데?”</p><p class="text-sm text-white/50 mt-0.5" data-i18n="click2-d">핵심을 벗어나 논리가 어긋납니다</p></div>
+                        </li>
+                        <li class="flex gap-4 bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4">
+                            <span class="text-sm font-bold text-accent pt-0.5 shrink-0">03</span>
+                            <div><p class="text-sm font-semibold text-white/90" data-i18n="click3-t">“그래서 어떻게, 얼마나요?”</p><p class="text-sm text-white/50 mt-0.5" data-i18n="click3-d">구체성 없이 다짐으로 끝납니다</p></div>
+                        </li>
+                        <li class="flex gap-4 bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4">
+                            <span class="text-sm font-bold text-accent pt-0.5 shrink-0">04</span>
+                            <div><p class="text-sm font-semibold text-white/90" data-i18n="click4-t">“이럴 거면 내가 쓰고 말지.”</p><p class="text-sm text-white/50 mt-0.5" data-i18n="click4-d">고치는 시간이 쓰는 시간보다 깁니다</p></div>
+                        </li>
+                    </ol>
                 </div>
-                <div class="order-1 lg:order-2 rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
-                    <img src="/images/feat2.png" alt="contrl AI PPT 제안서 생성 결과 - 우리 회사 PPT 템플릿 양식 그대로 45슬라이드 제안서 초안이 자동 작성된 화면. AI-generated proposal draft using company's own PowerPoint template with format preservation." class="w-full h-auto">
-                </div>
+                <figure class="order-1 lg:order-2">
+                    <img src="/images/brochure/problem.jpg" alt="범용 AI로 한 번에 만든 제안 슬라이드 예시 - 보기엔 그럴듯하지만 핵심을 벗어난 결과물" loading="lazy" class="w-full rounded-2xl border border-white/10 shadow-2xl">
+                    <figcaption class="mt-3 text-xs text-white/40" data-i18n="click-caption">실제 사례 · 범용 AI로 한 번에 만든 슬라이드</figcaption>
+                </figure>
             </div>
 
-            <!-- Row 3: Image left, Text right — 피드백 메모리 -->
-            <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mt-20 lg:mt-28">
-                <div class="rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] bg-gradient-to-br from-[#fef8f0] to-[#fdf2e6] flex flex-col items-center justify-center py-12 px-8 relative" style="min-height: 420px;">
-                    <!-- Grid background -->
-                    <svg class="absolute inset-0 w-full h-full opacity-[0.06]" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid3" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0L0 0 0 40" fill="none" stroke="#F27A2E" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid3)"/></svg>
-
-                    <!-- Floating badges -->
-                    <div class="absolute top-[10%] left-[10%] bg-white rounded-xl shadow-md px-4 py-2 flex items-center gap-2 animate-float-slow">
-                        <iconify-icon icon="solar:close-circle-bold" width="18" style="color:#EF4444;"></iconify-icon>
-                        <span class="text-[11px] text-zinc-400 font-semibold">AI 스타일</span>
-                    </div>
-                    <div class="absolute top-[10%] right-[10%] bg-white rounded-xl shadow-md px-4 py-2 flex items-center gap-2 animate-float-slow" style="animation-delay: 0.6s;">
-                        <iconify-icon icon="solar:check-circle-bold" width="18" style="color:#F27A2E;"></iconify-icon>
-                        <span class="text-[11px] text-zinc-500 font-semibold">입찰 제안서</span>
-                    </div>
-                    <div class="absolute bottom-[16%] left-[8%] bg-white rounded-xl shadow-md px-3 py-2 flex items-center gap-1.5 animate-float-slow" style="animation-delay: 1.2s;">
-                        <iconify-icon icon="solar:presentation-graph-bold-duotone" width="18" style="color:#E06630;"></iconify-icon>
-                        <span class="text-[10px] text-zinc-400 font-medium">.pptx</span>
-                    </div>
-                    <div class="absolute bottom-[14%] right-[10%] bg-white rounded-xl shadow-md px-3 py-2 flex items-center gap-1.5 animate-float-slow" style="animation-delay: 0.9s;">
-                        <iconify-icon icon="solar:diploma-verified-bold-duotone" width="18" class="text-accent"></iconify-icon>
-                        <span class="text-[10px] text-zinc-400 font-medium">제출 가능</span>
-                    </div>
-                    <div class="absolute top-[44%] left-[4%] w-11 h-11 bg-white rounded-xl shadow-md flex items-center justify-center animate-float-slow" style="animation-delay: 1.5s;">
-                        <iconify-icon icon="solar:ruler-cross-pen-bold-duotone" width="20" class="text-accent"></iconify-icon>
-                    </div>
-                    <div class="absolute top-[44%] right-[4%] w-11 h-11 bg-white rounded-xl shadow-md flex items-center justify-center animate-float-slow" style="animation-delay: 0.3s;">
-                        <iconify-icon icon="solar:pallete-2-bold-duotone" width="20" class="text-accent"></iconify-icon>
-                    </div>
-
-                    <!-- Central slide illustration -->
-                    <div class="relative z-10">
-                        <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-44 h-6 rounded-full" style="background: radial-gradient(ellipse, rgba(242,122,46,0.15) 0%, transparent 70%);"></div>
-                        <svg width="260" height="200" viewBox="0 0 260 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-xl relative z-10">
-                            <defs>
-                                <linearGradient id="slideGrad" x1="20" y1="0" x2="240" y2="200" gradientUnits="userSpaceOnUse">
-                                    <stop offset="0%" stop-color="#F9A84D"/>
-                                    <stop offset="100%" stop-color="#F27A2E"/>
-                                </linearGradient>
-                            </defs>
-                            <!-- Slide background -->
-                            <rect x="10" y="10" width="240" height="180" rx="12" fill="white" stroke="#E5E7EB" stroke-width="1.5"/>
-                            <!-- Title bar -->
-                            <rect x="10" y="10" width="240" height="36" rx="12" fill="url(#slideGrad)"/>
-                            <rect x="10" y="34" width="240" height="12" fill="url(#slideGrad)"/>
-                            <!-- Title text lines -->
-                            <rect x="28" y="22" width="90" height="6" rx="3" fill="white" opacity="0.9"/>
-                            <rect x="28" y="32" width="55" height="4" rx="2" fill="white" opacity="0.5"/>
-                            <!-- Content area - structured text blocks -->
-                            <rect x="28" y="62" width="130" height="5" rx="2.5" fill="#D4D4D8"/>
-                            <rect x="28" y="73" width="110" height="5" rx="2.5" fill="#E4E4E7"/>
-                            <rect x="28" y="84" width="120" height="5" rx="2.5" fill="#E4E4E7"/>
-                            <!-- Chart/diagram area -->
-                            <rect x="170" y="58" width="60" height="50" rx="6" fill="#FEF3E2" stroke="#F27A2E" stroke-width="0.8" opacity="0.6"/>
-                            <rect x="180" y="88" width="10" height="14" rx="2" fill="#F27A2E" opacity="0.5"/>
-                            <rect x="194" y="80" width="10" height="22" rx="2" fill="#F27A2E" opacity="0.7"/>
-                            <rect x="208" y="72" width="10" height="30" rx="2" fill="#F27A2E" opacity="0.9"/>
-                            <!-- Bottom content blocks -->
-                            <rect x="28" y="108" width="80" height="40" rx="6" fill="#FEF3E2" stroke="#FDDCB5" stroke-width="0.8"/>
-                            <rect x="36" y="118" width="50" height="4" rx="2" fill="#D4D4D8"/>
-                            <rect x="36" y="127" width="40" height="3" rx="1.5" fill="#E4E4E7"/>
-                            <rect x="36" y="134" width="55" height="3" rx="1.5" fill="#E4E4E7"/>
-                            <rect x="120" y="108" width="80" height="40" rx="6" fill="#FEF3E2" stroke="#FDDCB5" stroke-width="0.8"/>
-                            <rect x="128" y="118" width="50" height="4" rx="2" fill="#D4D4D8"/>
-                            <rect x="128" y="127" width="40" height="3" rx="1.5" fill="#E4E4E7"/>
-                            <rect x="128" y="134" width="55" height="3" rx="1.5" fill="#E4E4E7"/>
-                            <!-- Page number -->
-                            <rect x="118" y="162" width="24" height="4" rx="2" fill="#D4D4D8"/>
-                            <!-- Checkmark badge -->
-                            <circle cx="230" cy="170" r="16" fill="#F27A2E"/>
-                            <path d="M222 170 L228 176 L238 164" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                </div>
-                <div>
-                    <div class="inline-flex items-center gap-2 bg-accent/5 border border-accent/15 rounded-full px-3 py-1 mb-4">
-                        <span class="text-xs font-bold text-accent" data-i18n="feat3-step">STEP 03</span>
-                    </div>
-                    <div class="flex items-center gap-4 mb-3">
-                        <div class="w-12 h-12 rounded-xl border border-accent/20 flex items-center justify-center flex-shrink-0">
-                            <iconify-icon icon="solar:presentation-graph-bold-duotone" width="24" class="text-accent"></iconify-icon>
-                        </div>
-                        <h3 class="text-2xl md:text-3xl font-bold tracking-tight whitespace-nowrap" data-i18n="feat3-title">제안서 PPT 생성</h3>
-                    </div>
-                    <p class="text-base text-zinc-500 leading-relaxed mb-6" data-i18n="feat3-lead">우리 회사의 기존 제안서로부터 디자인 시스템을 추출하고, 이를 재사용해 슬라이드를 구성합니다.</p>
-
-                    <!-- F/B/D Cards -->
-                    <div class="space-y-3">
-                        <div class="border border-zinc-100 rounded-xl p-4 bg-white">
-                            <div class="flex items-center gap-2 mb-1.5">
-                                <iconify-icon icon="solar:settings-bold-duotone" width="16" class="text-accent"></iconify-icon>
-                                <span class="text-xs font-bold text-accent uppercase tracking-wide" data-i18n="fbd-feature-3">Feature</span>
-                            </div>
-                            <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="feat3-f">우리 회사 제안서를 분석해 디자인 시스템을 만들고 템플릿화합니다. 이 시스템을 재사용해 슬라이드를 생성합니다.</p>
-                        </div>
-                        <div class="border border-zinc-100 rounded-xl p-4 bg-white">
-                            <div class="flex items-center gap-2 mb-1.5">
-                                <iconify-icon icon="solar:star-bold-duotone" width="16" class="text-accent"></iconify-icon>
-                                <span class="text-xs font-bold text-accent uppercase tracking-wide" data-i18n="fbd-benefit-3">Benefit</span>
-                            </div>
-                            <p class="text-sm text-zinc-700 leading-relaxed" data-i18n="feat3-b">그대로 디자인팀에 hand-off 할 수 있는 초안이 만들어집니다. 제안 담당자의 일이 최소화됩니다.</p>
-                        </div>
-                        <div class="border border-accent/30 rounded-xl p-4 bg-orange-50/30">
-                            <div class="flex items-center gap-2 mb-1.5">
-                                <iconify-icon icon="solar:bolt-bold-duotone" width="16" class="text-accent"></iconify-icon>
-                                <span class="text-xs font-bold text-accent uppercase tracking-wide" data-i18n="fbd-diff-3">Differentiator</span>
-                            </div>
-                            <p class="text-sm text-zinc-700 leading-relaxed" data-i18n-html="feat3-d"><span class="font-bold">AI Slop</span>스러운 도식·화면구성이 아닙니다. 우리 회사가 실제로 썼던 표현·도식·이미지를 재사용해, <span class="font-bold">사람이 만든 것 같은 슬라이드</span>를 생성합니다.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="reveal mt-12 text-center">
+                <p class="text-base md:text-lg text-white/70 leading-relaxed" data-i18n-html="hot-bridge">입찰 제안서는 최소 50~100장.<br><span class="text-accent font-semibold">장수가 많아질수록 AI는 더 산으로 갑니다.</span></p>
             </div>
         </div>
     </section>
 
-    <!-- 3. WHY -->
-    <section id="why" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white" aria-label="왜 contrl인가 - AI 제안서 작성이 필요한 이유 Why Choose contrl for Proposal Writing">
+    <!-- 3. SHOWCASE — CONTRL이 만들고 싶었던 것 -->
+    <section class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#f9f6f2]" aria-label="CONTRL이 만들고 싶었던 것 - 고객사 디자인 시스템으로 만든 제안서 예시">
         <div class="max-w-7xl mx-auto">
-            <div class="reveal text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n="why-title">Why contrl</h2>
-                <p class="text-base md:text-lg text-zinc-500 leading-relaxed max-w-xl mx-auto" data-i18n="why-sub">제안서가 지는 진짜 이유, 그리고 CONTRL이 존재하는 이유.</p>
+            <div class="reveal max-w-3xl mb-12">
+                <p class="text-xs font-bold text-accent tracking-wide uppercase mb-4" data-i18n="show-label">CONTRL이 만들고 싶었던 것</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="show-title">“우리 회사 팀장님이 쓴 것 같은<br>제안서를 만들고 싶었습니다.”</h2>
+                <p class="text-base md:text-lg text-zinc-500 leading-relaxed" data-i18n-html="show-sub">그래서 Contrl이 만드는 제안서는 이렇게 나옵니다.<br>고객사의 디자인 시스템으로, 사람이 직접 작성한 스토리 전개로.</p>
             </div>
-            <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-5 stagger">
-                <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
-                    <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:link-broken-linear" width="20" class="text-accent"></iconify-icon>
-                    </div>
-                    <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2" data-i18n="why1-title">전략이 관통하지 못하는 제안서</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why1-desc">고객 니즈와 우리 강점을 연결한 이기는 전략이, 제안서 마지막 Slide까지 관통하지 못합니다.</p>
-                    </div>
+            <div class="reveal">
+                <img src="/images/brochure/showcase.jpg" alt="Contrl로 만든 여러 고객사의 제안서 슬라이드 - 각 회사의 디자인 시스템을 그대로 유지한 결과물" loading="lazy" class="w-full rounded-3xl shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. HOW — 스토리는 사람이, 재료와 살은 AI가 -->
+    <section id="how" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white" aria-label="contrl 작동 방식 - 사람이 스토리를 만들고 AI가 재료와 살을 붙이는 구조">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal mb-16 text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="flow-title">스토리는 사람이 만들고,<br>AI는 그 뼈대에 <span class="text-accent">재료와 살</span>을 붙입니다</h2>
+            </div>
+
+            <div class="reveal grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_40px_minmax(0,1.45fr)_40px_minmax(0,1fr)] gap-4 lg:gap-0 items-stretch">
+                <!-- AI가 모아 오는 재료 -->
+                <div class="bg-white rounded-2xl p-7 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
+                    <p class="text-xs font-bold text-zinc-400 tracking-wide uppercase mb-5" data-i18n="flow-in-label">AI가 모아 오는 재료</p>
+                    <ul class="space-y-5">
+                        <li class="flex gap-3">
+                            <iconify-icon icon="solar:document-text-bold-duotone" width="22" class="text-accent shrink-0 mt-0.5"></iconify-icon>
+                            <div><p class="text-sm font-bold" data-i18n="flow-in1-t">공고문 · RFP</p><p class="text-sm text-zinc-500 mt-0.5 leading-relaxed" data-i18n="flow-in1-d">요구사항과 평가 기준을 빠짐없이 읽어 옵니다</p></div>
+                        </li>
+                        <li class="flex gap-3">
+                            <iconify-icon icon="solar:buildings-3-bold-duotone" width="22" class="text-accent shrink-0 mt-0.5"></iconify-icon>
+                            <div><p class="text-sm font-bold" data-i18n="flow-in2-t">회사소개서 · 실적</p><p class="text-sm text-zinc-500 mt-0.5 leading-relaxed" data-i18n="flow-in2-d">우리 회사의 근거를 찾아 옵니다</p></div>
+                        </li>
+                        <li class="flex gap-3">
+                            <iconify-icon icon="solar:folder-with-files-bold-duotone" width="22" class="text-accent shrink-0 mt-0.5"></iconify-icon>
+                            <div><p class="text-sm font-bold" data-i18n="flow-in3-t">과거 자료 · 사례집</p><p class="text-sm text-zinc-500 mt-0.5 leading-relaxed" data-i18n="flow-in3-d">예전 제안서와 사례에서 쓸 것을 골라 옵니다</p></div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
-                    <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:users-group-rounded-linear" width="20" class="text-accent"></iconify-icon>
-                    </div>
-                    <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2" data-i18n="why2-title">경험 많은 소수만의 역량이었다</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why2-desc">이기는 전략을 세우고 끝까지 관통시키는 건, 경험 많은 소수만 할 수 있었습니다. CONTRL은 그 역량을 모든 사람에게 줍니다.</p>
-                    </div>
+                <div class="hidden lg:flex items-center justify-center" aria-hidden="true"><iconify-icon icon="solar:arrow-right-bold" width="22" class="text-accent"></iconify-icon></div>
+                <!-- 사람: 뼈대 -->
+                <div class="bg-orange-50/60 rounded-2xl p-7 border-2 border-accent shadow-[0_8px_30px_rgba(242,122,46,0.12)]">
+                    <span class="inline-flex items-center rounded-full bg-accent text-white text-xs font-bold px-3 py-1 mb-3" data-i18n="flow-human-badge">사람</span>
+                    <p class="text-lg font-bold mb-4" data-i18n="flow-human-t">뼈대: 무엇으로 이길지, 어떤 순서로 말할지</p>
+                    <img src="/images/brochure/storyboard.jpg" alt="손으로 그린 제안서 스토리보드 - 장의 순서를 사람이 정한다" loading="lazy" class="w-full rounded-xl bg-white border border-orange-100">
+                    <p class="text-sm text-zinc-600 mt-3" data-i18n="flow-human-d">손으로 그린 스토리보드. 장의 순서는 사람이 정합니다.</p>
                 </div>
-                <div class="reveal bg-white rounded-2xl p-8 pb-10 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col min-h-[220px]">
-                    <div class="w-11 h-11 rounded-full border border-accent/30 flex items-center justify-center">
-                        <iconify-icon icon="solar:cpu-bolt-linear" width="20" class="text-accent"></iconify-icon>
-                    </div>
-                    <div class="mt-5">
-                        <h3 class="text-lg font-bold mb-2" data-i18n="why3-title">범용 AI로는 안 되는 연결고리</h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="why3-desc">ChatGPT, Claude 같은 범용 AI가 있지만, RFP에서 Win Theme, Storyline, Slide까지 관통시키는 건 범용 AI로는 안 됩니다.</p>
-                    </div>
+                <div class="hidden lg:flex items-center justify-center" aria-hidden="true"><iconify-icon icon="solar:arrow-right-bold" width="22" class="text-accent"></iconify-icon></div>
+                <!-- AI가 입히는 살 -->
+                <div class="bg-white rounded-2xl p-7 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
+                    <p class="text-xs font-bold text-zinc-400 tracking-wide uppercase mb-5" data-i18n="flow-out-label">AI가 입히는 살</p>
+                    <ul class="space-y-5">
+                        <li class="flex gap-3">
+                            <iconify-icon icon="solar:document-add-bold-duotone" width="22" class="text-accent shrink-0 mt-0.5"></iconify-icon>
+                            <div><p class="text-sm font-bold" data-i18n="flow-out1-t">장을 채움</p><p class="text-sm text-zinc-500 mt-0.5 leading-relaxed" data-i18n="flow-out1-d">정한 뼈대대로 장마다 내용을 씁니다</p></div>
+                        </li>
+                        <li class="flex gap-3">
+                            <iconify-icon icon="solar:chart-square-bold-duotone" width="22" class="text-accent shrink-0 mt-0.5"></iconify-icon>
+                            <div><p class="text-sm font-bold" data-i18n="flow-out2-t">수치 · 근거를 붙임</p><p class="text-sm text-zinc-500 mt-0.5 leading-relaxed" data-i18n="flow-out2-d">재료에서 찾은 숫자와 근거로 채웁니다</p></div>
+                        </li>
+                        <li class="flex gap-3">
+                            <iconify-icon icon="solar:microphone-3-bold-duotone" width="22" class="text-accent shrink-0 mt-0.5"></iconify-icon>
+                            <div><p class="text-sm font-bold" data-i18n="flow-out3-t">발표 스크립트</p><p class="text-sm text-zinc-500 mt-0.5 leading-relaxed" data-i18n="flow-out3-d">장마다 말할 내용까지 함께 나옵니다</p></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="reveal mt-10 text-center">
+                <div class="inline-flex items-center gap-2 bg-accent/5 border border-accent/15 rounded-full px-6 py-2.5">
+                    <iconify-icon icon="solar:user-check-rounded-bold" width="16" class="text-accent"></iconify-icon>
+                    <span class="text-sm font-semibold text-zinc-700" data-i18n-html="flow-through">중요한 결정은 사람이 합니다. <span class="text-accent">AI는 그 결정을 두텁게 만듭니다.</span></span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 4. FAQ -->
+    <!-- 5. THREE CHOICES — 스토리보드는 세 번의 선택으로 -->
+    <section id="features" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8" style="background-color: #FCFCFC;" aria-label="contrl 핵심 기능 - 핵심 문장 고르기, 이야기 전개 고르기, 슬라이드 검수">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal mb-16 text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="feat-title">스토리보드는 <span class="text-accent">세 번의 선택</span>으로 만들어집니다</h2>
+                <p class="text-base text-zinc-500 leading-relaxed max-w-xl mx-auto" data-i18n="feat-sub">제안서를 만들 때 섹션마다 실제로 거치는 과정입니다. 고르는 건 사람이, 준비하는 건 Contrl이 합니다.</p>
+            </div>
+
+            <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-5 stagger">
+                <!-- 1 -->
+                <div class="reveal bg-white rounded-2xl p-6 border border-zinc-100/80 border-t-4 border-t-accent shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-bold flex items-center justify-center shrink-0">1</span>
+                        <h3 class="text-lg font-bold" data-i18n="feat1-title">핵심 문장 고르기</h3>
+                    </div>
+                    <img src="/images/brochure/step1.jpg" alt="섹션별 핵심 문장 후보를 고르는 Contrl 화면" loading="lazy" class="w-full rounded-xl border border-zinc-100 mb-5">
+                    <p class="text-sm text-zinc-600 leading-relaxed mt-auto" data-i18n-html="feat1-d">섹션마다 AI가 핵심 문장을 내놓습니다.<br>이 섹션에서 무엇을 말할지 사람이 선택합니다.</p>
+                </div>
+                <!-- 2 -->
+                <div class="reveal bg-white rounded-2xl p-6 border border-zinc-100/80 border-t-4 border-t-accent shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-bold flex items-center justify-center shrink-0">2</span>
+                        <h3 class="text-lg font-bold" data-i18n="feat2-title">이야기 전개 고르기</h3>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <div class="rounded-xl border-2 border-accent bg-orange-50/60 px-4 py-3">
+                            <p class="text-sm font-semibold"><span class="text-accent mr-1.5">A</span><span data-i18n="feat2-a-t">서식 순서대로 펴기 · 2장 ✓ 선택</span></p>
+                            <p class="text-xs text-zinc-500 mt-1 leading-relaxed" data-i18n="feat2-a-d">서식 5호 총괄표와 인력별 경력을 한 장에, 이어 기간별 투입 공수</p>
+                        </div>
+                        <div class="rounded-xl border border-zinc-200 px-4 py-3">
+                            <p class="text-sm font-semibold"><span class="text-zinc-400 mr-1.5">B</span><span data-i18n="feat2-b-t">고객 개선 요청의 흐름으로 · 4장</span></p>
+                            <p class="text-xs text-zinc-500 mt-1 leading-relaxed" data-i18n="feat2-b-d">접수부터 배포까지 담당자를 따라 인력과 역할을 소개</p>
+                        </div>
+                        <div class="rounded-xl border border-zinc-200 px-4 py-3">
+                            <p class="text-sm font-semibold"><span class="text-zinc-400 mr-1.5">C</span><span data-i18n="feat2-c-t">평가 기준 순서대로 · 5장</span></p>
+                            <p class="text-xs text-zinc-500 mt-1 leading-relaxed" data-i18n="feat2-c-d">구성·역할분담·투입계획·운영·증빙 순으로 한 장씩</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-zinc-600 leading-relaxed mt-auto" data-i18n-html="feat2-d">같은 문장도 푸는 순서가 다릅니다.<br>장점과 약점을 보고 전개를 고르면 장 구성이 정해집니다.</p>
+                </div>
+                <!-- 3 -->
+                <div class="reveal bg-white rounded-2xl p-6 border border-zinc-100/80 border-t-4 border-t-accent shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-bold flex items-center justify-center shrink-0">3</span>
+                        <h3 class="text-lg font-bold" data-i18n="feat3-title">슬라이드 검수</h3>
+                    </div>
+                    <img src="/images/brochure/step3.jpg" alt="슬라이드 프리뷰와 발표 스크립트를 보며 검수하는 Contrl 화면" loading="lazy" class="w-full rounded-xl border border-zinc-100 mb-5">
+                    <p class="text-sm text-zinc-600 leading-relaxed mt-auto" data-i18n-html="feat3-d">장마다 프리뷰와 발표 스크립트를 보며 넘깁니다.<br>“19쪽 오른쪽이 비었다”고 짚으면 그 장만 고쳐집니다.</p>
+                </div>
+            </div>
+
+            <div class="reveal mt-8 flex flex-wrap items-center justify-center gap-2">
+                <span class="text-xs font-bold text-zinc-500 mr-1" data-i18n="feat-chips">그 사이 AI가 챙기는 재료</span>
+                <span class="px-3 py-1 rounded-full text-xs bg-zinc-100 text-zinc-600" data-i18n="feat-chip1">평가항목 · 배점</span>
+                <span class="px-3 py-1 rounded-full text-xs bg-zinc-100 text-zinc-600" data-i18n="feat-chip2">요구사항 · RFP 서식</span>
+                <span class="px-3 py-1 rounded-full text-xs bg-zinc-100 text-zinc-600" data-i18n="feat-chip3">회사 자산 (소개서 · 실적 · 과거 제안서)</span>
+                <span class="px-3 py-1 rounded-full text-xs bg-zinc-100 text-zinc-600" data-i18n="feat-chip4">빈 자료 알림</span>
+                <span class="px-3 py-1 rounded-full text-xs bg-zinc-100 text-zinc-600" data-i18n="feat-chip5">근거 출처 표시</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CASE — 도입 사례 -->
+    <section id="case" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white" aria-label="도입 사례 - 글로벌 바이오 기업 T사 수주 금액 59% 증가">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal mb-12">
+                <p class="text-xs font-bold text-accent tracking-wide uppercase mb-4" data-i18n="case-label">도입 사례 · 글로벌 바이오 기업 T사</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="case-title">도입 후 4개 분기 만에<br>수주 금액이 <span class="text-accent">59%</span> 늘었습니다</h2>
+                <p class="text-sm text-zinc-400" data-i18n="case-basis">도입 후 4개 분기(25Q3–26Q2)를 전년 같은 분기와 비교 · T사 입찰 실적 대시보드 기준</p>
+            </div>
+
+            <div class="reveal grid grid-cols-2 lg:grid-cols-4 gap-4 stagger mb-12">
+                <div class="reveal bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
+                    <p class="text-sm font-semibold text-zinc-500" data-i18n="case-k1">투찰 건수</p>
+                    <p class="text-3xl md:text-4xl font-extrabold tracking-tight my-2">+27.1%</p>
+                    <p class="text-xs text-zinc-400" data-i18n="case-k1-d">155건 → 197건</p>
+                </div>
+                <div class="reveal bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
+                    <p class="text-sm font-semibold text-zinc-500" data-i18n="case-k2">낙찰 건수</p>
+                    <p class="text-3xl md:text-4xl font-extrabold tracking-tight my-2">+53.1%</p>
+                    <p class="text-xs text-zinc-400" data-i18n="case-k2-d">96건 → 147건</p>
+                </div>
+                <div class="reveal bg-white rounded-2xl p-6 border border-zinc-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
+                    <p class="text-sm font-semibold text-zinc-500" data-i18n="case-k3">승률</p>
+                    <p class="text-3xl md:text-4xl font-extrabold tracking-tight my-2">+12.7%p</p>
+                    <p class="text-xs text-zinc-400">61.9% → 74.6%</p>
+                </div>
+                <div class="reveal bg-orange-50/60 rounded-2xl p-6 border-2 border-accent shadow-[0_8px_30px_rgba(242,122,46,0.12)]">
+                    <p class="text-sm font-semibold text-accent" data-i18n="case-k4">수주 금액</p>
+                    <p class="text-3xl md:text-4xl font-extrabold tracking-tight my-2 text-accent">+58.8%</p>
+                    <p class="text-xs text-zinc-500" data-i18n="case-k4-d">165.2억 → 262.4억 원</p>
+                </div>
+            </div>
+
+            <div class="reveal grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-8 lg:gap-14 items-center">
+                <p class="text-xl md:text-2xl font-bold leading-snug" data-i18n-html="case-summary">Contrl과 함께 더 많이 투찰하고,<br>이기는 제안에 집중하여<br><span class="text-accent">승률과 수주액이 함께 올랐습니다.</span></p>
+                <figure>
+                    <div class="grid grid-cols-2 gap-3">
+                        <img src="/images/brochure/case1.jpg" alt="사내 세일즈 박람회 Sales Guru에서 Contrl을 시연하는 모습" loading="lazy" class="w-full aspect-[3/2] object-cover rounded-xl">
+                        <img src="/images/brochure/case2.jpg" alt="Contrl 시연을 지켜보는 참가자들" loading="lazy" class="w-full aspect-[3/2] object-cover rounded-xl">
+                    </div>
+                    <figcaption class="mt-3 text-xs text-zinc-400" data-i18n="case-caption">사내 세일즈 박람회 ‘Sales Guru’에서 전체 프로젝트 1위, 전사 AI 혁신 대표 사례로 소개 (플래텀, 2025.08.20)</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FAQ -->
     <section id="faq" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#f9f6f2]" aria-label="자주 묻는 질문 - AI 제안서 작성 FAQ Frequently Asked Questions about AI Proposal Writing">
         <div class="max-w-3xl mx-auto">
             <div class="reveal text-center mb-16">
@@ -1038,20 +858,20 @@
             <div class="stagger">
                 <div class="reveal border-t border-zinc-200 faq-item">
                     <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq1-q">contrl은 어떤 문제를 풀고 있나요?</span>
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq1-q">범용 AI로 만든 제안서와 무엇이 다른가요?</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq1-a">제안서가 지는 이유는 하나입니다. 고객 니즈와 우리 강점을 연결한 이기는 전략이, 제안서 마지막 Slide까지 관통하지 못하기 때문입니다. contrl은 RFP → Win Theme → Storyline → Slide까지 하나의 전략이 끊어지지 않고 관통하게 합니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq1-a">범용 AI는 한 번에 그럴듯한 슬라이드를 내놓지만, 핵심을 벗어나고 구체성이 없어 고치는 시간이 쓰는 시간보다 깁니다. Contrl은 무엇으로 이길지와 어떤 순서로 말할지를 사람이 정하고, AI는 그 뼈대에 재료와 살을 붙입니다. 그래서 우리 회사 팀장님이 쓴 것 같은 제안서가 나옵니다.</p>
                     </div>
                 </div>
                 <div class="reveal border-t border-zinc-200 faq-item">
                     <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq2-q">어떤 파일 형식을 지원하나요?</span>
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq2-q">우리 회사 디자인 그대로 나오나요?</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq2-a">현재 PowerPoint(.pptx) 형식을 지원합니다. 우리 회사의 기존 PPT 템플릿을 그대로 업로드하면, 양식과 디자인을 유지한 채 제안서 초안이 생성됩니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq2-a">네. 고객사의 디자인 시스템을 그대로 씁니다. 기존 제안서의 표현·도식·구성을 재사용해 PowerPoint(.pptx)로 만들고, 장마다 발표 스크립트와 근거 출처가 함께 나옵니다.</p>
                     </div>
                 </div>
                 <div class="reveal border-t border-zinc-200 faq-item">
@@ -1069,32 +889,35 @@
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq4-a">제안서를 쓰는 누구나입니다. 직급 불문, 경험 불문. 이기는 전략을 세우고 그걸 제안서 끝까지 관통시키는 건, 경험 많은 소수만 할 수 있었습니다. CONTRL은 그 역량을 모든 사람에게 줍니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq4-a">제안서를 쓰는 누구나입니다. 신입에게 맡기면 결국 팀장이 다시 쓰던 일을, 고르는 건 사람이 하고 준비하는 건 Contrl이 하는 방식으로 바꿉니다. 중요한 결정은 사람이 하고, AI는 그 결정을 두텁게 만듭니다.</p>
                     </div>
                 </div>
                 <div class="reveal border-t border-b border-zinc-200 faq-item">
                     <button class="w-full py-5 flex items-center justify-between text-left group" onclick="toggleFaq(this)">
-                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq5-q">Contrl을 무료로 체험하려면?</span>
+                        <span class="text-base font-semibold text-zinc-900 group-hover:text-accent transition-colors" data-i18n="faq5-q">무료 PoC는 어떻게 진행되나요?</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-zinc-400 group-hover:text-accent transition-all faq-chevron"></iconify-icon>
                     </button>
                     <div class="faq-answer overflow-hidden max-h-0 transition-all duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
-                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq5-a">상단의 'POC 신청' 버튼을 클릭하시면 됩니다. 현재 2차 클로즈 베타가 운영 중이며, 1차 베타 피드백을 반영해 더욱 강력해졌습니다. 별도의 회원가입이나 결제 없이 초대 기반으로 무료 이용 가능합니다.</p>
+                        <p class="pb-5 text-sm text-zinc-500 leading-relaxed" data-i18n="faq5-a">품질 검증을 무료로 합니다. 지금 진행하는 제안서를 Contrl로 만들어 드리고, 결과물을 보고 판단하시면 됩니다. 상단의 '무료 PoC 신청' 버튼을 누르거나 junho@cliwant.com 으로 연락 주세요.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 5. CTA Card (Glance-style orange card) -->
+    <!-- 8. CTA — 무료 PoC -->
     <section class="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#524438]">
         <div class="max-w-3xl mx-auto text-center">
             <div class="reveal">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="cta-title">이기는 전략이, 제안서 끝까지 관통합니다.<br>지금 시작하세요.</h2>
-                <p class="text-base text-white/60 leading-relaxed mb-8 max-w-md mx-auto" data-i18n-html="cta-sub">RFP → Win Theme → Storyline → Slide.<br>하나의 전략이 끊어지지 않고 관통합니다.</p>
+                <p class="text-xs font-bold text-[#f5b27a] tracking-wide uppercase mb-4" data-i18n="cta-label">무료 PoC</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="cta-title">품질 검증을 무료로.</h2>
+                <p class="text-base text-white/60 leading-relaxed mb-8 max-w-md mx-auto" data-i18n-html="cta-sub">지금 진행하는 제안서를 만들어 드립니다.</p>
                 <a href="https://tally.so/r/VL4JJv" data-tally-link target="_blank" class="btn-3d inline-flex items-center gap-2 text-white font-semibold px-8 py-3.5 rounded-full text-base">
-                    <span data-i18n="cta-btn">POC 신청</span>
+                    <span data-i18n="cta-btn">무료 PoC 신청</span>
                     <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
                 </a>
+                <p class="mt-5 text-sm text-white/50"><span data-i18n="cta-mail-label">무료 PoC 신청 · </span><a href="mailto:junho@cliwant.com" class="text-white/80 hover:text-white underline underline-offset-4 transition-colors">junho@cliwant.com</a></p>
+                <p class="mt-10 text-xs tracking-wide text-white/30">Make RFP Simple, No More Paperwork</p>
             </div>
         </div>
     </section>
@@ -1105,7 +928,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div>
                     <a href="#" class="text-xl font-bold tracking-tight">contrl<span class="text-accent">.</span></a>
-                    <p class="text-sm text-zinc-400 mt-3 leading-relaxed max-w-xs" data-i18n-html="footer-desc">이기는 전략이 제안서 끝까지 이어지게 하는<br>AI Win Theme Editor.</p>
+                    <p class="text-sm text-zinc-400 mt-3 leading-relaxed max-w-xs" data-i18n-html="footer-desc">스토리는 사람이, 재료와 살은 AI가.<br>우리 회사 팀장님이 쓴 것 같은 제안서를 만드는 AI.</p>
                     <div class="mt-4 space-y-1 text-xs text-zinc-400 leading-relaxed">
                         <p><span class="font-semibold text-zinc-500 mr-2">US</span>12130 Millennium Dr #300, Los Angeles, CA 90094</p>
                         <p><span class="font-semibold text-zinc-500 mr-2">SG</span>21 Collyer Quay, Downtown Core, Central, 049320</p>
@@ -1115,8 +938,8 @@
                 <div>
                     <h4 class="text-sm font-semibold text-zinc-900 mb-4" data-i18n="footer-product-title">Product</h4>
                     <div class="space-y-3">
-                        <a href="#features" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-features">Features</a>
-                        <a href="#why" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-why">Why contrl</a>
+                        <a href="#how" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-features">작동 방식</a>
+                        <a href="#case" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-why">도입 사례</a>
                         <a href="#faq" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-faq">FAQ</a>
                         <a id="footer-blog-link" href="https://blog.cliwant.com/" target="_blank" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">Blog</a>
                     </div>
@@ -1125,7 +948,7 @@
                     <h4 class="text-sm font-semibold text-zinc-900 mb-4" data-i18n="footer-contact-title">문의</h4>
                     <div class="space-y-3">
                         <a href="mailto:sales@cliwant.com" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors">sales@cliwant.com</a>
-                        <a href="https://tally.so/r/VL4JJv" data-tally-link target="_blank" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-demo">POC 신청</a>
+                        <a href="https://tally.so/r/VL4JJv" data-tally-link target="_blank" class="block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="footer-demo">무료 PoC 신청</a>
                     </div>
                 </div>
             </div>
@@ -1264,218 +1087,230 @@
         // i18n
         const translations = {
             en: {
-                'nav-features': 'Features',
-                'nav-why': 'Why contrl',
+                'nav-features': 'How It Works',
+                'nav-why': 'Case Study',
                 'nav-faq': 'FAQ',
-                'banner': '<span class="font-extrabold tracking-tight">Experience Contrl, tailored to your company — before launch.</span>',
-                'banner-cta': 'Get started →',
-                'nav-cta': 'Get started',
-                'hero-label': 'AI Win Theme Editor',
-                'hero-title': 'A winning strategy,<br>driven through every slide.',
-                'hero-sub': 'A winning strategy that connects client needs to your strengths — driven through every last slide.',
-                'hero-cta': 'Apply for POC',
-                'hero-cta2': 'See How It Works',
-                'badge-format': 'Winning Strategy Design',
-                'badge-hallu': 'RFP → Slide Driven',
-                'badge-local': 'Proposal Protection',
-                'flow-title': 'How It Works',
-                'flow-sub': 'One strategy, unbroken — driven through to the last slide.',
-                'flow-s1-title': 'RFP Analysis',
-                'flow-s1-desc': 'Identifies the client\'s core needs and requirements.',
-                'flow-s2-title': 'Win Theme',
-                'flow-s2-desc': 'Connects client needs to your strengths to design a winning strategy.',
-                'flow-s3-title': 'Storyline',
-                'flow-s3-desc': 'Designs a storyline that drives the Win Theme through every slide.',
-                'flow-s4-title': 'Slide',
-                'flow-s4-desc': 'Generates strategy-driven slides in your company\'s own template.',
-                'flow-through': 'One strategy, unbroken — driven through to the end',
-                'feat-title': 'Key Features',
-                'feat-sub': 'Core capabilities that drive your winning strategy from RFP to Slide.',
-                'feat1-step': 'STEP 01',
-                'feat1-title': 'RFP Analysis',
-                'feat1-lead': 'No need to read 300 pages line by line. Just chat with the system and uncover the real needs behind the RFP.',
-                'feat1-f': 'Analyzes information beyond the RFP document itself to capture what the issuer actually wants.',
-                'feat1-b': 'No more eye strain. Skim the RFP, answer a few system questions, and you\'re aligned.',
-                'feat1-d': 'Other AI pretends to understand everything. Contrl <span class="font-bold">syncs</span> its understanding with you first — then writes.',
-                'feat2-step': 'STEP 02',
-                'feat2-title': 'Strategy Design',
-                'feat2-lead': 'Built on the global APMP framework, Contrl defines your Win Theme and specifies it slide by slide.',
-                'feat2-badge': 'APMP Framework · Global proposal standard',
-                'feat2-f': 'Structures the Win Theme through Hot Button · Feature · Benefit · Proof Point — then specs Theme Statements slide by slide.',
-                'feat2-b': 'A winning concept once owned only by veterans is now accessible to everyone — driven through the entire proposal.',
-                'feat2-d': 'Other AI does <span class="font-bold">"one-shot"</span> — GPT fills in the blanks of a 100-page proposal however it wants. Contrl <span class="font-bold">designs and specs</span> each slide exactly as you intend.',
-                'feat3-step': 'STEP 03',
-                'feat3-title': 'PPT Generation',
-                'feat3-lead': 'Contrl extracts a design system from your company\'s past proposals, then reuses it to build new slides.',
-                'feat3-f': 'Analyzes your company\'s proposals to build a reusable design system, then composes new slides from it.',
-                'feat3-b': 'A draft you can hand directly to the design team. Your proposal lead\'s work is minimized.',
-                'feat3-d': 'No <span class="font-bold">AI Slop</span> diagrams or layouts. Reuses your company\'s real expressions, charts, and visuals — slides that look like <span class="font-bold">a human made them</span>.',
-                'why-title': 'Why contrl',
-                'why-sub': 'The real reason proposals lose, and why CONTRL exists.',
-                'why1-title': 'Strategy That Doesn\'t Reach the Last Slide',
-                'why1-desc': 'A winning strategy connecting client needs to your strengths fails to drive through to the last slide of the proposal.',
-                'why2-title': 'A Skill Only the Experienced Few Had',
-                'why2-desc': 'Building a winning strategy and driving it through to the end was something only experienced few could do. CONTRL gives that capability to everyone.',
-                'why3-title': 'Generic AI Can\'t Bridge This Gap',
-                'why3-desc': 'ChatGPT, Claude — generic AI exists, but driving the link from RFP to Win Theme, Storyline, and Slide isn\'t something generic AI can do.',
+                'banner': '<span class="font-extrabold tracking-tight">Free PoC · We build the proposal you are working on right now</span>',
+                'banner-cta': 'Apply for a free PoC →',
+                'hero-label': 'AI Proposal Writing · CONTRL',
+                'hero-title': '“We wanted proposals that read<br>like our best team lead wrote them.”',
+                'hero-sub': 'People build the story. AI adds the evidence and substance.<br>In your own design system, following a narrative a person laid out.',
+                'hero-cta': 'Apply for a free PoC',
+                'hero-cta2': 'See how it works',
+                'badge-format': 'People set the story',
+                'badge-hallu': 'Your design system, as is',
+                'badge-local': 'Speaker script included',
+                'hot-label': 'What we hear most in the field',
+                'hot-title': '“Why are proposals still hard,<br>even with AI?”',
+                'voice1': '“We tried GPT. But it’s nothing we could present.”',
+                'voice1-who': 'Proposal lead, research firm',
+                'voice2': '“Reviewing AI output takes longer than writing it ourselves.”',
+                'voice2-who': 'Team lead, education institute',
+                'voice3': '“If I hand it to a junior, I end up rewriting it.”',
+                'voice3-who': 'CEO, IT company',
+                'click-label': '✦ One click, and then what happens',
+                'click-title': 'It looks easy. It isn’t.',
+                'click1-t': 'Looks plausible…',
+                'click1-d': 'Flashy slides appear in seconds',
+                'click2-t': '“That’s not what we meant to say.”',
+                'click2-d': 'It drifts off the point and the logic breaks',
+                'click3-t': '“So how, and how much?”',
+                'click3-d': 'It ends in promises, not specifics',
+                'click4-t': '“I might as well write it myself.”',
+                'click4-d': 'Fixing takes longer than writing',
+                'click-caption': 'Real example · slides generated in one shot by a general-purpose AI',
+                'hot-bridge': 'A bid proposal runs 50–100 pages at minimum.<br><span class="text-accent font-semibold">The longer it gets, the further AI drifts.</span>',
+                'show-label': 'What CONTRL set out to build',
+                'show-title': '“We wanted proposals that read<br>like our best team lead wrote them.”',
+                'show-sub': 'So this is what Contrl produces:<br>in your own design system, following a story a person laid out.',
+                'flow-title': 'People build the story.<br>AI adds the <span class="text-accent">evidence and substance</span>.',
+                'flow-in-label': 'What AI gathers',
+                'flow-in1-t': 'Notice · RFP',
+                'flow-in1-d': 'Reads every requirement and evaluation criterion',
+                'flow-in2-t': 'Company deck · track record',
+                'flow-in2-d': 'Finds the evidence from your own company',
+                'flow-in3-t': 'Past proposals · case files',
+                'flow-in3-d': 'Picks what is reusable from earlier work',
+                'flow-human-badge': 'People',
+                'flow-human-t': 'The skeleton: what wins, and in what order',
+                'flow-human-d': 'A hand-drawn storyboard. People decide the page order.',
+                'flow-out-label': 'What AI fills in',
+                'flow-out1-t': 'Fills each page',
+                'flow-out1-d': 'Writes every page along the chosen skeleton',
+                'flow-out2-t': 'Adds numbers and evidence',
+                'flow-out2-d': 'Backed by figures found in your materials',
+                'flow-out3-t': 'Speaker script',
+                'flow-out3-d': 'What to say on each page comes with it',
+                'flow-through': 'People make the key decisions. <span class="text-accent">AI makes them stronger.</span>',
+                'feat-title': 'A storyboard takes <span class="text-accent">three choices</span>',
+                'feat-sub': 'This is the actual flow for every section. People choose; Contrl prepares.',
+                'feat1-title': 'Pick the key message',
+                'feat1-d': 'AI proposes key messages for each section.<br>You choose what this section should say.',
+                'feat2-title': 'Pick the narrative',
+                'feat2-a-t': 'Follow the form order · 2 pages ✓ selected',
+                'feat2-a-d': 'Form 5 summary and staff careers on one page, then effort by period',
+                'feat2-b-t': 'Follow the customer request flow · 4 pages',
+                'feat2-b-d': 'Introduce staff and roles from intake to release',
+                'feat2-c-t': 'Follow the evaluation criteria · 5 pages',
+                'feat2-c-d': 'One page each: structure, roles, staffing, operations, evidence',
+                'feat2-d': 'The same message can unfold in different orders.<br>Pick a narrative by its strengths and the pages fall into place.',
+                'feat3-title': 'Review the slides',
+                'feat3-d': 'Flip through each page with its preview and script.<br>Say “page 19, right side is empty” and only that page is fixed.',
+                'feat-chips': 'Meanwhile, AI keeps track of',
+                'feat-chip1': 'Criteria · scoring',
+                'feat-chip2': 'Requirements · RFP forms',
+                'feat-chip3': 'Company assets (deck · record · past proposals)',
+                'feat-chip4': 'Missing-material alerts',
+                'feat-chip5': 'Source citations',
+                'case-label': 'Case study · Global bio company T',
+                'case-title': 'Contract value up <span class="text-accent">59%</span><br>within four quarters of adoption',
+                'case-basis': 'Four quarters after adoption (Q3 2025–Q2 2026) vs. the same quarters a year earlier · per T’s bid performance dashboard',
+                'case-k1': 'Bids submitted',
+                'case-k1-d': '155 → 197',
+                'case-k2': 'Bids won',
+                'case-k2-d': '96 → 147',
+                'case-k3': 'Win rate',
+                'case-k4': 'Contract value',
+                'case-k4-d': 'KRW 16.5B → 26.2B',
+                'case-summary': 'With Contrl they bid more,<br>focused on winnable proposals,<br><span class="text-accent">and both win rate and value rose.</span>',
+                'case-caption': 'Ranked #1 overall at the internal “Sales Guru” fair and featured as the company-wide AI innovation case (Platum, Aug 20, 2025)',
                 'faq-title': 'Frequently Asked Questions',
                 'faq-sub': 'Have questions?',
-                'faq1-q': 'What problem does contrl solve?',
-                'faq1-a': 'Proposals lose for one reason: the winning strategy connecting client needs to your strengths doesn\'t drive through to the last slide. contrl ensures RFP → Win Theme → Storyline → Slide flows as one unbroken strategy.',
-                'faq2-q': 'What file formats are supported?',
-                'faq2-a': 'Currently PowerPoint (.pptx). Upload your company\'s existing PPT template, and contrl generates a proposal draft that preserves your format and design.',
+                'faq1-q': 'How is this different from a proposal made with a general-purpose AI?',
+                'faq1-a': 'General-purpose AI produces plausible slides in one shot, but they drift off the point and lack specifics, so fixing takes longer than writing. With Contrl, people decide what wins and in what order, and AI adds the evidence and substance to that skeleton. The result reads like your best team lead wrote it.',
+                'faq2-q': 'Does it come out in our own design?',
+                'faq2-a': 'Yes. Contrl uses your design system as is. It reuses the expressions, diagrams and layouts from your past proposals, outputs PowerPoint (.pptx), and ships each page with a speaker script and source citations.',
                 'faq3-q': 'How is data security handled?',
                 'faq3-a': 'Your proposal files never leave your machine. Nothing is uploaded to the cloud, and your proposal data is never exposed externally.',
                 'faq4-q': 'Who is this product for?',
-                'faq4-a': 'Anyone who writes proposals. Regardless of title or experience. Building a winning strategy and driving it through was only possible for the experienced few. CONTRL gives that capability to everyone.',
-                'faq5-q': 'How do I try Contrl for free?',
-                'faq5-a': 'Click the "Apply for POC" button above. The 2nd Closed Beta is now open — upgraded with feedback from our first round. Free to use, no sign-up or payment required. Access is invite-based.',
-                'cta-title': 'A winning strategy, driven through every slide.<br>Start now.',
-                'cta-sub': 'RFP → Win Theme → Storyline → Slide.<br>One strategy, unbroken — driven through to the end.',
-                'cta-btn': 'Apply for POC',
-                'footer-desc': 'AI Win Theme Editor that drives a winning strategy through every slide.',
-                'footer-features': 'Features',
-                'footer-why': 'Why contrl',
+                'faq4-a': 'Anyone who writes proposals. The work that a team lead ended up rewriting after handing it to a junior becomes: people choose, Contrl prepares. People make the key decisions, and AI makes them stronger.',
+                'faq5-q': 'How does the free PoC work?',
+                'faq5-a': 'We verify the quality for free. We build the proposal you are working on right now with Contrl, and you judge by the result. Click “Apply for a free PoC” above or contact junho@cliwant.com.',
+                'cta-label': 'Free PoC',
+                'cta-title': 'Verify the quality. Free.',
+                'cta-sub': 'We build the proposal you are working on right now.',
+                'cta-btn': 'Apply for a free PoC',
+                'cta-mail-label': 'Free PoC · ',
+                'footer-desc': 'People build the story, AI adds the substance.<br>Proposals that read like your best team lead wrote them.',
+                'footer-features': 'How It Works',
+                'footer-why': 'Case Study',
                 'footer-faq': 'FAQ',
                 'footer-contact-title': 'Contact',
-                'footer-demo': 'Apply for POC',
-                'hot-label': 'Pain Point',
-                'hot-title': 'Are proposals capping<br>your revenue ceiling?',
-                'hot-sub': 'Bid opportunities arrive every day, but everyone hits the same wall.',
-                'hot-role1': 'For Leaders',
-                'hot-title1': 'Company / Executive view',
-                'hot-quote1': '"There are so many bids we could win…"',
-                'hot-item1-1': 'Not enough people who can write strong proposals',
-                'hot-item1-2': 'Few experienced staff on the team',
-                'hot-item1-3': 'Existing projects already eating up bandwidth',
-                'hot-item1-4': 'Many team members have never written one',
-                'hot-result1': '→ Can\'t respond to bids, revenue ceiling stays capped',
-                'hot-role2': 'For Practitioners',
-                'hot-title2': 'Practitioner view',
-                'hot-quote2': '"Writing proposals — I really don\'t want to."',
-                'hot-item2-1': 'Complex and eats up too much time',
-                'hot-item2-2': 'Doesn\'t feel like meaningful work',
-                'hot-item2-3': 'No clear answer on where to even start',
-                'hot-item2-4': 'I wish someone else would just do it',
-                'hot-result2': '→ Becomes a task you instinctively avoid',
-                'hot-bridge': 'Contrl was built to tear down this wall.<br><span class="text-accent font-semibold">Same opportunities. Unlimited capacity.</span>',
-                'fbd-feature': 'Feature',
-                'fbd-benefit': 'Benefit',
-                'fbd-diff': 'Differentiator',
-                'fbd-feature-2': 'Feature',
-                'fbd-benefit-2': 'Benefit',
-                'fbd-diff-2': 'Differentiator',
-                'fbd-feature-3': 'Feature',
-                'fbd-benefit-3': 'Benefit',
-                'fbd-diff-3': 'Differentiator',
+                'footer-demo': 'Apply for a free PoC',
             },
             ko: {},
             ja: {
-                'nav-features': '機能',
-                'nav-why': '選ばれる理由',
+                'nav-features': '仕組み',
+                'nav-why': '導入事例',
                 'nav-faq': 'よくある質問',
-                'nav-cta': '始める',
-                'banner': '<span class="font-extrabold tracking-tight">公開前に、自社に最適化されたContrlを体験してください。</span>',
-                'banner-cta': '始める →',
-                'hero-label': 'AI Win Theme Editor',
-                'hero-title': '成功を描く戦略、<br>最後の一枚まで妥協なく。',
-                'hero-sub': 'RFPの核心を射貫く戦略。<br>最後の一枚まで、揺るぎない説得力を。',
-                'hero-cta': 'POC申込',
-                'hero-cta2': '詳しく見る',
-                'badge-format': '採択される戦略設計',
-                'badge-hallu': 'RFP → Slide 一気通貫',
-                'badge-local': '提案データ保護',
-                'flow-title': '仕組み',
-                'flow-sub': 'ひとつの戦略が、最後のスライドまで一貫して反映されます。',
-                'flow-s1-title': 'RFP分析',
-                'flow-s1-desc': '顧客の本質的なニーズと要件を的確に把握します。',
-                'flow-s2-title': 'Win Theme',
-                'flow-s2-desc': '顧客ニーズと自社の強みを結びつけ、勝てる戦略を設計します。',
-                'flow-s3-title': 'Storyline',
-                'flow-s3-desc': 'Win Themeがすべてのスライドに行き渡るストーリーラインを設計します。',
-                'flow-s4-title': 'Slide',
-                'flow-s4-desc': '自社テンプレートのまま、戦略を反映したスライドを生成します。',
-                'flow-through': 'ひとつの戦略が途切れることなく最後まで一貫します',
-                'feat-title': '主な機能',
-                'feat-sub': 'RFPからスライドまで、勝てる戦略を一貫させるコア機能。',
-                'feat1-step': 'STEP 01',
-                'feat1-title': 'RFP分析',
-                'feat1-lead': '300ページのRFPを一行ずつ読まなくても、システムと対話しながら発注元の真のニーズを共に把握します。',
-                'feat1-f': 'RFP文書の背景情報まで併せて分析し、発注元の本当の要求を理解します。',
-                'feat1-b': '目を凝らして読む必要はありません。サッと目を通し、システムの質問に答えるだけでRFPが理解できます。',
-                'feat1-d': '既存AIは「全て理解したフリ」をします。Contrlはシステムの理解度をユーザーと<span class="font-bold">Sync</span>させてから提案書を作成します。',
-                'feat2-step': 'STEP 02',
-                'feat2-title': '提案戦略構成',
-                'feat2-lead': 'グローバル標準のAPMPフレームワークに基づき、「我々が選ばれるべき理由(Win Theme)」を定義し、スライド単位で仕様化します。',
-                'feat2-badge': 'APMPフレームワーク · グローバル提案標準',
-                'feat2-f': 'Hot Button · Feature · Benefit · Proof Point構造でWin Themeを定義し、目次別の核心メッセージ(Theme Statement)をスライド単位で仕様化します。',
-                'feat2-b': 'ベテランだけが持っていた「勝てる提案コンセプト」を誰もが持てます。提案書全体に我々のPositioningが貫通します。',
-                'feat2-d': '既存AIは<span class="font-bold">「ワンクリック」</span>で作ります — 100ページの空白をGPTが勝手に埋めます。Contrlは<span class="font-bold">「設計/仕様化」</span>します — ユーザーの意図通りにスライドを一枚ずつ作成します。',
-                'feat3-step': 'STEP 03',
-                'feat3-title': '提案書PPT生成',
-                'feat3-lead': '自社の既存提案書からデザインシステムを抽出し、それを再利用してスライドを構成します。',
-                'feat3-f': '自社の提案書を分析してデザインシステムを構築・テンプレート化し、これを再利用して新しいスライドを生成します。',
-                'feat3-b': 'デザインチームへそのままhand-off可能なドラフトが完成します。提案担当者の作業が最小化されます。',
-                'feat3-d': '<span class="font-bold">AI Slop</span>風の図解やレイアウトではありません。自社が実際に使用した表現·図解·画像を再利用し、<span class="font-bold">人が作ったようなスライド</span>を生成します。',
-                'why-title': 'CONTRLが選ばれる理由',
-                'why-sub': '提案書が選ばれない本当の理由。そして、CONTRLが必要な理由。',
-                'why1-title': '戦略が最後まで届かない提案書',
-                'why1-desc': '顧客ニーズと自社の強みを結ぶ戦略が、提案書の最後のスライドまで行き届いていない。これが、提案が選ばれない最大の原因です。',
-                'why2-title': '一部のベテランだけが持っていたスキル',
-                'why2-desc': '勝てる戦略を立て、最後のスライドまで一貫させる。それができるのは、一部のベテランだけでした。CONTRLは、そのスキルをすべての人に届けます。',
-                'why3-title': '汎用AIでは実現できない連携',
-                'why3-desc': 'ChatGPTやClaudeなどの汎用AIでは、RFPからWin Theme、Storyline、スライドまでを一気通貫でつなぐことはできません。',
+                'banner': '<span class="font-extrabold tracking-tight">無料PoC · いま進行中の提案書をお作りします</span>',
+                'banner-cta': '無料PoC申込 →',
+                'hero-label': 'AI提案書作成 · CONTRL',
+                'hero-title': '「うちの部長が書いたような<br>提案書を作りたかった。」',
+                'hero-sub': 'ストーリーは人が作り、AIがその骨格に素材と肉付けを加えます。<br>自社のデザインシステムで、人が組み立てたストーリー展開のままに。',
+                'hero-cta': '無料PoC申込',
+                'hero-cta2': '仕組みを見る',
+                'badge-format': 'ストーリーは人が決める',
+                'badge-hallu': '自社デザインシステムのまま',
+                'badge-local': '発表スクリプトまで',
+                'hot-label': '現場で最もよく聞く言葉',
+                'hot-title': '「AIを使っても、<br>なぜ提案書は難しいのか？」',
+                'voice1': '「GPTで作ってみました。でも、発表に持っていける内容ではありません。」',
+                'voice1-who': 'リサーチ企業 提案チーム長',
+                'voice2': '「AIで作ったものは、確認する方が時間がかかります。」',
+                'voice2-who': '教育機関 チーム長',
+                'voice3': '「新人に任せても、結局は私が書き直しています。」',
+                'voice3-who': 'IT企業 代表',
+                'click-label': '✦ ワンクリック、その後に起きること',
+                'click-title': '簡単そうで、そうではありません',
+                'click1-t': '見た目はそれらしいが…',
+                'click1-d': '華やかなPPTページが一瞬で出てきます',
+                'click2-t': '「言いたかったことと違う」',
+                'click2-d': '核心から外れ、論理が噛み合いません',
+                'click3-t': '「で、どうやって、どれくらい？」',
+                'click3-d': '具体性がなく、決意表明で終わります',
+                'click4-t': '「これなら自分で書く」',
+                'click4-d': '直す時間の方が書く時間より長くなります',
+                'click-caption': '実例 · 汎用AIで一度に生成したスライド',
+                'hot-bridge': '入札提案書は最低でも50〜100ページ。<br><span class="text-accent font-semibold">ページが増えるほど、AIは迷走します。</span>',
+                'show-label': 'CONTRLが作りたかったもの',
+                'show-title': '「うちの部長が書いたような<br>提案書を作りたかった。」',
+                'show-sub': 'だからContrlの提案書はこう仕上がります。<br>自社のデザインシステムで、人が組み立てたストーリー展開で。',
+                'flow-title': 'ストーリーは人が作り、<br>AIがその骨格に<span class="text-accent">素材と肉付け</span>を加えます',
+                'flow-in-label': 'AIが集める素材',
+                'flow-in1-t': '公告文 · RFP',
+                'flow-in1-d': '要求事項と評価基準を漏れなく読み取ります',
+                'flow-in2-t': '会社案内 · 実績',
+                'flow-in2-d': '自社の根拠を探し出します',
+                'flow-in3-t': '過去資料 · 事例集',
+                'flow-in3-d': '過去の提案書や事例から使えるものを選びます',
+                'flow-human-badge': '人',
+                'flow-human-t': '骨格：何で勝つか、どの順番で語るか',
+                'flow-human-d': '手描きのストーリーボード。ページの順番は人が決めます。',
+                'flow-out-label': 'AIが加える肉付け',
+                'flow-out1-t': 'ページを埋める',
+                'flow-out1-d': '決めた骨格どおりに各ページの内容を書きます',
+                'flow-out2-t': '数値・根拠を添える',
+                'flow-out2-d': '素材から見つけた数字と根拠で埋めます',
+                'flow-out3-t': '発表スクリプト',
+                'flow-out3-d': '各ページで話す内容まで一緒に出てきます',
+                'flow-through': '重要な決定は人が行います。<span class="text-accent">AIはその決定を厚くします。</span>',
+                'feat-title': 'ストーリーボードは<span class="text-accent">3回の選択</span>で作られます',
+                'feat-sub': '提案書を作る際、セクションごとに実際に通る流れです。選ぶのは人、準備するのはContrlです。',
+                'feat1-title': '核心となる一文を選ぶ',
+                'feat1-d': 'セクションごとにAIが核心となる一文を提示します。<br>このセクションで何を語るかは人が選びます。',
+                'feat2-title': 'ストーリー展開を選ぶ',
+                'feat2-a-t': '様式の順に展開 · 2ページ ✓ 選択',
+                'feat2-a-d': '様式5号の総括表と人員別の経歴を1ページに、続けて期間別の投入工数',
+                'feat2-b-t': '顧客の改善要望の流れで · 4ページ',
+                'feat2-b-d': '受付から配布まで担当者を追い、人員と役割を紹介',
+                'feat2-c-t': '評価基準の順に · 5ページ',
+                'feat2-c-d': '構成・役割分担・投入計画・運営・証憑の順に1ページずつ',
+                'feat2-d': '同じ一文でも、解き方の順番は異なります。<br>長所と短所を見て展開を選べば、ページ構成が決まります。',
+                'feat3-title': 'スライドの検収',
+                'feat3-d': 'ページごとにプレビューと発表スクリプトを見ながら進めます。<br>「19ページの右側が空いている」と指摘すれば、そのページだけ直ります。',
+                'feat-chips': 'その間にAIが押さえる素材',
+                'feat-chip1': '評価項目 · 配点',
+                'feat-chip2': '要求事項 · RFP様式',
+                'feat-chip3': '会社資産（会社案内 · 実績 · 過去提案書）',
+                'feat-chip4': '不足資料の通知',
+                'feat-chip5': '根拠の出典表示',
+                'case-label': '導入事例 · グローバルバイオ企業 T社',
+                'case-title': '導入後4四半期で<br>受注金額が<span class="text-accent">59%</span>増加',
+                'case-basis': '導入後4四半期（25Q3〜26Q2）を前年同四半期と比較 · T社入札実績ダッシュボード基準',
+                'case-k1': '入札件数',
+                'case-k1-d': '155件 → 197件',
+                'case-k2': '落札件数',
+                'case-k2-d': '96件 → 147件',
+                'case-k3': '勝率',
+                'case-k4': '受注金額',
+                'case-k4-d': '165.2億 → 262.4億ウォン',
+                'case-summary': 'Contrlとともにより多く入札し、<br>勝てる提案に集中することで<br><span class="text-accent">勝率と受注額がともに上がりました。</span>',
+                'case-caption': '社内セールス博覧会「Sales Guru」で全プロジェクト1位、全社AI革新の代表事例として紹介（Platum、2025.08.20）',
                 'faq-title': 'よくあるご質問',
                 'faq-sub': 'CONTRLについて、よくいただくご質問をまとめました。',
-                'faq1-q': 'contrlはどのような課題を解決しますか？',
-                'faq1-a': '提案書が選ばれない理由はひとつ。顧客ニーズと自社の強みを結ぶ戦略が、最後のスライドまで一貫していないからです。contrlは、RFP → Win Theme → Storyline → スライドを途切れのない一本の戦略としてつなぎます。',
-                'faq2-q': '対応しているファイル形式を教えてください。',
-                'faq2-a': '現在はPowerPoint（.pptx）形式に対応しています。自社の既存PPTテンプレートをアップロードするだけで、フォーマットやデザインを維持した提案書の初稿を自動生成します。',
+                'faq1-q': '汎用AIで作った提案書と何が違いますか？',
+                'faq1-a': '汎用AIは一度にそれらしいスライドを出しますが、核心から外れ具体性がなく、直す時間の方が書く時間より長くなります。Contrlは、何で勝つか・どの順番で語るかを人が決め、AIがその骨格に素材と肉付けを加えます。だから、うちの部長が書いたような提案書に仕上がります。',
+                'faq2-q': '自社のデザインのまま仕上がりますか？',
+                'faq2-a': 'はい。自社のデザインシステムをそのまま使います。過去の提案書の表現・図解・構成を再利用してPowerPoint（.pptx）で作成し、各ページに発表スクリプトと根拠の出典が付きます。',
                 'faq3-q': 'データのセキュリティはどのように確保されていますか？',
                 'faq3-a': '提案書ファイルが外部に送信されることはありません。クラウドへのアップロードも一切なく、提案データが社外に流出するリスクはありません。',
                 'faq4-q': 'どのような方を対象とした製品ですか？',
-                'faq4-a': '提案書作成に関わるすべての方が対象です。役職や経験は問いません。勝てる戦略を立て、最後のスライドまで一貫させる——それは一部のベテランだけが持つスキルでした。CONTRLは、そのスキルをすべての人に届けます。',
-                'faq5-q': 'Contrを無料で試すにはどうすればいいですか？',
-                'faq5-a': 'ページ上部の「POC申込」ボタンからご利用いただけます。第2次クローズドベータが開始されました。第1次のフィードバックを反映し、さらに強化されています。無料でご利用いただけ、ご登録やお支払いは不要の招待制です。',
-                'cta-title': '勝てる戦略を、提案書の最後まで。<br>今すぐ始めましょう。',
-                'cta-sub': 'RFP → Win Theme → Storyline → Slide。<br>ひとつの戦略が、途切れることなく最後まで届きます。',
-                'cta-btn': 'POC申込',
-                'footer-desc': '勝てる戦略を、提案書の最後まで一貫させるAI Win Theme Editor。',
-                'footer-features': '機能',
-                'footer-why': '選ばれる理由',
+                'faq4-a': '提案書を書くすべての方が対象です。新人に任せても結局チーム長が書き直していた仕事を、「選ぶのは人、準備するのはContrl」という形に変えます。重要な決定は人が行い、AIはその決定を厚くします。',
+                'faq5-q': '無料PoCはどのように進みますか？',
+                'faq5-a': '品質検証を無料で行います。いま進行中の提案書をContrlでお作りし、その結果を見てご判断ください。上部の「無料PoC申込」ボタン、または junho@cliwant.com までご連絡ください。',
+                'cta-label': '無料PoC',
+                'cta-title': '品質検証を、無料で。',
+                'cta-sub': 'いま進行中の提案書をお作りします。',
+                'cta-btn': '無料PoC申込',
+                'cta-mail-label': '無料PoC申込 · ',
+                'footer-desc': 'ストーリーは人が、素材と肉付けはAIが。<br>うちの部長が書いたような提案書を作るAI。',
+                'footer-features': '仕組み',
+                'footer-why': '導入事例',
                 'footer-faq': 'よくあるご質問',
                 'footer-product-title': '製品',
                 'footer-contact-title': 'お問い合わせ',
-                'footer-demo': 'POC申込',
-                'hot-label': 'Pain Point',
-                'hot-title': '提案書のせいで、<br>売上の上限が止まっていませんか？',
-                'hot-sub': '入札機会は毎日あふれていますが、誰もが同じ壁にぶつかります。',
-                'hot-role1': 'For Leaders',
-                'hot-title1': '会社・経営者の視点',
-                'hot-quote1': '「対応できそうな入札はもっと見えているのに…」',
-                'hot-item1-1': '提案書をしっかり書ける人が足りない',
-                'hot-item1-2': '経験者の比率が低い',
-                'hot-item1-3': '既存プロジェクトで人手が足りない',
-                'hot-item1-4': '提案書を書いた経験のないメンバーが多い',
-                'hot-result1': '→ 入札に参加できず、売上の上限が止まる',
-                'hot-role2': 'For Practitioners',
-                'hot-title2': '実務者の視点',
-                'hot-quote2': '「提案書、本当にやりたくない仕事です」',
-                'hot-item2-1': '複雑で、時間がかかりすぎる',
-                'hot-item2-2': '価値ある仕事だと感じられない',
-                'hot-item2-3': 'どこから手をつければいいか分からない',
-                'hot-item2-4': '誰かが代わりにやってくれたらと思う',
-                'hot-result2': '→ 本能的に避けたくなる業務になる',
-                'hot-bridge': 'Contrlは、この壁を壊すために生まれました。<br><span class="text-accent font-semibold">入札機会はそのまま、作成キャパは無限大に。</span>',
-                'fbd-feature': 'Feature',
-                'fbd-benefit': 'Benefit',
-                'fbd-diff': 'Differentiator',
-                'fbd-feature-2': 'Feature',
-                'fbd-benefit-2': 'Benefit',
-                'fbd-diff-2': 'Differentiator',
-                'fbd-feature-3': 'Feature',
-                'fbd-benefit-3': 'Benefit',
-                'fbd-diff-3': 'Differentiator',
+                'footer-demo': '無料PoC申込',
             }
         };
 
