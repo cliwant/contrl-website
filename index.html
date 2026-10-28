@@ -492,6 +492,22 @@
         @keyframes slideUp   { from { transform: translateY(0); }     to { transform: translateY(-100%); } }
         @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
         @media (prefers-reduced-motion: reduce) { .slide-track { animation: none !important; } }
+        /* "만들고 싶었던 것": 제안서 슬라이드가 왼쪽에서 오른쪽으로 흐르는 가로 마퀴 */
+        .show-marquee {
+            display: flex; overflow: hidden; gap: 1.5rem;
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+        }
+        .show-track { display: flex; flex-shrink: 0; gap: 1.5rem; padding-right: 1.5rem; animation: showRight 48s linear infinite; }
+        .show-card {
+            height: 220px; width: auto; flex-shrink: 0;
+            border-radius: 14px; background: #fff;
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 18px 40px -18px rgba(0,0,0,0.25), 0 2px 8px rgba(0,0,0,0.05);
+        }
+        @media (min-width: 768px) { .show-card { height: 320px; } }
+        @keyframes showRight { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+        @media (prefers-reduced-motion: reduce) { .show-track { animation: none; } }
         /* (flow diagram styles removed — now CSS-only horizontal steps) */
     </style>
 </head>
@@ -702,8 +718,23 @@
                 <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="show-title">“우리 회사 팀장님이 쓴 것 같은<br>제안서를 만들고 싶었습니다.”</h2>
                 <p class="text-base md:text-lg text-zinc-500 leading-relaxed" data-i18n-html="show-sub">그래서 Contrl이 만드는 제안서는 이렇게 나옵니다.<br>고객사의 디자인 시스템으로, 사람이 직접 작성한 스토리 전개로.</p>
             </div>
-            <div class="reveal">
-                <img src="/images/brochure/showcase.jpg" alt="Contrl로 만든 여러 고객사의 제안서 슬라이드 - 각 회사의 디자인 시스템을 그대로 유지한 결과물" loading="lazy" class="w-full rounded-3xl shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
+            <div class="reveal show-marquee" aria-label="Contrl로 만든 고객사 제안서 슬라이드 예시">
+                <div class="show-track">
+                    <img src="/images/slides/kep.jpg" alt="한전형 AI 플랫폼 구축용역 제안서" loading="lazy" class="show-card">
+                    <img src="/images/slides/edu.jpg" alt="정신건강전문가 긴급지원사업 사례관리시스템 기능개선 제안서" loading="lazy" class="show-card">
+                    <img src="/images/slides/web.jpg" alt="공공기관 서비스 중심 홈페이지 재구축 용역 제안서" loading="lazy" class="show-card">
+                    <img src="/images/slides/rnd.jpg" alt="방산 모빌리티 분야 R&amp;D 사업 기획 연구 제안서" loading="lazy" class="show-card">
+                    <img src="/images/slides/chapter.jpg" alt="예비창업자 1만원 챌린지 프로그램 제안서" loading="lazy" class="show-card">
+                    <img src="/images/slides/incu.jpg" alt="인큐베이팅 · 크라우드 펀딩 · 브랜딩 전문가 제안서" loading="lazy" class="show-card">
+                </div>
+                <div class="show-track" aria-hidden="true">
+                    <img src="/images/slides/kep.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/edu.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/web.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/rnd.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/chapter.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/incu.jpg" alt="" loading="lazy" class="show-card">
+                </div>
             </div>
         </div>
     </section>
