@@ -489,12 +489,12 @@
             /* 각 카드가 따로 둥실 떠다니며 살짝 기울어진다 */
             animation: cardDrift 7s ease-in-out infinite;
         }
-        .slide-track > .slide-card:nth-child(1) { --tilt: -2deg; animation-delay: 0s;    animation-duration: 7s; }
-        .slide-track > .slide-card:nth-child(2) { --tilt:  1.5deg; animation-delay: -2.3s; animation-duration: 8s; }
-        .slide-track > .slide-card:nth-child(3) { --tilt: -1deg; animation-delay: -4.1s; animation-duration: 6.5s; }
-        .slide-col-down .slide-track > .slide-card:nth-child(1) { --tilt:  2deg; }
-        .slide-col-down .slide-track > .slide-card:nth-child(2) { --tilt: -1.5deg; }
-        .slide-col-down .slide-track > .slide-card:nth-child(3) { --tilt:  1deg; }
+        .slide-track > .slide-card:nth-child(3n+1) { --tilt: -2deg; animation-delay: 0s;    animation-duration: 7s; }
+        .slide-track > .slide-card:nth-child(3n+2) { --tilt:  1.5deg; animation-delay: -2.3s; animation-duration: 8s; }
+        .slide-track > .slide-card:nth-child(3n) { --tilt: -1deg; animation-delay: -4.1s; animation-duration: 6.5s; }
+        .slide-col-down .slide-track > .slide-card:nth-child(3n+1) { --tilt:  2deg; }
+        .slide-col-down .slide-track > .slide-card:nth-child(3n+2) { --tilt: -1.5deg; }
+        .slide-col-down .slide-track > .slide-card:nth-child(3n) { --tilt:  1deg; }
         @keyframes cardDrift {
             0%, 100% { transform: translate(0, 0) rotate(var(--tilt, 0deg)); }
             33%      { transform: translate(6px, -8px) rotate(calc(var(--tilt, 0deg) + 1deg)); }
@@ -601,26 +601,30 @@
                     <div class="slide-river relative h-[440px] sm:h-[520px] lg:h-[600px] overflow-hidden" aria-label="Contrl로 만든 고객사 제안서 슬라이드 예시">
                         <div class="slide-col slide-col-up">
                             <div class="slide-track">
-                                <img src="/images/slides/logistics.jpg" alt="누리물류 스마트 물류센터 통합관제 플랫폼 구축 제안서 (가상 예시)" class="slide-card">
-                                <img src="/images/slides/library.jpg" alt="시민참여형 디지털 도서관 서비스 고도화 제안서 (가상 예시)" class="slide-card">
-                                <img src="/images/slides/coastal-rnd.jpg" alt="연안 환경 모니터링 R&amp;D 기획 연구 제안서 (가상 예시)" class="slide-card">
+                                <img src="/images/slides/doodle-startup.jpg" alt="새길창업재단 첫 매출 챌린지 액셀러레이팅 제안서 (가상 예시)" class="slide-card">
+                                <img src="/images/slides/klein-dataportal.jpg" alt="가온시 공공데이터 포털 재구축 제안서 표지 (가상 예시)" class="slide-card">
+                                <img src="/images/slides/gray-coastal.jpg" alt="연안 환경 모니터링 R&amp;D 기획 제안서 표지 (가상 예시)" class="slide-card">
+                                <img src="/images/slides/red-festival.jpg" alt="가온시 문화예술축제 운영 대행 제안서 (가상 예시)" class="slide-card">
                             </div>
                             <div class="slide-track" aria-hidden="true">
-                                <img src="/images/slides/logistics.jpg" alt="" class="slide-card">
-                                <img src="/images/slides/library.jpg" alt="" class="slide-card">
-                                <img src="/images/slides/coastal-rnd.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/doodle-startup.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/klein-dataportal.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/gray-coastal.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/red-festival.jpg" alt="" class="slide-card">
                             </div>
                         </div>
                         <div class="slide-col slide-col-down">
                             <div class="slide-track">
-                                <img src="/images/slides/dataportal.jpg" alt="공공데이터 개방 포털 재구축 제안서 (가상 예시)" class="slide-card">
-                                <img src="/images/slides/startup.jpg" alt="첫 매출 챌린지 창업 액셀러레이팅 프로그램 제안서 (가상 예시)" class="slide-card">
-                                <img src="/images/slides/local-brand.jpg" alt="지역 소상공인 브랜딩 지원 사업 제안서 (가상 예시)" class="slide-card">
+                                <img src="/images/slides/coffee-brand.jpg" alt="지역 소상공인 브랜딩 지원 제안서 표지 (가상 예시)" class="slide-card">
+                                <img src="/images/slides/sage-library.jpg" alt="한빛교육재단 디지털 도서관 고도화 제안서 표지 (가상 예시)" class="slide-card">
+                                <img src="/images/slides/bw-logistics.jpg" alt="누리물류 스마트 물류센터 통합관제 제안서 표지 (가상 예시)" class="slide-card">
+                                <img src="/images/slides/mono-traffic.jpg" alt="스마트시티 교통 데이터 플랫폼 제안서 표지 (가상 예시)" class="slide-card">
                             </div>
                             <div class="slide-track" aria-hidden="true">
-                                <img src="/images/slides/dataportal.jpg" alt="" class="slide-card">
-                                <img src="/images/slides/startup.jpg" alt="" class="slide-card">
-                                <img src="/images/slides/local-brand.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/coffee-brand.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/sage-library.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/bw-logistics.jpg" alt="" class="slide-card">
+                                <img src="/images/slides/mono-traffic.jpg" alt="" class="slide-card">
                             </div>
                         </div>
                     </div>
@@ -740,20 +744,24 @@
             </div>
             <div class="reveal show-marquee" aria-label="Contrl로 만든 고객사 제안서 슬라이드 예시">
                 <div class="show-track">
-                    <img src="/images/slides/logistics.jpg" alt="누리물류 스마트 물류센터 통합관제 플랫폼 구축 제안서 (가상 예시)" loading="lazy" class="show-card">
-                    <img src="/images/slides/library.jpg" alt="시민참여형 디지털 도서관 서비스 고도화 제안서 (가상 예시)" loading="lazy" class="show-card">
-                    <img src="/images/slides/dataportal.jpg" alt="공공데이터 개방 포털 재구축 제안서 (가상 예시)" loading="lazy" class="show-card">
-                    <img src="/images/slides/coastal-rnd.jpg" alt="연안 환경 모니터링 R&amp;D 기획 연구 제안서 (가상 예시)" loading="lazy" class="show-card">
-                    <img src="/images/slides/startup.jpg" alt="첫 매출 챌린지 창업 액셀러레이팅 프로그램 제안서 (가상 예시)" loading="lazy" class="show-card">
-                    <img src="/images/slides/local-brand.jpg" alt="지역 소상공인 브랜딩 지원 사업 제안서 (가상 예시)" loading="lazy" class="show-card">
+                    <img src="/images/slides/doodle-startup.jpg" alt="새길창업재단 첫 매출 챌린지 액셀러레이팅 제안서 (가상 예시)" loading="lazy" class="show-card">
+                    <img src="/images/slides/coffee-brand.jpg" alt="지역 소상공인 브랜딩 지원 제안서 표지 (가상 예시)" loading="lazy" class="show-card">
+                    <img src="/images/slides/sage-library.jpg" alt="한빛교육재단 디지털 도서관 고도화 제안서 표지 (가상 예시)" loading="lazy" class="show-card">
+                    <img src="/images/slides/klein-dataportal.jpg" alt="가온시 공공데이터 포털 재구축 제안서 표지 (가상 예시)" loading="lazy" class="show-card">
+                    <img src="/images/slides/bw-logistics.jpg" alt="누리물류 스마트 물류센터 통합관제 제안서 표지 (가상 예시)" loading="lazy" class="show-card">
+                    <img src="/images/slides/gray-coastal.jpg" alt="연안 환경 모니터링 R&amp;D 기획 제안서 표지 (가상 예시)" loading="lazy" class="show-card">
+                    <img src="/images/slides/red-festival.jpg" alt="가온시 문화예술축제 운영 대행 제안서 (가상 예시)" loading="lazy" class="show-card">
+                    <img src="/images/slides/mono-traffic.jpg" alt="스마트시티 교통 데이터 플랫폼 제안서 표지 (가상 예시)" loading="lazy" class="show-card">
                 </div>
                 <div class="show-track" aria-hidden="true">
-                    <img src="/images/slides/logistics.jpg" alt="" loading="lazy" class="show-card">
-                    <img src="/images/slides/library.jpg" alt="" loading="lazy" class="show-card">
-                    <img src="/images/slides/dataportal.jpg" alt="" loading="lazy" class="show-card">
-                    <img src="/images/slides/coastal-rnd.jpg" alt="" loading="lazy" class="show-card">
-                    <img src="/images/slides/startup.jpg" alt="" loading="lazy" class="show-card">
-                    <img src="/images/slides/local-brand.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/doodle-startup.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/coffee-brand.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/sage-library.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/klein-dataportal.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/bw-logistics.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/gray-coastal.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/red-festival.jpg" alt="" loading="lazy" class="show-card">
+                    <img src="/images/slides/mono-traffic.jpg" alt="" loading="lazy" class="show-card">
                 </div>
             </div>
         </div>
