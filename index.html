@@ -670,7 +670,20 @@
                     </ol>
                 </div>
                 <figure class="order-1 lg:order-2">
-                    <img src="/images/brochure/problem.jpg" alt="범용 AI로 한 번에 만든 제안 슬라이드 예시 - 보기엔 그럴듯하지만 핵심을 벗어난 결과물" loading="lazy" class="w-full rounded-2xl border border-white/10 shadow-2xl">
+                    <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                        <img src="/images/brochure/problem.jpg" alt="범용 AI로 한 번에 만든 제안 슬라이드 예시 - 보기엔 그럴듯하지만 핵심을 벗어난 결과물" loading="lazy" class="w-full block">
+                        <!-- 빨간 X + 사용 불가 도장 -->
+                        <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 56" preserveAspectRatio="none" aria-hidden="true">
+                            <line x1="3" y1="3" x2="97" y2="53" stroke="#ef4444" stroke-width="1.6" stroke-linecap="round" opacity="0.9"/>
+                            <line x1="97" y1="3" x2="3" y2="53" stroke="#ef4444" stroke-width="1.6" stroke-linecap="round" opacity="0.9"/>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <span class="-rotate-12 inline-flex items-center gap-2 border-4 border-red-500 bg-white/90 text-red-600 font-extrabold text-xl md:text-3xl tracking-widest px-5 py-2 rounded-xl shadow-lg" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;">
+                                <iconify-icon icon="solar:close-circle-bold" width="28"></iconify-icon>
+                                <span data-i18n="click-stamp">사용 불가</span>
+                            </span>
+                        </div>
+                    </div>
                     <figcaption class="mt-3 text-xs text-white/40" data-i18n="click-caption">실제 사례 · 범용 AI로 한 번에 만든 슬라이드</figcaption>
                 </figure>
             </div>
@@ -1053,6 +1066,7 @@
                 'click3-d': 'It ends in promises, not specifics',
                 'click4-t': '“I might as well write it myself.”',
                 'click4-d': 'Fixing takes longer than writing',
+                'click-stamp': 'UNUSABLE',
                 'click-caption': 'Real example · slides generated in one shot by a general-purpose AI',
                 'hot-bridge': 'A bid proposal runs 50–100 pages at minimum.<br><span class="text-accent font-semibold">The longer it gets, the further AI drifts.</span>',
                 'show-label': 'What CONTRL set out to build',
@@ -1166,6 +1180,7 @@
                 'click3-d': '具体性がなく、決意表明で終わります',
                 'click4-t': '「これなら自分で書く」',
                 'click4-d': '直す時間の方が書く時間より長くなります',
+                'click-stamp': '使用不可',
                 'click-caption': '実例 · 汎用AIで一度に生成したスライド',
                 'hot-bridge': '入札提案書は最低でも50〜100ページ。<br><span class="text-accent font-semibold">ページが増えるほど、AIは迷走します。</span>',
                 'show-label': 'CONTRLが作りたかったもの',
