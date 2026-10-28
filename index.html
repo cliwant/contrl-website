@@ -485,13 +485,24 @@
             display: block; width: 100%; height: auto;
             border-radius: 14px; background: #fff;
             border: 1px solid rgba(0,0,0,0.06);
-            box-shadow: 0 18px 40px -18px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.06);
-            transform: rotate(-2deg);
+            box-shadow: 0 10px 24px -14px rgba(0,0,0,0.16), 0 1px 4px rgba(0,0,0,0.04);
+            /* 각 카드가 따로 둥실 떠다니며 살짝 기울어진다 */
+            animation: cardDrift 7s ease-in-out infinite;
         }
-        .slide-col-down .slide-card { transform: rotate(2deg); }
+        .slide-track > .slide-card:nth-child(1) { --tilt: -2deg; animation-delay: 0s;    animation-duration: 7s; }
+        .slide-track > .slide-card:nth-child(2) { --tilt:  1.5deg; animation-delay: -2.3s; animation-duration: 8s; }
+        .slide-track > .slide-card:nth-child(3) { --tilt: -1deg; animation-delay: -4.1s; animation-duration: 6.5s; }
+        .slide-col-down .slide-track > .slide-card:nth-child(1) { --tilt:  2deg; }
+        .slide-col-down .slide-track > .slide-card:nth-child(2) { --tilt: -1.5deg; }
+        .slide-col-down .slide-track > .slide-card:nth-child(3) { --tilt:  1deg; }
+        @keyframes cardDrift {
+            0%, 100% { transform: translate(0, 0) rotate(var(--tilt, 0deg)); }
+            33%      { transform: translate(6px, -8px) rotate(calc(var(--tilt, 0deg) + 1deg)); }
+            66%      { transform: translate(-5px, 5px) rotate(calc(var(--tilt, 0deg) - 1deg)); }
+        }
         @keyframes slideUp   { from { transform: translateY(0); }     to { transform: translateY(-100%); } }
         @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
-        @media (prefers-reduced-motion: reduce) { .slide-track { animation: none !important; } }
+        @media (prefers-reduced-motion: reduce) { .slide-track, .slide-card { animation: none !important; } }
         /* "만들고 싶었던 것": 제안서 슬라이드가 왼쪽에서 오른쪽으로 흐르는 가로 마퀴 */
         .show-marquee {
             display: flex; overflow: hidden; gap: 1.5rem;
