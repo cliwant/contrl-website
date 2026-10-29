@@ -1,0 +1,63 @@
+# PR 마다 Firebase Hosting 미리보기 채널(7일 뒤 만료)을 만들고 PR 에 주소를 댓글로 남긴다.
+# 라이브(contrl.ai)는 바뀌지 않는다.
+#
+# 기본은 꺼져 있다. 켜려면 저장소 변수 FIREBASE_PREVIEW_ENABLED 를 true 로 만든다
+# (Settings > Secrets and variables > Actions > Variables).
+# 같은 저장소 안의 브랜치에서 올린 PR 에서만 돈다(포크는 시크릿을 받지 못한다).
+# 시크릿은 이 변수와 상관없이, 쓰기 권한이 있는 사람이 자기 브랜치의 워크플로로 읽을 수 있다.
+# 미리보기 주소는 공개이고, 이 저장소의 PR 내용도 이미 공개다.
+#
+# 필요한 시크릿은 firebase-hosting-merge.yml 과 같다(FIREBASE_SERVICE_ACCOUNT_CONTRL_AI).
+# 서비스 계정에 Firebase Authentication Admin 역할이 없으면 미리보기 주소가 Auth 승인 도메인에
+# 자동으로 추가되지 않고 경고만 난다. 이 사이트는 Firebase 로그인을 쓰지 않으므로 추가하지 않아도 된다.
+
+name: Deploy to Firebase Hosting on PR
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - '.github/**'
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+# 같은 PR 에 새 커밋이 오면 이전 미리보기 배포는 취소한다
+concurrency:
+  group: firebase-hosting-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  build_and_preview:
+    if: vars.FIREBASE_PREVIEW_ENABLED == 'true' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check deploy secret
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CONTRL_AI }}
+        run: |
+          if [ -z "$FIREBASE_SERVICE_ACCOUNT" ]; then
+            echo "::error title=Deploy secret missing::저장소 시크릿 FIREBASE_SERVICE_ACCOUNT_CONTRL_AI 가 없어 미리보기를 만들지 못했습니다. 이 파일 맨 위의 설정을 확인하세요."
+            exit 1
+          fi
+          if ! printf '%s' "$FIREBASE_SERVICE_ACCOUNT" | jq -e '.type == "service_account" and (.client_email | type == "string") and (.private_key | type == "string")' > /dev/null 2>&1; then
+            echo "::error title=Deploy secret invalid::FIREBASE_SERVICE_ACCOUNT_CONTRL_AI 가 서비스 계정 키 JSON(type=service_account)이 아닙니다. OAuth 클라이언트 JSON 같은 다른 값을 넣지 않았는지 확인하세요."
+            exit 1
+          fi
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          lfs: true
+          persist-credentials: false
+
+      - uses: FirebaseExtended/action-hosting-deploy@500ac625ca2dd40cbd15f7659af953801858032a # v0.11.0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CONTRL_AI }}
+          projectId: contrl-ai
+          expires: 7d
+          firebaseToolsVersion: 15.34.0

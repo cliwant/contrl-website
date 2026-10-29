@@ -1,0 +1,23 @@
+{
+  "hosting": {
+    "site": "contrl-ai",
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/.*/**",
+      "**/node_modules/**",
+      "**/*.md"
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(html|xml|txt)",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+      },
+      {
+        "source": "**/",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+      }
+    ]
+  }
+}
