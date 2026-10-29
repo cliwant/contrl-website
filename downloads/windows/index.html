@@ -156,7 +156,8 @@
 
     <script>
         (function () {
-            var lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+            var params = new URLSearchParams(window.location.search);
+            var lang = (params.get('lang') || navigator.language || navigator.userLanguage || 'en').toLowerCase();
 
             var i18n = {
                 ko: {
