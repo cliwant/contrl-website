@@ -520,6 +520,54 @@
         @keyframes showRight { from { transform: translateX(-100%); } to { transform: translateX(0); } }
         @media (prefers-reduced-motion: reduce) { .show-track { animation: none; } }
         /* (flow diagram styles removed — now CSS-only horizontal steps) */
+
+        /* Sales deck slide 2: readable examples across screen sizes. */
+        .attempt-section{padding:100px 24px;background:#f9f6f2;scroll-margin-top:110px}
+        .attempt-inner{max-width:1280px;margin:auto}
+        .attempt-heading{max-width:850px;margin:0 auto 48px;text-align:center;word-break:keep-all}
+        .attempt-eyebrow{color:#b7551b;font-size:14px;font-weight:700;letter-spacing:.03em;margin-bottom:16px}
+        .attempt-heading h2{font-family:'Freesentation','Pretendard',sans-serif;font-size:clamp(28px,3.2vw,42px);font-weight:800;line-height:1.3;letter-spacing:-.035em;text-wrap:balance}
+        .attempt-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+        .attempt-card{min-width:0;background:#fff;border:1px solid #e9e4df;border-radius:24px;padding:28px;box-shadow:0 8px 24px #43352405}
+        .attempt-number{display:block;color:#b7551b;font-size:13px;font-weight:800;letter-spacing:.08em;margin-bottom:14px}
+        .attempt-card h3{font-size:26px;font-weight:800;line-height:1.45;letter-spacing:-.035em;word-break:keep-all;min-height:76px;margin-bottom:24px}
+        .attempt-demo{height:236px;background:#f8f8f9;border:1px solid #e8e8eb;border-radius:14px;overflow:hidden;margin-bottom:24px}
+        .attempt-window-head{display:flex;align-items:center;gap:10px;padding:13px 14px;border-bottom:1px solid #e8e8eb;font-size:11px;color:#5b5b63;overflow-wrap:anywhere}
+        .attempt-dots{font-size:8px;white-space:nowrap;color:#c4c4ca}
+        .attempt-prompt{padding:22px 18px;font-size:14px;line-height:1.9;color:#52525b;word-break:keep-all}
+        .attempt-demo-model{text-align:center;padding:22px 12px}
+        .attempt-meta{font-size:12px;color:#71717a}
+        .attempt-plans{display:flex;align-items:center;justify-content:center;gap:22px;margin:18px 0;font-size:26px;color:#71717a}
+        .attempt-plans strong{font-size:32px;color:#18181b}
+        .attempt-upgrade{display:inline-block;background:#eaf3ed;color:#32704b;padding:6px 14px;border-radius:7px;font-size:12px;font-weight:700}
+        .attempt-price{font-size:12px;color:#71717a;margin-top:14px}
+        .attempt-folder{padding:16px;display:flex;justify-content:space-between;gap:8px;align-items:center;border-bottom:1px solid #e8e8eb}
+        .attempt-folder strong{font-size:13px}
+        .attempt-files{padding:14px 16px;font-size:12px}
+        .attempt-files>div{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+        .attempt-filetype{font-size:9px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:6px;background:#fff;border:1px solid #e4e4e7;color:#777;flex-shrink:0}
+        .attempt-card ul{display:grid;gap:12px;padding:0;list-style:none}
+        .attempt-card li{position:relative;padding-left:17px;font-size:14px;line-height:1.75;color:#52525b;word-break:keep-all;overflow-wrap:anywhere}
+        .attempt-card li:before{content:'';position:absolute;top:10px;left:0;width:5px;height:5px;border-radius:50%;background:#c67c4d}
+        .attempt-question{margin-top:40px;text-align:center;font-size:clamp(18px,2vw,24px);font-weight:750;word-break:keep-all}
+        @media(max-width:1000px){.attempt-grid{gap:16px}.attempt-card{padding:22px 18px}.attempt-card h3{font-size:24px}}
+        @media(max-width:767px){.attempt-section{padding:64px 20px}.attempt-heading{margin-bottom:32px}.attempt-grid{grid-template-columns:1fr;max-width:520px;margin:auto;gap:20px}.attempt-card{padding:24px}.attempt-card h3{min-height:0;margin-bottom:20px;font-size:25px}.attempt-demo{height:auto;min-height:212px}.attempt-demo-model{padding:24px}.attempt-question{margin-top:32px}.attempt-prompt{padding:24px 20px}.attempt-demo-data{padding-bottom:8px}}
+
+        .prompt-typing-wrap{position:relative}
+        .prompt-typing-wrap>[data-i18n]{opacity:0}
+        .prompt-typing-output{position:absolute;inset:0;margin:0}
+        .prompt-typing-output::after{content:'';display:inline-block;width:2px;height:1.1em;background:#b7551b;vertical-align:-.15em;margin-left:3px;animation:prompt-caret 1s steps(1) infinite}
+        .prompt-typing-paused .prompt-typing-output::after{animation:none}
+        .prompt-typing-toggle{margin-left:auto;flex-shrink:0;width:28px;height:28px;border:1px solid #d4d4d8;border-radius:6px;color:#52525b;background:white;cursor:pointer}
+        .prompt-typing-toggle:focus-visible{outline:2px solid #b7551b;outline-offset:3px}
+        @keyframes prompt-caret{50%{opacity:0}}
+        @media(prefers-reduced-motion:reduce){.prompt-typing-output::after{animation:none}}
+        .attempt-file-icon{width:32px;height:32px;object-fit:contain;flex-shrink:0;display:block}
+        .attempt-hwp-icon{width:32px;height:32px;overflow:hidden;flex-shrink:0;display:block}.attempt-hwp-icon img{height:32px;width:auto;max-width:none;display:block}
+        /* Shared scale for the three main narrative section headings. */
+        h2.section-heading-unified{font-size:28px;line-height:1.3;letter-spacing:-.035em;font-weight:800;word-break:keep-all;text-wrap:balance}
+        @media(min-width:768px){h2.section-heading-unified{font-size:44px}}
+        @media(min-width:1024px){h2.section-heading-unified{font-size:52px}}
     </style>
 </head>
 
@@ -680,7 +728,7 @@
                     <iconify-icon icon="solar:chat-round-dots-bold-duotone" width="20" class="text-accent"></iconify-icon>
                     <span class="text-sm md:text-base font-semibold text-white/80 tracking-wide" data-i18n="hot-label">현장에서 가장 많이 듣는 말</span>
                 </div>
-                <h2 class="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="hot-title">“저는 왜 AI를 써도 제안서가 어렵죠?”</h2>
+                <h2 class="section-heading-unified text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="hot-title">“저는 왜 AI를 써도 제안서가 어렵죠?”</h2>
             </div>
 
             <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-5 stagger mb-24">
@@ -803,7 +851,7 @@
     <section id="how" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white" aria-label="contrl 작동 방식 - 사람이 스토리를 만들고 AI가 재료와 살을 붙이는 구조">
         <div class="max-w-7xl mx-auto">
             <div class="reveal mb-16 text-center">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="flow-title">스토리는 사람이 만들고,<br>AI는 그 뼈대에 <span class="text-accent">재료와 살</span>을 붙입니다</h2>
+                <h2 class="section-heading-unified text-3xl md:text-4xl font-extrabold tracking-tight mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="flow-title">스토리는 사람이 만들고,<br>AI는 그 뼈대에 <span class="text-accent">재료와 살</span>을 붙입니다</h2>
             </div>
 
             <div class="reveal grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_40px_minmax(0,1.45fr)_40px_minmax(0,1fr)] gap-4 lg:gap-0 items-stretch">
@@ -863,66 +911,13 @@
         </div>
     </section>
 
-    <!-- 5. THREE CHOICES — 스토리보드는 세 번의 선택으로 -->
-    <section id="features" class="py-24 md:py-32 px-4 sm:px-6 lg:px-8" style="background-color: #FCFCFC;" aria-label="contrl 핵심 기능 - 핵심 문장 고르기, 이야기 전개 고르기, 슬라이드 검수">
-        <div class="max-w-7xl mx-auto">
-            <div class="reveal mb-16 text-center">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" data-font-frees style="font-family: 'Freesentation', 'Pretendard', sans-serif;" data-i18n-html="feat-title">스토리보드는 <span class="text-accent">세 번의 선택</span>으로 만들어집니다</h2>
-                <p class="text-base text-zinc-500 leading-relaxed max-w-xl mx-auto" data-i18n="feat-sub">제안서를 만들 때 섹션마다 실제로 거치는 과정입니다. 고르는 건 사람이, 준비하는 건 Contrl이 합니다.</p>
-            </div>
-
-            <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-5 stagger">
-                <!-- 1 -->
-                <div class="reveal bg-white rounded-2xl p-6 border border-zinc-100/80 border-t-4 border-t-accent shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-bold flex items-center justify-center shrink-0">1</span>
-                        <h3 class="text-lg font-bold" data-i18n="feat1-title">핵심 문장 고르기</h3>
-                    </div>
-                    <img src="/images/brochure/step1.jpg" alt="섹션별 핵심 문장 후보를 고르는 Contrl 화면" loading="lazy" class="w-full rounded-xl border border-zinc-100 mb-5">
-                    <p class="text-sm text-zinc-600 leading-relaxed mt-auto" data-i18n-html="feat1-d">섹션마다 AI가 핵심 문장을 내놓습니다.<br>이 섹션에서 무엇을 말할지 사람이 선택합니다.</p>
-                </div>
-                <!-- 2 -->
-                <div class="reveal bg-white rounded-2xl p-6 border border-zinc-100/80 border-t-4 border-t-accent shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-bold flex items-center justify-center shrink-0">2</span>
-                        <h3 class="text-lg font-bold" data-i18n="feat2-title">이야기 전개 고르기</h3>
-                    </div>
-                    <div class="space-y-2 mb-5">
-                        <div class="rounded-xl border-2 border-accent bg-orange-50/60 px-4 py-3">
-                            <p class="text-sm font-semibold"><span class="text-accent mr-1.5">A</span><span data-i18n="feat2-a-t">서식 순서대로 펴기 · 2장 ✓ 선택</span></p>
-                            <p class="text-xs text-zinc-500 mt-1 leading-relaxed" data-i18n="feat2-a-d">서식 5호 총괄표와 인력별 경력을 한 장에, 이어 기간별 투입 공수</p>
-                        </div>
-                        <div class="rounded-xl border border-zinc-200 px-4 py-3">
-                            <p class="text-sm font-semibold"><span class="text-zinc-400 mr-1.5">B</span><span data-i18n="feat2-b-t">고객 개선 요청의 흐름으로 · 4장</span></p>
-                            <p class="text-xs text-zinc-500 mt-1 leading-relaxed" data-i18n="feat2-b-d">접수부터 배포까지 담당자를 따라 인력과 역할을 소개</p>
-                        </div>
-                        <div class="rounded-xl border border-zinc-200 px-4 py-3">
-                            <p class="text-sm font-semibold"><span class="text-zinc-400 mr-1.5">C</span><span data-i18n="feat2-c-t">평가 기준 순서대로 · 5장</span></p>
-                            <p class="text-xs text-zinc-500 mt-1 leading-relaxed" data-i18n="feat2-c-d">구성·역할분담·투입계획·운영·증빙 순으로 한 장씩</p>
-                        </div>
-                    </div>
-                    <p class="text-sm text-zinc-600 leading-relaxed mt-auto" data-i18n-html="feat2-d">같은 문장도 푸는 순서가 다릅니다.<br>장점과 약점을 보고 전개를 고르면 장 구성이 정해집니다.</p>
-                </div>
-                <!-- 3 -->
-                <div class="reveal bg-white rounded-2xl p-6 border border-zinc-100/80 border-t-4 border-t-accent shadow-[0_2px_16px_rgba(0,0,0,0.04)] flex flex-col">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="w-8 h-8 rounded-full bg-accent text-white text-sm font-bold flex items-center justify-center shrink-0">3</span>
-                        <h3 class="text-lg font-bold" data-i18n="feat3-title">슬라이드 검수</h3>
-                    </div>
-                    <img src="/images/brochure/step3.jpg" alt="슬라이드 프리뷰와 발표 스크립트를 보며 검수하는 Contrl 화면" loading="lazy" class="w-full rounded-xl border border-zinc-100 mb-5">
-                    <p class="text-sm text-zinc-600 leading-relaxed mt-auto" data-i18n-html="feat3-d">장마다 프리뷰와 발표 스크립트를 보며 넘깁니다.<br>“19쪽 오른쪽이 비었다”고 짚으면 그 장만 고쳐집니다.</p>
-                </div>
-            </div>
-
-            <div class="reveal mt-8 flex flex-wrap items-center justify-center gap-2">
-                <span class="text-xs font-bold text-zinc-500 mr-1" data-i18n="feat-chips">그 사이 AI가 챙기는 재료</span>
-                <span class="px-3 py-1 rounded-full text-xs bg-zinc-100 text-zinc-600" data-i18n="feat-chip1">평가항목 · 배점</span>
-                <span class="px-3 py-1 rounded-full text-xs bg-zinc-100 text-zinc-600" data-i18n="feat-chip2">요구사항 · RFP 서식</span>
-                <span class="px-3 py-1 rounded-full text-xs bg-zinc-100 text-zinc-600" data-i18n="feat-chip3">회사 자산 (소개서 · 실적 · 과거 제안서)</span>
-                <span class="px-3 py-1 rounded-full text-xs bg-zinc-100 text-zinc-600" data-i18n="feat-chip4">빈 자료 알림</span>
-                <span class="px-3 py-1 rounded-full text-xs bg-zinc-100 text-zinc-600" data-i18n="feat-chip5">근거 출처 표시</span>
-            </div>
-        </div>
+    <!-- 5. AI ATTEMPTS — Sales deck slide 2 -->
+    <section id="features" class="attempt-section" aria-labelledby="attempt-title">
+      <div class="attempt-inner">
+        <header class="attempt-heading"><p class="attempt-eyebrow" data-i18n="attempt-eyebrow">AI를 더 잘 써보려는 시도들</p><h2 id="attempt-title" class="section-heading-unified " data-i18n="attempt-title">문제는 ‘AI를 충분히 쓰지 않는 것’이 아닙니다</h2></header>
+        <div class="attempt-grid"><article class="attempt-card"><span class="attempt-number" aria-hidden="true">01</span><h3 class="" data-i18n="attempt-prompt-title">“프롬프트를 더 잘 짜면 되겠지”</h3><div class="attempt-demo attempt-demo-prompt"><div class="attempt-window-head"><span class="attempt-dots" aria-hidden="true">● ● ●</span><span class="" data-i18n="attempt-prompt-file">제안서_프롬프트_v7.txt</span></div><p class="attempt-prompt" data-i18n="attempt-prompt-body">너는 20년 차 제안 PM이야. 평가항목을 빠짐없이 반영해서, 표와 도식을 넣어 50장으로 써줘…</p></div><ul><li><span class="" data-i18n="attempt-prompt-a">“너는 ○○ 전문가야”로 시작하는 긴 프롬프트를 만들었다</span></li><li><span class="" data-i18n="attempt-prompt-b">잘 나온 프롬프트를 템플릿으로 공유했다</span></li></ul></article><article class="attempt-card"><span class="attempt-number" aria-hidden="true">02</span><h3 class="" data-i18n="attempt-model-title">“더 좋은 모델을 쓰면 되겠지”</h3><div class="attempt-demo attempt-demo-model"><p class="attempt-meta" data-i18n="attempt-plan">요금제 변경</p><div class="attempt-plans"><span>Pro</span><span aria-hidden="true">→</span><strong>Max</strong></div><div class="attempt-upgrade"><span aria-hidden="true">✓</span> <span class="" data-i18n="attempt-upgraded">업그레이드됨</span></div><p class="attempt-price" data-i18n="attempt-price">월 $200 · 최상위 모델 사용</p></div><ul><li><span class="" data-i18n="attempt-model-a">결과가 아쉬우면 더 똑똑한 모델로 바꿔봤다</span></li><li><span class="" data-i18n="attempt-model-b">가장 비싼 요금제로 올렸다</span></li></ul></article><article class="attempt-card"><span class="attempt-number" aria-hidden="true">03</span><h3 class="" data-i18n="attempt-data-title">“자료를 다 넣어주면 알아서 하겠지”</h3><div class="attempt-demo attempt-demo-data"><div class="attempt-folder"><strong class="" data-i18n="attempt-folder">제안자료_전체</strong><span class="attempt-meta" data-i18n="attempt-count">파일 47개</span></div><div class="attempt-files"><div><span class="attempt-hwp-icon" aria-hidden="true"><img src="/images/file-types/hwp.png" alt="" width="224" height="32" loading="lazy"></span><span class="" data-i18n="attempt-file1">과업지시서.hwp</span></div><div><img class="attempt-file-icon" src="/images/file-types/pdf.svg" alt="" width="32" height="32" loading="lazy"><span class="" data-i18n="attempt-file2">회사소개서.pdf</span></div><div><img class="attempt-file-icon" src="/images/file-types/ppt.svg" alt="" width="32" height="32" loading="lazy"><span class="" data-i18n="attempt-file3">○○ 낙찰 제안서.pptx</span></div><p class="attempt-meta" data-i18n="attempt-more">+44개</p></div></div><ul><li><span class="" data-i18n="attempt-data-a">관련 자료 폴더를 통째로 첨부했다</span></li><li><span class="" data-i18n="attempt-data-b">과거 낙찰 제안서를 넣으면 비슷하게 써줄 거라 기대했다</span></li></ul></article></div>
+        <div class="attempt-question"><p class="" data-i18n="attempt-question">혹시, 우리도 이렇게 하고 있지 않나요?</p></div>
+      </div>
     </section>
 
     <!-- 6. CASE — 도입 사례 -->
@@ -960,11 +955,8 @@
             <div class="reveal grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-8 lg:gap-14 items-center">
                 <p class="text-xl md:text-2xl font-bold leading-snug" data-i18n-html="case-summary">Contrl과 함께 더 많이 투찰하고,<br>이기는 제안에 집중하여<br><span class="text-accent">승률과 수주액이 함께 올랐습니다.</span></p>
                 <figure>
-                    <div class="grid grid-cols-2 gap-3">
-                        <img src="/images/brochure/case1.jpg" alt="사내 세일즈 박람회 Sales Guru에서 Contrl을 시연하는 모습" loading="lazy" class="w-full aspect-[3/2] object-cover rounded-xl">
-                        <img src="/images/brochure/case2.jpg" alt="Contrl 시연을 지켜보는 참가자들" loading="lazy" class="w-full aspect-[3/2] object-cover rounded-xl">
-                    </div>
-                    <figcaption class="mt-3 text-xs text-zinc-400" data-i18n="case-caption">사내 세일즈 박람회 ‘Sales Guru’에서 전체 프로젝트 1위, 전사 AI 혁신 대표 사례로 소개 (플래텀, 2025.08.20)</figcaption>
+                    <a href="/images/brochure/case-statistics.png" target="_blank" rel="noopener noreferrer" aria-label="View statistics full size" class="block rounded-xl border border-zinc-100 bg-white overflow-hidden"><img src="/images/brochure/case-statistics.png" alt="2024–2026 수주 및 실주 통계: 수주 합계 563건, 389.1억 원" loading="lazy" width="1598" height="552" class="w-full h-auto"></a>
+                    <figcaption class="mt-3 text-xs text-zinc-400" data-i18n="case-caption">2024–2026년 수주·실주 통계 · 이미지를 누르면 크게 볼 수 있습니다.</figcaption>
                 </figure>
             </div>
         </div>
@@ -1126,6 +1118,29 @@
         // i18n
         const translations = {
             en: {
+                "attempt-eyebrow": "Trying to get more from AI",
+                "attempt-title": "The problem goes beyond how much you use AI",
+                "attempt-prompt-title": "“A better prompt should do it”",
+                "attempt-prompt-file": "proposal_prompt_v7.txt",
+                "attempt-prompt-body": "You are a proposal PM with 20 years of experience. Cover every evaluation criterion and write 50 slides with tables and diagrams…",
+                "attempt-prompt-a": "Wrote a long prompt starting with “You are an expert in…”",
+                "attempt-prompt-b": "Shared prompts that worked as templates",
+                "attempt-model-title": "“A better model should do it”",
+                "attempt-plan": "Change plan",
+                "attempt-upgraded": "Upgraded",
+                "attempt-price": " $200/month · Top-tier model",
+                "attempt-model-a": "Switched to a smarter model when results fell short",
+                "attempt-model-b": "Upgraded to the most expensive plan",
+                "attempt-data-title": "“All the files should be enough”",
+                "attempt-folder": "All_proposal_materials",
+                "attempt-count": "47 files",
+                "attempt-file1": "scope_of_work.hwp",
+                "attempt-file2": "company_profile.pdf",
+                "attempt-file3": "winning_proposal.pptx",
+                "attempt-more": "+44 more",
+                "attempt-data-a": "Attached the entire folder of related materials",
+                "attempt-data-b": "Expected a similar proposal after uploading past winning bids",
+                "attempt-question": "Does any of this sound familiar?",
                 'nav-features': 'How It Works',
                 'nav-why': 'Case Study',
                 'nav-faq': 'FAQ',
@@ -1215,7 +1230,7 @@
                 'case-k4': 'Contract value',
                 'case-k4-d': 'KRW 16.5B → 26.2B',
                 'case-summary': 'With Contrl they bid more,<br>focused on winnable proposals,<br><span class="text-accent">and both win rate and value rose.</span>',
-                'case-caption': 'Ranked #1 overall at the internal “Sales Guru” fair and featured as the company-wide AI innovation case (Platum, Aug 20, 2025)',
+                'case-caption': '2024–2026 won/lost deal statistics · Click the image to enlarge.',
                 'faq-title': 'Frequently Asked Questions',
                 'faq-sub': 'Have questions?',
                 'faq1-q': 'How is this different from a proposal made with a general-purpose AI?',
@@ -1242,6 +1257,29 @@
             },
             ko: {},
             ja: {
+                "attempt-eyebrow": "AIをもっと活用するための試み",
+                "attempt-title": "問題は「AIを十分に使っていないこと」ではありません",
+                "attempt-prompt-title": "「プロンプトを工夫すればいいはず」",
+                "attempt-prompt-file": "提案書_プロンプト_v7.txt",
+                "attempt-prompt-body": "あなたは提案業務20年のPMです。評価項目を漏れなく反映し、表や図を入れて50枚で書いてください…",
+                "attempt-prompt-a": "「あなたは○○の専門家です」で始まる長いプロンプトを作った",
+                "attempt-prompt-b": "うまくいったプロンプトをテンプレートとして共有した",
+                "attempt-model-title": "「もっと高性能なモデルならいいはず」",
+                "attempt-plan": "プラン変更",
+                "attempt-upgraded": "アップグレード済み",
+                "attempt-price": "月額$200 · 最上位モデルを使用",
+                "attempt-model-a": "結果に満足できず、より高性能なモデルに変えた",
+                "attempt-model-b": "最も高額なプランに変更した",
+                "attempt-data-title": "「資料を全部渡せばできるはず」",
+                "attempt-folder": "提案資料_すべて",
+                "attempt-count": "47ファイル",
+                "attempt-file1": "業務仕様書.hwp",
+                "attempt-file2": "会社紹介.pdf",
+                "attempt-file3": "○○ 落札提案書.pptx",
+                "attempt-more": "ほか44件",
+                "attempt-data-a": "関連資料のフォルダを丸ごと添付した",
+                "attempt-data-b": "過去の落札提案書を入れれば、同じように書けると思った",
+                "attempt-question": "私たちも、同じことをしていませんか？",
                 'nav-features': '仕組み',
                 'nav-why': '導入事例',
                 'nav-faq': 'よくある質問',
@@ -1331,7 +1369,7 @@
                 'case-k4': '受注金額',
                 'case-k4-d': '165.2億 → 262.4億ウォン',
                 'case-summary': 'Contrlとともにより多く入札し、<br>勝てる提案に集中することで<br><span class="text-accent">勝率と受注額がともに上がりました。</span>',
-                'case-caption': '社内セールス博覧会「Sales Guru」で全プロジェクト1位、全社AI革新の代表事例として紹介（Platum、2025.08.20）',
+                'case-caption': '2024–2026年の受注・失注統計 · 画像をクリックすると拡大できます。',
                 'faq-title': 'よくあるご質問',
                 'faq-sub': 'CONTRLについて、よくいただくご質問をまとめました。',
                 'faq1-q': '汎用AIで作った提案書と何が違いますか？',
@@ -1815,6 +1853,67 @@
             <meta itemprop="name" content="Cliwant Inc.">
         </span>
     </div>
+
+
+    <script>
+    // Keep the translated source intact and animate an aria-hidden visual copy.
+    (() => {
+      const source = document.querySelector('[data-i18n="attempt-prompt-body"]');
+      if (!source) return;
+      const demo = source.closest('.attempt-demo');
+      const wrap = document.createElement('div');
+      wrap.className = 'prompt-typing-wrap';
+      source.before(wrap);
+      wrap.append(source);
+      const output = document.createElement('p');
+      output.className = 'attempt-prompt prompt-typing-output';
+      output.setAttribute('aria-hidden', 'true');
+      wrap.append(output);
+      // A stable accessible description avoids announcing each typed character.
+      demo.setAttribute('role', 'img');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'prompt-typing-toggle';
+      demo.querySelector('.attempt-window-head').append(button);
+      demo.removeAttribute('role');
+      source.style.visibility = 'visible';
+      source.style.opacity = '0';
+      let chars = [], index = 0, timer = null, visible = false, paused = false;
+      const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      function stop() { clearTimeout(timer); timer = null; }
+      function label() {
+        const lang = document.documentElement.lang;
+        button.textContent = paused ? '▶' : 'Ⅱ';
+        const text = lang === 'ja' ? (paused ? '入力アニメーションを再開' : '入力アニメーションを一時停止') : lang === 'en' ? (paused ? 'Resume typing animation' : 'Pause typing animation') : (paused ? '입력 애니메이션 재생' : '입력 애니메이션 일시 정지');
+        button.setAttribute('aria-label', text);
+        button.title = text;
+        demo.classList.toggle('prompt-typing-paused', paused);
+      }
+      function tick() {
+        if (!visible || paused || document.hidden || motion.matches) return;
+        if (index === chars.length) {
+          timer = setTimeout(() => { index = 0; output.textContent = ''; timer = setTimeout(tick, 600); }, 2800);
+          return;
+        }
+        output.textContent += chars[index++];
+        timer = setTimeout(tick, /[.,…!?。]/.test(chars[index - 1]) ? 260 : 65);
+      }
+      function resume() { stop(); if (!motion.matches && visible && !paused && !document.hidden) timer = setTimeout(tick, 450); }
+      function reset() {
+        stop(); chars = Array.from(source.textContent); index = 0;
+        output.textContent = motion.matches ? chars.join('') : '';
+        button.hidden = motion.matches;
+        label(); resume();
+      }
+      button.addEventListener('click', () => { paused = !paused; label(); resume(); });
+      new MutationObserver(reset).observe(source, { childList:true, characterData:true, subtree:true });
+      new MutationObserver(label).observe(document.documentElement, { attributes:true, attributeFilter:['lang'] });
+      new IntersectionObserver(entries => { visible = entries[0].isIntersecting; resume(); }, { threshold:0.3 }).observe(demo);
+      document.addEventListener('visibilitychange', resume);
+      motion.addEventListener('change', reset);
+      reset();
+    })();
+    </script>
 
 </body>
 
