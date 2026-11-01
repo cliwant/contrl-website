@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Contrl replay</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root { --ink:#1C1B18; --mut:#6F6A5F; --line:#DAD6CC; --bg:#EFEDE8; --acc:#C2410C; --acc-soft:#FBE9DF; --green:#0F766E; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; width:1600px; height:1000px; overflow:hidden; background:#E9E6DF; font-family:"IBM Plex Sans", Pretendard, system-ui, sans-serif; color:var(--ink); -webkit-font-smoothing:antialiased; }
+  .app { display:grid; grid-template-columns: 520px 1fr; width:1600px; height:1000px; }
+  /* Camera: the whole app is scaled/translated; captions live outside it */
+  #cam { position:absolute; left:0; top:0; width:1600px; height:1000px; transform-origin:0 0; transition:transform 1.1s cubic-bezier(.22,.8,.2,1); will-change:transform; }
+  #cap { font-family: Inter, Pretendard, 'Noto Sans JP', 'Noto Sans SC', sans-serif; position:absolute; left:50%; bottom:52px; transform:translateX(-50%) translateY(14px); z-index:100; max-width:1100px; padding:16px 28px; border-radius:16px; background:rgba(28,27,24,.92); color:#F4F2EC; font-size:30px; font-weight:600; line-height:1.3; letter-spacing:-.01em; text-align:center; opacity:0; transition:opacity .4s ease, transform .4s ease; box-shadow:0 20px 50px -20px rgba(0,0,0,.5); white-space:normal; width:max-content; }
+  #cap.on { opacity:1; transform:translateX(-50%) translateY(0); }
+  #cap b { color:#FFB35A; font-weight:700; }
+  #cap.top { bottom:auto; top:44px; }
+
+  /* ---------- Chat (Claude Code) ---------- */
+  .chat { background:#FBFAF7; border-right:1px solid #E2DED5; display:flex; flex-direction:column; }
+  .chat-hd { height:56px; display:flex; align-items:center; gap:10px; padding:0 20px; border-bottom:1px solid #EEEAE2; font-size:14px; color:#3E3A33; }
+  .chat-hd .dots { display:flex; gap:6px; margin-right:6px; } .chat-hd .dots i { width:11px; height:11px; border-radius:50%; background:#DDD8CE; }
+  .chat-hd b { font-weight:600; } .chat-hd span { color:#9A9488; }
+  .msgs { flex:1; padding:26px 24px 10px; display:flex; flex-direction:column; gap:18px; overflow:hidden; justify-content:flex-end; }
+  .m { font-family: 'IBM Plex Sans', Pretendard, 'Hiragino Sans', 'PingFang SC', sans-serif; max-width:100%; opacity:0; transform:translateY(8px); transition:opacity .35s ease, transform .35s ease; font-size:17px; line-height:1.55; }
+  .m.on { opacity:1; transform:none; }
+  .m.ai { color:#1C1B18; padding-left:4px; }
+  .m.ai .who { display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; color:#C2410C; letter-spacing:.06em; text-transform:uppercase; margin-bottom:6px; }
+  .m.ai .who i { width:8px; height:8px; border-radius:50%; background:#C2410C; }
+  .m.ai .opts { margin-top:8px; display:flex; flex-direction:column; gap:4px; font-size:15px; color:#5B564C; }
+  .m.ai .opts b { color:#1C1B18; font-weight:600; margin-right:6px; }
+  .m.me { align-self:flex-end; background:#1C1B18; color:#F4F2EC; border-radius:16px 16px 4px 16px; padding:12px 16px; font-size:17px; }
+  .m.sys { font-size:14px; color:#6F6A5F; display:flex; align-items:center; gap:8px; }
+  .spin { width:14px; height:14px; border-radius:50%; border:2px solid #E2DED5; border-top-color:#C2410C; animation:spin .9s linear infinite; }
+  .m.sys.done .spin { border:0; background:#0F766E; animation:none; position:relative; }
+  .m.sys.done .spin::after { content:""; position:absolute; left:4px; top:1px; width:4px; height:8px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg); }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .composer { margin:10px 20px 22px; border:1.5px solid #D6D0C4; border-radius:14px; background:#fff; padding:14px 16px; min-height:58px; font-size:17px; color:#1C1B18; display:flex; align-items:center; gap:8px; }
+  .composer .ph { color:#A39D91; }
+  .composer .caret { width:2px; height:20px; background:#1C1B18; animation:blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity:0; } }
+  .composer .send { margin-left:auto; width:30px; height:30px; border-radius:8px; background:#1C1B18; flex:none; position:relative; opacity:.25; }
+  .composer.has .send { opacity:1; }
+  .composer .send::after { content:""; position:absolute; left:10px; top:8px; width:8px; height:8px; border:solid #fff; border-width:2px 2px 0 0; transform:rotate(-45deg); }
+
+  /* ---------- Panel ---------- */
+  .panel { background:var(--bg); padding:22px 28px; display:flex; flex-direction:column; gap:14px; position:relative; }
+  .pbar { display:flex; align-items:center; gap:14px; font-size:13.5px; color:#3E3A33; }
+  .pbar .proj { font-weight:700; color:#1C1B18; font-size:15px; }
+  .pbar .stage { margin-left:auto; display:flex; gap:6px; }
+  .pbar .stage i { font-style:normal; padding:4px 10px; border-radius:999px; background:#E2DED5; color:#6F6A5F; font-size:12px; font-weight:600; }
+  .pbar .stage i.on { background:#1C1B18; color:#F4F2EC; }
+  .pbar .stage i.done { background:#D9EBE4; color:#0F766E; }
+  .scene { position:absolute; left:28px; right:28px; top:66px; bottom:22px; opacity:0; transform:translateY(10px); transition:opacity .45s ease, transform .45s ease; pointer-events:none; display:flex; flex-direction:column; gap:14px; }
+  .scene.on { opacity:1; transform:none; }
+  .scene:not(.on) { visibility:hidden; }
+  .vhead { display:flex; align-items:center; gap:10px; }
+  .vdot { width:9px; height:9px; border-radius:50%; background:#C2410C; }
+  .vtitle { font-size:21px; font-weight:700; }
+  .vsub { font-size:14px; color:#6F6A5F; }
+  .chip { display:inline-flex; align-items:center; padding:4px 10px; border-radius:6px; font-size:12.5px; font-weight:600; background:#F5D9C6; color:#9A3412; }
+  .eyebrow { font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#6F6A5F; }
+  .focus { background:#fff; border:1.5px solid #C2410C; border-radius:16px; box-shadow:0 2px 14px rgba(194,65,12,.10); padding:18px 20px; display:flex; flex-direction:column; gap:14px; }
+  .focus.grow { flex:1; min-height:0; }
+  .qhead b { font-size:18px; font-weight:700; display:block; } .qhead span { font-size:14px; color:#6F6A5F; }
+  .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; align-items:stretch; }
+  .card { border:1.5px solid #E3DFD5; border-radius:14px; padding:16px 18px; background:#FCFBF8; display:flex; flex-direction:column; gap:10px; transition:border-color .3s, box-shadow .3s, background .3s; position:relative; }
+  .card .n { font-size:12px; font-weight:700; color:#9A9488; letter-spacing:.06em; }
+  .card .t { font-size:18px; font-weight:700; line-height:1.3; }
+  .card .d { font-size:14.5px; line-height:1.55; color:#3E3A33; }
+  .card .rows { display:flex; flex-direction:column; gap:7px; margin-top:auto; font-size:13px; color:#5B564C; }
+  .card .rows div { display:grid; grid-template-columns:76px 1fr; gap:8px; } .card .rows b { color:#6F6A5F; font-weight:600; }
+  .card.sel { border-color:#C2410C; background:#fff; box-shadow:0 0 0 3px #FBE9DF; }
+  .card .sel-chip { position:absolute; top:14px; right:14px; background:#C2410C; color:#fff; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:999px; opacity:0; transform:scale(.8); transition:all .3s; }
+  .card.sel .sel-chip { opacity:1; transform:none; }
+  .card.dim { opacity:.45; }
+  .hub { background:#1C1B18; color:#F4F2EC; border-radius:12px; padding:12px 16px; font-size:14px; line-height:1.6; }
+  .hub .eyebrow { color:#B8B2A6; margin-bottom:3px; }
+  .ksrow { display:flex; align-items:center; gap:14px; padding:12px 16px; background:#fff; border:1px solid #E6E1D7; border-radius:10px; font-size:15px; }
+  .ksrow .l { flex:none; width:110px; font-size:12px; font-weight:700; color:#9A9488; letter-spacing:.06em; text-transform:uppercase; }
+  .ksrow .v { font-weight:700; } .ksrow .v.empty { color:#B8B2A4; font-weight:500; }
+  .ksrow .st { margin-left:auto; font-size:12.5px; color:#0F766E; font-weight:600; opacity:0; transition:opacity .3s; } .ksrow.done .st { opacity:1; }
+  .ksrow.now { border-color:#C2410C; }
+  /* key sentence candidate specifics */
+  .card .angle { font-size:12.5px; color:#9A3412; font-weight:600; }
+  .card .stm { font-size:14.5px; line-height:1.55; color:#3E3A33; }
+  /* development */
+  .card .pc { display:flex; gap:12px; font-size:12.5px; margin-top:auto; }
+  .card .pc div { flex:1; } .card .pc b { display:block; color:#6F6A5F; font-weight:600; margin-bottom:2px; }
+  .card .beats { display:flex; flex-direction:column; gap:3px; font-size:13px; color:#3E3A33; }
+  .card .beats div { display:flex; justify-content:space-between; gap:8px; } .card .beats span { color:#9A9488; }
+  /* preview */
+  .pv-top { display:flex; align-items:center; gap:12px; }
+  .pv-top b { font-size:18px; } .pv-count { font-size:14px; color:#6F6A5F; }
+  .pv-strip { display:flex; gap:6px; overflow:hidden; padding:2px; }
+  .pv-scard { flex:none; width:118px; padding:7px 9px; border-radius:8px; border:1px solid #DAD6CC; background:#fff; font-size:11.5px; line-height:1.3; color:#1C1B18; transition:all .25s; }
+  .pv-scard i { display:block; font-style:normal; font-size:10px; color:#9A9488; margin-bottom:2px; }
+  .pv-scard.writing { background:#FCFBF8; border-color:#F0E3D6; color:#C9C4B8; }
+  .pv-scard.writing i { color:#C9C4B8; }
+  .pv-scard.on { border:2px solid #C2410C; padding:6px 8px; }
+  .pv-render { border:1px solid #e3e5dd; border-radius:10px; overflow:hidden; background:#fff; flex:1; min-height:0; position:relative; }
+  .pv-status { display:flex; align-items:center; gap:8px; font-size:13.5px; color:#6F6A5F; margin-left:auto; }
+  .pv-status .ok { color:#0F766E; font-weight:600; }
+
+  /* ---------- Rendered slide replica (16:9 inside 16:10 area) ---------- */
+  .slide { position:absolute; inset:0; background:#fff; font-family:Pretendard, system-ui, sans-serif; color:#191919; padding:0 44px; }
+  .slide .bar { position:absolute; left:44px; right:44px; top:22px; height:5px; background:#FFBE00; }
+  .slide .hd { position:absolute; left:44px; right:44px; top:40px; display:flex; justify-content:space-between; font-size:14px; }
+  .slide .hd b { font-weight:700; } .slide .hd span { color:#3C3C3C; }
+  .slide .h1 { position:absolute; left:44px; top:78px; font-size:34px; font-weight:800; line-height:1.3; letter-spacing:-.02em; }
+  .slide .h1 .hl { background:linear-gradient(transparent 55%, #FFE28A 55%); padding:0 2px; }
+  .slide .h1 .alt { position:absolute; left:0; top:0; white-space:nowrap; opacity:0; transition:opacity .5s; }
+  .slide .h1 .cur { transition:opacity .5s; display:block; white-space:nowrap; }
+  .slide.rev .h1 .cur { opacity:0; } .slide.rev .h1 .alt { opacity:1; }
+  .slide table { position:absolute; left:44px; top:182px; width:540px; border-collapse:collapse; font-size:13px; }
+  .slide th { background:#FFF7E6; text-align:left; padding:10px 10px; font-weight:700; border-bottom:1px solid #E6E6E6; }
+  .slide td { padding:11px 10px; border-bottom:1px solid #E6E6E6; vertical-align:top; color:#3C3C3C; line-height:1.4; }
+  .slide td:first-child { font-weight:700; color:#191919; }
+  .slide tr.new td { background:#FFF7E6; opacity:0; transition:opacity .5s; } .slide.rev tr.new td { opacity:1; }
+  .slide .shot { position:absolute; right:44px; top:182px; width:340px; height:215px; border:1px solid #D5DCE3; border-radius:8px; background:#fff; overflow:hidden; box-shadow:0 10px 24px -16px rgba(0,0,0,.25); }
+  .slide .shot .tb { height:18px; background:#F3F4F6; display:flex; gap:4px; padding:5px 8px; } .slide .shot .tb i { width:7px; height:7px; border-radius:50%; background:#D5DCE3; }
+  .slide .shot .ttl { padding:8px 12px 4px; font-size:9px; font-weight:700; color:#191919; }
+  .slide .shot .body { display:grid; grid-template-columns:78px 1fr; height:100%; }
+  .slide .shot .sb { background:#F9FAFB; border-right:1px solid #EEF0F3; padding:6px 8px; display:flex; flex-direction:column; gap:7px; }
+  .slide .shot .sb i { display:block; height:5px; border-radius:2px; background:#E5E7EB; } .slide .shot .sb i.on { background:#FFBE00; }
+  .slide .shot .mx { padding:8px 10px; display:grid; grid-template-columns:70px repeat(7,1fr); gap:6px 4px; align-content:start; }
+  .slide .shot .mx i { display:block; height:8px; border-radius:2px; background:#F3F4F6; } .slide .shot .mx i.y { background:#FFBE00; } .slide .shot .mx i.l { background:#E5E7EB; }
+  .slide .cap { position:absolute; right:44px; top:406px; width:340px; font-size:12.5px; color:#3C3C3C; }
+  .slide .ft { position:absolute; left:44px; right:44px; bottom:18px; display:flex; justify-content:space-between; align-items:center; font-size:12.5px; color:#858585; border-top:1px solid #E6E6E6; padding-top:10px; }
+  .slide .ft .lg { display:flex; align-items:center; gap:8px; color:#191919; font-weight:700; } .slide .ft .lg i { width:22px; height:14px; background:#FFBE00; border-radius:3px; display:inline-block; }
+  .slide .ft .pg { font-weight:700; color:#191919; margin-left:10px; }
+  .slide .rw { position:absolute; inset:0; background:rgba(255,255,255,.72); display:flex; align-items:center; justify-content:center; gap:10px; font-size:15px; color:#6F6A5F; opacity:0; transition:opacity .3s; backdrop-filter:blur(2px); }
+  .slide .rw.on { opacity:1; }
+  .cursor { position:absolute; width:18px; height:22px; z-index:50; pointer-events:none; opacity:0; transition:left .55s cubic-bezier(.2,.8,.2,1), top .55s cubic-bezier(.2,.8,.2,1), opacity .3s; }
+  .cursor svg { display:block; filter:drop-shadow(0 1px 2px rgba(0,0,0,.35)); }
+</style>
+</head>
+<body>
+<div id="hd" style="position:relative;width:1600px;height:1000px">
+<div id="cap"></div>
+<div id="cam">
+<div class="app">
+  <!-- Chat -->
+  <aside class="chat">
+    <div class="chat-hd"><div class="dots"><i></i><i></i><i></i></div><b>Claude Code</b><span>· nanum-vitamin / keepa-casemgmt-upgrade</span></div>
+    <div class="msgs" id="msgs"></div>
+    <div class="composer" id="composer"><span class="ph" id="cph">Reply to Contrl…</span><span id="ctext"></span><span class="caret"></span><span class="send"></span></div>
+  </aside>
+
+  <!-- Panel -->
+  <main class="panel">
+    <div class="pbar">
+      <span class="proj">Student mental-health case management system · functional upgrade</span>
+      <span>KEEPA · 16 provincial education offices · 100 pages</span>
+      <div class="stage" id="stage"><i data-s="0">RFP</i><i data-s="1">Interview</i><i data-s="2">Win Theme</i><i data-s="3">Storyboard</i><i data-s="4">Deck</i></div>
+    </div>
+
+    <!-- Scene 1: Win Theme -->
+    <section class="scene" id="s1">
+      <div class="vhead"><span class="vdot"></span><span class="vtitle">Win Theme</span><span class="vsub">What the client wants, that we can prove, and competitors can't say</span></div>
+      <div class="focus">
+        <div class="qhead"><b>Which theme do we build the whole proposal on?</b><span>Three candidates from the RFP and the strategy interview. Pick one — every section inherits it.</span></div>
+        <div class="cards">
+          <div class="card" id="wt1"><span class="sel-chip">Selected</span><span class="n">THEME 1</span><span class="t">Field pain, shipped fast</span>
+            <span class="d">Turn the input burden and permission friction reported by 16 provincial offices into shipped features — the way we run our welfare field apps — delivered repeatedly within the contract.</span>
+            <div class="rows"><div><b>Client need</b><span>Simpler input, multi-school teachers, member-info edits, SMS without exposure</span></div><div><b>Our edge</b><span>Field requests → release cycle, proven in 20+ municipalities</span></div><div><b>Benefit</b><span>Staff feel the improvement in-contract, not after</span></div></div></div>
+          <div class="card" id="wt2"><span class="sel-chip">Selected</span><span class="n">THEME 2</span><span class="t">Zero-downtime, zero-leak upgrade</span>
+            <span class="d">Start from the existing source, change in stages without service interruption or data damage, and fold all 11 security items into the execution plan.</span>
+            <div class="rows"><div><b>Client need</b><span>Sensitive student data, no downtime, NIS security guideline</span></div><div><b>Our edge</b><span>eGovFrame builds; staged change scope</span></div><div><b>Benefit</b><span>The client can hand it over with confidence</span></div></div></div>
+          <div class="card" id="wt3"><span class="sel-chip">Selected</span><span class="n">THEME 3</span><span class="t">Data-driven program operations</span>
+            <span class="d">Bundle the permission, alert, statistics and performance modules we already run into views the client can use as evidence for policy decisions.</span>
+            <div class="rows"><div><b>Client need</b><span>Program results as numbers for policy</span></div><div><b>Our edge</b><span>Modules in production with user feedback</span></div><div><b>Benefit</b><span>Performance visible without manual reporting</span></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scene 2: Key sentence -->
+    <section class="scene" id="s2">
+      <div class="vhead"><span class="vdot"></span><span class="vtitle">III-1 Functional improvement requirements</span><span class="chip">17 pages</span><span class="vsub">12 requirements · FR-001 – COR-006</span></div>
+      <div class="hub"><div class="eyebrow">Win Theme · Field pain, shipped fast</div>Turn the input burden and permission friction reported by 16 provincial offices into shipped features, delivered repeatedly within the contract.</div>
+      <div class="ksrow now" id="ks-row"><span class="l">Key sentence</span><span class="v empty" id="ks-val">Not decided yet</span><span class="st">✓ Confirmed</span></div>
+      <div class="focus" id="ks-focus">
+        <div class="qhead"><b>One sentence this section must land</b><span>Three angles reduced from the Win Theme. Choose one, or write your own.</span></div>
+        <div class="cards">
+          <div class="card" id="ks1"><span class="sel-chip">Selected</span><span class="n">CANDIDATE 1</span><span class="angle">Lead with real-time monitoring</span><span class="t">Improve features through a live status dashboard</span><span class="stm">Apply the usage-monitoring and regional-distribution screens we already operate, so office staff read program status at a glance and decide immediately.</span></div>
+          <div class="card" id="ks2"><span class="sel-chip">Selected</span><span class="n">CANDIDATE 2</span><span class="angle">Lead with the institution-tier platform structure</span><span class="t">Role-based permissions connect student support</span><span class="stm">Apply a 3-tier platform structure with a separate institution layer, so referral, counseling and admin roles each see a distinct scope — and a teacher covering several schools links student support in one place.</span></div>
+          <div class="card" id="ks3"><span class="sel-chip">Selected</span><span class="n">CANDIDATE 3</span><span class="angle">Lead with common data infrastructure</span><span class="t">Same-format data links lookup and referral</span><span class="stm">Store every program's data in one common format, so existing cases and screenings carry over without re-entry across the two systems.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scene 3: Development -->
+    <section class="scene" id="s3">
+      <div class="vhead"><span class="vdot"></span><span class="vtitle">III-1 Functional improvement requirements</span><span class="chip">17 pages</span><span class="vsub">12 requirements · FR-001 – COR-006</span></div>
+      <div class="ksrow done"><span class="l">Key sentence</span><span class="v">Role-based permissions connect student support</span><span class="st">✓ Confirmed</span></div>
+      <div class="ksrow now" id="dv-row"><span class="l">Development</span><span class="v empty" id="dv-val">Not decided yet</span><span class="st">✓ Confirmed</span></div>
+      <div class="focus">
+        <div class="qhead"><b>How do the 17 pages unfold?</b><span>Three organizing principles. Each covers all 12 requirements — they differ in what the reader meets first.</span></div>
+        <div class="cards">
+          <div class="card" id="dv1"><span class="sel-chip">Selected</span><span class="n">PLAN A</span><span class="t">In RFP order</span><span class="d">Follow FR-001 to COR-006 as written; one bundle of screens, rules and deliverables per requirement.</span>
+            <div class="beats"><div>Cases &amp; statistics<span>p.1–4</span></div><div>Permissions &amp; search<span>p.5–7</span></div><div>Screening &amp; automation<span>p.8–12</span></div><div>Convenience &amp; standards<span>p.13–17</span></div></div>
+            <div class="pc"><div><b>Strength</b>Easiest to cross-check</div><div><b>Weakness</b>Permissions scattered across three places</div></div></div>
+          <div class="card" id="dv2"><span class="sel-chip">Selected</span><span class="n">PLAN B</span><span class="t">Around the 3-tier permission structure</span><span class="d">Set up the institution / role permission structure first, then layer school workflows and lookup / data features on top.</span>
+            <div class="beats"><div>Permission structure<span>p.1–4</span></div><div>School-site workflows<span>p.5–9</span></div><div>Lookup &amp; data<span>p.10–13</span></div><div>Automation &amp; standards<span>p.14–17</span></div></div>
+            <div class="pc"><div><b>Strength</b>One spine; matches the key sentence</div><div><b>Weakness</b>Leaves RFP order</div></div></div>
+          <div class="card" id="dv3"><span class="sel-chip">Selected</span><span class="n">PLAN C</span><span class="t">As one student's journey</span><span class="d">Follow a single case from admin setup through referral, screening, counseling, case management and analysis.</span>
+            <div class="beats"><div>Setup &amp; referral<span>p.1–4</span></div><div>Screening &amp; counseling<span>p.5–9</span></div><div>Case operations<span>p.10–13</span></div><div>Analysis &amp; standards<span>p.14–17</span></div></div>
+            <div class="pc"><div><b>Strength</b>Reads as a story</div><div><b>Weakness</b>Permissions arrive late</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scene 4: Preview / render -->
+    <section class="scene" id="s4">
+      <div class="vhead"><span class="vdot"></span><span class="vtitle">III-1 Functional improvement requirements</span><span class="chip">17 pages</span><span class="vsub">Plan B · Around the 3-tier permission structure</span></div>
+      <div class="focus grow">
+        <div class="pv-top"><b>Preview</b><span class="pv-count"><b id="pv-done">0</b> / 17 pages written</span><span class="pv-status" id="pv-status"><span class="spin"></span>Writing to your decisions…</span></div>
+        <div class="pv-strip" id="strip"></div>
+        <div class="pv-render">
+          <div class="slide" id="slide">
+            <div class="bar"></div>
+            <div class="hd"><b>Permission framework · 3-tier design</b><span>III. Project execution · 1. Functional requirements</span></div>
+            <div class="h1" style="position:absolute;">
+              <span class="cur">Menus follow the role,<br><span class="hl">what you can see follows the institution</span></span>
+              <span class="alt">Three tiers decide what you see.<br><span class="hl">The server enforces it — not the screen.</span></span>
+            </div>
+            <table>
+              <tr><th>Role</th><th>Menu access</th><th>Lookup scope</th><th>Actions</th></tr>
+              <tr><td>Tier 1 · Central admin</td><td>All menus · permission settings</td><td>Every institution and school</td><td>Settings · export · all</td></tr>
+              <tr><td>Tier 2 · Office / program team</td><td>Cases · screening · stats · institutions</td><td>Institutions in jurisdiction</td><td>View · edit · export</td></tr>
+              <tr><td>Tier 3 · Referral teacher</td><td>Screening · referral · linkage</td><td>Assigned schools &amp; students</td><td>Run screening · request linkage</td></tr>
+              <tr><td>Tier 3 · Counselor</td><td>Cases · counseling records</td><td>Linked students only</td><td>Write counseling records</td></tr>
+              <tr class="new"><td>Server-side check</td><td colspan="3">Scope is judged on the server from the login's institution code — out-of-scope records never load.</td></tr>
+            </table>
+            <div class="shot"><div class="tb"><i></i><i></i><i></i></div><div class="ttl">School mental-health case management system · Permission matrix</div>
+              <div class="body"><div class="sb"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="mx"><i class="l"></i><i class="l"></i><i class="l"></i><i class="l"></i><i class="l"></i><i class="l"></i><i class="l"></i><i class="l"></i>
+                  <i class="l"></i><i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i>
+                  <i class="l"></i><i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i><i></i><i></i>
+                  <i class="l"></i><i class="y"></i><i class="y"></i><i class="y"></i><i></i><i></i><i></i><i></i>
+                  <i class="l"></i><i class="y"></i><i class="y"></i><i></i><i></i><i></i><i></i><i class="y"></i></div></div></div>
+            <div class="cap">Role × menu is configured; scope is judged by institution code</div>
+            <div class="ft"><span>Source: RFP FR-003 · FR-006 · 3-tier platform structure · menu scope to be confirmed on site</span><span class="lg"><i></i>NANUM VITAMIN<span class="pg">33</span></span></div>
+            <div class="rw" id="rw"><span class="spin"></span>Rewriting page 1 to your note…</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cursor" id="cursor"><svg width="18" height="22" viewBox="0 0 18 22"><path d="M1 1l6 18 2.5-7.5L17 9z" fill="#1C1B18" stroke="#fff" stroke-width="1.5"/></svg></div>
+  </main>
+</div>
+</div>
+
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const LANG = new URLSearchParams(location.search).get('lang') || 'en';
+const CAPS = {"r1": {"en": "A real bid, <b>100 pages.</b> Watch who decides what.", "ko": "실제 입찰, <b>100장.</b> 누가 무엇을 정하는지 보세요.", "ja": "実際の入札、<b>100ページ。</b>誰が何を決めるか。", "zh": "真实投标，<b>100页。</b>看看谁来决定什么。"}, "r2": {"en": "Contrl asks. <b>You</b> answer, in plain chat.", "ko": "Contrl이 묻고, <b>사람</b>이 채팅으로 답합니다.", "ja": "Contrlが尋ね、<b>あなた</b>がチャットで答える。", "zh": "Contrl提问，<b>你</b>用聊天回答。"}, "r3": {"en": "<b>Decision 1 · Win Theme.</b> What the whole proposal argues. Yours, not AI's.", "ko": "<b>결정 1 · Win Theme.</b> 제안서 전체의 주장. AI가 아니라 당신이 정합니다.", "ja": "<b>決定1・Win Theme。</b>提案全体の主張。AIではなく、あなたが決める。", "zh": "<b>决定1 · Win Theme。</b>整份提案的主张。由你定，不是AI。"}, "r4": {"en": "<b>Decision 2 · Key sentence.</b> The one line this section must land.", "ko": "<b>결정 2 · 핵심 문장.</b> 이 섹션이 남겨야 할 한 줄.", "ja": "<b>決定2・核心文。</b>この章が伝えるべき一行。", "zh": "<b>决定2 · 核心句。</b>这一章必须落下的一句话。"}, "r5": {"en": "<b>Decision 3 · The plan.</b> How 17 pages unfold. You pick the spine.", "ko": "<b>결정 3 · 전개.</b> 17장을 어떤 순서로 풀지. 뼈대는 당신이 고릅니다.", "ja": "<b>決定3・展開。</b>17ページをどう展開するか。骨格はあなたが選ぶ。", "zh": "<b>决定3 · 展开。</b>17页怎么展开，主线由你选。"}, "r6": {"en": "Three decisions made. <b>Now AI writes</b> every page to them.", "ko": "결정 셋. <b>이제 AI가</b> 그대로 전부 씁니다.", "ja": "決めたのは3つ。<b>あとはAIが</b>その通りに全ページ書く。", "zh": "三个决定定好。<b>接下来AI</b>按此写完每一页。"}, "r7": {"en": "Page 1 of 17, in <b>your</b> design system. Evidence and script included.", "ko": "17장 중 1장, <b>우리 회사</b> 디자인 시스템으로. 근거와 발표 스크립트 포함.", "ja": "17ページ中の1ページ、<b>自社の</b>デザインシステムで。根拠と台本つき。", "zh": "17页中的第1页，用<b>你们的</b>设计系统。附根据和讲稿。"}, "r8": {"en": "Not quite right? <b>Just say so.</b>", "ko": "마음에 안 들면? <b>말만 하세요.</b>", "ja": "違う？<b>そう言えばいい。</b>", "zh": "不太对？<b>说一句就行。</b>"}, "r9": {"en": "<b>Rewritten.</b> New headline, one row added. The other 16 pages untouched.", "ko": "<b>다시 썼습니다.</b> 헤드라인 교체, 행 하나 추가. 나머지 16장은 그대로.", "ja": "<b>書き直し完了。</b>見出し変更、1行追加。残り16ページはそのまま。", "zh": "<b>已重写。</b>新标题，加一行。其余16页不动。"}, "r10": {"en": "<b>You decide. AI writes.</b> That's Contrl.", "ko": "<b>사람이 정하고, AI가 씁니다.</b> 그게 Contrl입니다.", "ja": "<b>あなたが決め、AIが書く。</b>それがContrl。", "zh": "<b>你来决定，AI来写。</b>这就是Contrl。"}, "ai1": {"en": "Three Win Theme candidates are ready in the panel. Which one do we build the proposal on?", "ko": "Win Theme 후보 3개가 패널에 준비됐습니다. 어떤 걸로 제안서를 세울까요?", "ja": "Win Theme候補が3つパネルに揃いました。どれで提案書を組み立てますか？", "zh": "面板里准备好了3个Win Theme候选。用哪一个来搭建提案？"}, "u1": {"en": "Go with 1. The offices care most about fixes they can feel.", "ko": "1번으로. 교육청은 체감되는 개선을 제일 원해요.", "ja": "1で。教育庁が一番求めているのは体感できる改善です。", "zh": "选1。教育厅最在意的是能感受到的改进。"}, "s1": {"en": "Win Theme 1 selected · every section inherits it", "ko": "Win Theme 1 선택 · 모든 섹션에 적용", "ja": "Win Theme 1を選択・全セクションに反映", "zh": "已选Win Theme 1 · 所有章节继承"}, "ai2": {"en": "Section III-1, Functional requirements — 17 pages. Which sentence should this section land?", "ko": "III-1 기능개선 요구사항, 17장. 이 섹션이 남길 핵심 문장은 무엇으로 할까요?", "ja": "III-1 機能改善要件、17ページ。この章の核心文はどれにしますか？", "zh": "III-1 功能改进需求，17页。这一章的核心句选哪一个？"}, "u2": {"en": "2. Permissions are where their teachers get stuck.", "ko": "2번. 현장 교사들이 제일 막히는 게 권한이에요.", "ja": "2で。現場の先生が一番つまずくのは権限です。", "zh": "选2。老师们最卡的就是权限。"}, "s2": {"en": "Key sentence confirmed", "ko": "핵심 문장 확정", "ja": "核心文を確定", "zh": "核心句已确定"}, "ai3": {"en": "How should the 17 pages unfold? Three plans in the panel — A in RFP order, B around the permission structure, C as one student's journey.", "ko": "17장을 어떻게 전개할까요? 패널에 세 안이 있습니다 — A는 RFP 순서대로, B는 권한 구조 중심, C는 학생 한 명의 여정으로.", "ja": "17ページをどう展開しますか？パネルに3案 — AはRFP順、Bは権限構造中心、Cは生徒一人の流れで。", "zh": "17页怎么展开？面板里有三个方案——A按RFP顺序，B围绕权限结构，C按一个学生的流程。"}, "u3": {"en": "B. Build it around the three tiers.", "ko": "B로. 3층 권한 구조를 뼈대로 세워 주세요.", "ja": "Bで。3層の権限構造を骨格に。", "zh": "选B。以三层权限结构为主线。"}, "s3": {"en": "Writing 17 pages to your decisions…", "ko": "결정대로 17장 작성 중…", "ja": "決定どおり17ページ作成中…", "zh": "正按你的决定写17页…"}, "s3b": {"en": "17 pages written · III-1 complete", "ko": "17장 작성 완료 · III-1 완료", "ja": "17ページ作成完了・III-1完了", "zh": "17页已写完 · III-1 完成"}, "ai4": {"en": "Page 1 of III-1 is up: <b>Menus follow the role, what you can see follows the institution.</b> Evidence: FR-003, FR-006. Anything to change?", "ko": "III-1의 1장이 나왔습니다: <b>메뉴는 역할에 따라, 볼 수 있는 자료는 소속에 따라.</b> 근거: FR-003, FR-006. 고칠 곳 있나요?", "ja": "III-1の1ページ目ができました：<b>メニューは役割に、閲覧範囲は所属に従う。</b>根拠：FR-003、FR-006。修正はありますか？", "zh": "III-1第1页出来了：<b>菜单看角色，能看什么看单位。</b>依据：FR-003、FR-006。要改吗？"}, "u4": {"en": "Lead the headline with the three tiers, and show that the server enforces the scope, not the screen.", "ko": "헤드라인을 3층 구조로 시작하고, 범위 통제는 화면이 아니라 서버가 한다는 걸 보여 주세요.", "ja": "見出しは3層構造から。範囲の制御は画面ではなくサーバー側だと示して。", "zh": "标题先讲三层结构，并说明范围是服务器控制的，不是界面。"}, "s4": {"en": "Page 1 rewritten · headline + 1 row added", "ko": "1장 수정 완료 · 헤드라인 교체 + 행 1개 추가", "ja": "1ページ修正・見出し変更＋1行追加", "zh": "第1页已重写 · 新标题 + 加1行"}, "ai5": {"en": "Done. The headline now leads with the three tiers and the table ends on the server-side check. Speaker script updated to match.", "ko": "완료. 헤드라인은 3층 구조로 시작하고, 표 마지막에 서버 검증 행을 넣었습니다. 발표 스크립트도 맞춰 수정했습니다.", "ja": "完了。見出しは3層構造から始まり、表の最後にサーバー側チェックを追加。台本も更新済み。", "zh": "完成。标题以三层结构开头，表格末尾加了服务器端校验。讲稿也同步更新了。"}, "ph": {"en": "Reply to Contrl…", "ko": "Contrl에게 답하기…", "ja": "Contrlに返信…", "zh": "回复Contrl…"}};
+const T = Object.fromEntries(Object.entries(CAPS).map(([k, v]) => [k, v[LANG] || v.en]));
+document.documentElement.lang = LANG;
+
+// ---- UI localization: replace text nodes / placeholders / data-type by exact match
+const UI = {"Student mental-health case management system · functional upgrade": {"ko": "학생 정신건강 사례관리시스템 기능개선", "ja": "学生メンタルヘルス事例管理システム機能改修"}, "KEEPA · 16 provincial education offices · 100 pages": {"ko": "교육환경보호원 · 16개 시도교육청 · 100장", "ja": "KEEPA・16都道府県教育庁・100ページ"}, "Interview": {"ko": "인터뷰", "ja": "インタビュー"}, "Storyboard": {"ko": "스토리보드", "ja": "ストーリーボード"}, "Deck": {"ko": "덱", "ja": "スライド"}, "What the client wants, that we can prove, and competitors can't say": {"ko": "발주처가 원하는데, 우리는 증명할 수 있고, 경쟁사는 못하는 것", "ja": "顧客が求め、当社が証明でき、競合が言えないこと"}, "Which theme do we build the whole proposal on?": {"ko": "제안서 전체를 어떤 테마 위에 세울까요?", "ja": "提案書全体をどのテーマで組み立てますか？"}, "Three candidates from the RFP and the strategy interview. Pick one — every section inherits it.": {"ko": "RFP와 전략 인터뷰에서 뽑은 후보 3개. 하나를 고르면 모든 섹션이 이어받습니다.", "ja": "RFPと戦略インタビューから3候補。1つ選ぶと全セクションに反映されます。"}, "Selected": {"ko": "선택됨", "ja": "選択済み"}, "THEME 1": {"ko": "테마 1", "ja": "テーマ 1"}, "THEME 2": {"ko": "테마 2", "ja": "テーマ 2"}, "THEME 3": {"ko": "테마 3", "ja": "テーマ 3"}, "Field pain, shipped fast": {"ko": "현장 불편의 빠른 기능화", "ja": "現場の不便を素早く機能に"}, "Zero-downtime, zero-leak upgrade": {"ko": "무중단·무유출 안전한 개선", "ja": "無停止・無漏洩の安全な改修"}, "Data-driven program operations": {"ko": "데이터 기반 사업 운영 지원", "ja": "データに基づく事業運営支援"}, "Turn the input burden and permission friction reported by 16 provincial offices into shipped features — the way we run our welfare field apps — delivered repeatedly within the contract.": {"ko": "16개 시도교육청 현장의 입력 부담과 권한 불편을, 복지 현장 앱에서 사용자 요청을 빠르게 배포로 옮겨 온 방식으로 해소해 계약 기간 안에 반복해서 전달합니다.", "ja": "16教育庁の現場が抱える入力負担と権限の不便を、福祉現場アプリで培った「要望を素早くリリースへ」の方式で解消し、契約期間内に繰り返し届けます。"}, "Start from the existing source, change in stages without service interruption or data damage, and fold all 11 security items into the execution plan.": {"ko": "민감한 학생 정신건강 정보가 쌓인 운영 시스템을 기존 소스 파악부터 시작해 중단·훼손 없이 단계적으로 고치고, 보안 11개 항목을 수행계획에 그대로 녹입니다.", "ja": "既存ソースの把握から始め、サービス停止やデータ毀損なく段階的に改修し、セキュリティ11項目を実行計画にそのまま組み込みます。"}, "Bundle the permission, alert, statistics and performance modules we already run into views the client can use as evidence for policy decisions.": {"ko": "권한·알림·통계·성과관리 모듈을 이미 운영해 온 팀이 사용자 의견과 운영 데이터를 조회·통계 기능으로 묶어, 발주처가 사업 성과를 숫자로 확인하게 합니다.", "ja": "既に運用している権限・通知・統計・成果管理モジュールを束ね、発注者が政策判断の根拠として使える画面にします。"}, "Client need": {"ko": "고객 니즈", "ja": "顧客ニーズ"}, "Our edge": {"ko": "우리 강점", "ja": "自社の強み"}, "Benefit": {"ko": "효익", "ja": "効果"}, "Simpler input, multi-school teachers, member-info edits, SMS without exposure": {"ko": "입력 간소화, 복수 학교 담당 교사, 회원정보 수정, 정보 비노출 문자", "ja": "入力簡素化、複数校担当教員、会員情報修正、情報非表示SMS"}, "Field requests → release cycle, proven in 20+ municipalities": {"ko": "현장 요청 → 배포 주기, 지자체 20곳 이상 운영", "ja": "現場要望→リリース周期、20以上の自治体で実証"}, "Staff feel the improvement in-contract, not after": {"ko": "담당자가 계약 기간 안에 개선을 체감", "ja": "担当者が契約期間内に改善を実感"}, "Sensitive student data, no downtime, NIS security guideline": {"ko": "민감 학생정보, 무중단, 국가정보보안지침", "ja": "機微な学生情報、無停止、国家情報セキュリティ指針"}, "eGovFrame builds; staged change scope": {"ko": "전자정부프레임워크 구축, 단계적 변경 범위", "ja": "電子政府フレームワーク構築、段階的な変更範囲"}, "The client can hand it over with confidence": {"ko": "발주처가 안심하고 맡길 수 있음", "ja": "発注者が安心して任せられる"}, "Program results as numbers for policy": {"ko": "사업 성과를 정책 근거 숫자로", "ja": "事業成果を政策根拠の数値に"}, "Modules in production with user feedback": {"ko": "사용자 피드백이 쌓인 운영 중 모듈", "ja": "ユーザーの声が蓄積された稼働中モジュール"}, "Performance visible without manual reporting": {"ko": "수작업 보고 없이 성과 가시화", "ja": "手作業の報告なしで成果を可視化"}, "III-1 Functional improvement requirements": {"ko": "III-1 기능개선수행 요구사항", "ja": "III-1 機能改善要件"}, "17 pages": {"ko": "17장", "ja": "17ページ"}, "12 requirements · FR-001 – COR-006": {"ko": "요구사항 12개 · FR-001 – COR-006", "ja": "要件12件・FR-001 – COR-006"}, "Win Theme · Field pain, shipped fast": {"ko": "Win Theme · 현장 불편의 빠른 기능화", "ja": "Win Theme・現場の不便を素早く機能に"}, "Turn the input burden and permission friction reported by 16 provincial offices into shipped features, delivered repeatedly within the contract.": {"ko": "16개 시도교육청 현장의 입력 부담과 권한 불편을 빠른 배포로 해소해, 계약 기간 안에 반복해서 전달합니다.", "ja": "16教育庁の入力負担と権限の不便を素早いリリースで解消し、契約期間内に繰り返し届けます。"}, "Key sentence": {"ko": "핵심 문장", "ja": "核心文"}, "Not decided yet": {"ko": "아직 미정", "ja": "未決定"}, "✓ Confirmed": {"ko": "✓ 확정", "ja": "✓ 確定"}, "One sentence this section must land": {"ko": "이 섹션이 남겨야 할 한 문장", "ja": "この章が伝えるべき一文"}, "Three angles reduced from the Win Theme. Choose one, or write your own.": {"ko": "Win Theme에서 뽑은 세 가지 각도. 하나를 고르거나 직접 쓰세요.", "ja": "Win Themeから導いた3つの切り口。選ぶか、自分で書くか。"}, "CANDIDATE 1": {"ko": "후보 1", "ja": "候補 1"}, "CANDIDATE 2": {"ko": "후보 2", "ja": "候補 2"}, "CANDIDATE 3": {"ko": "후보 3", "ja": "候補 3"}, "Lead with real-time monitoring": {"ko": "실시간 현황 모니터링을 앞세움", "ja": "リアルタイム状況モニタリングを前面に"}, "Lead with the institution-tier platform structure": {"ko": "기관 단위 계층 플랫폼 구조를 앞세움", "ja": "機関単位の階層プラットフォーム構造を前面に"}, "Lead with common data infrastructure": {"ko": "공통 데이터 형식 인프라를 앞세움", "ja": "共通データ形式のインフラを前面に"}, "Improve features through a live status dashboard": {"ko": "실시간 현황 화면으로 기능을 개선합니다", "ja": "リアルタイム状況画面で機能を改善する"}, "Role-based permissions connect student support": {"ko": "역할별 권한 체계로 학생지원을 연계합니다", "ja": "役割別の権限体系で学生支援をつなぐ"}, "Same-format data links lookup and referral": {"ko": "같은 형식의 데이터로 조회와 연계를 잇습니다", "ja": "同じ形式のデータで照会と連携をつなぐ"}, "Apply the usage-monitoring and regional-distribution screens we already operate, so office staff read program status at a glance and decide immediately.": {"ko": "사용 현황 모니터링과 지역 분포 리포트를 운영해 온 화면 구성을 적용해, 현황을 한눈에 읽는 형태로 교육청 담당자가 사업 운영 판단을 바로 내리게 합니다.", "ja": "運用中の利用状況モニタリングと地域分布レポートの画面構成を適用し、教育庁の担当者が状況を一目で読み取り、すぐ判断できるようにします。"}, "Apply a 3-tier platform structure with a separate institution layer, so referral, counseling and admin roles each see a distinct scope — and a teacher covering several schools links student support in one place.": {"ko": "기관 운영 계층을 따로 둔 3층 플랫폼 구조를 적용해, 의뢰·상담·관리 역할마다 볼 수 있는 범위가 갈리는 체계로 복수 담당학교를 맡은 교사가 학생 지원 정보를 한곳에서 잇게 합니다.", "ja": "機関運営の階層を分けた3層プラットフォーム構造を適用し、依頼・相談・管理の役割ごとに閲覧範囲が分かれる体系で、複数校を担当する教員が学生支援情報を一か所でつなげます。"}, "Store every program's data in one common format, so existing cases and screenings carry over without re-entry across the two systems.": {"ko": "모든 사업의 데이터를 같은 형식으로 쌓는 공통 인프라 방식을 적용해, 기존 사례와 검사 자료가 끊기지 않고 이어져 담당자가 두 시스템의 정보를 다시 입력하지 않게 합니다.", "ja": "すべての事業データを同じ形式で蓄積する共通インフラ方式を適用し、既存の事例と検査データが途切れずつながり、担当者が2つのシステムに再入力しなくて済むようにします。"}, "Development": {"ko": "전개", "ja": "展開"}, "How do the 17 pages unfold?": {"ko": "17장을 어떻게 전개할까요?", "ja": "17ページをどう展開しますか？"}, "Three organizing principles. Each covers all 12 requirements — they differ in what the reader meets first.": {"ko": "구성 원칙 세 가지. 요구사항 12개는 모두 다루되, 독자가 먼저 만나는 것이 다릅니다.", "ja": "3つの構成原理。12要件はすべて網羅し、読み手が最初に出会うものが違います。"}, "PLAN A": {"ko": "A안", "ja": "A案"}, "PLAN B": {"ko": "B안", "ja": "B案"}, "PLAN C": {"ko": "C안", "ja": "C案"}, "In RFP order": {"ko": "요구사항 순서대로", "ja": "要件の順序どおり"}, "Around the 3-tier permission structure": {"ko": "권한 3층 구조 중심으로", "ja": "権限3層構造を中心に"}, "As one student's journey": {"ko": "학생 지원 한 건의 흐름으로", "ja": "学生支援1件の流れで"}, "Follow FR-001 to COR-006 as written; one bundle of screens, rules and deliverables per requirement.": {"ko": "RFP가 적은 FR-001부터 COR-006까지 요구사항 순서를 따라, 요구사항마다 구현 화면·규칙·산출물을 한 묶음씩 폅니다.", "ja": "RFPの記載順にFR-001からCOR-006まで、要件ごとに画面・ルール・成果物を一束ずつ展開します。"}, "Set up the institution / role permission structure first, then layer school workflows and lookup / data features on top.": {"ko": "기관과 역할의 권한 구조를 먼저 세우고, 그 위에 학교 현장 업무와 조회·데이터 기능을 얹는 층 순서로 폅니다.", "ja": "機関と役割の権限構造を先に立て、その上に学校現場の業務と照会・データ機能を重ねる順で展開します。"}, "Follow a single case from admin setup through referral, screening, counseling, case management and analysis.": {"ko": "관리자의 기관·권한 설정에서 의뢰, 검사, 상담, 사례 운영, 분석까지 학생 지원 한 건이 지나는 순서로 폅니다.", "ja": "管理者の機関・権限設定から依頼、検査、相談、事例運営、分析まで、学生支援1件が辿る順で展開します。"}, "Cases & statistics": {"ko": "사례와 통계", "ja": "事例と統計"}, "Permissions & search": {"ko": "권한과 검색", "ja": "権限と検索"}, "Screening & automation": {"ko": "검사와 자동화", "ja": "検査と自動化"}, "Convenience & standards": {"ko": "편의와 수행기준", "ja": "利便性と実施基準"}, "Permission structure": {"ko": "권한 구조", "ja": "権限構造"}, "School-site workflows": {"ko": "학교 현장 업무", "ja": "学校現場の業務"}, "Lookup & data": {"ko": "조회와 데이터", "ja": "照会とデータ"}, "Automation & standards": {"ko": "자동화와 수행기준", "ja": "自動化と実施基準"}, "Setup & referral": {"ko": "설정과 의뢰", "ja": "設定と依頼"}, "Screening & counseling": {"ko": "검사와 상담", "ja": "検査と相談"}, "Case operations": {"ko": "사례 운영", "ja": "事例運営"}, "Analysis & standards": {"ko": "분석과 수행기준", "ja": "分析と実施基準"}, "Strength": {"ko": "강점", "ja": "強み"}, "Weakness": {"ko": "약점", "ja": "弱み"}, "Easiest to cross-check": {"ko": "요구사항 대조가 가장 쉬움", "ja": "要件との照合が最も容易"}, "Permissions scattered across three places": {"ko": "권한 체계가 세 곳에 흩어져 읽힘", "ja": "権限体系が3か所に分散"}, "One spine; matches the key sentence": {"ko": "뼈대 하나, 핵심 문장과 맞음", "ja": "骨格が一本、核心文と一致"}, "Leaves RFP order": {"ko": "RFP 순서를 벗어남", "ja": "RFPの順序から外れる"}, "Reads as a story": {"ko": "이야기처럼 읽힘", "ja": "物語として読める"}, "Permissions arrive late": {"ko": "권한이 늦게 나옴", "ja": "権限の説明が後回しに"}, "Plan B · Around the 3-tier permission structure": {"ko": "B안 · 권한 3층 구조 중심으로", "ja": "B案・権限3層構造を中心に"}, "Preview": {"ko": "프리뷰", "ja": "プレビュー"}, "/ 17 pages written": {"ko": "/ 17장 작성", "ja": "/ 17ページ作成"}, "Writing to your decisions…": {"ko": "결정대로 작성 중…", "ja": "決定どおり作成中…"}, "✓ 17 pages written · design system applied": {"ko": "✓ 17장 작성 완료 · 디자인 시스템 적용", "ja": "✓ 17ページ作成完了・デザインシステム適用"}, "Permission framework · 3-tier design": {"ko": "권한 체계 · 3층 권한 설계", "ja": "権限体系・3層権限設計"}, "III. Project execution · 1. Functional requirements": {"ko": "III. 프로젝트 수행 · 1. 기능개선수행 요구사항", "ja": "III. プロジェクト遂行・1. 機能改善要件"}, "Menus follow the role,": {"ko": "메뉴는 역할에 따라,", "ja": "メニューは役割に、"}, "what you can see follows the institution": {"ko": "볼 수 있는 자료는 소속에 따라", "ja": "閲覧範囲は所属に従う"}, "Three tiers decide what you see.": {"ko": "3층 구조가 볼 수 있는 범위를 정합니다.", "ja": "3層が閲覧範囲を決める。"}, "The server enforces it — not the screen.": {"ko": "지키는 건 화면이 아니라 서버입니다.", "ja": "守るのは画面ではなくサーバー。"}, "Role": {"ko": "역할", "ja": "役割"}, "Menu access": {"ko": "메뉴 접근", "ja": "メニュー権限"}, "Lookup scope": {"ko": "조회 범위", "ja": "照会範囲"}, "Actions": {"ko": "처리 권한", "ja": "操作権限"}, "Tier 1 · Central admin": {"ko": "1층 중앙관리자", "ja": "第1層 中央管理者"}, "All menus · permission settings": {"ko": "전체 메뉴·권한 설정", "ja": "全メニュー・権限設定"}, "Every institution and school": {"ko": "전국 기관·학교 전체", "ja": "全国の機関・学校すべて"}, "Settings · export · all": {"ko": "설정·출력 전 기능", "ja": "設定・出力の全機能"}, "Tier 2 · Office / program team": {"ko": "2층 교육청·사업팀 관리자", "ja": "第2層 教育庁・事業チーム管理者"}, "Cases · screening · stats · institutions": {"ko": "사례·검사·통계·기관", "ja": "事例・検査・統計・機関"}, "Institutions in jurisdiction": {"ko": "관할 기관·학교", "ja": "管轄の機関・学校"}, "View · edit · export": {"ko": "관할 내 조회·수정·출력", "ja": "管轄内の照会・修正・出力"}, "Tier 3 · Referral teacher": {"ko": "3층 의뢰교사", "ja": "第3層 依頼教員"}, "Screening · referral · linkage": {"ko": "검사·의뢰·연계", "ja": "検査・依頼・連携"}, "Assigned schools & students": {"ko": "담당 학교·담당 학생", "ja": "担当校・担当学生"}, "Run screening · request linkage": {"ko": "검사 실시·연계 요청", "ja": "検査実施・連携依頼"}, "Tier 3 · Counselor": {"ko": "3층 상담교사", "ja": "第3層 相談教員"}, "Cases · counseling records": {"ko": "사례·상담 기록", "ja": "事例・相談記録"}, "Linked students only": {"ko": "연계받은 학생", "ja": "連携された学生のみ"}, "Write counseling records": {"ko": "상담 기록 작성", "ja": "相談記録の作成"}, "Server-side check": {"ko": "서버 측 판정", "ja": "サーバー側判定"}, "Scope is judged on the server from the login's institution code — out-of-scope records never load.": {"ko": "로그인한 사람의 소속 기관 코드로 서버에서 판정 — 범위 밖 자료는 조회되지 않습니다", "ja": "ログイン者の所属機関コードでサーバー側が判定 — 範囲外のデータは表示されません"}, "School mental-health case management system · Permission matrix": {"ko": "학교 정신건강 위기지원 사례관리시스템 · 권한 매트릭스 설정", "ja": "学校メンタルヘルス事例管理システム・権限マトリクス設定"}, "Role × menu is configured; scope is judged by institution code": {"ko": "역할×메뉴 설정, 범위는 소속 코드로 판정", "ja": "役割×メニューを設定、範囲は所属コードで判定"}, "Source: RFP FR-003 · FR-006 · 3-tier platform structure · menu scope to be confirmed on site": {"ko": "근거: 제안요청서 FR-003·FR-006 · 3층 플랫폼 구조 · 메뉴별 허용 범위 현장 확인 필요", "ja": "根拠：提案依頼書 FR-003・FR-006・3層プラットフォーム構造・メニュー別許可範囲は現場確認要"}, "NANUM VITAMIN": {"ko": "나눔비타민", "ja": "NANUM VITAMIN"}, "Rewriting page 1 to your note…": {"ko": "메모대로 1장 다시 쓰는 중…", "ja": "メモどおり1ページ目を書き直し中…"}, "Live status dashboard": {"ko": "실시간 현황 화면", "ja": "リアルタイム状況画面"}, "Role-based permissions": {"ko": "역할별 권한 체계", "ja": "役割別の権限体系"}, "Same-format data": {"ko": "같은 형식 데이터", "ja": "同じ形式のデータ"}};
+const L = (s) => { const v = UI[s]; return v && v[LANG] ? v[LANG] : s; };
+(function localizeUI() {
+  if (LANG === 'en' || LANG === 'zh') return;
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+  for (const n of nodes) { const t = n.nodeValue; const k = t.trim(); if (!k || !UI[k] || !UI[k][LANG]) continue; n.nodeValue = t.replace(k, UI[k][LANG]); }
+  document.querySelectorAll('[placeholder]').forEach(el => el.setAttribute('placeholder', L(el.getAttribute('placeholder'))));
+  document.querySelectorAll('[data-type]').forEach(el => el.setAttribute('data-type', L(el.getAttribute('data-type'))));
+})();
+const K = location.search.includes('hd') ? 2 : 1;
+if (K === 2) { document.documentElement.style.cssText += 'width:3200px;height:2000px;'; document.body.style.cssText += 'width:3200px;height:2000px;'; const hd = document.getElementById('hd'); hd.style.transform = 'scale(2)'; hd.style.transformOrigin = '0 0'; }
+
+const msgs = $('#msgs');
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+function addMsg(kind, html) {
+  const el = document.createElement('div'); el.className = 'm ' + kind; el.innerHTML = html; msgs.appendChild(el);
+  while (msgs.children.length > 6) msgs.removeChild(msgs.firstChild);
+  requestAnimationFrame(() => el.classList.add('on')); return el;
+}
+async function typeIn(text, cps = 58) {
+  const t = $('#ctext'); $('#cph').style.display = 'none'; $('#composer').classList.add('has'); t.textContent = '';
+  for (let i = 1; i <= text.length; i++) { t.textContent = text.slice(0, i); await wait(1000 / cps); }
+  await wait(380);
+  t.textContent = ''; $('#cph').style.display = ''; $('#composer').classList.remove('has');
+  return addMsg('me', text);
+}
+function stage(i) { document.querySelectorAll('#stage i').forEach((e, k) => { e.className = k < i ? 'done' : (k === i ? 'on' : ''); }); }
+function scene(id) { document.querySelectorAll('.scene').forEach(s => s.classList.toggle('on', s.id === id)); }
+async function cursorTo(el, dx = 0.5, dy = 0.5) {
+  const c = $('#cursor'), r0 = el.getBoundingClientRect(), p0 = $('.panel').getBoundingClientRect(); const r = { left: r0.left / K, top: r0.top / K, width: r0.width / K, height: r0.height / K }, p = { left: p0.left / K, top: p0.top / K };
+  c.style.left = (r.left - p.left + r.width * dx) + 'px'; c.style.top = (r.top - p.top + r.height * dy) + 'px'; c.style.opacity = 1; await wait(620);
+}
+function pick(sel, others) { $(sel).classList.add('sel'); others.forEach(o => $(o).classList.add('dim')); }
+
+// ---- Camera & captions ----------------------------------------------------
+const W = 1600, H = 1000;
+function camRect(x, y, w, h) {
+  const s = Math.min(W / w, H / h);
+  const tx = (W - w * s) / 2 - x * s, ty = (H - h * s) / 2 - y * s;
+  $('#cam').style.transform = `translate(${tx}px, ${ty}px) scale(${s})`;
+}
+function camEl(el, pad = 24) {
+  const rr = el.getBoundingClientRect(); const r = { left: rr.left / K, top: rr.top / K, width: rr.width / K, height: rr.height / K };
+  // bounding rect is in screen space; undo the current transform by reading layout offsets instead
+  const m = new DOMMatrix(getComputedStyle($('#cam')).transform);
+  const x = (r.left - m.e) / m.a, y = (r.top - m.f) / m.d, w = r.width / m.a, h = r.height / m.d;
+  camRect(x - pad, y - pad, w + pad * 2, h + pad * 2);
+}
+function camFull() { $('#cam').style.transform = 'none'; }
+const CHAT = { x: 0, y: 540, w: 520, h: 460 };
+function camChat() { camRect(CHAT.x, CHAT.y, CHAT.w, CHAT.h); }
+async function cap(html, ms, pos = '') {
+  const c = $('#cap'); c.className = pos; c.innerHTML = html; requestAnimationFrame(() => c.classList.add('on'));
+  if (ms) { await wait(ms); c.classList.remove('on'); await wait(400); }
+}
+function capOff() { $('#cap').classList.remove('on'); }
+
+const TITLES_L = {"ko": ["3층 구조의 권한 설계", "권한 부여와 변경 이력", "기관정보와 소속 현황", "개인정보 접근 통제", "의뢰교사 검사 권한과 연계", "상담교사 사례 기록", "복수 학교 담당 교사", "사례관리 절차와 진행현황", "사용자 중심 입력화면", "다기준 운영 현황 통계", "통계 출력과 성과 시각화", "검사 자동화", "정보 비노출 단체문자", "검색과 조회", "알림", "산출물과 수행기준", "보안 11개 항목"], "ja": ["3層構造の権限設計", "権限付与と変更履歴", "機関情報と所属状況", "個人情報アクセス制御", "依頼教員の検査権限と連携", "相談教員の事例記録", "複数校担当の教員", "事例管理手順と進捗", "ユーザー中心の入力画面", "多基準の運営状況統計", "統計出力と成果の可視化", "検査の自動化", "情報非表示の一斉SMS", "検索と照会", "通知", "成果物と実施基準", "セキュリティ11項目"]};
+const TITLES = (TITLES_L[LANG] || null) || ['3-tier permission design','Granting & change history','Institution records & affiliation','Personal-data access control','Referral teacher screening rights','Counselor case records','Teachers covering several schools','Case procedure & status','User-centered input screens','Multi-criteria statistics','Statistics export & charts','Screening automation','Bulk SMS without exposure','Search & lookup','Notifications & alerts','Deliverables & standards','Security · 11 items'];
+
+async function run() {
+  $('#cph').textContent = T.ph;
+  // ---- Scene 1: Win Theme
+  stage(2); scene('s1'); camFull();
+  await wait(900);
+  await cap(T.r1, 2600);
+  addMsg('ai', '<div class="who"><i></i>Contrl</div>' + T.ai1 + '<div class="opts"><div><b>1</b>' + L('Field pain, shipped fast') + '</div><div><b>2</b>' + L('Zero-downtime, zero-leak upgrade') + '</div><div><b>3</b>' + L('Data-driven program operations') + '</div></div>');
+  camChat(); await wait(1700);
+  cap(T.r2);
+  await typeIn(T.u1);
+  capOff(); await wait(300);
+  camEl($('#s1 .cards'), 20); await wait(900);
+  cap(T.r3);
+  await cursorTo($('#wt1'), 0.5, 0.35); pick('#wt1', ['#wt2', '#wt3']); await wait(1600);
+  capOff();
+  const s1 = addMsg('sys', '<span class="spin"></span>' + T.s1); await wait(600); s1.classList.add('done'); await wait(500);
+
+  // ---- Scene 2: Key sentence
+  stage(3); scene('s2'); $('#cursor').style.opacity = 0; camFull(); await wait(1400);
+  addMsg('ai', '<div class="who"><i></i>Contrl</div>' + T.ai2 + '<div class="opts"><div><b>1</b>' + L('Live status dashboard') + '</div><div><b>2</b>' + L('Role-based permissions') + '</div><div><b>3</b>' + L('Same-format data') + '</div></div>');
+  camChat(); await wait(1600);
+  await typeIn(T.u2);
+  await wait(300); camEl($('#ks-focus'), 20); await wait(900);
+  cap(T.r4);
+  await cursorTo($('#ks2'), 0.5, 0.3); pick('#ks2', ['#ks1', '#ks3']); await wait(1600);
+  capOff();
+  $('#ks-val').textContent = L('Role-based permissions connect student support'); $('#ks-val').classList.remove('empty'); $('#ks-row').classList.add('done'); $('#ks-row').classList.remove('now');
+  const s2 = addMsg('sys', '<span class="spin"></span>' + T.s2); await wait(500); s2.classList.add('done'); await wait(500);
+
+  // ---- Scene 3: Development
+  scene('s3'); $('#cursor').style.opacity = 0; camFull(); await wait(1400);
+  addMsg('ai', '<div class="who"><i></i>Contrl</div>' + T.ai3);
+  camChat(); await wait(1600);
+  await typeIn(T.u3);
+  await wait(300); camEl($('#s3 .cards'), 20); await wait(900);
+  cap(T.r5);
+  await cursorTo($('#dv2'), 0.5, 0.3); pick('#dv2', ['#dv1', '#dv3']); await wait(1600);
+  capOff();
+  $('#dv-val').textContent = L('Plan B · Around the 3-tier permission structure'); $('#dv-val').classList.remove('empty'); $('#dv-row').classList.add('done'); $('#dv-row').classList.remove('now');
+  const s3 = addMsg('sys', '<span class="spin"></span>' + T.s3); await wait(900);
+
+  // ---- Scene 4: Preview fills
+  scene('s4'); $('#cursor').style.opacity = 0; camFull(); await wait(900);
+  cap(T.r6);
+  const strip = $('#strip');
+  TITLES.forEach((t, i) => { const c = document.createElement('div'); c.className = 'pv-scard writing'; c.innerHTML = `<i>p.${i + 1}</i>${t}`; strip.appendChild(c); });
+  const cards = [...strip.children];
+  $('#slide').style.opacity = 0;
+  for (let i = 0; i < cards.length; i++) { await wait(i < 3 ? 260 : 130); cards[i].classList.remove('writing'); $('#pv-done').textContent = i + 1; }
+  cards[0].classList.add('on');
+  $('#pv-status').innerHTML = '<span class="ok">' + L('✓ 17 pages written · design system applied') + '</span>';
+  s3.classList.add('done'); s3.innerHTML = '<span class="spin"></span>' + T.s3b;
+  $('#slide').style.transition = 'opacity .6s'; $('#slide').style.opacity = 1; await wait(600);
+  capOff(); await wait(300);
+  camEl($('#slide'), 10); await wait(1100);
+  cap(T.r7, 2800);
+  addMsg('ai', '<div class="who"><i></i>Contrl</div>' + T.ai4);
+  await wait(600);
+
+  // ---- Scene 5: Revise by prompt
+  camChat(); await wait(1200);
+  cap(T.r8);
+  await typeIn(T.u4);
+  capOff(); await wait(200);
+  camEl($('#slide'), 10); await wait(600);
+  $('#rw').classList.add('on'); await wait(1400); $('#rw').classList.remove('on');
+  $('#slide').classList.add('rev'); await wait(600);
+  cap(T.r9, 3200);
+  const s4 = addMsg('sys', '<span class="spin"></span>' + T.s4); s4.classList.add('done');
+  addMsg('ai', '<div class="who"><i></i>Contrl</div>' + T.ai5);
+  camFull(); await wait(1200);
+  await cap(T.r10, 3000);
+  document.body.setAttribute('data-done', '1');
+}
+window.addEventListener('load', () => setTimeout(run, 600));
+</script>
+</body>
+</html>

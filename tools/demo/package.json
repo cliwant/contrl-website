@@ -1,0 +1,10 @@
+{
+  "name": "contrl-demo-videos",
+  "private": true,
+  "description": "Self-playing HTML replays recorded to the landing-page demo videos (images/hero/*.mp4).",
+  "scripts": {
+    "install-browser": "npx playwright install chromium",
+    "record": "./record_all.sh"
+  },
+  "devDependencies": { "playwright": "1.49.1" }
+}

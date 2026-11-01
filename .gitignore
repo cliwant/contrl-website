@@ -1,2 +1,4 @@
 .DS_Store
 .firevibe_config.json
+tools/demo/node_modules/
+tools/demo/out*/
