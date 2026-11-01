@@ -69,10 +69,16 @@
         .lang-switch { display: flex; gap: 14px; font-size: 13px; }
         .lang-switch button { background: none; border: 0; padding: 0; font: inherit; color: #a1a1aa; cursor: pointer; }
         .lang-switch button.on { color: #18181b; font-weight: 700; }
-        .lang-switch--nav { gap: 2px; padding: 3px; border-radius: 9999px; background: #f4f1ec; border: 1px solid #e9e4df; margin-left: 6px; }
-        .lang-switch--nav button { padding: 5px 10px; border-radius: 9999px; font-size: 12.5px; font-weight: 600; color: #71717a; line-height: 1; }
-        .lang-switch--nav button.on { background: #18181b; color: #fff; }
-        @media (max-width: 480px) { .lang-switch--nav button { padding: 5px 8px; font-size: 12px; } }
+        /* Nav language menu: a quiet globe icon; the list only appears on click */
+        .lang-menu { position: relative; margin-left: 2px; }
+        .lang-menu-btn { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 9999px; border: 0; background: none; color: #a1a1aa; cursor: pointer; transition: color .15s, background .15s; }
+        .lang-menu-btn:hover, .lang-menu.open .lang-menu-btn { color: #18181b; background: #f4f1ec; }
+        .lang-menu-list { display: none; position: absolute; right: 0; top: calc(100% + 8px); min-width: 140px; flex-direction: column; gap: 0; padding: 6px; background: #fff; border: 1px solid #e9e4df; border-radius: 12px; box-shadow: 0 12px 32px -12px rgba(24,24,27,.25); }
+        .lang-menu.open .lang-menu-list { display: flex; }
+        .lang-menu-list button { text-align: left; padding: 8px 10px; border-radius: 8px; font-size: 13px; color: #52525b; }
+        .lang-menu-list button:hover { background: #f4f1ec; color: #18181b; }
+        .lang-menu-list button.on { color: #18181b; font-weight: 700; }
+        .lang-menu-list button.on::after { content: '✓'; float: right; color: #F27A2E; }
         h1, h2, h3 { text-wrap: balance; }
 
         /* 3D pill button (shared with the main page) */
@@ -288,7 +294,10 @@
                 <a href="#why" class="hidden md:block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav_why">Why it fails</a>
                 <a href="#how" class="hidden md:block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav_how">How it works</a>
                 <a href="#proof" class="hidden md:block text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav_results">Results</a>
-                <div class="lang-switch lang-switch--nav" aria-label="Language"><button data-lang="en">EN</button><button data-lang="ko">한국어</button><button data-lang="ja">日本語</button><button data-lang="zh">中文</button></div>
+                <div class="lang-menu" data-lang-menu>
+                    <button type="button" class="lang-menu-btn" aria-label="Language" aria-haspopup="menu" aria-expanded="false" data-lang-menu-btn><iconify-icon icon="solar:global-linear" width="18"></iconify-icon></button>
+                    <div class="lang-switch lang-menu-list" role="menu"><button role="menuitem" data-lang="en">English</button><button role="menuitem" data-lang="ko">한국어</button><button role="menuitem" data-lang="ja">日本語</button><button role="menuitem" data-lang="zh">中文</button></div>
+                </div>
             </div>
         </div>
     </nav>
@@ -666,6 +675,14 @@
         }
         applyLang(detectLang(), false);
         document.addEventListener('click', e => { const b = e.target.closest('.lang-switch button'); if (b) applyLang(b.dataset.lang, true); });
+        // Nav language menu: toggle on the globe, close on pick / outside click / Escape
+        const langMenu = document.querySelector('[data-lang-menu]');
+        const setLangMenu = (open) => { langMenu.classList.toggle('open', open); langMenu.querySelector('[data-lang-menu-btn]').setAttribute('aria-expanded', String(open)); };
+        document.addEventListener('click', e => {
+            if (e.target.closest('[data-lang-menu-btn]')) setLangMenu(!langMenu.classList.contains('open'));
+            else if (!e.target.closest('.lang-menu-list') || e.target.closest('.lang-switch button')) setLangMenu(false);
+        });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') setLangMenu(false); });
 
         // ---- Waitlist -----------------------------------------------------
         // Set WAITLIST_ENDPOINT to a form backend (e.g. a Google Apps Script web app,
