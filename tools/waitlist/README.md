@@ -2,7 +2,7 @@
 
 The landing page POSTs each signup to `WAITLIST_ENDPOINT` (in `index.html`). `Code.gs` is the whole backend:
 it stores the signup in a Google Sheet, computes the queue position, posts to Slack, and returns the position
-so the page can show "You're #N in line."
+so the page can show "You're #N in line." It also emails an HTML confirmation and answers the page's invite-code Check button (`GET ?invite=`).
 
 ## One-time setup (≈10 minutes, needs your Google + Slack accounts)
 
@@ -22,7 +22,8 @@ Re-deploying after editing `Code.gs`: *Deploy → Manage deployments → ✎ →
 
 ## Sheets
 
-- `Waitlist` (auto-created): timestamp · email · lang · invite_code · invited · source · user_agent · position
+- `Sheet1` (headers auto-filled): Date/Time · Region · Email · invite_code · invited · source · user_agent · position
+  Positions start at #101 (`POSITION_OFFSET`). A duplicate email is not re-added; the API returns `duplicate:true` with the existing position.
 - `Invites` (optional, create it yourself): column A = codes you hand out (e.g. `NV-7F3K`). When a signup uses a
   code, column B is filled with the email, and that signup is counted in the **front queue** (its own #1, #2…).
 
@@ -34,8 +35,9 @@ Invited signups show `🎟️ Waitlist #3 (invite · front queue)`.
 ## Testing
 
 ```bash
-curl -L -X POST "$ENDPOINT" -H 'Content-Type: text/plain' \
-  -d '{"email":"test@example.com","lang":"en","source":"curl"}'
-# → {"ok":true,"position":1,"invited":false}
+curl -sL "$ENDPOINT" -H 'Content-Type: text/plain' \
+  --data '{"email":"test@example.com","lang":"en","source":"curl"}'   # no -X POST: the 302 must become a GET
+# → {"ok":true,"position":101,"invited":false,"invalidCode":false}
+curl -sL "$ENDPOINT?invite=ABC123"   # → {"ok":true,"valid":false}  (invite-code Check button)
 ```
 Delete the test row from the sheet afterwards (positions are computed from rows).
