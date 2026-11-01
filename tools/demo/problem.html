@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Problem replay</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lato:wght@400;700;900&display=swap">
+<style>
+  * { box-sizing:border-box; }
+  html,body { margin:0; width:1600px; height:1000px; overflow:hidden; background:#ECECEF; font-family:Inter, Pretendard, system-ui, sans-serif; color:#18181b; -webkit-font-smoothing:antialiased; }
+  #cam { position:absolute; left:0; top:0; width:1600px; height:1000px; transform-origin:0 0; transition:transform .9s cubic-bezier(.22,.8,.2,1); will-change:transform; }
+  #cap { font-family: Inter, Pretendard, 'Noto Sans JP', 'Noto Sans SC', sans-serif; position:absolute; left:50%; bottom:52px; transform:translateX(-50%) translateY(14px); z-index:100; max-width:1180px; width:max-content; padding:18px 36px; border-radius:18px; background:rgba(24,24,27,.94); color:#fafafa; font-size:46px; font-weight:800; line-height:1.3; letter-spacing:-.01em; text-align:center; opacity:0; transition:opacity .4s ease, transform .4s ease; box-shadow:0 20px 50px -20px rgba(0,0,0,.5); }
+  #cap.on { opacity:1; transform:translateX(-50%) translateY(0); }
+  #cap b { color:#FFB35A; font-weight:700; }
+  #open { position:absolute; inset:0; z-index:90; background:rgba(24,24,27,.97); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; opacity:0; transition:opacity .5s ease; pointer-events:none; }
+  #open.on { opacity:1; }
+  #open .s { font-size:34px; font-weight:600; color:#A1A1AA; letter-spacing:-.01em; }
+  #open .b { font-size:96px; font-weight:800; color:#fff; letter-spacing:-.03em; line-height:1.05; text-align:center; }
+  #open .b em { font-style:normal; color:#FFB35A; }
+  #end { position:absolute; inset:0; z-index:90; background:rgba(24,24,27,.97); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; opacity:0; transition:opacity .6s ease; pointer-events:none; }
+  #end.on { opacity:1; }
+  #end .s { font-size:34px; font-weight:600; color:#A1A1AA; letter-spacing:-.01em; transform:translateY(10px); opacity:0; transition:all .5s ease .2s; }
+  #end .b { font-size:96px; font-weight:800; color:#fff; letter-spacing:-.03em; line-height:1.05; text-align:center; transform:translateY(14px); opacity:0; transition:all .6s ease .45s; }
+  #end .b em { font-style:normal; color:#FFB35A; }
+  #end.on .s, #end.on .b { transform:none; opacity:1; }
+
+  /* Generic AI deck generator UI (no brand) */
+  .app { width:1600px; height:1000px; display:grid; grid-template-columns:440px 1fr; background:#F7F7F8; position:relative; }
+  .side { background:#fff; border-right:1px solid #E6E6EA; display:flex; flex-direction:column; }
+  .hd { height:56px; display:flex; align-items:center; gap:10px; padding:0 20px; border-bottom:1px solid #EEEEF1; font-size:14px; color:#52525b; }
+  .hd .dots { display:flex; gap:6px; } .hd .dots i { width:11px; height:11px; border-radius:50%; background:#E0E0E5; }
+  .hd b { font-weight:700; color:#18181b; } .hd .logo { width:22px; height:22px; border-radius:7px; background:linear-gradient(135deg,#7C3AED,#2563EB); }
+  .side .body { padding:22px 20px; display:flex; flex-direction:column; gap:16px; }
+  .lbl { font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#8a8a93; }
+  .drop { border:1.5px dashed #CBCBD3; border-radius:14px; padding:14px; background:#FAFAFB; min-height:200px; display:flex; flex-direction:column; gap:8px; transition:all .3s; position:relative; }
+  .drop.hot { border-color:#7C3AED; background:#F5F0FF; border-style:solid; box-shadow:0 0 0 4px rgba(124,58,237,.15); }
+  .drop .hint { color:#A1A1AA; font-size:14px; text-align:center; margin:auto; }
+  .drop.hot .hint { color:#7C3AED; font-weight:600; }
+  .file { display:flex; align-items:center; gap:10px; font-size:13.5px; padding:8px 10px; background:#fff; border:1px solid #ECECF0; border-radius:9px; opacity:0; transform:translateY(6px); transition:all .25s; }
+  .file.on { opacity:1; transform:none; }
+  .file i { width:26px; height:26px; border-radius:6px; font-style:normal; font-size:9px; font-weight:800; color:#fff; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .hwp { background:#2563EB; } .pdf { background:#DC2626; } .ppt { background:#EA580C; } .doc { background:#4B5563; } .xls { background:#16A34A; }
+  .file span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .file .more { color:#71717a; font-size:13px; }
+  .prompt { border:1.5px solid #D4D4D8; border-radius:14px; background:#fff; padding:14px 16px; min-height:120px; font-size:16px; line-height:1.5; color:#18181b; position:relative; }
+  .prompt .ph { color:#A1A1AA; }
+  .prompt .caret { display:inline-block; width:2px; height:18px; background:#18181b; vertical-align:-3px; animation:blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity:0; } }
+  .gen { height:50px; border-radius:12px; background:linear-gradient(135deg,#7C3AED,#2563EB); color:#fff; font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center; gap:8px; transition:transform .15s; }
+  .gen.press { transform:scale(.97); filter:brightness(.92); }
+  .opts { display:flex; gap:8px; } .opts span { font-size:12.5px; padding:5px 10px; border-radius:999px; border:1px solid #E4E4E7; color:#52525b; background:#fff; }
+  .opts span.on { border-color:#7C3AED; color:#7C3AED; background:#F5F0FF; font-weight:600; }
+
+  .main { position:relative; padding:22px 28px; display:flex; flex-direction:column; gap:14px; }
+  .mhd { display:flex; align-items:center; gap:12px; font-size:14px; color:#52525b; height:30px; }
+  .mhd b { font-size:16px; color:#18181b; font-weight:700; }
+  .mhd .st { margin-left:auto; display:flex; align-items:center; gap:8px; font-size:13.5px; color:#7C3AED; font-weight:600; opacity:0; transition:opacity .3s; }
+  .mhd .st.on { opacity:1; }
+  .spin { width:14px; height:14px; border-radius:50%; border:2px solid #E4E4E7; border-top-color:#7C3AED; animation:spin .9s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .empty { position:absolute; inset:80px 28px 28px; display:flex; align-items:center; justify-content:center; color:#A1A1AA; font-size:16px; border:1.5px dashed #E4E4E7; border-radius:16px; transition:opacity .3s; }
+  .grid { position:absolute; inset:80px 28px 28px; display:grid; grid-template-columns:repeat(10,1fr); grid-auto-rows:min-content; gap:8px; align-content:start; }
+  .th { aspect-ratio:16/9; border-radius:5px; background:#fff; border:1px solid #E4E4E7; padding:6px 7px; display:flex; flex-direction:column; gap:3px; opacity:0; transform:scale(.9); transition:opacity .22s, transform .22s; box-shadow:0 1px 2px rgba(0,0,0,.04); }
+  .th.on { opacity:1; transform:none; }
+  .th .t { height:4px; width:70%; border-radius:2px; background:#7C3AED; opacity:.8; } .th .l { height:2.5px; border-radius:2px; background:#E4E4E7; }
+  .th:nth-child(3n) .t { width:55%; } .th:nth-child(4n) .t { background:#2563EB; }
+
+  /* Finder-style window with the source folder (drag origin) */
+  .finder { position:absolute; left:120px; top:140px; width:760px; height:520px; background:#fff; border-radius:12px; box-shadow:0 30px 70px -30px rgba(0,0,0,.4), 0 0 0 1px rgba(0,0,0,.08); overflow:hidden; display:grid; grid-template-columns:190px 1fr; grid-template-rows:46px 1fr 26px; font-family:-apple-system, Inter, sans-serif; transition:opacity .5s, transform .5s; }
+  .finder.off { opacity:0; transform:scale(.97); }
+  .finder .tb { grid-column:1/3; background:#F1F1F3; border-bottom:1px solid #DEDEE2; display:flex; align-items:center; gap:7px; padding:0 14px; font-size:13.5px; font-weight:600; color:#3f3f46; }
+  .finder .tb i { width:12px; height:12px; border-radius:50%; } .finder .tb i:nth-child(1) { background:#FF5F57; } .finder .tb i:nth-child(2) { background:#FEBC2E; } .finder .tb i:nth-child(3) { background:#28C840; }
+  .finder .tb span { margin-left:auto; margin-right:auto; }
+  .finder .sb { background:#F5F5F7; border-right:1px solid #E6E6EA; padding:12px 10px; font-size:12.5px; color:#52525b; display:flex; flex-direction:column; gap:4px; }
+  .finder .sb b { font-size:10.5px; color:#A1A1AA; font-weight:700; letter-spacing:.04em; margin:6px 6px 2px; }
+  .finder .sb div { padding:5px 8px; border-radius:6px; } .finder .sb div.on { background:#DCDCE3; color:#18181b; font-weight:600; }
+  .finder .list { padding:4px 0; font-size:13px; overflow:hidden; }
+  .finder .row { display:grid; grid-template-columns:32px 1fr 110px 90px; align-items:center; gap:8px; padding:5px 14px; color:#27272a; }
+  .finder .row:nth-child(even) { background:#FAFAFB; }
+  .finder .row i { width:20px; height:20px; border-radius:4px; font-style:normal; font-size:7.5px; font-weight:800; color:#fff; display:inline-flex; align-items:center; justify-content:center; }
+  .finder .row span:nth-child(3), .finder .row span:nth-child(4) { color:#71717a; font-size:12px; }
+  .finder.sel .row { background:#2563EB; color:#fff; } .finder.sel .row span { color:#fff !important; }
+  .finder .foot { grid-column:1/3; border-top:1px solid #E6E6EA; background:#F5F5F7; font-size:11.5px; color:#71717a; display:flex; align-items:center; justify-content:center; }
+  .ghost { position:absolute; z-index:40; display:flex; align-items:center; gap:8px; padding:8px 12px; background:rgba(255,255,255,.95); border:1px solid #D4D4D8; border-radius:10px; box-shadow:0 14px 30px -10px rgba(0,0,0,.35); font-size:13px; font-weight:600; opacity:0; transition:left 1.4s cubic-bezier(.3,.7,.3,1), top 1.4s cubic-bezier(.3,.7,.3,1), opacity .25s; pointer-events:none; }
+  .ghost .stack { position:relative; width:30px; height:30px; } .ghost .stack i { position:absolute; width:22px; height:22px; border-radius:5px; left:0; top:0; }
+  .ghost .stack i:nth-child(2) { left:4px; top:4px; } .ghost .stack i:nth-child(3) { left:8px; top:8px; }
+  .ghost .badge { background:#DC2626; color:#fff; border-radius:999px; font-size:11px; font-weight:800; padding:2px 7px; }
+
+  /* The one slide we zoom into; highlight wrappers */
+  .slide { position:absolute; left:120px; top:130px; width:1000px; height:562px; background:#fff; border-radius:8px; box-shadow:0 30px 70px -30px rgba(0,0,0,.35), 0 0 0 1px #E4E4E7; padding:40px 48px; opacity:0; transform:scale(.96); transition:opacity .5s, transform .5s; font-family:Inter, sans-serif; }
+  .slide.on { opacity:1; transform:none; }
+  .slide .sbar { position:absolute; left:0; top:0; right:0; height:8px; background:linear-gradient(90deg,#7C3AED,#2563EB); border-radius:8px 8px 0 0; }
+  .slide .kick { font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#7C3AED; margin-bottom:10px; }
+  .slide h2 { margin:0; font-size:30px; font-weight:800; letter-spacing:-.02em; line-height:1.25; }
+  .slide .cols { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:22px; }
+  .slide h3 { margin:0 0 8px; font-size:15px; font-weight:700; color:#3f3f46; }
+  .slide ul { margin:0 0 16px; padding-left:18px; font-size:14px; line-height:1.55; color:#52525b; }
+  .slide li { margin-bottom:4px; }
+  .slide .kpi { display:flex; gap:12px; margin-top:4px; }
+  .slide .kpi div { flex:1; background:#F4F4F5; border-radius:8px; padding:10px 12px; }
+  .slide .kpi b { display:block; font-size:22px; color:#18181b; } .slide .kpi span { font-size:11.5px; color:#71717a; }
+  .slide .pg { position:absolute; right:20px; bottom:14px; font-size:11px; color:#A1A1AA; }
+  .hl { position:relative; border-radius:8px; transition:background .35s, box-shadow .35s, opacity .35s; }
+  .hl.on { background:#FFF3EA; box-shadow:0 0 0 6px #FFF3EA, 0 0 0 9px #F27A2E; }
+  .hl .pin { position:absolute; right:-10px; top:-20px; display:flex; align-items:center; gap:8px; background:#F27A2E; color:#fff; border-radius:999px; padding:6px 14px 6px 8px; font-size:14px; font-weight:700; box-shadow:0 10px 24px -10px rgba(242,122,46,.8); opacity:0; transform:translateY(6px) scale(.95); transition:all .35s; white-space:nowrap; z-index:5; }
+  .hl .pin i { width:22px; height:22px; border-radius:50%; background:#fff; color:#F27A2E; font-style:normal; font-size:12px; display:inline-flex; align-items:center; justify-content:center; }
+  .hl.on > .pin { opacity:1; transform:none; }
+  .slide.focus .hl:not(.on):not(.keep) { opacity:.3; }
+
+  /* Slack-style team chat (layout only, no logo) */
+  .slack { position:absolute; left:240px; top:130px; width:760px; height:540px; background:#fff; border-radius:12px; box-shadow:0 30px 70px -30px rgba(0,0,0,.4), 0 0 0 1px rgba(0,0,0,.08); opacity:0; transform:scale(.96); transition:opacity .5s, transform .5s; display:grid; grid-template-columns:1fr; grid-template-rows:40px 1fr; overflow:hidden; font-family:Lato, Inter, sans-serif; }
+  .slack.on { opacity:1; transform:none; }
+  .slack .top { grid-column:1; background:#350D36; display:flex; align-items:center; padding:0 14px; gap:8px; }
+  .slack .top .srch { margin:0 auto; width:420px; height:26px; border-radius:6px; background:rgba(255,255,255,.18); color:rgba(255,255,255,.8); font-size:12.5px; display:flex; align-items:center; padding:0 10px; }
+  .slack .top .clock { color:rgba(255,255,255,.75); font-size:12px; }
+  .slack .nav { background:#3F0E40; color:#CFC3CF; padding:12px 0; font-size:14.5px; }
+  .slack .nav .ws { display:flex; align-items:center; gap:8px; padding:4px 16px 12px; color:#fff; font-weight:900; font-size:16px; }
+  .slack .nav .ws i { width:8px; height:8px; border-radius:50%; background:#2BAC76; display:inline-block; margin-left:2px; }
+  .slack .nav .sec { padding:8px 16px 4px; font-size:13px; color:#BCABBC; }
+  .slack .nav .ch { padding:4px 16px 4px 22px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .slack .nav .ch::before { content:"# "; color:#BCABBC; }
+  .slack .nav .ch.on { background:#1164A3; color:#fff; } .slack .nav .ch.b { color:#fff; font-weight:700; }
+  .slack .nav .ch.dm::before { content:""; display:inline-block; width:8px; height:8px; border-radius:50%; background:#2BAC76; margin-right:8px; vertical-align:middle; }
+  .slack .chan { display:flex; flex-direction:column; min-height:0; }
+  .slack .chd { height:50px; border-bottom:1px solid #E2E2E2; display:flex; align-items:center; padding:0 20px; font-size:17px; font-weight:900; color:#1D1C1D; gap:12px; }
+  .slack .chd span { font-weight:400; font-size:13px; color:#616061; }
+  .slack .chd .mem { margin-left:auto; font-weight:400; font-size:13px; color:#616061; border:1px solid #E2E2E2; border-radius:6px; padding:3px 8px; }
+  .slack .msgs { flex:1; padding:8px 0 6px; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; }
+  .slack .day { display:flex; align-items:center; margin:6px 0 10px; } .slack .day::before, .slack .day::after { content:""; flex:1; height:1px; background:#E2E2E2; }
+  .slack .day span { font-size:13px; font-weight:700; color:#1D1C1D; border:1px solid #E2E2E2; border-radius:999px; padding:4px 12px; background:#fff; }
+  .slack .m { display:grid; grid-template-columns:50px 1fr; gap:10px; padding:7px 20px; opacity:0; transform:translateY(6px); transition:all .35s; }
+  .slack .m.on { opacity:1; transform:none; }
+  .slack .av { width:48px; height:48px; border-radius:6px; background-size:cover; background-position:center; }
+  .slack .av.a { background-image:url(av-sarah.jpg); } .slack .av.b { background-image:url(av-jake.jpg); }
+  .slack .m .nm { font-size:17px; font-weight:900; color:#1D1C1D; } .slack .m .nm span { font-weight:400; font-size:12px; color:#616061; margin-left:6px; }
+  .slack .m .tx { font-family: Lato, Inter, Pretendard, 'Hiragino Sans', 'PingFang SC', sans-serif; font-size:22px; line-height:1.45; color:#1D1C1D; margin-top:2px; }
+  .slack .m .tx em { font-style:normal; background:#FFF3C4; padding:0 3px; border-radius:3px; }
+  .slack .m .tx code { font-family:Menlo, monospace; font-size:13px; background:#F6F6F6; border:1px solid #E2E2E2; border-radius:3px; padding:1px 4px; color:#E01E5A; }
+  .slack .m .rx { display:inline-flex; align-items:center; gap:4px; margin:8px 4px 0 0; font-size:15px; background:#F0F0F0; border:1px solid #E2E2E2; border-radius:999px; padding:2px 8px; color:#1D1C1D; }
+  .slack .typing { padding:4px 20px 0 70px; font-size:12.5px; color:#616061; opacity:0; transition:opacity .3s; } .slack .typing.on { opacity:1; }
+  .slack .comp { margin:4px 20px 14px; border:1px solid #BBBBBB; border-radius:8px; height:54px; padding:10px 12px; font-size:14px; color:#616061; }
+  .cursor { position:absolute; width:18px; height:22px; z-index:50; pointer-events:none; opacity:0; transition:left .55s cubic-bezier(.2,.8,.2,1), top .55s cubic-bezier(.2,.8,.2,1), opacity .3s; }
+  .cursor.slow { transition-duration:1.4s, 1.4s, .3s; transition-timing-function:cubic-bezier(.3,.7,.3,1); }
+</style>
+</head>
+<body>
+<div id="hd" style="position:relative;width:1600px;height:1000px">
+<div id="cap"></div>
+<div id="open" class="on"><div class="s">Gamma. ChatGPT. Genspark. Any of them.</div><div class="b">Hand it <em>everything.</em></div></div>
+<div id="end"><div class="s">You didn’t use AI too little.</div><div class="b">You handed it <em>too much.</em></div></div>
+<div id="cam">
+<div class="app">
+  <aside class="side">
+    <div class="hd"><div class="dots"><i></i><i></i><i></i></div><span class="logo"></span><b>AI Deck Generator</b><span>· New deck</span></div>
+    <div class="body">
+      <div class="lbl">Sources</div>
+      <div class="drop" id="drop">
+        <div class="hint" id="hint">Drop files here</div>
+        <div class="file"><i class="hwp">HWP</i><span>RFP_case-management-upgrade.hwp</span></div>
+        <div class="file"><i class="pdf">PDF</i><span>company_profile_2026.pdf</span></div>
+        <div class="file"><i class="ppt">PPT</i><span>winning_proposal_2025.pptx</span></div>
+        <div class="file"><i class="doc">DOC</i><span>evaluation_criteria.docx</span></div>
+        <div class="file"><i class="xls">XLS</i><span>past_projects_list.xlsx</span></div>
+        <div class="file"><span class="more">+ 42 more files · 312 MB</span></div>
+      </div>
+      <div class="lbl">Prompt</div>
+      <div class="prompt" id="prompt"><span class="ph" id="ph">Describe the deck you want…</span><span id="ptext"></span><span class="caret"></span></div>
+      <div class="opts"><span class="on">100 slides</span><span>Professional</span><span>Auto images</span></div>
+      <div class="gen" id="gen">✦ Generate deck</div>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="mhd"><b>Untitled deck</b><span id="mcount"></span><span class="st" id="st"><span class="spin"></span>Generating…</span></div>
+    <div class="empty" id="empty">Your deck will appear here</div>
+    <div class="grid" id="grid"></div>
+
+    <!-- Finder window: where the files come from -->
+    <div class="finder" id="finder">
+      <div class="tb"><i></i><i></i><i></i><span>Proposal_materials</span></div>
+      <div class="sb"><b>Favorites</b><div>Recents</div><div>Desktop</div><div>Downloads</div><b>Shared</b><div class="on">Proposal_materials</div><div>Bids 2025</div><div>Templates</div></div>
+      <div class="list" id="flist">
+        <div class="row"><i class="hwp">HWP</i><span>RFP_case-management-upgrade.hwp</span><span>Today, 9:12 AM</span><span>4.1 MB</span></div>
+        <div class="row"><i class="pdf">PDF</i><span>company_profile_2026.pdf</span><span>Oct 2, 2026</span><span>18.6 MB</span></div>
+        <div class="row"><i class="ppt">PPT</i><span>winning_proposal_2025.pptx</span><span>Dec 11, 2025</span><span>96.2 MB</span></div>
+        <div class="row"><i class="doc">DOC</i><span>evaluation_criteria.docx</span><span>Today, 9:14 AM</span><span>212 KB</span></div>
+        <div class="row"><i class="xls">XLS</i><span>past_projects_list.xlsx</span><span>Sep 18, 2026</span><span>1.3 MB</span></div>
+        <div class="row"><i class="pdf">PDF</i><span>case_study_welfare_app.pdf</span><span>Aug 30, 2026</span><span>7.9 MB</span></div>
+        <div class="row"><i class="ppt">PPT</i><span>lost_proposal_2024_v3_final.pptx</span><span>Mar 5, 2025</span><span>71.4 MB</span></div>
+        <div class="row"><i class="doc">DOC</i><span>security_checklist_11items.docx</span><span>Today, 9:20 AM</span><span>88 KB</span></div>
+        <div class="row"><i class="pdf">PDF</i><span>org_chart_and_resumes.pdf</span><span>Jul 22, 2026</span><span>12.0 MB</span></div>
+        <div class="row"><i class="xls">XLS</i><span>pricing_draft_v7.xlsx</span><span>Yesterday</span><span>640 KB</span></div>
+        <div class="row"><i class="ppt">PPT</i><span>company_intro_long.pptx</span><span>Jun 3, 2026</span><span>58.3 MB</span></div>
+        <div class="row"><i class="pdf">PDF</i><span>reference_letters_2023-2026.pdf</span><span>May 14, 2026</span><span>9.7 MB</span></div>
+        <div class="row"><i class="doc">DOC</i><span>meeting_notes_kickoff.docx</span><span>Oct 20, 2026</span><span>140 KB</span></div>
+      </div>
+      <div class="foot" id="ffoot">47 items, 312 MB</div>
+    </div>
+    <div class="ghost" id="ghost"><div class="stack"><i class="hwp"></i><i class="pdf"></i><i class="ppt"></i></div><span>47 items</span><span class="badge">47</span></div>
+
+    <div class="slide" id="slide">
+      <div class="sbar"></div>
+      <div class="kick">Section 3 · Technical approach</div>
+      <div class="hl" id="h1"><h2>Comprehensive Approach to System Enhancement and Stakeholder Value</h2><div class="pin"><i>1</i>Off the point</div></div>
+      <div class="cols">
+        <div>
+          <div class="hl" id="h2">
+            <h3>Our methodology</h3>
+            <ul><li>Leverage cross-functional synergies to deliver a robust, scalable and future-proof solution</li><li>Apply industry best practices and a systematic management framework</li><li>Ensure seamless integration across all stakeholder groups</li></ul>
+            <h3>Key differentiators</h3>
+            <ul style="margin-bottom:0"><li>Extensive experience in public-sector digital transformation</li><li>Commitment to excellence — we will do our utmost to ensure success</li></ul>
+            <div class="pin"><i>2</i>Generic</div>
+          </div>
+        </div>
+        <div>
+          <div class="hl" id="h3">
+            <h3>Expected outcomes</h3>
+            <div class="hl" id="h4"><div class="kpi"><div><b>40%</b><span>efficiency gain</span></div><div><b>99.9%</b><span>availability</span></div><div><b>12</b><span>weeks to launch</span></div></div><div class="pin"><i>?</i>Where did 40% come from?</div></div>
+            <h3 style="margin-top:16px">Also covered on this slide</h3>
+            <ul style="margin-bottom:0"><li>Security &amp; compliance</li><li>Change management</li><li>Training &amp; adoption</li><li>Long-term roadmap</li></ul>
+            <div class="pin"><i>3</i>Scattered</div>
+          </div>
+        </div>
+      </div>
+      <div class="pg">12 / 100</div>
+    </div>
+
+    <!-- Slack-style chat: the night before -->
+    <div class="slack" id="slack">
+      <div class="top"><span class="srch">Search Northwind Proposal Team</span><span class="clock">11:42 PM</span></div>
+      <div class="chan">
+        <div class="chd"># bid-casemgmt-upgrade <span id="chd-sub">Presentation tomorrow 9:00 AM</span><span class="mem">4 members</span></div>
+        <div class="msgs">
+          <div class="day"><span>Thursday, October 30th</span></div>
+          <div class="m" id="b1"><div class="av a"></div><div><div class="nm">Sarah Mitchell <span>11:42 PM</span></div><div class="tx">Page 12 — where's the <em>40%</em> from?</div></div></div>
+          <div class="m" id="b2"><div class="av b"></div><div><div class="nm">Jake Reynolds <span>11:43 PM</span></div><div class="tx">AI put it in. Checking…</div></div></div>
+          <div class="m" id="b3"><div class="av b"></div><div><div class="nm">Jake Reynolds <span>11:51 PM</span></div><div class="tx">No source. Not in the RFP. Not in our files.</div></div></div>
+          <div class="m" id="b4"><div class="av a"></div><div><div class="nm">Sarah Mitchell <span>11:52 PM</span></div><div class="tx">So who explains it tomorrow?</div><div class="rx">😶 3</div><div class="rx">😡 2</div><div class="rx">🤦 2</div><div class="rx">💀 1</div></div></div>
+          <div class="typing" id="ty">Jake Reynolds is typing…</div>
+        </div>
+        <div class="comp">Message #bid-casemgmt-upgrade</div>
+      </div>
+    </div>
+
+    <div class="cursor" id="cursor"><svg width="18" height="22" viewBox="0 0 18 22"><path d="M1 1l6 18 2.5-7.5L17 9z" fill="#18181b" stroke="#fff" stroke-width="1.5"/></svg></div>
+  </main>
+</div>
+</div>
+
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const LANG = new URLSearchParams(location.search).get('lang') || 'en';
+const CAPS = {"open_s": {"en": "Gamma. ChatGPT. Genspark. Any of them.", "ko": "Gamma, ChatGPT, Genspark. 뭐든 상관없습니다.", "ja": "Gamma、ChatGPT、Genspark。どれでも同じ。", "zh": "Gamma、ChatGPT、Genspark，哪个都一样。"}, "open_b": {"en": "Hand it <em>everything.</em>", "ko": "<em>전부</em> 맡겨 보세요.", "ja": "<em>全部</em>任せてみる。", "zh": "<em>全部</em>交给它。"}, "p1": {"en": "Step one: <b>hand it everything.</b>", "ko": "1단계: <b>자료를 전부 올린다.</b>", "ja": "ステップ1：<b>全部任せる。</b>", "zh": "第一步：<b>全部交给它。</b>"}, "p2": {"en": "One prompt. <b>“Write it all.”</b>", "ko": "프롬프트 한 줄. <b>“알아서 제안서 잘 만들어 줘.”</b>", "ja": "プロンプト一行。<b>「いい感じに提案書を作って。」</b>", "zh": "一句提示词。<b>“帮我把提案做好。”</b>"}, "p3": {"en": "Five minutes. <b>100 slides.</b>", "ko": "5분 뒤. <b>100장.</b>", "ja": "5分後。<b>100ページ。</b>", "zh": "五分钟后。<b>100页。</b>"}, "p4": {"en": "Now <b>read one.</b>", "ko": "이제 <b>한 장만 읽어 봅시다.</b>", "ja": "では<b>1ページ読んでみる。</b>", "zh": "现在<b>读一页看看。</b>"}, "f1": {"en": "<b>① Off the point.</b> Fits any project.", "ko": "<b>① 논점 이탈.</b> 아무 사업에나 맞는 말.", "ja": "<b>① 論点ずれ。</b>どの案件にも当てはまる。", "zh": "<b>① 跑题。</b>放到哪个项目都行。"}, "f2": {"en": "<b>② Generic.</b> Any vendor could say it.", "ko": "<b>② 평이함.</b> 어느 업체나 하는 말.", "ja": "<b>② ありきたり。</b>どの会社でも言える。", "zh": "<b>② 空泛。</b>哪家供应商都能这么说。"}, "f3": {"en": "<b>③ Scattered.</b> Seven topics, one page.", "ko": "<b>③ 산만함.</b> 한 장에 주제 일곱 개.", "ja": "<b>③ 散漫。</b>1ページに7つの話題。", "zh": "<b>③ 零散。</b>一页七个主题。"}, "f4": {"en": "<b>40%?</b> Made up.", "ko": "<b>40%?</b> 지어낸 숫자.", "ja": "<b>40%？</b>根拠なし。", "zh": "<b>40%？</b>编出来的。"}, "p5": {"en": "The night before.", "ko": "발표 전날 밤.", "ja": "プレゼン前夜。", "zh": "答辩前一晚。"}, "p6": {"en": "<b>Nobody knows what’s in it.</b>", "ko": "<b>발표자도 내용을 모릅니다.</b>", "ja": "<b>中身を誰も知らない。</b>", "zh": "<b>没人知道里面写了什么。</b>"}, "end_s": {"en": "You didn’t use AI too little.", "ko": "AI를 덜 써서가 아닙니다.", "ja": "AIの使い方が足りなかったのではない。", "zh": "不是你用AI用得太少。"}, "end_b": {"en": "You handed it <em>too much.</em>", "ko": "<em>너무 많이</em> 맡깁니다.", "ja": "<em>任せすぎた</em>のだ。", "zh": "而是交给它<em>太多了。</em>"}, "prompt": {"en": "Write a 100-page proposal for this RFP. Cover every evaluation criterion, add tables and diagrams, make it professional.", "ko": "이 RFP로 100장짜리 제안서 써 줘. 평가항목 빠짐없이 반영하고, 표랑 도식 넣어서 전문가처럼.", "ja": "このRFPで100ページの提案書を書いて。評価項目をすべて反映し、表と図を入れて、プロっぽく。", "zh": "用这份RFP写一份100页的提案。覆盖所有评分项，加上表格和图表，要专业。"}, "chd": {"en": "Presentation tomorrow 9:00 AM", "ko": "내일 오전 9시 발표", "ja": "明日9:00プレゼン", "zh": "明天9:00答辩"}, "b1": {"en": "Page 12 — where's the <em>40%</em> from?", "ko": "12페이지 — <em>40%</em>는 어디서 나온 숫자예요?", "ja": "12ページ — この<em>40%</em>はどこから？", "zh": "第12页——这个<em>40%</em>是哪来的？"}, "b2": {"en": "AI put it in. Checking…", "ko": "AI가 넣은 거예요. 확인해 볼게요…", "ja": "AIが入れたものです。確認します…", "zh": "是AI加的，我查一下…"}, "b3": {"en": "No source. Not in the RFP. Not in our files.", "ko": "출처가 없어요. RFP에도, 우리 자료에도 없습니다.", "ja": "出典なし。RFPにも、社内資料にもありません。", "zh": "没有出处。RFP里没有，我们的资料里也没有。"}, "b4": {"en": "So who explains it tomorrow?", "ko": "그럼 내일 누가 설명하죠?", "ja": "じゃあ明日、誰が説明するの？", "zh": "那明天谁来解释？"}, "ty": {"en": "Jake Reynolds is typing…", "ko": "Jake Reynolds님이 입력 중…", "ja": "Jake Reynolds が入力中…", "zh": "Jake Reynolds 正在输入…"}};
+const T = Object.fromEntries(Object.entries(CAPS).map(([k, v]) => [k, v[LANG] || v.en]));
+document.documentElement.lang = LANG;
+
+// ---- UI localization: replace text nodes / placeholders / data-type by exact match
+const UI = {"AI Deck Generator": {"ko": "AI 장표 생성기", "ja": "AIスライド生成"}, "· New deck": {"ko": "· 새 문서", "ja": "・新規"}, "Sources": {"ko": "자료", "ja": "ソース"}, "Prompt": {"ko": "프롬프트", "ja": "プロンプト"}, "Drop files here": {"ko": "파일을 여기에 끌어다 놓으세요", "ja": "ここにファイルをドロップ"}, "Release to add 47 files": {"ko": "놓으면 파일 47개 추가", "ja": "離すと47件を追加"}, "RFP_case-management-upgrade.hwp": {"ko": "RFP_사례관리시스템_기능개선.hwp", "ja": "RFP_ケース管理システム改修.pdf"}, "company_profile_2026.pdf": {"ko": "회사소개서_2026.pdf", "ja": "会社案内_2026.pdf"}, "winning_proposal_2025.pptx": {"ko": "낙찰제안서_2025.pptx", "ja": "受注提案書_2025.pptx"}, "evaluation_criteria.docx": {"ko": "평가기준.docx", "ja": "評価基準.docx"}, "past_projects_list.xlsx": {"ko": "수행실적목록.xlsx", "ja": "実績一覧.xlsx"}, "case_study_welfare_app.pdf": {"ko": "사례집_복지앱.pdf", "ja": "事例集_福祉アプリ.pdf"}, "lost_proposal_2024_v3_final.pptx": {"ko": "탈락제안서_2024_v3_최종.pptx", "ja": "失注提案書_2024_v3_最終.pptx"}, "security_checklist_11items.docx": {"ko": "보안_체크리스트_11항목.docx", "ja": "セキュリティ_チェックリスト_11項目.docx"}, "org_chart_and_resumes.pdf": {"ko": "조직도_및_이력서.pdf", "ja": "組織図_経歴書.pdf"}, "pricing_draft_v7.xlsx": {"ko": "가격_초안_v7.xlsx", "ja": "見積_ドラフト_v7.xlsx"}, "company_intro_long.pptx": {"ko": "회사소개_긴버전.pptx", "ja": "会社紹介_ロング版.pptx"}, "reference_letters_2023-2026.pdf": {"ko": "추천서_2023-2026.pdf", "ja": "推薦状_2023-2026.pdf"}, "meeting_notes_kickoff.docx": {"ko": "회의록_킥오프.docx", "ja": "議事録_キックオフ.docx"}, "+ 42 more files · 312 MB": {"ko": "+ 42개 더 · 312 MB", "ja": "+ 他42件 · 312 MB"}, "Describe the deck you want…": {"ko": "만들고 싶은 장표를 설명하세요…", "ja": "作りたいスライドを説明…"}, "100 slides": {"ko": "100장", "ja": "100ページ"}, "Professional": {"ko": "프로페셔널", "ja": "プロ仕様"}, "Auto images": {"ko": "이미지 자동", "ja": "画像を自動挿入"}, "✦ Generate deck": {"ko": "✦ 장표 생성", "ja": "✦ スライド生成"}, "Untitled deck": {"ko": "제목 없는 문서", "ja": "無題のスライド"}, "Generating…": {"ko": "생성 중…", "ja": "生成中…"}, "✓ Done · 100 slides": {"ko": "✓ 완료 · 100장", "ja": "✓ 完了・100ページ"}, "Your deck will appear here": {"ko": "여기에 장표가 표시됩니다", "ja": "ここにスライドが表示されます"}, "Proposal_materials": {"ko": "제안자료_전체", "ja": "提案資料_全部"}, "Favorites": {"ko": "즐겨찾기", "ja": "よく使う項目"}, "Recents": {"ko": "최근 항목", "ja": "最近の項目"}, "Desktop": {"ko": "데스크탑", "ja": "デスクトップ"}, "Downloads": {"ko": "다운로드", "ja": "ダウンロード"}, "Shared": {"ko": "공유", "ja": "共有"}, "Bids 2025": {"ko": "입찰 2025", "ja": "入札 2025"}, "Templates": {"ko": "템플릿", "ja": "テンプレート"}, "47 items, 312 MB": {"ko": "47개 항목, 312MB", "ja": "47項目、312 MB"}, "47 of 47 selected, 312 MB": {"ko": "47개 항목 중 47개 선택됨, 312MB", "ja": "47項目中47項目を選択、312 MB"}, "Today, 9:12 AM": {"ko": "오늘 오전 9:12", "ja": "今日 9:12"}, "Today, 9:14 AM": {"ko": "오늘 오전 9:14", "ja": "今日 9:14"}, "Today, 9:20 AM": {"ko": "오늘 오전 9:20", "ja": "今日 9:20"}, "Oct 2, 2026": {"ko": "2026. 10. 2.", "ja": "2026/10/02"}, "Dec 11, 2025": {"ko": "2025. 12. 11.", "ja": "2025/12/11"}, "Sep 18, 2026": {"ko": "2026. 9. 18.", "ja": "2026/09/18"}, "Aug 30, 2026": {"ko": "2026. 8. 30.", "ja": "2026/08/30"}, "Mar 5, 2025": {"ko": "2025. 3. 5.", "ja": "2025/03/05"}, "Jul 22, 2026": {"ko": "2026. 7. 22.", "ja": "2026/07/22"}, "Yesterday": {"ko": "어제", "ja": "昨日"}, "Jun 3, 2026": {"ko": "2026. 6. 3.", "ja": "2026/06/03"}, "May 14, 2026": {"ko": "2026. 5. 14.", "ja": "2026/05/14"}, "Oct 20, 2026": {"ko": "2026. 10. 20.", "ja": "2026/10/20"}, "{n} slides": {"ko": "{n}장", "ja": "{n}ページ"}, "47 items": {"ko": "47개 항목", "ja": "47項目"}, "Section 3 · Technical approach": {"ko": "3장 · 기술 접근 방안", "ja": "第3章・技術的アプローチ"}, "Comprehensive Approach to System Enhancement and Stakeholder Value": {"ko": "시스템 고도화 및 이해관계자 가치 창출을 위한 종합적 접근 방안", "ja": "システム高度化とステークホルダー価値創出に向けた包括的アプローチ"}, "Our methodology": {"ko": "수행 방법론", "ja": "当社の方法論"}, "Leverage cross-functional synergies to deliver a robust, scalable and future-proof solution": {"ko": "부서 간 시너지를 활용하여 견고하고 확장 가능한 미래지향적 솔루션 제공", "ja": "部門横断のシナジーを活用し、堅牢で拡張性の高い将来対応型ソリューションを提供"}, "Apply industry best practices and a systematic management framework": {"ko": "업계 모범 사례와 체계적인 관리 프레임워크 적용", "ja": "業界のベストプラクティスと体系的な管理フレームワークを適用"}, "Ensure seamless integration across all stakeholder groups": {"ko": "모든 이해관계자 그룹 간 원활한 통합 보장", "ja": "すべてのステークホルダー間のシームレスな統合を確保"}, "Key differentiators": {"ko": "핵심 차별점", "ja": "主な差別化要素"}, "Extensive experience in public-sector digital transformation": {"ko": "공공부문 디지털 전환에 대한 풍부한 경험", "ja": "公共分野のDXにおける豊富な経験"}, "Commitment to excellence — we will do our utmost to ensure success": {"ko": "사업 성공을 위해 최선을 다하겠습니다", "ja": "成功に向けて最善を尽くします"}, "Expected outcomes": {"ko": "기대 효과", "ja": "期待される成果"}, "efficiency gain": {"ko": "효율 향상", "ja": "効率向上"}, "availability": {"ko": "가용성", "ja": "可用性"}, "weeks to launch": {"ko": "주 내 오픈", "ja": "週で稼働"}, "Also covered on this slide": {"ko": "이 장에서 함께 다루는 내용", "ja": "このページで扱う内容"}, "Security & compliance": {"ko": "보안 및 컴플라이언스", "ja": "セキュリティとコンプライアンス"}, "Change management": {"ko": "변화 관리", "ja": "変更管理"}, "Training & adoption": {"ko": "교육 및 정착", "ja": "研修と定着"}, "Long-term roadmap": {"ko": "중장기 로드맵", "ja": "中長期ロードマップ"}, "Off the point": {"ko": "논점 이탈", "ja": "論点ずれ"}, "Generic": {"ko": "평이함", "ja": "ありきたり"}, "Scattered": {"ko": "산만함", "ja": "散漫"}, "Where did 40% come from?": {"ko": "40%는 어디서 나왔죠?", "ja": "40%はどこから？"}, "Search Northwind Proposal Team": {"ko": "Northwind 제안팀 검색", "ja": "Northwind 提案チームを検索"}, "4 members": {"ko": "멤버 4명", "ja": "メンバー4人"}, "Thursday, October 30th": {"ko": "10월 30일 목요일", "ja": "10月30日（木）"}, "Message #bid-casemgmt-upgrade": {"ko": "#bid-casemgmt-upgrade에 메시지 보내기", "ja": "#bid-casemgmt-upgrade へメッセージ"}};
+const L = (s) => { const v = UI[s]; return v && v[LANG] ? v[LANG] : s; };
+(function localizeUI() {
+  if (LANG === 'en' || LANG === 'zh') return;
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+  for (const n of nodes) { const t = n.nodeValue; const k = t.trim(); if (!k || !UI[k] || !UI[k][LANG]) continue; n.nodeValue = t.replace(k, UI[k][LANG]); }
+  document.querySelectorAll('[placeholder]').forEach(el => el.setAttribute('placeholder', L(el.getAttribute('placeholder'))));
+  document.querySelectorAll('[data-type]').forEach(el => el.setAttribute('data-type', L(el.getAttribute('data-type'))));
+})();
+const K = location.search.includes('hd') ? 2 : 1;
+if (K === 2) { document.documentElement.style.cssText += 'width:3200px;height:2000px;'; document.body.style.cssText += 'width:3200px;height:2000px;'; const hd = document.getElementById('hd'); hd.style.transform = 'scale(2)'; hd.style.transformOrigin = '0 0'; }
+
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const W = 1600, H = 1000;
+function camRect(x, y, w, h) { const s = Math.min(W / w, H / h); const tx = (W - w * s) / 2 - x * s, ty = (H - h * s) / 2 - y * s; $('#cam').style.transform = `translate(${tx}px, ${ty}px) scale(${s})`; }
+function stageRect(el) { const rr = el.getBoundingClientRect(); const r = { left: rr.left / K, top: rr.top / K, width: rr.width / K, height: rr.height / K }; const m = new DOMMatrix(getComputedStyle($('#cam')).transform); return { x: (r.left - m.e) / m.a, y: (r.top - m.f) / m.d, w: r.width / m.a, h: r.height / m.d }; }
+function camEl(el, pad = 24) { const r = stageRect(el); camRect(r.x - pad, r.y - pad, r.w + pad * 2, r.h + pad * 2); }
+function camUnion(els, pad = 24) { const rs = els.map(stageRect); const x = Math.min(...rs.map(r => r.x)), y = Math.min(...rs.map(r => r.y)); const x2 = Math.max(...rs.map(r => r.x + r.w)), y2 = Math.max(...rs.map(r => r.y + r.h)); camRect(x - pad, y - pad, x2 - x + pad * 2, y2 - y + pad * 2); }
+function camFull() { $('#cam').style.transform = 'none'; }
+async function cap(html, ms) { const c = $('#cap'); c.innerHTML = html; requestAnimationFrame(() => c.classList.add('on')); if (ms) { await wait(ms); c.classList.remove('on'); await wait(400); } }
+function capOff() { $('#cap').classList.remove('on'); }
+async function typeIn(text, cps = 60) { const t = $('#ptext'); $('#ph').style.display = 'none'; for (let i = 1; i <= text.length; i++) { t.textContent = text.slice(0, i); await wait(1000 / cps); } }
+function mainPos(el, dx = 0.5, dy = 0.5) { const r = stageRect(el), p = stageRect($('.main')); return { x: r.x - p.x + r.w * dx, y: r.y - p.y + r.h * dy }; }
+async function cursorTo(el, dx = 0.5, dy = 0.5, ms = 600) { const c = $('#cursor'), p = mainPos(el, dx, dy); c.style.left = p.x + 'px'; c.style.top = p.y + 'px'; c.style.opacity = 1; await wait(ms); }
+
+async function run() {
+  $('#chd-sub').textContent = T.chd; ['b1','b2','b3','b4'].forEach(k => $('#'+k+' .tx').innerHTML = T[k]); $('#ty').textContent = T.ty;
+  $('#open .s').innerHTML = T.open_s; $('#open .b').innerHTML = T.open_b; $('#end .s').innerHTML = T.end_s; $('#end .b').innerHTML = T.end_b;
+  if (location.hash === '#still') { $('#open').classList.remove('on'); return; }
+  camFull(); await wait(1800); $('#open').classList.remove('on'); await wait(500);
+  // ---- 1. Drag the whole folder into the tool
+  cap(T.p1);
+  camUnion([$('#finder'), $('#drop')], 40); await wait(1000);
+  await cursorTo($('#flist'), 0.5, 0.3, 500);
+  $('#finder').classList.add('sel'); $('#ffoot').textContent = L('47 of 47 selected, 312 MB'); await wait(450);
+  const g = $('#ghost'), c = $('#cursor'); const start = mainPos($('#flist'), 0.5, 0.3);
+  g.style.left = (start.x + 12) + 'px'; g.style.top = (start.y + 10) + 'px'; g.style.opacity = 1; await wait(200);
+  c.classList.add('slow'); const end = mainPos($('#drop'), 0.5, 0.45);
+  c.style.left = end.x + 'px'; c.style.top = end.y + 'px'; g.style.left = (end.x + 12) + 'px'; g.style.top = (end.y + 10) + 'px';
+  await wait(850); $('#drop').classList.add('hot'); $('#hint').textContent = L('Release to add 47 files'); await wait(450);
+  g.style.opacity = 0; c.classList.remove('slow'); $('#finder').classList.remove('sel'); $('#finder').classList.add('off');
+  $('#hint').style.display = 'none';
+  for (const f of document.querySelectorAll('.file')) { f.classList.add('on'); await wait(110); }
+  $('#drop').classList.remove('hot'); await wait(400); capOff(); c.style.opacity = 0; await wait(200);
+  // ---- 2. Prompt
+  camRect(0, 56, 440, 760); await wait(900);
+  cap(T.p2);
+  await typeIn(T.prompt, 85);
+  await wait(350); await cursorTo($('#gen'), 0.5, 0.5, 450); $('#gen').classList.add('press'); await wait(150); $('#gen').classList.remove('press');
+  capOff(); c.style.opacity = 0;
+  // ---- 3. Generate 100 slides
+  camFull(); await wait(700);
+  $('#st').classList.add('on'); $('#empty').style.opacity = 0;
+  cap(T.p3);
+  const grid = $('#grid');
+  for (let i = 0; i < 100; i++) { const d = document.createElement('div'); d.className = 'th'; d.innerHTML = '<div class="t"></div><div class="l"></div><div class="l" style="width:80%"></div><div class="l" style="width:60%"></div>'; grid.appendChild(d); }
+  const ths = [...grid.children];
+  for (let i = 0; i < ths.length; i++) { ths[i].classList.add('on'); $('#mcount').textContent = L('{n} slides').replace('{n}', i + 1); await wait(i < 10 ? 55 : 18); }
+  $('#st').innerHTML = L('✓ Done · 100 slides'); await wait(900); capOff(); await wait(200);
+  // ---- 4. Open one slide, then one problem at a time
+  const slide = $('#slide');
+  slide.classList.add('on'); await wait(250); camEl(slide, 16); await wait(1000);
+  await cap(T.p4, 1600);
+  async function focus(id, html, ms, keep) {
+    slide.classList.add('focus'); if (keep) $(keep).classList.add('keep');
+    $(id).classList.add('on'); camEl($(id), 70); await wait(800); await cap(html, ms);
+    $(id).classList.remove('on'); if (keep) $(keep).classList.remove('keep');
+  }
+  await focus('#h1', T.f1, 2400);
+  await focus('#h2', T.f2, 2400);
+  await focus('#h3', T.f3, 2400, '#h4');
+  await focus('#h4', T.f4, 2400, '#h3');
+  slide.classList.remove('focus'); camEl(slide, 16); await wait(700);
+  // ---- 5. The night before (Slack-style)
+  slide.classList.remove('on'); await wait(150);
+  $('#slack').classList.add('on'); camEl($('#slack'), 8); await wait(900);
+  cap(T.p5);
+  $('#b1').classList.add('on'); await wait(1500);
+  $('#b2').classList.add('on'); await wait(1100);
+  $('#ty').classList.add('on'); await wait(1200); $('#ty').classList.remove('on');
+  $('#b3').classList.add('on'); await wait(1700);
+  $('#b4').classList.add('on'); await wait(1300); capOff(); await wait(250);
+  await cap(T.p6, 2200);
+  camFull(); await wait(500);
+  $('#end').classList.add('on'); await wait(3600);
+  document.body.setAttribute('data-done', '1');
+}
+window.addEventListener('load', () => setTimeout(run, 500));
+</script>
+</body>
+</html>
