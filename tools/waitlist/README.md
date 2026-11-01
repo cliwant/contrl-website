@@ -29,7 +29,7 @@ Re-deploying after editing `Code.gs`: *Deploy → Manage deployments → ✎ →
 
 ## Slack message
 
-`🆕 Waitlist #42 — someone@company.com` with a context line `🇰🇷 ko · total 57 · contrl.ai`.
+`🆕 Waitlist #42 — someone@company.com` with a context line `🇰🇷 ko · signups 57 · contrl.ai · Open row in Sheet` (the link selects that signup's row).
 Invited signups show `🎟️ Waitlist #3 (invite · front queue)`.
 
 ## Testing

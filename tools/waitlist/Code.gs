@@ -60,7 +60,8 @@ function doPost(e) {
       : POSITION_OFFSET + rows.filter(r => r[4] !== true).length + 1;
 
     sh.appendRow([new Date(), lang, email, code, invited, body.source || '', body.ua || '', position]);
-    notifySlack_({ email, position, invited, code, lang, source: body.source || '', total: rows.length + 1 });
+    const rowUrl = `${ss.getUrl()}#gid=${sh.getSheetId()}&range=A${sh.getLastRow()}`;
+    notifySlack_({ email, position, invited, code, lang, source: body.source || '', total: rows.length + 1, rowUrl });
     if (SEND_EMAIL) sendConfirmation_(email, position, invited, lang);
     return json_({ ok: true, position, invited, invalidCode: !!(code && !invited) });
   } finally {
@@ -116,7 +117,7 @@ function notifySlack_(d) {
     text,
     blocks: [
       { type: 'section', text: { type: 'mrkdwn', text: `*${text}*` } },
-      { type: 'context', elements: [{ type: 'mrkdwn', text: `${flag} ${d.lang} · signups ${d.total}${d.code ? ` · code \`${d.code}\`${d.invited ? '' : ' (invalid)'}` : ''} · ${d.source}` }] },
+      { type: 'context', elements: [{ type: 'mrkdwn', text: `${flag} ${d.lang} · signups ${d.total}${d.code ? ` · code \`${d.code}\`${d.invited ? '' : ' (invalid)'}` : ''} · ${d.source} · <${d.rowUrl}|Open row in Sheet>` }] },
     ],
   };
   try { UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', payload: JSON.stringify(payload), muteHttpExceptions: true }); } catch (err) {}
