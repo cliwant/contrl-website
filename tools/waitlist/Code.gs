@@ -2,7 +2,7 @@
  * contrl.ai waitlist backend — Google Apps Script web app.
  *
  * On each signup (POST from the landing page):
- *   1. appends a row to the "Waitlist" tab of TARGET_SHEET_ID (row order = queue order)
+ *   1. appends a row to the "Sheet1" tab of TARGET_SHEET_ID (row order = queue order)
  *   2. computes the queue position: POSITION_OFFSET + number of regular signups
  *      (invited signups form a separate front queue numbered from 1)
  *   3. posts to Slack #7-alert (Script Property SLACK_WEBHOOK) with the position
@@ -16,7 +16,7 @@
  */
 
 const TARGET_SHEET_ID = '1x_jzKkbUk3MwhJi8aVEQeqvML97MgclHBlCqJ2LRwGY';
-const SHEET_WAITLIST = 'Waitlist';
+const SHEET_WAITLIST = 'Sheet1';   // columns: Date/Time · Region · Email · invite_code · invited · source · user_agent · position
 const SHEET_INVITES = 'Invites';
 const POSITION_OFFSET = 100;   // first regular signup is #101
 const SEND_EMAIL = true;
@@ -44,10 +44,10 @@ function doPost(e) {
   try {
     const ss = SpreadsheetApp.openById(TARGET_SHEET_ID);
     const sh = ss.getSheetByName(SHEET_WAITLIST) || ss.insertSheet(SHEET_WAITLIST);
-    if (sh.getLastRow() === 0) sh.appendRow(['timestamp', 'email', 'lang', 'invite_code', 'invited', 'source', 'user_agent', 'position']);
+    if (sh.getLastRow() === 0) sh.appendRow(['Date/Time', 'Region', 'Email', 'invite_code', 'invited', 'source', 'user_agent', 'position']);
 
     const rows = sh.getLastRow() > 1 ? sh.getRange(2, 1, sh.getLastRow() - 1, 8).getValues() : [];
-    const existing = rows.find(r => String(r[1]).toLowerCase() === email);
+    const existing = rows.find(r => String(r[2]).toLowerCase() === email);
     if (existing) return json_({ ok: true, position: Number(existing[7]), invited: existing[4] === true, duplicate: true });
 
     const code = String(body.invite || '').trim().toUpperCase();
@@ -56,7 +56,7 @@ function doPost(e) {
       ? rows.filter(r => r[4] === true).length + 1
       : POSITION_OFFSET + rows.filter(r => r[4] !== true).length + 1;
 
-    sh.appendRow([new Date(), email, lang, code, invited, body.source || '', body.ua || '', position]);
+    sh.appendRow([new Date(), lang, email, code, invited, body.source || '', body.ua || '', position]);
     notifySlack_({ email, position, invited, code, lang, source: body.source || '', total: rows.length + 1 });
     if (SEND_EMAIL) sendConfirmation_(email, position, invited, lang);
     return json_({ ok: true, position, invited });
