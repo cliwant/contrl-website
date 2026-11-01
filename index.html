@@ -189,6 +189,14 @@
         @media (min-width: 1536px) { .hero-video-col { width: calc(100% + 6vw); } }
         .hero-video-col .demo-frame { box-shadow: 0 50px 100px -40px rgba(67,53,36,.4), 0 2px 10px rgba(67,53,36,.06); }
         @media (max-width: 1023px) { .hero-fit { min-height: 0; padding: 84px 0 56px; } }
+        /* Mobile/tablet: single column, so center the hero copy and stretch the invite row */
+        @media (max-width: 1023px) {
+            .hero-copy { text-align: center; }
+            .hero-copy > p { margin-left: auto; margin-right: auto; }
+            .hero-copy .wl-success { justify-content: center; }
+            .hero-copy .wl-invite input { max-width: none; }
+            .hero-copy .wl-invite-row input { flex: 1; }
+        }
 
         /* Hero product demo (muted looping video in a window frame) */
         .demo-progress { position: relative; height: 22px; background: #f6f3ee; border-top: 1px solid #ebe5de; }
@@ -289,7 +297,7 @@
     <section class="hero-fit bg-cream relative overflow-hidden">
         <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 w-full grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
             <!-- Left: message + waitlist -->
-            <div class="lg:col-span-5">
+            <div class="lg:col-span-5 hero-copy">
                 <h1 class="hero-enter hero-delay-1 display hero-h1 text-zinc-900">
                     <span class="hero-line" data-i18n="h1a">You're not using</span>
                     <span class="hero-line" data-i18n="h1b">AI too little.</span>
