@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&family=Noto+Sans+SC:wght@500;700;800;900&display=swap">
+<style>
+@font-face { font-family:'Freesentation'; src:url('http://localhost:8080/fonts/Freesentation-8ExtraBold.ttf') format('truetype'); font-weight:800; }
+html,body{margin:0;width:1920px;height:1080px;background:#faf7f2;font-family:Pretendard,sans-serif;color:#18181b;overflow:hidden}
+.w{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;text-align:center}
+.glow{position:absolute;right:-200px;top:-220px;width:820px;height:820px;border-radius:50%;background:radial-gradient(circle,rgba(242,122,46,.18),rgba(242,122,46,0) 65%)}
+.logo{font-size:76px;font-weight:800;letter-spacing:-.03em}.logo b{color:#F27A2E}
+.eb{font-size:34px;font-weight:700;color:#b7551b}
+.h{font-family:'Freesentation',Pretendard,'Noto Sans JP','Noto Sans SC',sans-serif;font-size:104px;font-weight:800;letter-spacing:-.03em;line-height:1.12}
+.h em{font-style:normal;color:#F27A2E}
+.sub{font-size:38px;color:#52525b;font-weight:500}
+.cta{margin-top:18px;display:inline-flex;align-items:center;gap:18px;background:#F27A2E;color:#fff;font-size:40px;font-weight:800;padding:24px 48px;border-radius:999px;box-shadow:0 18px 40px -16px rgba(242,122,46,.7)}
+.url{font-size:34px;font-weight:700;color:#a1a1aa;margin-top:6px}
+</style></head><body><div class="glow"></div><div class="w" id="w"></div>
+<script>
+const L={
+ ko:{eb:'Contrl은 이렇게 합니다',bh:'같은 100장짜리 입찰,<br><em>사람이 먼저 정하면?</em>',eh:'사람이 정하고,<br><em>나머지는 AI가 씁니다.</em>',cta:'지금 대기 명단 등록 →'},
+ en:{eb:'How Contrl does it',bh:'Same 100-slide bid.<br><em>What if you decide first?</em>',eh:'You make the decisions.<br><em>AI writes on your behalf.</em>',cta:'Join the waitlist →'},
+ ja:{eb:'Contrlなら、こうなる',bh:'同じ100ページの入札、<br><em>人が先に決めたら？</em>',eh:'方針は人が決め、<br><em>作成はAIが担う。</em>',cta:'ウェイトリストに登録 →'},
+ zh:{eb:'Contrl怎么做',bh:'同样100页的投标，<br><em>如果先由人来决定？</em>',eh:'你来决定，<br><em>AI来写。</em>',cta:'加入等候名单 →'}};
+const [card,lang]=location.hash.slice(1).split('-'); const t=L[lang||'ko'];
+if (lang==='ja') document.body.style.fontFamily="'Noto Sans JP',Pretendard,sans-serif";
+if (lang==='zh') document.body.style.fontFamily="'Noto Sans SC',Pretendard,sans-serif";
+document.getElementById('w').innerHTML = card==='bridge'
+ ? `<div class="eb">${t.eb}</div><div class="h">${t.bh}</div>`
+ : `<div class="logo">contrl<b>.</b></div><div class="h">${t.eh}</div><div class="cta">${t.cta}</div><div class="url">contrl.ai</div>`;
+</script></body></html>
