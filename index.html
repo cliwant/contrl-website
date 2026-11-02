@@ -321,9 +321,7 @@
                     <span class="hero-line text-accent" data-i18n="h1c">You're giving it</span>
                     <span class="hero-line text-accent" data-i18n="h1d">too much control.</span>
                 </h1>
-                <p class="hero-enter hero-delay-2 text-lg md:text-xl text-zinc-600 leading-relaxed max-w-md mb-8" data-i18n="hero_sub">
-                    Most AI tools write your proposal before you've decided what it should say. Contrl flips that: <span class="font-semibold text-zinc-900">You make the calls, AI does the writing.</span>
-                </p>
+                <p class="hero-enter hero-delay-2 text-lg md:text-xl text-zinc-600 leading-relaxed max-w-md mb-8" data-i18n="hero_sub">Most AI tools write your proposal even before you've decided what to say. Contrl flips the order: <span class="font-semibold text-zinc-900">You make the call, AI writes on your behalf.</span></p>
                 <div class="hero-enter hero-delay-3" data-waitlist>
                     <form class="wl-form" novalidate>
                         <label for="wl-email-hero" class="sr-only">Email</label>
@@ -335,7 +333,7 @@
                         <span data-success-text data-i18n="success_long">You're in line. Your spot number is on its way to your inbox.</span>
                     </p>
                     <p class="wl-error hidden text-sm text-red-600 mt-2" data-i18n="err_email">Please enter a valid email address.</p>
-                    <p class="mt-3 text-sm text-zinc-500" data-i18n="hero_note">Access opens in order of signup, <span data-batch>25</span> teams a week. <button type="button" class="wl-invite-link" data-invite-toggle data-i18n="invite_link_dark">Have an invite? Skip the line →</button></p>
+                    <p class="mt-3 text-sm text-zinc-500" data-i18n="hero_note">Access opens in order of signup, <span data-batch>25</span> teams a week. <button type="button" class="wl-invite-link" data-invite-toggle>Have an invite? Skip the line →</button></p>
                     <div class="wl-invite hidden mt-2"><label class="sr-only" for="wl-invite-hero">Invite code</label><div class="wl-invite-row"><input id="wl-invite-hero" type="text" name="invite" placeholder="Invite code" data-i18n-placeholder="ph_invite" autocomplete="off" spellcheck="false"><button type="button" class="wl-invite-check" data-invite-check data-i18n="invite_check">Check</button></div><p class="wl-invite-status" data-invite-status></p></div>
                 </div>
             </div>
@@ -365,8 +363,8 @@
     <section class="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-6xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-12 reveal">
-                <p class="text-sm font-bold text-[#b7551b] tracking-wide mb-4" data-i18n="fix_eyebrow">The usual fix</p>
-                <h2 class="display text-3xl md:text-[2.6rem] leading-tight" data-i18n="fix_title">So everyone tries the same thing: <span class="text-accent">more AI.</span></h2>
+                <p class="text-sm font-bold text-[#b7551b] tracking-wide mb-4" data-i18n="fix_eyebrow">The common approach</p>
+                <h2 class="display text-3xl md:text-[2.6rem] leading-tight" data-i18n="fix_title">Most people try the same thing: <span class="text-accent">more AI.</span></h2>
             </div>
             <div class="grid md:grid-cols-3 gap-5 reveal stagger" id="fix-cards">
                 <article class="rounded-3xl bg-cream border border-[#e9e4df] p-7">
@@ -391,13 +389,13 @@
                         <span class="fx-upgraded inline-block bg-[#eaf3ed] text-[#32704b] text-xs font-bold px-3 py-1.5 rounded-md mt-3" data-i18n="fix_upgraded">✓ Upgraded · Top-tier model</span>
                     </div>
                     <ul class="space-y-2 text-sm text-zinc-600">
-                        <li class="flex gap-2.5"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-[#c67c4d] flex-shrink-0"></span><span data-i18n="fix2_a">Swapped in a smarter model when the output fell flat</span></li>
+                        <li class="flex gap-2.5"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-[#c67c4d] flex-shrink-0"></span><span data-i18n="fix2_a">Switched to a smarter model when the output fell flat</span></li>
                         <li class="flex gap-2.5"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-[#c67c4d] flex-shrink-0"></span><span data-i18n="fix2_b">Upgraded to the top plan</span></li>
                     </ul>
                 </article>
                 <article class="rounded-3xl bg-cream border border-[#e9e4df] p-7">
                     <span class="block text-xs font-extrabold text-[#b7551b] tracking-widest mb-3">03</span>
-                    <h3 class="text-xl font-extrabold leading-snug mb-5 min-h-[3.5rem]" data-i18n="fix3_t">"All the files should be enough."</h3>
+                    <h3 class="text-xl font-extrabold leading-snug mb-5 min-h-[3.5rem]" data-i18n="fix3_t">"Handing it the full set of materials should do it."</h3>
                     <div class="rounded-xl bg-white border border-zinc-200 overflow-hidden mb-5 h-60 flex flex-col">
                         <div class="flex items-center justify-between px-4 py-3 border-b border-zinc-100"><strong class="text-[13px]">All_proposal_materials</strong><span class="text-xs text-zinc-500"><mark class="hl" id="fx-files-hl"><span id="fx-files">0</span> files · <span id="fx-mb">0</span> MB</mark></span></div>
                         <div class="px-4 py-2.5 space-y-1.5 text-xs text-zinc-700 fx-files">
@@ -415,7 +413,7 @@
                     </ul>
                 </article>
             </div>
-            <p class="reveal mt-10 text-center text-xl md:text-2xl font-bold" data-i18n="fix_close">Sound familiar? <span class="text-zinc-500 font-semibold">Every one of these hands AI <em class="not-italic text-accent">more</em>.</span></p>
+            <p class="reveal mt-10 text-center text-xl md:text-2xl font-bold" data-i18n="fix_close">Sound familiar? <span class="text-zinc-500 font-semibold">You've been giving AI <em class="not-italic text-accent">too much control</em>.</span></p>
         </div>
     </section>
 
@@ -424,8 +422,8 @@
         <div class="max-w-6xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-12 reveal">
                 <p class="text-sm font-bold text-[#b7551b] tracking-wide mb-4" data-i18n="nav_why">Why it fails</p>
-                <h2 class="display text-3xl md:text-[2.6rem] leading-tight mb-5" data-i18n="why_title">AI writes the answer <span class="text-accent">before you've thought about the question.</span></h2>
-                <p class="text-lg text-zinc-600 leading-relaxed" data-i18n="why_sub">Three decisions only you can make. Leave them blank, and AI fills them in.</p>
+                <h2 class="display text-3xl md:text-[2.6rem] leading-tight mb-5" data-i18n="why_title">AI jumps straight to the answer <span class="text-accent">without thinking about the question.</span></h2>
+                <p class="text-lg text-zinc-600 leading-relaxed" data-i18n="why_sub">Three decisions only you can make. Without your input, AI goes off on a tangent.</p>
             </div>
 
             <div class="why-split reveal" id="why-split">
@@ -453,7 +451,7 @@
                 </div>
             </div>
 
-            <p class="reveal mt-12 text-center text-xl md:text-2xl font-bold" data-i18n="why_close">A bid runs 50–100 slides. <span class="text-zinc-500 font-semibold">The more you hand off, the further it drifts.</span></p>
+            <p class="reveal mt-12 text-center text-xl md:text-2xl font-bold" data-i18n="why_close">A bid runs 50–100 slides. <span class="text-zinc-500 font-semibold">The more you hand over, the further it drifts.</span></p>
         </section>
 
     <!-- Transition band -->
@@ -467,7 +465,7 @@
         <div class="max-w-6xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-12 reveal">
                 <p class="text-sm font-bold text-[#b7551b] tracking-wide mb-4" data-i18n="how_eyebrow">How Contrl works</p>
-                <h2 class="display text-3xl md:text-[2.6rem] leading-tight" data-i18n="how_title"><span class="text-accent">You decide.</span> AI writes the rest.</h2>
+                <h2 class="display text-3xl md:text-[2.6rem] leading-tight" data-i18n="how_title"><span class="text-accent">You make the decisions.</span> AI writes on your behalf.</h2>
             </div>
 
             <!-- Product demo: Win Theme → key sentence → plan → 17 pages → revise by one note -->
@@ -488,15 +486,15 @@
                 <div class="check" data-i18n="chk3"><i>✓</i>The one point each slide makes</div>
             </div>
 
-            <p class="reveal mt-10 text-center text-xl md:text-2xl font-bold" data-i18n="how_close">Every slide AI wrote still carries <span class="text-accent">your thinking.</span></p>
+            <p class="reveal mt-10 text-center text-xl md:text-2xl font-bold" data-i18n="how_close">AI writes the slides, but <span class="text-accent">your ideas remain at the core.</span></p>
 
             <!-- Q&A: present it the next morning -->
             <div class="flow-link reveal" aria-hidden="true"><i></i><span data-i18n="qa_bridge">And that thinking walks into the room with you.</span><i></i></div>
             <div class="mt-4 reveal">
                 <div class="text-center max-w-3xl mx-auto mb-10">
-                    <p class="text-sm font-bold text-[#b7551b] tracking-wide mb-4" data-i18n="qa_eyebrow">Already in your head</p>
-                    <h3 class="display text-2xl md:text-[2.1rem] leading-tight mb-4" data-i18n="qa_title">You made the calls. So you can <span class="text-accent">present it tomorrow.</span></h3>
-                    <p class="text-zinc-600 text-lg" data-i18n="qa_sub">No cramming your own proposal the night before. When the evaluator asks, you already know the answer — you're the one who decided.</p>
+                    <p class="text-sm font-bold text-[#b7551b] tracking-wide mb-4" data-i18n="qa_eyebrow">On presentation day</p>
+                    <h3 class="display text-2xl md:text-[2.1rem] leading-tight mb-4" data-i18n="qa_title">You made the decisions, so you can <span class="text-accent">answer in your own words.</span></h3>
+                    <p class="text-zinc-600 text-lg" data-i18n="qa_sub">No cramming your own proposal the night before. Every slide carries a decision you made — when the evaluator asks, the answer is already yours.</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-5 stagger">
                     <div class="qa">
@@ -624,7 +622,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row md:items-start justify-between gap-8">
             <div>
                 <a href="/en/" class="text-xl font-bold tracking-tight">contrl<span class="text-accent">.</span></a>
-                <p class="text-sm text-zinc-400 mt-3 max-w-xs leading-relaxed" data-i18n="footer_tag">You decide. AI writes the rest.</p>
+                <p class="text-sm text-zinc-400 mt-3 max-w-xs leading-relaxed" data-i18n="footer_tag">You make the decisions. AI writes on your behalf.</p>
                 <div class="mt-4 space-y-1 text-xs text-zinc-400 leading-relaxed">
                     <p><span class="font-semibold text-zinc-500 mr-2">US</span>12130 Millennium Dr #300, Los Angeles, CA 90094</p>
                     <p><span class="font-semibold text-zinc-500 mr-2">SG</span>21 Collyer Quay, Downtown Core, Central, 049320</p>
