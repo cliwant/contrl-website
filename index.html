@@ -682,6 +682,9 @@
                 if (v.getAttribute('src') === src) return;
                 const playing = !v.paused; v.setAttribute('poster', `/images/hero/${name}.${currentLang}.jpg`); v.setAttribute('src', src); v.load(); if (playing || v.autoplay) v.play().catch(() => {});
             });
+            // the typed prompt box: if its animation already ran, redraw it in the new language
+            const typed = document.querySelector('.fx-type.done');
+            if (typed) typed.querySelector('.fx-typed').innerHTML = typed.dataset.text.replace(/\|([^|]+)\|/g, '<mark class="hl on">$1</mark>');
         }
         applyLang(detectLang(), false);
         document.addEventListener('click', e => { const b = e.target.closest('.lang-switch button'); if (b) applyLang(b.dataset.lang, true); });
