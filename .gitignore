@@ -2,3 +2,5 @@
 .firevibe_config.json
 tools/demo/node_modules/
 tools/demo/out*/
+tools/youtube/*.mp4
+tools/youtube/kit/
