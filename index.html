@@ -777,6 +777,13 @@
         function showToast(text) { const el = document.getElementById('toast'); if (!el) return; document.getElementById('toast-text').textContent = text; el.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('show'), 7000); }
         function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 
+        // ---- Campaign tracking: remember utm_* / ref from the landing URL for this visit ----
+        const UTM = (() => {
+            const q = new URLSearchParams(location.search), keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref'];
+            const found = keys.filter(k => q.get(k)).map(k => `${k}=${q.get(k).slice(0, 60)}`).join('&');
+            try { if (found) sessionStorage.setItem('contrl-utm', found); return found || sessionStorage.getItem('contrl-utm') || ''; } catch (e) { return found; }
+        })();
+
         // ---- Sign-up: Firebase Auth (Google, or email + password), then register with the backend ----
         const FIREBASE_CONFIG = { apiKey: 'AIzaSyAEAbx0ZAlvNMWDAxloVg8JevO7GDls7I8', authDomain: 'contrl-ai.firebaseapp.com', projectId: 'contrl-ai', appId: '1:944656586925:web:75b88522acd93e31c14e24' };
         const FB_VER = '10.12.2';
@@ -798,7 +805,7 @@
             const res = await fetch(WAITLIST_ENDPOINT, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify({ idToken, provider, invite: (wrap.querySelector('input[name=invite]') || {}).value || '', lang: currentLang,
                     source: 'contrl.ai', ua: navigator.userAgent.slice(0, 120), ts: new Date().toISOString(),
-                    tz: (Intl.DateTimeFormat().resolvedOptions().timeZone || ''), locale: (navigator.languages && navigator.languages[0]) || navigator.language || '' }) });
+                    tz: (Intl.DateTimeFormat().resolvedOptions().timeZone || ''), locale: (navigator.languages && navigator.languages[0]) || navigator.language || '', utm: UTM }) });
             const data = await res.json().catch(() => ({}));
             if (!res.ok || data.ok === false) throw new Error(data.error || 'register_failed');
             showDone(wrap, data);

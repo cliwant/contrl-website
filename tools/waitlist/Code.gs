@@ -8,6 +8,7 @@
  *                 post to Slack #7-alert, email the setup schedule, return {ok, position, invited, duplicate, schedule_url}.
  * Script Properties: SLACK_WEBHOOK, SCHEDULE_URL (Google Calendar booking page; optional).
  * Location: estimated from the browser's time zone + locale the page sends (no IP lookup).
+ * UTM: utm_* / ref query params from the landing URL, stored as 'utm_source=…&utm_campaign=…'.
  * GET ?invite=X:  checks an invite code → {ok, valid}.
  *
  * Deploy: Deploy → New deployment → Web app → Execute as Me · Who has access: Anyone → copy /exec URL
@@ -19,7 +20,7 @@
 const TARGET_SHEET_ID = '1x_jzKkbUk3MwhJi8aVEQeqvML97MgclHBlCqJ2LRwGY';
 const SHEET_WAITLIST = 'Sheet1';
 const SHEET_INVITES = 'Invites';
-const HEADERS = ['Date/Time', 'Region', 'Email', 'invite_code', 'invited', 'source', 'user_agent', 'position', 'provider', 'location'];
+const HEADERS = ['Date/Time', 'Region', 'Email', 'invite_code', 'invited', 'source', 'user_agent', 'position', 'provider', 'location', 'utm'];
 const FIREBASE_API_KEY = 'AIzaSyAEAbx0ZAlvNMWDAxloVg8JevO7GDls7I8';   // public web key of the contrl-ai Firebase project
 const POSITION_OFFSET = 100;   // first regular signup is #101
 const SEND_EMAIL = true;
@@ -73,9 +74,10 @@ function doPost(e) {
       : POSITION_OFFSET + rows.filter(r => r[4] !== true).length + 1;
 
     const loc = location_(body.tz, body.locale);
-    sh.appendRow([new Date(), lang, email, code, invited, body.source || '', body.ua || '', position, provider, loc.text]);
+    const utm = String(body.utm || '').slice(0, 300);
+    sh.appendRow([new Date(), lang, email, code, invited, body.source || '', body.ua || '', position, provider, loc.text, utm]);
     const rowUrl = `${ss.getUrl()}#gid=${sh.getSheetId()}&range=A${sh.getLastRow()}`;
-    notifySlack_({ email, position, invited, code, lang, provider, loc, source: body.source || '', total: rows.length + 1, rowUrl });
+    notifySlack_({ email, position, invited, code, lang, provider, loc, utm, source: body.source || '', total: rows.length + 1, rowUrl });
     if (SEND_EMAIL) sendConfirmation_(email, position, invited, lang, schedule);
     return json_({ ok: true, position, invited, invalidCode: !!(code && !invited), schedule_url: schedule });
   } finally {
@@ -120,6 +122,12 @@ function location_(tz, locale) {
   if (!cc && !city) return { text: '', slack: '📍 unknown' };
   const text = [city, cc].filter(Boolean).join(', ') + (tz ? ` (${tz})` : '');
   return { text, slack: `📍 ${flag_(cc)} ${[city, cc].filter(Boolean).join(', ')}${locale ? ` · ${locale}` : ''}` };
+}
+
+/** 'utm_source=email&utm_campaign=reengage' → 'email / reengage' for Slack. */
+function utmLabel_(utm) {
+  const q = {}; String(utm).split('&').forEach(p => { const i = p.indexOf('='); if (i > 0) q[p.slice(0, i)] = p.slice(i + 1); });
+  return [q.utm_source, q.utm_medium, q.utm_campaign, q.ref].filter(Boolean).join(' / ') || utm;
 }
 
 function scheduleUrl_() { return PropertiesService.getScriptProperties().getProperty('SCHEDULE_URL') || ''; }
@@ -173,7 +181,7 @@ function notifySlack_(d) {
     text,
     blocks: [
       { type: 'section', text: { type: 'mrkdwn', text: `*${text}*` } },
-      { type: 'context', elements: [{ type: 'mrkdwn', text: `${d.loc ? d.loc.slack + ' · ' : ''}page ${flag} ${d.lang} · signups ${d.total}${d.code ? ` · code \`${d.code}\`${d.invited ? '' : ' (invalid)'}` : ''} · ${d.source} · <${d.rowUrl}|Open row in Sheet>` }] },
+      { type: 'context', elements: [{ type: 'mrkdwn', text: `${d.loc ? d.loc.slack + ' · ' : ''}page ${flag} ${d.lang} · signups ${d.total}${d.code ? ` · code \`${d.code}\`${d.invited ? '' : ' (invalid)'}` : ''} · ${d.source}${d.utm ? ` · 🔗 ${utmLabel_(d.utm)}` : ''} · <${d.rowUrl}|Open row in Sheet>` }] },
     ],
   };
   try { UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', payload: JSON.stringify(payload), muteHttpExceptions: true }); } catch (err) {}
