@@ -797,7 +797,8 @@
             const idToken = await user.getIdToken();
             const res = await fetch(WAITLIST_ENDPOINT, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify({ idToken, provider, invite: (wrap.querySelector('input[name=invite]') || {}).value || '', lang: currentLang,
-                    source: 'contrl.ai', ua: navigator.userAgent.slice(0, 120), ts: new Date().toISOString() }) });
+                    source: 'contrl.ai', ua: navigator.userAgent.slice(0, 120), ts: new Date().toISOString(),
+                    tz: (Intl.DateTimeFormat().resolvedOptions().timeZone || ''), locale: (navigator.languages && navigator.languages[0]) || navigator.language || '' }) });
             const data = await res.json().catch(() => ({}));
             if (!res.ok || data.ok === false) throw new Error(data.error || 'register_failed');
             showDone(wrap, data);

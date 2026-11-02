@@ -7,6 +7,7 @@
  *                 (POSITION_OFFSET + regular signups; invited signups form a front queue from #1),
  *                 post to Slack #7-alert, email the setup schedule, return {ok, position, invited, duplicate, schedule_url}.
  * Script Properties: SLACK_WEBHOOK, SCHEDULE_URL (Google Calendar booking page; optional).
+ * Location: estimated from the browser's time zone + locale the page sends (no IP lookup).
  * GET ?invite=X:  checks an invite code → {ok, valid}.
  *
  * Deploy: Deploy → New deployment → Web app → Execute as Me · Who has access: Anyone → copy /exec URL
@@ -18,7 +19,7 @@
 const TARGET_SHEET_ID = '1x_jzKkbUk3MwhJi8aVEQeqvML97MgclHBlCqJ2LRwGY';
 const SHEET_WAITLIST = 'Sheet1';
 const SHEET_INVITES = 'Invites';
-const HEADERS = ['Date/Time', 'Region', 'Email', 'invite_code', 'invited', 'source', 'user_agent', 'position', 'provider'];
+const HEADERS = ['Date/Time', 'Region', 'Email', 'invite_code', 'invited', 'source', 'user_agent', 'position', 'provider', 'location'];
 const FIREBASE_API_KEY = 'AIzaSyAEAbx0ZAlvNMWDAxloVg8JevO7GDls7I8';   // public web key of the contrl-ai Firebase project
 const POSITION_OFFSET = 100;   // first regular signup is #101
 const SEND_EMAIL = true;
@@ -71,9 +72,10 @@ function doPost(e) {
       ? rows.filter(r => r[4] === true).length + 1
       : POSITION_OFFSET + rows.filter(r => r[4] !== true).length + 1;
 
-    sh.appendRow([new Date(), lang, email, code, invited, body.source || '', body.ua || '', position, provider]);
+    const loc = location_(body.tz, body.locale);
+    sh.appendRow([new Date(), lang, email, code, invited, body.source || '', body.ua || '', position, provider, loc.text]);
     const rowUrl = `${ss.getUrl()}#gid=${sh.getSheetId()}&range=A${sh.getLastRow()}`;
-    notifySlack_({ email, position, invited, code, lang, provider, source: body.source || '', total: rows.length + 1, rowUrl });
+    notifySlack_({ email, position, invited, code, lang, provider, loc, source: body.source || '', total: rows.length + 1, rowUrl });
     if (SEND_EMAIL) sendConfirmation_(email, position, invited, lang, schedule);
     return json_({ ok: true, position, invited, invalidCode: !!(code && !invited), schedule_url: schedule });
   } finally {
@@ -92,6 +94,32 @@ function verifyIdToken_(idToken) {
     const ids = (u.providerUserInfo || []).map(p => p.providerId);
     return { email: String(u.email).toLowerCase(), provider: ids.includes('google.com') ? 'google' : (ids.includes('password') ? 'password' : (ids[0] || 'firebase')) };
   } catch (err) { return null; }
+}
+
+// Time zone → [country code, city]. Covers the target markets; anything else falls back to the zone's city.
+const TZ_PLACE = {
+  'Asia/Seoul': ['KR', 'Seoul'], 'Asia/Tokyo': ['JP', 'Tokyo'], 'Asia/Shanghai': ['CN', 'Shanghai'], 'Asia/Hong_Kong': ['HK', 'Hong Kong'],
+  'Asia/Taipei': ['TW', 'Taipei'], 'Asia/Singapore': ['SG', 'Singapore'], 'Asia/Ho_Chi_Minh': ['VN', 'Ho Chi Minh City'], 'Asia/Saigon': ['VN', 'Ho Chi Minh City'],
+  'Asia/Bangkok': ['TH', 'Bangkok'], 'Asia/Jakarta': ['ID', 'Jakarta'], 'Asia/Kuala_Lumpur': ['MY', 'Kuala Lumpur'], 'Asia/Manila': ['PH', 'Manila'],
+  'Asia/Kolkata': ['IN', 'India'], 'Asia/Calcutta': ['IN', 'India'], 'Asia/Dubai': ['AE', 'Dubai'],
+  'America/New_York': ['US', 'US Eastern'], 'America/Chicago': ['US', 'US Central'], 'America/Denver': ['US', 'US Mountain'], 'America/Phoenix': ['US', 'Arizona'],
+  'America/Los_Angeles': ['US', 'US Pacific'], 'America/Anchorage': ['US', 'Alaska'], 'Pacific/Honolulu': ['US', 'Hawaii'],
+  'America/Toronto': ['CA', 'Toronto'], 'America/Vancouver': ['CA', 'Vancouver'], 'America/Mexico_City': ['MX', 'Mexico City'], 'America/Sao_Paulo': ['BR', 'São Paulo'],
+  'Europe/London': ['GB', 'London'], 'Europe/Berlin': ['DE', 'Berlin'], 'Europe/Paris': ['FR', 'Paris'], 'Europe/Amsterdam': ['NL', 'Amsterdam'],
+  'Australia/Sydney': ['AU', 'Sydney'], 'Australia/Melbourne': ['AU', 'Melbourne'], 'Pacific/Auckland': ['NZ', 'Auckland'],
+};
+const flag_ = cc => /^[A-Z]{2}$/.test(cc || '') ? String.fromCodePoint(...[...cc].map(c => 0x1F1E6 + c.charCodeAt(0) - 65)) : '🌐';
+
+/** Best-effort location from the browser time zone (+ locale region as a fallback) → {text, slack}. */
+function location_(tz, locale) {
+  tz = String(tz || '').slice(0, 64); locale = String(locale || '').slice(0, 32);
+  const localeCC = (locale.match(/[-_]([A-Za-z]{2})\b/) || [])[1];
+  const hit = TZ_PLACE[tz];
+  const cc = hit ? hit[0] : (localeCC ? localeCC.toUpperCase() : '');
+  const city = hit ? hit[1] : (tz.includes('/') ? tz.split('/').pop().replace(/_/g, ' ') : '');
+  if (!cc && !city) return { text: '', slack: '📍 unknown' };
+  const text = [city, cc].filter(Boolean).join(', ') + (tz ? ` (${tz})` : '');
+  return { text, slack: `📍 ${flag_(cc)} ${[city, cc].filter(Boolean).join(', ')}${locale ? ` · ${locale}` : ''}` };
 }
 
 function scheduleUrl_() { return PropertiesService.getScriptProperties().getProperty('SCHEDULE_URL') || ''; }
@@ -145,7 +173,7 @@ function notifySlack_(d) {
     text,
     blocks: [
       { type: 'section', text: { type: 'mrkdwn', text: `*${text}*` } },
-      { type: 'context', elements: [{ type: 'mrkdwn', text: `${flag} ${d.lang} · signups ${d.total}${d.code ? ` · code \`${d.code}\`${d.invited ? '' : ' (invalid)'}` : ''} · ${d.source} · <${d.rowUrl}|Open row in Sheet>` }] },
+      { type: 'context', elements: [{ type: 'mrkdwn', text: `${d.loc ? d.loc.slack + ' · ' : ''}page ${flag} ${d.lang} · signups ${d.total}${d.code ? ` · code \`${d.code}\`${d.invited ? '' : ' (invalid)'}` : ''} · ${d.source} · <${d.rowUrl}|Open row in Sheet>` }] },
     ],
   };
   try { UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', payload: JSON.stringify(payload), muteHttpExceptions: true }); } catch (err) {}
