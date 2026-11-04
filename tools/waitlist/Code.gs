@@ -9,6 +9,7 @@
  * Script Properties: SLACK_WEBHOOK, SCHEDULE_URL (Google Calendar booking page; optional).
  * Location: estimated from the browser's time zone + locale the page sends (no IP lookup).
  * UTM: utm_* / ref query params from the landing URL, stored as 'utm_source=…&utm_campaign=…'.
+ * Campaign: the signup email is matched against the 'Outreach' tab (exact email, else same company domain).
  * GET ?invite=X:  checks an invite code → {ok, valid}.
  *
  * Deploy: Deploy → New deployment → Web app → Execute as Me · Who has access: Anyone → copy /exec URL
@@ -20,7 +21,8 @@
 const TARGET_SHEET_ID = '1x_jzKkbUk3MwhJi8aVEQeqvML97MgclHBlCqJ2LRwGY';
 const SHEET_WAITLIST = 'Sheet1';
 const SHEET_INVITES = 'Invites';
-const HEADERS = ['Date/Time', 'Region', 'Email', 'invite_code', 'invited', 'source', 'user_agent', 'position', 'provider', 'location', 'utm'];
+const SHEET_OUTREACH = 'Outreach';   // columns: email | campaign — people we emailed; signups are matched against it
+const HEADERS = ['Date/Time', 'Region', 'Email', 'invite_code', 'invited', 'source', 'user_agent', 'position', 'provider', 'location', 'utm', 'campaign'];
 const FIREBASE_API_KEY = 'AIzaSyAEAbx0ZAlvNMWDAxloVg8JevO7GDls7I8';   // public web key of the contrl-ai Firebase project
 const POSITION_OFFSET = 100;   // first regular signup is #101
 const SEND_EMAIL = true;
@@ -75,9 +77,10 @@ function doPost(e) {
 
     const loc = location_(body.tz, body.locale);
     const utm = String(body.utm || '').slice(0, 300);
-    sh.appendRow([new Date(), lang, email, code, invited, body.source || '', body.ua || '', position, provider, loc.text, utm]);
+    const campaign = campaignMatch_(ss, email);
+    sh.appendRow([new Date(), lang, email, code, invited, body.source || '', body.ua || '', position, provider, loc.text, utm, campaign]);
     const rowUrl = `${ss.getUrl()}#gid=${sh.getSheetId()}&range=A${sh.getLastRow()}`;
-    notifySlack_({ email, position, invited, code, lang, provider, loc, utm, source: body.source || '', total: rows.length + 1, rowUrl });
+    notifySlack_({ email, position, invited, code, lang, provider, loc, utm, campaign, source: body.source || '', total: rows.length + 1, rowUrl });
     if (SEND_EMAIL) sendConfirmation_(email, position, invited, lang, schedule);
     return json_({ ok: true, position, invited, invalidCode: !!(code && !invited), schedule_url: schedule });
   } finally {
@@ -128,6 +131,24 @@ function location_(tz, locale) {
 function utmLabel_(utm) {
   const q = {}; String(utm).split('&').forEach(p => { const i = p.indexOf('='); if (i > 0) q[p.slice(0, i)] = p.slice(i + 1); });
   return [q.utm_source, q.utm_medium, q.utm_campaign, q.ref].filter(Boolean).join(' / ') || utm;
+}
+
+const FREEMAIL = ['gmail.com', 'googlemail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'live.com', 'icloud.com', 'me.com', 'aol.com',
+  'proton.me', 'protonmail.com', 'naver.com', 'daum.net', 'hanmail.net', 'kakao.com', 'qq.com', '163.com', 'yahoo.co.jp'];
+
+/** 'us-reengage (email)' if the address is in the Outreach tab, 'us-reengage (domain)' for a colleague at the same company, else ''. */
+function campaignMatch_(ss, email) {
+  const sh = ss.getSheetByName(SHEET_OUTREACH);
+  if (!sh || sh.getLastRow() < 2) return '';
+  const rows = sh.getRange(2, 1, sh.getLastRow() - 1, 2).getValues();
+  const domain = email.split('@')[1] || '';
+  let byDomain = '';
+  for (const [e, c] of rows) {
+    const addr = String(e).trim().toLowerCase(); if (!addr) continue;
+    if (addr === email) return `${c || 'outreach'} (email)`;
+    if (!byDomain && domain && !FREEMAIL.includes(domain) && addr.split('@')[1] === domain) byDomain = `${c || 'outreach'} (domain)`;
+  }
+  return byDomain;
 }
 
 function scheduleUrl_() { return PropertiesService.getScriptProperties().getProperty('SCHEDULE_URL') || ''; }
@@ -181,7 +202,7 @@ function notifySlack_(d) {
     text,
     blocks: [
       { type: 'section', text: { type: 'mrkdwn', text: `*${text}*` } },
-      { type: 'context', elements: [{ type: 'mrkdwn', text: `${d.loc ? d.loc.slack + ' · ' : ''}page ${flag} ${d.lang} · signups ${d.total}${d.code ? ` · code \`${d.code}\`${d.invited ? '' : ' (invalid)'}` : ''} · ${d.source}${d.utm ? ` · 🔗 ${utmLabel_(d.utm)}` : ''} · <${d.rowUrl}|Open row in Sheet>` }] },
+      { type: 'context', elements: [{ type: 'mrkdwn', text: `${d.loc ? d.loc.slack + ' · ' : ''}page ${flag} ${d.lang} · signups ${d.total}${d.code ? ` · code \`${d.code}\`${d.invited ? '' : ' (invalid)'}` : ''} · ${d.source}${d.utm ? ` · 🔗 ${utmLabel_(d.utm)}` : ''}${d.campaign ? ` · 📧 ${d.campaign}` : ''} · <${d.rowUrl}|Open row in Sheet>` }] },
     ],
   };
   try { UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', payload: JSON.stringify(payload), muteHttpExceptions: true }); } catch (err) {}
