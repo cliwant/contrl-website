@@ -795,21 +795,28 @@
             fbAuth.languageCode = currentLang;
             return { auth: fbAuth, m: fbMod };
         }
-        function setErr(wrap, key) { const e = wrap.querySelector('[data-err]'); if (!key) { e.classList.add('hidden'); return; } e.textContent = i18nText(key); e.classList.remove('hidden'); }
+        function setErr(wrap, key) { const e = wrap.querySelector('[data-err]'); if (!key) { e.classList.add('hidden'); return; } e.textContent = i18nText(key); e.classList.remove('hidden'); document.getElementById('enter-app')?.remove(); }
         function busy(wrap, on) { wrap.querySelectorAll('button, input').forEach(el => el.disabled = on); }
 
         // After Firebase sign-in: hand the ID token to the backend (it verifies it), then show the result.
         async function register(wrap, user, provider) {
+            if (APP_READY) showEntering();   // the web app is live: show progress at once, the sign-up is already done
             const idToken = await user.getIdToken();
-            const res = await fetch(WAITLIST_ENDPOINT, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({ idToken, provider, invite: (wrap.querySelector('input[name=invite]') || {}).value || '', lang: currentLang,
+            const body = JSON.stringify({ idToken, provider, invite: (wrap.querySelector('input[name=invite]') || {}).value || '', lang: currentLang,
                     source: 'contrl.ai', ua: navigator.userAgent.slice(0, 120), ts: new Date().toISOString(),
-                    tz: (Intl.DateTimeFormat().resolvedOptions().timeZone || ''), locale: (navigator.languages && navigator.languages[0]) || navigator.language || '', utm: UTM }) });
+                    tz: (Intl.DateTimeFormat().resolvedOptions().timeZone || ''), locale: (navigator.languages && navigator.languages[0]) || navigator.language || '', utm: UTM });
+            const track = () => { if (typeof gtag === 'function') gtag('event', 'sign_up', { method: provider, source: wrap.closest('section')?.id || wrap.id || 'hero', transport_type: 'beacon' }); };
+            // Where the web app runs, don't wait for the sign-up record (sheet, Slack, welcome email; it
+            // takes several seconds): send it with keepalive, so it completes after the page has left,
+            // and go straight into the app.
+            if (APP_READY) {
+                fetch(WAITLIST_ENDPOINT, { method: 'POST', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body }).catch(() => {});
+                track(); enterApp(idToken); return;
+            }
+            const res = await fetch(WAITLIST_ENDPOINT, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body });
             const data = await res.json().catch(() => ({}));
             if (!res.ok || data.ok === false) throw new Error(data.error || 'register_failed');
-            if (typeof gtag === 'function') gtag('event', 'sign_up', { method: provider, source: wrap.closest('section')?.id || wrap.id || 'hero' });
-            // Where the web app runs, sign them in there too and go straight in.
-            if (APP_READY) { enterApp(idToken); return; }
+            track();
             showDone(wrap, data);
             try { (await getAuthMod()).m.signOut(fbAuth); } catch (e) {}
         }
@@ -822,6 +829,18 @@
         if (APP_READY) document.querySelectorAll('[data-nav-login]').forEach(a => { a.href = APP_URL; a.classList.remove('hidden'); });
         // The app is on another host, where this page's Firebase sign-in doesn't carry over: hand the ID
         // token to its server in a form POST (never in the URL); it sets its own session and opens the app.
+        // Full-screen "opening the app" while the sign-in is handed over and the app loads.
+        function showEntering() {
+            if (document.getElementById('enter-app')) return;
+            const label = { ko: 'Contrl을 여는 중…', en: 'Opening Contrl…', ja: 'Contrlを開いています…', zh: '正在打开 Contrl…' }[currentLang] || 'Opening Contrl…';
+            const d = document.createElement('div'); d.id = 'enter-app'; d.setAttribute('role', 'status');
+            d.style.cssText = 'position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:rgba(250,248,245,.94);backdrop-filter:blur(6px);font-weight:600;color:#18181b;font-size:16px';
+            d.innerHTML = '<div style="width:34px;height:34px;border-radius:999px;border:3px solid #f3d9c4;border-top-color:#F27A2E;animation:enter-spin .8s linear infinite"></div><div></div><style>@keyframes enter-spin{to{transform:rotate(360deg)}}</style>';
+            d.children[1].textContent = label;
+            document.body.appendChild(d);
+        }
+        // Back from the app (bfcache): don't leave the overlay up.
+        window.addEventListener('pageshow', e => { if (e.persisted) document.getElementById('enter-app')?.remove(); });
         function enterApp(idToken) {
             const f = document.createElement('form');
             f.method = 'POST'; f.action = new URL('/api/handoff', new URL(APP_URL, location.href)).href; f.style.display = 'none';
