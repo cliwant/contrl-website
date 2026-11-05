@@ -784,7 +784,7 @@
         })();
 
         // ---- Sign-up: Firebase Auth (Google, or email + password), then register with the backend ----
-        const FIREBASE_CONFIG = { apiKey: 'AIzaSyAEAbx0ZAlvNMWDAxloVg8JevO7GDls7I8', authDomain: 'contrl-ai.firebaseapp.com', projectId: 'contrl-ai', appId: '1:944656586925:web:75b88522acd93e31c14e24' };
+        const FIREBASE_CONFIG = { apiKey: 'AIzaSyAEAbx0ZAlvNMWDAxloVg8JevO7GDls7I8', authDomain: /(^|\.)contrl\.ai$/.test(location.hostname) ? location.hostname : 'contrl-ai.firebaseapp.com', projectId: 'contrl-ai', appId: '1:944656586925:web:75b88522acd93e31c14e24' };
         const FB_VER = '10.12.2';
         let fbAuth = null, fbMod = null;
         async function getAuthMod() {
