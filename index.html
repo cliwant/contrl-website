@@ -777,6 +777,13 @@
         function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 
         // ---- Campaign tracking: remember utm_* / ref from the landing URL for this visit ----
+        // A tender picked in an e-mail (?sample=…): kept for this visit and handed to the app after sign-in,
+        // which then opens that tender.
+        const PICK = (() => {
+            const q = new URLSearchParams(location.search), keys = ['sample', 'utm_source', 'utm_campaign'], out = {};
+            for (const k of keys) { const v = (q.get(k) || '').replace(/[^\w.-]/g, '').slice(0, 60); if (v) out[k] = v; }
+            try { if (out.sample) sessionStorage.setItem('contrl-pick', JSON.stringify(out)); return out.sample ? out : JSON.parse(sessionStorage.getItem('contrl-pick') || '{}'); } catch (e) { return out; }
+        })();
         const UTM = (() => {
             const q = new URLSearchParams(location.search), keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref'];
             const found = keys.filter(k => q.get(k)).map(k => `${k}=${q.get(k).slice(0, 60)}`).join('&');
@@ -826,7 +833,7 @@
         const APP_URL = (/^(localhost|127\.0\.0\.1)$/.test(location.hostname) && location.port === '8787') ? '/app/' : (APP_LIVE ? 'https://app.contrl.ai/' : '');
         const APP_READY = !!APP_URL;
         // Returning users: a 로그인 link in the top bar, only once the web app is live.
-        if (APP_READY) document.querySelectorAll('[data-nav-login]').forEach(a => { a.href = APP_URL; a.classList.remove('hidden'); });
+        if (APP_READY) document.querySelectorAll('[data-nav-login]').forEach(a => { a.href = APP_URL + (PICK.sample ? '?' + new URLSearchParams(PICK).toString() : ''); a.classList.remove('hidden'); });
         // The app is on another host, where this page's Firebase sign-in doesn't carry over: hand the ID
         // token to its server in a form POST (never in the URL); it sets its own session and opens the app.
         // Full-screen "opening the app" while the sign-in is handed over and the app loads.
@@ -867,7 +874,7 @@
             const f = document.createElement('form');
             f.method = 'POST'; f.action = new URL('/api/handoff', new URL(APP_URL, location.href)).href; f.style.display = 'none';
             const fields = { idToken, next: APP_URL.endsWith('/app/') ? '/app/' : '/', lang: ['ko', 'en', 'ja'].includes(currentLang) ? currentLang : 'en',
-                tz: Intl.DateTimeFormat().resolvedOptions().timeZone || '', locale: (navigator.languages && navigator.languages[0]) || navigator.language || '' };
+                tz: Intl.DateTimeFormat().resolvedOptions().timeZone || '', locale: (navigator.languages && navigator.languages[0]) || navigator.language || '', ...PICK };
             for (const [k, v] of Object.entries(fields)) { const i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = v; f.appendChild(i); }
             document.body.appendChild(f); f.submit();
         }
