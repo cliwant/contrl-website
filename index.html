@@ -834,6 +834,29 @@
         const APP_READY = !!APP_URL;
         // Returning users: a 로그인 link in the top bar, only once the web app is live.
         if (APP_READY) document.querySelectorAll('[data-nav-login]').forEach(a => { a.href = APP_URL + (PICK.sample ? '?' + new URLSearchParams(PICK).toString() : ''); a.classList.remove('hidden'); });
+        // Came from an e-mail with a tender picked: a bar at the bottom names it and starts the sign-up,
+        // after which the app opens that tender.
+        if (APP_READY && PICK.sample) (async () => {
+            let x = null;
+            try { x = await fetch(new URL('/api/sample-info?slug=' + encodeURIComponent(PICK.sample), new URL(APP_URL, location.href)).href).then(r => r.ok ? r.json() : null); } catch (e) {}
+            if (!x) return;
+            const T = { ko: ['선택한 공고', '무료로 가입하면 Contrl이 이 공고를 바로 분석해 드려요.', '무료로 시작하기 →'],
+                        en: ['Your tender', 'Sign up free and Contrl opens this tender for you, analysis ready.', 'Sign up free →'],
+                        ja: ['選んだ公告', '無料で登録すると、Contrlがこの公告をすぐに分析します。', '無料で始める →'],
+                        zh: ['您选择的招标', '免费注册后，Contrl 会立即为您分析这个招标。', '免费开始 →'] }[currentLang] || null;
+            const t = T || ['Your tender', 'Sign up free and Contrl opens this tender for you, analysis ready.', 'Sign up free →'];
+            const bar = document.createElement('div'); bar.id = 'pick-bar';
+            bar.style.cssText = 'position:fixed;left:12px;right:12px;bottom:12px;z-index:60;max-width:760px;margin:0 auto;background:#fff;border:1px solid #f3d9c4;border-radius:16px;box-shadow:0 10px 30px rgba(24,24,27,.14);padding:14px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-family:inherit';
+            bar.innerHTML = '<div style="flex:1;min-width:220px"><div style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#F27A2E"></div><div style="font-size:15px;font-weight:700;color:#18181b;line-height:1.35;margin-top:2px"></div><div style="font-size:12.5px;color:#71717a;margin-top:2px"></div></div><button type="button" class="btn-3d" style="border:0;color:#fff;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;white-space:nowrap"></button><button type="button" aria-label="close" style="border:0;background:none;color:#a1a1aa;font-size:20px;line-height:1;padding:4px;cursor:pointer">×</button>';
+            const [box, go, close] = bar.children;
+            box.children[0].textContent = t[0] + (x.live ? ' · LIVE' : '');
+            box.children[1].textContent = x.title;
+            box.children[2].textContent = x.client + ' — ' + t[1];
+            go.textContent = t[2];
+            go.onclick = () => { const g = document.querySelector('[data-waitlist] [data-google]'); if (g) { g.scrollIntoView({ behavior: 'smooth', block: 'center' }); g.click(); } };
+            close.onclick = () => bar.remove();
+            document.body.appendChild(bar);
+        })();
         // The app is on another host, where this page's Firebase sign-in doesn't carry over: hand the ID
         // token to its server in a form POST (never in the URL); it sets its own session and opens the app.
         // Full-screen "opening the app" while the sign-in is handed over and the app loads.
