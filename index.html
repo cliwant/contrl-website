@@ -790,6 +790,62 @@
             try { if (found) sessionStorage.setItem('contrl-utm', found); return found || sessionStorage.getItem('contrl-utm') || ''; } catch (e) { return found; }
         })();
 
+        // ---- Landing analytics (anonymous, first-party): where visitors drop off before signing up ----
+        // Sent to the app server (server/landing.mjs, admin page → 랜딩 분석): time on page (tab visible),
+        // scroll depth, time per section, where the mouse rests, clicks, and each sign-up step. No e-mail,
+        // no IP kept; a random id per tab (visit) and per browser (returning visitor).
+        const LT = (() => {
+            const rid = () => Math.random().toString(36).slice(2, 12) + Date.now().toString(36);
+            const get = (st, k) => { try { let v = st.getItem(k); if (!v) { v = rid(); st.setItem(k, v); return { v, fresh: true }; } return { v }; } catch (e) { return { v: rid(), fresh: true }; } };
+            const sid = get(sessionStorage, 'contrl-lt-sid').v, vis = get(localStorage, 'contrl-lt-vid');
+            const host = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? location.origin.replace(/:\d+$/, ':8788') : 'https://app.contrl.ai';
+            const url = host + '/api/lt';
+            const send = (t, d) => {
+                const body = JSON.stringify({ t, sid, ...d });
+                try { if (navigator.sendBeacon && navigator.sendBeacon(url, new Blob([body], { type: 'text/plain' }))) return; } catch (e) {}
+                fetch(url, { method: 'POST', body, keepalive: true, mode: 'no-cors', headers: { 'Content-Type': 'text/plain' } }).catch(() => {});
+            };
+            // Sections, named for the report
+            const secs = [...document.querySelectorAll('body > section, main > section, body > footer')].map((el, i) => {
+                const name = el.id || (el.classList.contains('hero-fit') ? 'hero' : el.tagName === 'FOOTER' ? 'footer' : ['hero', 'features', 'why', 'banner'][i] || 's' + i);
+                el.dataset.ltSec = name; return el;
+            });
+            const secOf = el => el?.closest?.('[data-lt-sec]')?.dataset.ltSec || '';
+            // Time on page and per section, counted only while the tab is visible
+            let dwell = 0, last = Date.now(), maxScroll = 0, mouseSec = '', mouseMoved = 0;
+            const secMs = {}, mouseMs = {}, clicks = [];
+            const tick = () => {
+                const now = Date.now(), dt = Math.min(now - last, 5000); last = now;
+                if (document.visibilityState !== 'visible') return;
+                dwell += dt;
+                const mid = innerHeight / 2;
+                for (const el of secs) { const r = el.getBoundingClientRect(); if (r.top < mid && r.bottom > mid) { secMs[el.dataset.ltSec] = (secMs[el.dataset.ltSec] || 0) + dt; break; } }
+                if (mouseSec && now - mouseMoved < 10000) mouseMs[mouseSec] = (mouseMs[mouseSec] || 0) + dt;
+                const doc = document.documentElement, h = Math.max(1, doc.scrollHeight - innerHeight);
+                maxScroll = Math.max(maxScroll, Math.round(Math.min(1, scrollY / h) * 100));
+            };
+            setInterval(tick, 1000);
+            addEventListener('scroll', () => { const h = Math.max(1, document.documentElement.scrollHeight - innerHeight); maxScroll = Math.max(maxScroll, Math.round(Math.min(1, scrollY / h) * 100)); }, { passive: true });
+            addEventListener('mousemove', e => { mouseMoved = Date.now(); mouseSec = secOf(e.target); }, { passive: true });
+            addEventListener('click', e => {
+                const el = e.target.closest('a, button, [role=button], input, video, summary, label') || e.target;
+                const label = (el.getAttribute('data-i18n') || el.getAttribute('aria-label') || el.dataset.lang && ('lang:' + el.dataset.lang) || el.textContent || el.tagName).trim().replace(/\s+/g, ' ').slice(0, 50);
+                const docH = Math.max(1, document.documentElement.scrollHeight);
+                clicks.push([label, secOf(el), Math.round(e.clientX / innerWidth * 100), Math.round((e.clientY + scrollY) / docH * 100)]);
+                if (clicks.length > 60) clicks.shift();
+            }, true);
+            const flush = () => { tick(); send('state', { dwell, scroll: maxScroll, secs: secMs, mouse: mouseMs, clicks }); };
+            let n = 0; const iv = setInterval(() => { if (document.visibilityState === 'visible') flush(); if (++n >= 40) clearInterval(iv); }, 15000);
+            addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(); else last = Date.now(); });
+            addEventListener('pagehide', flush);
+            const q = new URLSearchParams(location.search);
+            send('view', { vid: vis.v, ret: !vis.fresh, lang: document.documentElement.lang, tz: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+                locale: (navigator.languages && navigator.languages[0]) || navigator.language || '', ref: (() => { try { return document.referrer ? new URL(document.referrer).hostname : ''; } catch (e) { return ''; } })(),
+                utm: ['utm_source', 'utm_medium', 'utm_campaign'].filter(k => q.get(k)).map(k => k + '=' + q.get(k).slice(0, 40)).join('&'), ads: !!(q.get('gclid') || q.get('gbraid') || q.get('wbraid') || /cpc|paid/.test(q.get('utm_medium') || '')),
+                path: location.pathname + (q.get('lang') ? '?lang=' + q.get('lang') : ''), vw: innerWidth, vh: innerHeight, touch: matchMedia('(pointer: coarse)').matches, pick: q.get('sample') || '' });
+            return { sid, cta: (kind, el) => send('cta', { kind, where: secOf(el) || el?.id || '' }), auth: (ok, code, kind) => send('auth', { ok, code, kind }), enter: () => { flush(); send('enter', {}); } };
+        })();
+
         // ---- Sign-up: Firebase Auth (Google, or email + password), then register with the backend ----
         const FIREBASE_CONFIG = { apiKey: 'AIzaSyAEAbx0ZAlvNMWDAxloVg8JevO7GDls7I8', authDomain: /(^|\.)contrl\.ai$/.test(location.hostname) ? location.hostname : 'contrl-ai.firebaseapp.com', projectId: 'contrl-ai', appId: '1:944656586925:web:75b88522acd93e31c14e24' };
         const FB_VER = '10.12.2';
@@ -833,7 +889,7 @@
         const APP_URL = (/^(localhost|127\.0\.0\.1)$/.test(location.hostname) && location.port === '8787') ? '/app/' : (APP_LIVE ? 'https://app.contrl.ai/' : '');
         const APP_READY = !!APP_URL;
         // Returning users: a 로그인 link in the top bar, only once the web app is live.
-        if (APP_READY) document.querySelectorAll('[data-nav-login]').forEach(a => { a.href = APP_URL + (PICK.sample ? '?' + new URLSearchParams(PICK).toString() : ''); a.classList.remove('hidden'); });
+        if (APP_READY) document.querySelectorAll('[data-nav-login]').forEach(a => { a.addEventListener('click', () => LT.cta('login', a)); a.href = APP_URL + (PICK.sample ? '?' + new URLSearchParams(PICK).toString() : ''); a.classList.remove('hidden'); });
         // Came from an e-mail with a tender picked: a bar at the bottom names it and starts the sign-up,
         // after which the app opens that tender.
         if (APP_READY && PICK.sample) (async () => {
@@ -853,7 +909,7 @@
             box.children[1].textContent = x.title;
             box.children[2].textContent = x.client + ' — ' + t[1];
             go.textContent = t[2];
-            go.onclick = () => { const g = document.querySelector('[data-waitlist] [data-google]'); if (g) { g.scrollIntoView({ behavior: 'smooth', block: 'center' }); g.click(); } };
+            go.onclick = () => { LT.cta('pickbar', bar); const g = document.querySelector('[data-waitlist] [data-google]'); if (g) { g.scrollIntoView({ behavior: 'smooth', block: 'center' }); g.click(); } };
             close.onclick = () => bar.remove();
             document.body.appendChild(bar);
         })();
@@ -897,7 +953,8 @@
             const f = document.createElement('form');
             f.method = 'POST'; f.action = new URL('/api/handoff', new URL(APP_URL, location.href)).href; f.style.display = 'none';
             const fields = { idToken, next: APP_URL.endsWith('/app/') ? '/app/' : '/', lang: ['ko', 'en', 'ja'].includes(currentLang) ? currentLang : 'en',
-                tz: Intl.DateTimeFormat().resolvedOptions().timeZone || '', locale: (navigator.languages && navigator.languages[0]) || navigator.language || '', ...PICK };
+                tz: Intl.DateTimeFormat().resolvedOptions().timeZone || '', locale: (navigator.languages && navigator.languages[0]) || navigator.language || '', lsid: LT.sid, ...PICK };
+            LT.enter();
             for (const [k, v] of Object.entries(fields)) { const i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = v; f.appendChild(i); }
             document.body.appendChild(f); f.submit();
         }
@@ -923,10 +980,10 @@
 
         document.querySelectorAll('[data-waitlist]').forEach(wrap => {
             const gBtn = wrap.querySelector('[data-google]'), form = wrap.querySelector('.su-email');
-            wrap.querySelector('[data-email-toggle]').addEventListener('click', e => { form.classList.remove('hidden'); e.currentTarget.classList.add('hidden'); form.querySelector('input[type=email]').focus(); });
+            wrap.querySelector('[data-email-toggle]').addEventListener('click', e => { LT.cta('email_open', wrap); form.classList.remove('hidden'); e.currentTarget.classList.add('hidden'); form.querySelector('input[type=email]').focus(); });
 
             gBtn.addEventListener('click', async () => {
-                setErr(wrap); busy(wrap, true);
+                LT.cta('google', wrap); setErr(wrap); busy(wrap, true);
                 try {
                     const { auth, m } = await getAuthMod(); const prov = new m.GoogleAuthProvider(); prov.setCustomParameters({ prompt: 'select_account' });
                     let cred;
@@ -937,8 +994,9 @@
                         }
                         throw err;
                     }
+                    LT.auth(true, '', 'google');
                     await register(wrap, cred.user, 'google');
-                } catch (err) { console.warn(err); setErr(wrap, AUTH_ERR[err.code] || 'err_generic'); }
+                } catch (err) { console.warn(err); LT.auth(false, err.code || err.message || 'error', 'google'); setErr(wrap, AUTH_ERR[err.code] || 'err_generic'); }
                 busy(wrap, false);
             });
 
@@ -947,13 +1005,14 @@
                 const email = form.email.value.trim(), pw = form.password.value;
                 if (!validEmail(email)) { setErr(wrap, 'err_email'); form.email.focus(); return; }
                 if (pw.length < 8) { setErr(wrap, 'err_password'); form.password.focus(); return; }
-                busy(wrap, true);
+                LT.cta('email', wrap); busy(wrap, true);
                 try {
                     const { auth, m } = await getAuthMod(); let cred;
                     try { cred = await m.createUserWithEmailAndPassword(auth, email, pw); }
                     catch (err) { if (err.code !== 'auth/email-already-in-use') throw err; cred = await m.signInWithEmailAndPassword(auth, email, pw); }
+                    LT.auth(true, '', 'password');
                     await register(wrap, cred.user, 'password');
-                } catch (err) { console.warn(err); setErr(wrap, AUTH_ERR[err.code] || 'err_generic'); }
+                } catch (err) { console.warn(err); LT.auth(false, err.code || err.message || 'error', 'password'); setErr(wrap, AUTH_ERR[err.code] || 'err_generic'); }
                 busy(wrap, false);
             });
         });
@@ -961,8 +1020,8 @@
         if (sessionStorage.getItem('contrl-su-wrap') !== null) (async () => {
             const id = sessionStorage.getItem('contrl-su-wrap'); sessionStorage.removeItem('contrl-su-wrap');
             const wrap = (id && document.getElementById(id)) || document.querySelector('[data-waitlist]');
-            try { const { auth, m } = await getAuthMod(); const r = await m.getRedirectResult(auth); if (r && r.user) await register(wrap, r.user, 'google'); }
-            catch (err) { console.warn(err); setErr(wrap, AUTH_ERR[err.code] || 'err_generic'); }
+            try { const { auth, m } = await getAuthMod(); const r = await m.getRedirectResult(auth); if (r && r.user) { LT.auth(true, 'redirect', 'google'); await register(wrap, r.user, 'google'); } }
+            catch (err) { console.warn(err); LT.auth(false, err.code || 'error', 'google'); setErr(wrap, AUTH_ERR[err.code] || 'err_generic'); }
         })();
 
         // ---- Demo videos: progress bar + time under each frame ---------------------
