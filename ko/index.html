@@ -331,7 +331,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="/ko/" class="text-xl font-bold tracking-tight">contrl<span class="text-accent">.</span></a>
             <div class="flex items-center gap-5">
-                <a href="/blog/" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav_blog">블로그</a>
+                <a href="/ko/blog/" class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors" data-i18n="nav_blog">블로그</a>
                 <a href="https://app.contrl.ai/" class="hidden text-sm font-semibold text-zinc-900 hover:text-accent transition-colors" data-nav-login data-i18n="nav_login">로그인</a>
                 <div class="lang-menu" data-lang-menu>
                     <button type="button" class="lang-menu-btn" aria-label="Language" aria-haspopup="menu" aria-expanded="false" data-lang-menu-btn><iconify-icon icon="solar:global-linear" width="18"></iconify-icon></button>
@@ -731,7 +731,7 @@
                     <a href="#how" class="block text-zinc-500 hover:text-zinc-900" data-i18n="nav_how">어떻게 다른가</a>
                     <a href="#proof" class="block text-zinc-500 hover:text-zinc-900" data-i18n="nav_results">성과</a>
                     <a href="#pricing" class="block text-zinc-500 hover:text-zinc-900" data-i18n="nav_pricing">가격</a>
-                    <a href="/blog/" class="block text-zinc-500 hover:text-zinc-900" data-i18n="nav_blog">블로그</a>
+                    <a href="/ko/blog/" class="block text-zinc-500 hover:text-zinc-900" data-i18n="nav_blog">블로그</a>
                 </div>
             </div>
         </div>
@@ -782,6 +782,8 @@
             document.querySelectorAll('meta[property="og:title"], meta[name="twitter:title"]').forEach(m => m.setAttribute('content', META[currentLang].title));
             document.querySelectorAll('meta[property="og:description"], meta[name="twitter:description"]').forEach(m => m.setAttribute('content', META[currentLang].desc));
             document.querySelectorAll('.lang-switch button').forEach(b => b.classList.toggle('on', b.dataset.lang === currentLang));
+            // each language has its own blog (/blog/, /ko/blog/, /ja/blog/, /zh/blog/)
+            document.querySelectorAll('a[href="/ko/blog/"], a[href$="/blog/"][href^="/"]').forEach(a => a.setAttribute('href', currentLang === 'en' ? '/blog/' : '/' + currentLang + '/blog/'));
             // localized "Why it fails" stills (zh falls back to the English UI stills)
             const stillLang = ['ko', 'ja'].includes(currentLang) ? currentLang : 'en';
             document.querySelectorAll('img[data-why-img]').forEach(im => im.setAttribute('src', `/images/why/still-${im.dataset.whyImg}.${stillLang}.jpg`));

@@ -238,14 +238,17 @@ def render_landing(src, i18n, meta, lang):
     return fill_seo_block(out, landing_seo_block(lang, i18n, meta))
 
 
-def build_landing():
+def build_landing(blog_index_langs=()):
     src, i18n, meta = load_landing()
     if '<!-- seo:start' not in src:
         sys.exit('index.html has no <!-- seo:start --> block in <head>')
     write(ROOT / 'index.html', render_landing(src, i18n, meta, 'en'))
     src = (ROOT / 'index.html').read_text(encoding='utf-8')
     for lang in LANGS[1:]:
-        write(ROOT / lang / 'index.html', render_landing(src, i18n, meta, lang))
+        page = render_landing(src, i18n, meta, lang)
+        if lang in blog_index_langs:
+            page = page.replace('href="/blog/"', f'href="{blog_base(lang)}"')
+        write(ROOT / lang / 'index.html', page)
 
 
 # --------------------------------------------------------------------------------------------
@@ -263,8 +266,22 @@ BLOG_UI = {
            'cta_b': 'Get started free', 'start': 'Get started free', 'updated': 'Updated', 'published': 'Published', 'toc': 'Contents',
            'summary': 'Key takeaways', 'faq': 'FAQ', 'min': 'min read', 'all': 'All posts', 'empty': 'No posts yet.'},
 }
-BLOG_UI['ja'] = dict(BLOG_UI['en'], blog='ブログ')
-BLOG_UI['zh'] = dict(BLOG_UI['en'], blog='博客')
+BLOG_UI['ja'] = {'blog': 'ブログ', 'blog_title': 'Contrl ブログ — 提案書・入札の実務ガイド',
+                 'blog_desc': 'RFP分析、ウィンテーマ、評価基準への対応まで。提案書を書く人のための実務ガイド。',
+                 'cta_t': '判断は人が、作成はAIが。', 'cta_p': 'RFPをアップロードすると、Contrlが分析・戦略からスライド作成まで一緒に進めます。最初の提案書は無料です。',
+                 'cta_b': '無料で始める', 'start': '無料で始める', 'updated': '更新', 'published': '公開', 'toc': '目次',
+                 'summary': '要点', 'faq': 'よくある質問', 'min': '分で読めます', 'all': 'すべての記事', 'empty': 'まだ記事がありません。'}
+BLOG_UI['zh'] = {'blog': '博客', 'blog_title': 'Contrl 博客 — 投标与提案书实务指南',
+                 'blog_desc': '从RFP分析、制胜主题到评分标准应对：写给提案书撰写者的实务指南。',
+                 'cta_t': '由你决策，由AI撰写。', 'cta_p': '上传RFP，Contrl会与你一起完成从分析、策略到幻灯片的全过程。第一份提案书免费。',
+                 'cta_b': '免费开始', 'start': '免费开始', 'updated': '更新于', 'published': '发布于', 'toc': '目录',
+                 'summary': '要点', 'faq': '常见问题', 'min': '分钟阅读', 'all': '全部文章', 'empty': '暂无文章。'}
+LANG_NAME = {'en': 'English', 'ko': '한국어', 'ja': '日本語', 'zh': '中文'}
+
+
+def blog_base(lang):
+    """Path of a language's blog: /blog/ for English, /<lang>/blog/ for the others (next to /<lang>/)."""
+    return '/blog/' if lang == 'en' else f'/{lang}/blog/'
 
 
 def list_posts():
@@ -291,8 +308,13 @@ def parse_post(f):
     for k in ('title', 'description', 'published'):
         if not fm.get(k):
             sys.exit(f'{f}: front matter needs "{k}"')
-    fm.setdefault('slug', f.stem)
-    fm.setdefault('lang', 'ko')
+    # <slug>.html is the English post; <slug>.<lang>.html its translation (same slug, linked by hreflang)
+    stem, _, suffix = f.stem.partition('.')
+    fm.setdefault('slug', stem)
+    fm.setdefault('lang', suffix or 'en')
+    fm['file'] = f'tools/blog/posts/{f.name}'
+    if fm['lang'] not in LANGS:
+        sys.exit(f'{f}: lang must be one of {LANGS}')
     fm.setdefault('updated', fm['published'])
     fm.setdefault('tags', [])
     fm.setdefault('faq', [])
@@ -300,7 +322,8 @@ def parse_post(f):
     if not re.fullmatch(r'[a-z0-9]+(-[a-z0-9]+)*', fm['slug']):
         sys.exit(f'{f}: slug must be lowercase letters, digits and hyphens')
     fm['body'] = text[m.end():]
-    fm['url'] = f'{SITE}/blog/{fm["slug"]}/'
+    fm['path'] = f'{blog_base(fm["lang"])}{fm["slug"]}/'
+    fm['url'] = SITE + fm['path']
     chars = len(strip_tags(fm['body']))
     fm['minutes'] = max(1, round(chars / (500 if fm['lang'] in ('ko', 'ja', 'zh') else 1200)))
     return fm
@@ -338,7 +361,7 @@ BLOG_HEAD = '''<!DOCTYPE html>
 <body>
     <header class="b-nav"><div class="b-wrap b-nav-in">
         <a class="b-logo" href="{home}">contrl<span>.</span></a>
-        <nav><a href="/blog/">{ui_blog}</a><a class="b-btn" href="{home}#join">{ui_start}</a></nav>
+        <nav><a href="{blog_home}">{ui_blog}</a><a class="b-btn" href="{home}#join">{ui_start}</a></nav>
     </div></header>
 '''
 
@@ -390,7 +413,32 @@ def fmt_date(d, lang):
     return f'{y}. {int(m)}. {int(dd)}.' if lang == 'ko' else d
 
 
-def render_post(p):
+def hreflang_links(alts):
+    """alts: {lang: absolute url}. Returns <link> lines for the head (empty when there is one language)."""
+    if len(alts) < 2:
+        return ''
+    lines = [f'    <link rel="alternate" hreflang="{l}" href="{u}">\n' for l, u in sorted(alts.items())]
+    lines.append(f'    <link rel="alternate" hreflang="x-default" href="{alts.get("en") or next(iter(alts.values()))}">\n')
+    return ''.join(lines)
+
+
+def cjk_font(lang):
+    """Pretendard covers Latin and Hangul only; ja/zh pages also load Noto Sans JP/SC."""
+    if lang not in NOTO:
+        return ''
+    return (f'    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={NOTO[lang]}:wght@400;600;700;800&display=swap">\n'
+            f'    <style>body{{font-family:\'Pretendard\',\'{NOTO[lang].replace("+", " ")}\',sans-serif}}</style>\n')
+
+
+def lang_switch(alts, current):
+    if len(alts) < 2:
+        return ''
+    links = [f'<a href="{u.replace(SITE, "")}" hreflang="{l}" lang="{l}"{" aria-current=\"page\"" if l == current else ""}>{LANG_NAME[l]}</a>'
+             for l, u in sorted(alts.items(), key=lambda kv: LANGS.index(kv[0]))]
+    return '<span class="b-langs">' + ''.join(links) + '</span>'
+
+
+def render_post(p, alts):
     lang = p['lang']
     ui = BLOG_UI.get(lang, BLOG_UI['en'])
     home = landing_url(lang).replace(SITE, '')
@@ -408,11 +456,12 @@ def render_post(p):
          'url': p['url'], 'mainEntityOfPage': p['url'], 'inLanguage': lang, 'datePublished': p['published'],
          'dateModified': p['updated'], 'image': image, 'author': author_ld, 'publisher': {'@id': f'{SITE}/#org'},
          'keywords': p['tags'], 'wordCount': len(strip_tags(p['body']).split()),
-         'isPartOf': {'@type': 'Blog', '@id': f'{SITE}/blog/#blog', 'name': 'Contrl Blog', 'url': f'{SITE}/blog/'},
+         'isPartOf': {'@type': 'Blog', '@id': f'{SITE}{blog_base(lang)}#blog', 'name': 'Contrl Blog', 'url': f'{SITE}{blog_base(lang)}'},
+         **({'translationOfWork': {'@id': alts['en'] + '#article'}} if lang != 'en' and 'en' in alts else {}),
          'about': {'@type': 'SoftwareApplication', '@id': f'{SITE}/#app', 'name': 'Contrl'}},
         {'@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': 'Contrl', 'item': landing_url(lang)},
-            {'@type': 'ListItem', 'position': 2, 'name': ui['blog'], 'item': f'{SITE}/blog/'},
+            {'@type': 'ListItem', 'position': 2, 'name': ui['blog'], 'item': f'{SITE}{blog_base(lang)}'},
             {'@type': 'ListItem', 'position': 3, 'name': p['title'], 'item': p['url']}]},
     ]
     if p['faq']:
@@ -421,14 +470,16 @@ def render_post(p):
             for q in p['faq']]})
     extra = (f'    <meta property="article:published_time" content="{p["published"]}">\n'
              f'    <meta property="article:modified_time" content="{p["updated"]}">\n'
-             + ''.join(f'    <meta property="article:tag" content="{esc(t)}">\n' for t in p['tags']))
-    head = BLOG_HEAD.format(source=f'tools/blog/posts/{p["slug"]}.html', lang=lang, title=esc(p['title']), desc=esc(p['description']),
+             + ''.join(f'    <meta property="article:tag" content="{esc(t)}">\n' for t in p['tags'])
+             + hreflang_links(alts) + cjk_font(lang))
+    head = BLOG_HEAD.format(source=p['file'], lang=lang, title=esc(p['title']), desc=esc(p['description']),
                             url=p['url'], site=SITE, og_type='article', image=image, locale=LOCALE.get(lang, 'ko_KR'),
                             extra_meta=extra, ld=jsonld({'@context': 'https://schema.org', '@graph': graph}), css=blog_css(),
-                            home=home, ui_blog=ui['blog'], ui_start=ui['start'])
+                            home=home, ui_blog=ui['blog'], ui_start=ui['start'], blog_home=blog_base(lang))
     parts = [head, '    <main class="b-wrap b-post">\n']
-    parts.append(f'        <nav class="b-crumb"><a href="/blog/">{ui["blog"]}</a>'
-                 + (f' · <span>{esc(p.get("series") or p["tags"][0])}</span>' if p.get('series') or p['tags'] else '') + '</nav>\n')
+    parts.append(f'        <div class="b-crumb"><nav><a href="{blog_base(lang)}">{ui["blog"]}</a>'
+                 + (f' · <span>{esc(p.get("series") or p["tags"][0])}</span>' if p.get('series') or p['tags'] else '') + '</nav>'
+                 + lang_switch(alts, lang) + '</div>\n')
     parts.append(f'        <h1>{esc(p["title"])}</h1>\n')
     by = f'{esc(author["name"])} · ' if author else ''
     dates = f'<time datetime="{p["published"]}">{fmt_date(p["published"], lang)}</time>'
@@ -453,25 +504,25 @@ def render_post(p):
     return ''.join(parts)
 
 
-def render_blog_index(posts):
-    lang = BLOG_LANG
+def render_blog_index(posts, lang, index_langs):
     ui = BLOG_UI[lang]
-    url = f'{SITE}/blog/'
+    url = f'{SITE}{blog_base(lang)}'
+    alts = {l: f'{SITE}{blog_base(l)}' for l in index_langs}
     graph = [ORG, {'@type': 'Blog', '@id': f'{url}#blog', 'name': 'Contrl Blog', 'url': url, 'description': ui['blog_desc'],
                    'inLanguage': sorted({p['lang'] for p in posts}) or [lang], 'publisher': {'@id': f'{SITE}/#org'},
                    'blogPost': [{'@type': 'BlogPosting', 'headline': p['title'], 'url': p['url'], 'datePublished': p['published']}
                                 for p in posts]}]
     head = BLOG_HEAD.format(source='tools/blog/posts/', lang=lang, title=esc(ui['blog_title']), desc=esc(ui['blog_desc']),
                             url=url, site=SITE, og_type='website', image=f'{SITE}/og-image.png', locale=LOCALE[lang],
-                            extra_meta='', ld=jsonld({'@context': 'https://schema.org', '@graph': graph}), css=blog_css(),
-                            home=landing_url(lang).replace(SITE, ''), ui_blog=ui['blog'], ui_start=ui['start'])
+                            extra_meta=hreflang_links(alts) + cjk_font(lang), ld=jsonld({'@context': 'https://schema.org', '@graph': graph}), css=blog_css(),
+                            home=landing_url(lang).replace(SITE, ''), ui_blog=ui['blog'], ui_start=ui['start'], blog_home=blog_base(lang))
     items = []
     for p in posts:
         thumb = (f'<div class="b-thumb"><img src="{esc(p["image"])}" alt="" width="1344" height="752" loading="lazy" decoding="async"></div>'
                  if p.get('image', '').startswith('/') else '')
         kicker = esc(p.get('series') or (p['tags'][0] if p['tags'] else ''))
         read = f'{p["minutes"]} {ui["min"]}' if lang == 'en' else f'{p["minutes"]}{ui["min"]}'
-        items.append(f'''        <li><a class="b-card{" has-thumb" if thumb else ""}" href="/blog/{p["slug"]}/">
+        items.append(f'''        <li><a class="b-card{" has-thumb" if thumb else ""}" href="{p["path"]}">
             {thumb}<div class="b-card-body">
                 {f'<p class="b-kicker">{kicker}</p>' if kicker else ''}
                 <h2>{esc(p["title"])}</h2>
@@ -479,28 +530,43 @@ def render_blog_index(posts):
                 <p class="b-meta"><time datetime="{p["published"]}">{fmt_date(p["published"], p["lang"])}</time> · {read}</p>
             </div>
         </a></li>''')
-    body = (f'    <main class="b-wrap b-index">\n        <h1>{ui["blog"]}</h1>\n        <p class="b-lede">{ui["blog_desc"]}</p>\n'
+    body = (f'    <main class="b-wrap b-index">\n        <div class="b-crumb">{lang_switch(alts, lang)}</div>\n        <h1>{ui["blog"]}</h1>\n        <p class="b-lede">{ui["blog_desc"]}</p>\n'
             f'        <ul class="b-list">\n' + '\n'.join(items) + '\n        </ul>\n    </main>\n')
     return head + body + BLOG_FOOT.format(home=landing_url(lang).replace(SITE, ''), year=TODAY[:4])
 
 
-def build_blog(posts):
-    live = {p['slug'] for p in posts}
+def translations(posts):
+    groups = {}
     for p in posts:
-        write(ROOT / 'blog' / p['slug'] / 'index.html', render_post(p))
-    blog = ROOT / 'blog'
-    if blog.exists():
+        groups.setdefault(p['slug'], {})[p['lang']] = p['url']
+    return groups
+
+
+def blog_langs(posts):
+    return [l for l in LANGS if any(p['lang'] == l for p in posts)]
+
+
+def build_blog(posts):
+    groups = translations(posts)
+    index_langs = blog_langs(posts)
+    for p in posts:
+        write(ROOT / p['path'].strip('/') / 'index.html', render_post(p, groups[p['slug']]))
+    for lang in LANGS:
+        blog = ROOT / blog_base(lang).strip('/')
+        live = {p['slug'] for p in posts if p['lang'] == lang}
+        if not blog.exists():
+            continue
+        generated = lambda f: f.exists() and 'GENERATED by tools/seo/build.py' in f.read_text(encoding='utf-8')[:300]
         for d in blog.iterdir():
-            if d.is_dir() and d.name not in live and (d / 'index.html').exists() \
-                    and 'GENERATED by tools/seo/build.py' in (d / 'index.html').read_text(encoding='utf-8')[:300]:
+            if d.is_dir() and d.name not in live and generated(d / 'index.html'):
                 (d / 'index.html').unlink()
                 d.rmdir()
                 print('removed', d.relative_to(ROOT))
-    if posts:
-        write(blog / 'index.html', render_blog_index(posts))
-    elif (blog / 'index.html').exists():
-        (blog / 'index.html').unlink()
-        print('removed blog/index.html (no posts)')
+        if lang in index_langs:
+            write(blog / 'index.html', render_blog_index([p for p in posts if p['lang'] == lang], lang, index_langs))
+        elif generated(blog / 'index.html'):
+            (blog / 'index.html').unlink()
+            print('removed', (blog / 'index.html').relative_to(ROOT))
 
 
 # --------------------------------------------------------------------------------------------
@@ -526,15 +592,24 @@ def build_sitemap(posts):
         <lastmod>{lastmod}</lastmod>{alts}
         <image:image><image:loc>{SITE}/og-image.png</image:loc></image:image>
     </url>''')
-    if posts:
+    def xalts(alts):
+        if len(alts) < 2:
+            return ''
+        return ''.join(f'\n        <xhtml:link rel="alternate" hreflang="{l}" href="{u}"/>' for l, u in sorted(alts.items())) \
+            + f'\n        <xhtml:link rel="alternate" hreflang="x-default" href="{alts.get("en") or next(iter(alts.values()))}"/>'
+    index_langs = blog_langs(posts)
+    index_alts = {l: f'{SITE}{blog_base(l)}' for l in index_langs}
+    for l in index_langs:
         urls.append(f'''    <url>
-        <loc>{SITE}/blog/</loc>
-        <lastmod>{max(p["updated"] for p in posts)}</lastmod>
+        <loc>{SITE}{blog_base(l)}</loc>
+        <lastmod>{max(p["updated"] for p in posts if p["lang"] == l)}</lastmod>{xalts(index_alts)}
     </url>''')
+    groups = translations(posts)
     for p in posts:
+        img = f'\n        <image:image><image:loc>{SITE}{p["image"]}</image:loc></image:image>' if p.get('image', '').startswith('/') else ''
         urls.append(f'''    <url>
         <loc>{p["url"]}</loc>
-        <lastmod>{p["updated"]}</lastmod>
+        <lastmod>{p["updated"]}</lastmod>{xalts(groups[p["slug"]])}{img}
     </url>''')
     xml = ('<?xml version="1.0" encoding="UTF-8"?>\n<!-- GENERATED by tools/seo/build.py -->\n'
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
@@ -549,6 +624,7 @@ def rfc822(d):
 
 
 def build_rss(posts):
+    posts = [p for p in posts if p['lang'] == BLOG_LANG]
     items = []
     for p in posts[:50]:
         cats = ''.join(f'\n            <category>{esc(t)}</category>' for t in p['tags'])
@@ -579,11 +655,11 @@ def build_rss(posts):
 
 def main():
     posts = list_posts()
-    slugs = [p['slug'] for p in posts]
-    if len(slugs) != len(set(slugs)):
-        sys.exit('two posts share a slug')
+    keys = [(p['slug'], p['lang']) for p in posts]
+    if len(keys) != len(set(keys)):
+        sys.exit('two posts share a slug and language')
     build_blog(posts)
-    build_landing()
+    build_landing(blog_langs(posts))
     build_sitemap(posts)
     build_rss(posts)
 
