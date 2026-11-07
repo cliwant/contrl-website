@@ -35,31 +35,20 @@
     <meta name="twitter:description" content="You make the call, AI writes on your behalf. Your ideas stay at the core. Sign up free.">
     <meta name="twitter:image" content="https://contrl.ai/og-image.png?v=3">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
-                    },
-                    colors: {
-                        accent: '#F27A2E',
-                        cocoa: '#524438',
-                        cream: '#f9f6f2',
-                    },
-                }
-            }
-        }
-    </script>
+    <!-- Styles built ahead of time (tools/tailwind/build.sh), not compiled in the visitor's browser -->
+    <link rel="stylesheet" href="/assets/tailwind.css">
+    <script defer src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <!-- Pretendard split by character range: a page only downloads the glyphs it shows -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
+    <!-- Noto Sans JP / SC are loaded only for Japanese / Chinese (applyLang) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
         html { scroll-behavior: smooth; }
         @font-face {
             font-family: 'Freesentation';
-            src: url('/fonts/Freesentation-8ExtraBold.ttf') format('truetype');
+            src: url('/fonts/Freesentation-8ExtraBold.woff2') format('woff2'), url('/fonts/Freesentation-8ExtraBold.ttf') format('truetype');
             font-weight: 800;
             font-display: swap;
         }
@@ -95,11 +84,11 @@
 
         /* Hero entrance */
         @keyframes heroEnter { from { opacity: 0; transform: translateY(2rem); filter: blur(4px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
-        .hero-enter { opacity: 0; animation: heroEnter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .hero-delay-1 { animation-delay: 0.1s; }
-        .hero-delay-2 { animation-delay: 0.3s; }
-        .hero-delay-3 { animation-delay: 0.5s; }
-        .hero-delay-4 { animation-delay: 0.7s; }
+        .hero-enter { opacity: 0; animation: heroEnter 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .hero-delay-1 { animation-delay: 0.05s; }
+        .hero-delay-2 { animation-delay: 0.1s; }
+        .hero-delay-3 { animation-delay: 0.18s; }
+        .hero-delay-4 { animation-delay: 0.26s; }
 
         /* Scroll reveal */
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(1.5rem); } to { opacity: 1; transform: translateY(0); } }
@@ -321,7 +310,10 @@
         details summary::-webkit-details-marker { display: none; }
         details[open] .chev { transform: rotate(180deg); }
         .chev { transition: transform .2s ease; }
-    </style>
+            .su-try { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; padding: 11px 16px; border: 1.5px solid #18181b; border-radius: 999px; font-weight: 700; font-size: 14.5px; color: #18181b; text-decoration: none; background: #fff; transition: background .15s, transform .15s; }
+        .su-try:hover { background: #fff6ee; transform: translateY(-1px); }
+        .su-try-dot { width: 8px; height: 8px; border-radius: 50%; background: #16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,.18); flex: none; }
+</style>
 </head>
 
 <body class="font-sans antialiased bg-white text-zinc-900 overflow-x-hidden">
@@ -359,6 +351,7 @@
                     <div class="su-main">
                         <button type="button" class="btn-google" data-google><svg class="g-ico" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.3-.4-3.5z"/></svg><span data-i18n="su_google">Continue with Google</span></button>
                         <button type="button" class="su-alt" data-email-toggle data-i18n="su_email_toggle">No Google account? Sign up with email</button>
+                        <a class="su-try hidden" data-try href="#"><span class="su-try-dot"></span><span data-try-label>See a real tender analysis first — no sign-up</span> →</a>
                         <form class="su-email hidden" novalidate>
                             <label for="su-email-hero" class="sr-only">Email</label>
                             <input id="su-email-hero" type="email" name="email" inputmode="email" autocomplete="email" placeholder="Email" data-i18n-placeholder="ph_email" required>
@@ -714,7 +707,13 @@
             const q = new URLSearchParams(location.search).get('lang'); if (LANGS.includes(q)) return q;
             try { const saved = localStorage.getItem('contrl-lang'); if (LANGS.includes(saved)) return saved; } catch (e) {}
             const nav = (navigator.languages || [navigator.language || 'en']).map(l => l.toLowerCase());
-            for (const l of nav) { if (l.startsWith('ko')) return 'ko'; if (l.startsWith('ja')) return 'ja'; if (l.startsWith('zh')) return 'zh'; if (l.startsWith('en')) return 'en'; }
+            // A browser set to Korean / Japanese / Chinese wins; one set to English (or anything else) in
+            // Japan, Korea or China gets that country's language: many there browse with English UI.
+            for (const l of nav) { if (l.startsWith('ko')) return 'ko'; if (l.startsWith('ja')) return 'ja'; if (l.startsWith('zh')) return 'zh'; if (l.startsWith('en')) break; }
+            const tz = (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { return ''; } })();
+            if (tz === 'Asia/Tokyo') return 'ja';
+            if (tz === 'Asia/Seoul') return 'ko';
+            if (/^Asia\/(Shanghai|Chongqing|Urumqi|Harbin|Taipei|Hong_Kong|Macau)$/.test(tz)) return 'zh';
             return 'en';
         }
         let currentLang = 'en';
@@ -723,6 +722,11 @@
             currentLang = LANGS.includes(lang) ? lang : 'en';
             if (save) { try { localStorage.setItem('contrl-lang', currentLang); } catch (e) {} }
             document.documentElement.lang = currentLang;
+            if ((currentLang === 'ja' || currentLang === 'zh') && !document.getElementById('noto-' + currentLang)) {
+                const l = document.createElement('link'); l.id = 'noto-' + currentLang; l.rel = 'stylesheet';
+                l.href = 'https://fonts.googleapis.com/css2?family=' + (currentLang === 'ja' ? 'Noto+Sans+JP' : 'Noto+Sans+SC') + ':wght@400;500;600;700;800;900&display=swap';
+                document.head.appendChild(l);
+            }
             document.querySelectorAll('[data-i18n]').forEach(el => { const v = I18N[el.getAttribute('data-i18n')]; if (v) el.innerHTML = (v[currentLang] !== undefined ? v[currentLang] : v.en); });
             ['placeholder', 'data-text'].forEach(attr => document.querySelectorAll('[data-i18n-' + attr + ']').forEach(el => { const v = I18N[el.getAttribute('data-i18n-' + attr)]; if (v) el.setAttribute(attr, v[currentLang] || v.en); }));
             document.title = META[currentLang].title;
@@ -734,11 +738,14 @@
             const stillLang = ['ko', 'ja'].includes(currentLang) ? currentLang : 'en';
             document.querySelectorAll('img[data-why-img]').forEach(im => im.setAttribute('src', `/images/why/still-${im.dataset.whyImg}.${stillLang}.jpg`));
             // localized demo videos
-            document.querySelectorAll('video[data-video]').forEach(v => {
+            // (the poster shows at once; the 5 MB videos start downloading only after the page has loaded)
+            const setVideos = () => document.querySelectorAll('video[data-video]').forEach(v => {
                 const name = v.dataset.video, src = `/images/hero/${name}.${currentLang}.mp4`;
                 if (v.getAttribute('src') === src) return;
-                const playing = !v.paused; v.setAttribute('poster', `/images/hero/${name}.${currentLang}.jpg`); v.setAttribute('src', src); v.load(); if (playing || v.autoplay) v.play().catch(() => {});
+                const playing = !v.paused; v.setAttribute('src', src); v.load(); if (playing || v.autoplay) v.play().catch(() => {});
             });
+            document.querySelectorAll('video[data-video]').forEach(v => v.setAttribute('poster', `/images/hero/${v.dataset.video}.${currentLang}.jpg`));
+            if (document.readyState === 'complete') setVideos(); else if (!window.__vidWait) { window.__vidWait = 1; addEventListener('load', () => setVideos(), { once: true }); }
             // the typed prompt box: if its animation already ran, redraw it in the new language
             const typed = document.querySelector('.fx-type.done');
             if (typed) typed.querySelector('.fx-typed').innerHTML = typed.dataset.text.replace(/\|([^|]+)\|/g, '<mark class="hl on">$1</mark>');
@@ -890,6 +897,20 @@
         const APP_READY = !!APP_URL;
         // Returning users: a 로그인 link in the top bar, only once the web app is live.
         if (APP_READY) document.querySelectorAll('[data-nav-login]').forEach(a => { a.addEventListener('click', () => LT.cta('login', a)); a.href = APP_URL + (PICK.sample ? '?' + new URLSearchParams(PICK).toString() : ''); a.classList.remove('hidden'); });
+        // "See a real tender analysis first": a live tender of the visitor's region, its ready-made analysis
+        // viewable without an account (app.contrl.ai/try/<slug>); going on from there needs the sign-up.
+        if (APP_READY) {
+            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+            const pickTry = () => currentLang === 'ja' ? 'jp-suginami-dx' : currentLang === 'ko' ? 'kr-gwangju-web'
+                : tz === 'Asia/Singapore' ? 'singapore-it' : /^Asia\//.test(tz) ? 'india-consultancy' : 'us-state-passport';
+            const TRY = { ko: '가입 없이 실제 공고 분석 먼저 보기', en: 'See a real tender analysis first — no sign-up', ja: '登録なしで実際の公告の分析を見る', zh: '无需注册，先看真实招标的分析' };
+            const drawTry = () => document.querySelectorAll('[data-try]').forEach(a => {
+                a.href = new URL('try/' + pickTry(), new URL(APP_URL, location.href)).href;
+                a.querySelector('[data-try-label]').textContent = TRY[currentLang] || TRY.en; a.classList.remove('hidden');
+            });
+            drawTry();
+            document.addEventListener('click', e => { if (e.target.closest('.lang-switch button')) setTimeout(drawTry, 0); const a = e.target.closest('[data-try]'); if (a) LT.cta('preview', a); });
+        }
         // Came from an e-mail with a tender picked: a bar at the bottom names it and starts the sign-up,
         // after which the app opens that tender.
         if (APP_READY && PICK.sample) (async () => {

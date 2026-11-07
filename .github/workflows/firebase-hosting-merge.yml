@@ -68,6 +68,10 @@ jobs:
           lfs: true
           persist-credentials: false
 
+      # 랜딩 CSS(assets/tailwind.css)를 index.html 의 클래스로 다시 만든다. 커밋할 때 빌드를 잊어도 빠진 스타일이 배포되지 않게 한다.
+      - name: Build landing CSS
+        run: ./tools/tailwind/build.sh
+
       - uses: FirebaseExtended/action-hosting-deploy@500ac625ca2dd40cbd15f7659af953801858032a # v0.11.0
         with:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CONTRL_AI }}
