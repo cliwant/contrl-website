@@ -781,6 +781,8 @@
             document.querySelectorAll('meta[property="og:title"], meta[name="twitter:title"]').forEach(m => m.setAttribute('content', META[currentLang].title));
             document.querySelectorAll('meta[property="og:description"], meta[name="twitter:description"]').forEach(m => m.setAttribute('content', META[currentLang].desc));
             document.querySelectorAll('.lang-switch button').forEach(b => b.classList.toggle('on', b.dataset.lang === currentLang));
+            // each language has its own blog (/blog/, /ko/blog/, /ja/blog/, /zh/blog/)
+            document.querySelectorAll('a[href="/blog/"], a[href$="/blog/"][href^="/"]').forEach(a => a.setAttribute('href', currentLang === 'en' ? '/blog/' : '/' + currentLang + '/blog/'));
             // localized "Why it fails" stills (zh falls back to the English UI stills)
             const stillLang = ['ko', 'ja'].includes(currentLang) ? currentLang : 'en';
             document.querySelectorAll('img[data-why-img]').forEach(im => im.setAttribute('src', `/images/why/still-${im.dataset.whyImg}.${stillLang}.jpg`));

@@ -223,6 +223,31 @@
 
 <p>Responsiveness can't be generated from the RFP alone, because by definition it depends on what the RFP leaves out: why the customer is buying, what went wrong last time, and what the evaluators will worry about. If you give AI only the solicitation, you get a proposal that is fully compliant and reads like every other bid. That is exactly the scenario where the customer decides on price. The right split is for AI to handle the compliance work while people supply the understanding of the customer. Then the AI can write with that understanding.</p>
 
+<h3>How Contrl splits the work</h3>
+
+<p>Contrl, the proposal writer we build, is designed around exactly this split. The software does the compliance work and the writing. The decisions that make a proposal responsive stay with the people who know the customer.</p>
+
+<ol>
+<li><strong>Compliance comes first, from the RFP.</strong> When you upload an RFP, Contrl extracts the requirements, the required outline and the evaluation criteria. It then maps every requirement to the section of the proposal that must answer it, before any writing starts. That is the compliance matrix, built for every bid without anyone retyping the RFP.</li>
+<li><strong>Responsiveness comes from you, in a strategy interview.</strong> Contrl asks about the client, your company and the competition in chat, then proposes win themes. Each theme names the client need, your edge and the benefit, which is the same "why it matters, what we know, proof" pattern described above. You choose one, and every section inherits it.</li>
+</ol>
+
+<figure><img src="/images/blog/compliance-vs-responsiveness/contrl-win-theme.jpg" alt="Contrl screen: three win theme candidates, each with a client need, our edge and a benefit; the first one is selected" width="1600" height="780" loading="lazy" decoding="async"><figcaption>Decision 1, the win theme. Each candidate states the client need, your edge and the benefit. You pick one. Screens from a real 100-page bid.</figcaption></figure>
+
+<ol start="3">
+<li><strong>Each section lands one point, and you choose it.</strong> For every section Contrl reduces the win theme to three candidate key sentences that take different angles. You pick one or write your own, so each section makes a single point instead of seven scattered ones.</li>
+</ol>
+
+<figure><img src="/images/blog/compliance-vs-responsiveness/contrl-key-sentence.jpg" alt="Contrl screen: three key sentence candidates for a section, derived from the selected win theme; the second one is selected" width="1600" height="790" loading="lazy" decoding="async"><figcaption>Decision 2, the key sentence. Three angles reduced from the win theme. Choose one or write your own.</figcaption></figure>
+
+<ol start="4">
+<li><strong>Every page shows where it comes from.</strong> Contrl writes the slides in your company's design system, with speaker notes. Each page names the requirements it answers, and its footer cites the RFP items behind it, so a reviewer can trace any claim back to the source. If something is off, one line of feedback in chat rewrites the page.</li>
+</ol>
+
+<figure><img src="/images/blog/compliance-vs-responsiveness/contrl-slide-sources.jpg" alt="A finished Contrl slide about a three-tier permission framework, with a footer citing RFP requirements FR-003 and FR-006 as its source" width="1340" height="960" loading="lazy" decoding="async"><figcaption>A finished page. The footer cites the RFP requirements it answers (FR-003, FR-006), so the answer is easy to find and to check.</figcaption></figure>
+
+<p>The result follows the split this competency asks for. Nothing in the RFP gets missed, and the proposal still argues what your team decided, not what a model guessed.</p>
+
 <h2>Next in the series</h2>
 
 <p>The Body of Knowledge also points out that responsiveness varies a lot across markets and cultures, and that it starts early in the business development lifecycle, well before any RFP. That leads to the next competency, <strong>Customer Relationship Management</strong>. Customers have to follow formal evaluation rules, but across industries they still tend to choose people they know, like and trust. Episode 2 looks at how to earn that before the bid.</p>

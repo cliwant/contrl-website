@@ -1,6 +1,6 @@
 # Blog posts
 
-Each post is one file here: `tools/blog/posts/<slug>.html`. `tools/` is not deployed; run
+Each post is one file here: `tools/blog/posts/<slug>.html` (English, /blog/<slug>/). Translations are `<slug>.<lang>.html` (ko, ja, zh) and publish at /<lang>/blog/<slug>/, linked to each other by hreflang and a language switch. `tools/` is not deployed; run
 
     python3 tools/seo/build.py
 
