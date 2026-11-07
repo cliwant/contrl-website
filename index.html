@@ -191,7 +191,7 @@
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
         /* Floating waitlist */
-        .float-wl { position: fixed; right: 20px; bottom: 20px; z-index: 60; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .3s ease, transform .3s ease; }
+        .float-wl { position: fixed; left: 20px; bottom: 20px; z-index: 60; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .3s ease, transform .3s ease; }
         .float-wl.show { opacity: 1; transform: none; pointer-events: auto; }
         .float-pill::after { content: "→"; margin-left: 2px; } .float-pill { height: 50px; padding: 0 22px; border-radius: 9999px; color: #fff; font-weight: 700; font-size: 15px; border: 0; display: inline-flex; align-items: center; gap: 8px; }
         .float-form { display: none; background: #fff; border: 1px solid #e6dfd6; border-radius: 9999px; padding: 6px; box-shadow: 0 20px 50px -20px rgba(67,53,36,.4), 0 2px 8px rgba(67,53,36,.08); max-width: none; }
@@ -204,7 +204,7 @@
         .float-wl.wl-done .float-form, .float-wl.wl-done .float-pill { display: none !important; }
         .float-wl.wl-done .float-done { display: flex; }
         .float-wl .wl-error { background: #fff; border-radius: 9999px; padding: 4px 12px; }
-        @media (max-width: 640px) { .float-wl { left: 12px; right: 12px; bottom: 12px; align-items: stretch; } .float-pill { width: 100%; justify-content: center; } .float-form { border-radius: 16px; flex-direction: row; } .float-form input { width: auto; flex: 1; } .float-form button { width: auto; } }
+        @media (max-width: 640px) { .float-wl { left: 12px; right: 76px; bottom: 12px; align-items: stretch; } .float-pill { width: 100%; justify-content: center; } .float-form { border-radius: 16px; flex-direction: row; } .float-form input { width: auto; flex: 1; } .float-form button { width: auto; } }
 
         /* Hero fits one viewport: headline → video (height-driven) → subhead + form */
         .hero-fit { min-height: 100dvh; padding: 96px 0 120px; display: flex; align-items: center; }
