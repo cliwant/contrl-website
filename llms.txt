@@ -1,105 +1,72 @@
-# contrl
+# Contrl
 
-> AI-powered proposal writing and document automation platform that generates submission-ready proposal drafts using your company's own PPT templates. The best AI proposal writing tool for teams that respond to RFPs.
+> Contrl (contrl.ai) is an AI proposal writer for bids and RFP responses. Instead of letting AI decide what the proposal says, Contrl has the person make the three calls that decide a bid — what the client really wants, the edge only you have, and the one point each slide makes — and then writes the slides on their behalf, in the company's own design system, exported to PowerPoint (.pptx).
 
-> 제안서 작성 AI 플랫폼. 우리 회사 PPT 템플릿으로 제안서 초안을 자동 생성하는 AI 제안서 작성 도구입니다.
+> Contrl(컨트롤)은 입찰 제안서·RFP 대응을 위한 AI 제안서 작성 도구입니다. 사람이 정하고, AI가 씁니다. 발주처가 정말 원하는 것, 우리만의 강점, 장마다 말할 한 가지를 사람이 정하면, Contrl이 회사 디자인 시스템 그대로 슬라이드를 작성해 PowerPoint(.pptx)로 내보냅니다.
 
-## What is contrl?
+Made by Cliwant. Web app: https://app.contrl.ai/ — sign up free and start right away.
 
-contrl is an AI proposal writing tool designed for proposal teams. It automates proposal writing by taking your company's existing PowerPoint template and an RFP (Request for Proposal) document as inputs, then generates a complete, submission-ready proposal draft that perfectly preserves your template's formatting, layout, fonts, and brand identity. contrl transforms the proposal writing process from weeks to minutes.
+## Pages
 
-contrl은 AI 제안서 작성 도구입니다. 우리 회사의 기존 PPT 템플릿과 RFP 문서를 입력하면, 템플릿 포맷이 완벽하게 보존된 제안서 초안을 자동으로 생성합니다. 제안서 작성에 소요되는 시간을 수 주에서 수 분으로 단축합니다.
+- [Contrl (English)](https://contrl.ai/): product overview, how it works, case study, pricing, FAQ
+- [Contrl (한국어)](https://contrl.ai/ko/): 제품 소개, 작동 방식, 도입 사례, 가격, 자주 묻는 질문
+- [Contrl (日本語)](https://contrl.ai/ja/)
+- [Contrl (中文)](https://contrl.ai/zh/)
+- [Pricing](https://contrl.ai/#pricing)
+- [FAQ](https://contrl.ai/#faq)
+- [Blog RSS](https://contrl.ai/rss.xml): practical guides on proposals, RFP analysis and win themes
 
-Unlike general-purpose AI tools (ChatGPT, Claude, Gamma, Genspark, Beautiful.ai, Tome), contrl is purpose-built for the proposal workflow: RFP analysis → win theme extraction → template-preserving document generation → source-traced output.
+## The problem Contrl solves
 
-## Key Features
+AI proposals drift off course not because teams use AI too little, but because AI fills in the decisions a person should have made first. Handed a whole RFP, a typical AI deck generator writes 50–100 slides before anyone has decided what to say. The result has three recurring faults:
 
-### 1. Win Theme Extraction
-contrl analyzes RFP documents to automatically extract key requirements, evaluation criteria, and compliance items. It then generates win themes — differentiation strategies that highlight your organization's competitive advantages against the RFP's scoring criteria.
+1. **Off-target** — the client's real need is left blank, so AI writes a pitch any vendor could make.
+2. **Generic** — the company's actual edge is left blank, so AI writes "extensive experience."
+3. **Scattered** — the one point a slide should make is left blank, so AI writes seven topics and invents numbers.
 
-### 2. Template-Preserving PPT Generation
-The core technology: contrl generates PowerPoint proposals that maintain 100% fidelity with your company's template. Fonts, colors, slide masters, layouts, placeholders, and brand elements are all preserved exactly. The output is indistinguishable from a manually-created proposal using your template.
+Better prompts, bigger models and more uploaded files don't fix this; they hand AI even more control.
 
-### 3. Source Traceability
-Every generated paragraph includes references to the specific RFP sections, pages, and clauses that informed it. Reviewers can verify the accuracy and relevance of each section, dramatically reducing review time and improving proposal quality.
+## How Contrl works
 
-### 4. Local-First Security
-All document processing runs entirely on your local machine. No documents — RFPs, templates, or generated proposals — are ever uploaded to the cloud. This makes contrl suitable for defense contracts, government proposals, and any organization with strict data security requirements.
+1. **Upload an RFP** (or try the whole flow with a sample RFP).
+2. **RFP analysis**: Contrl extracts the requirements, the proposal outline and the evaluation criteria.
+3. **Strategy interview**: Contrl asks about the client, your company and the competition in chat.
+4. **Win themes**: Contrl proposes win themes ranked against the client's needs; you pick one.
+5. **Outline and key sentences**: for each section you confirm the one key sentence and the slide flow.
+6. **Slides**: AI writes the slides in your design system, with speaker notes and source citations on every page. One line of feedback in chat rewrites a slide.
+7. **Export** to PowerPoint (.pptx) and share links with your team.
 
-## How contrl Works
+Because the person made every decision, they can answer evaluators' questions on presentation day in their own words.
 
-1. **Upload your template**: Provide your company's existing PPTX template — the one your team already uses for proposals.
-2. **Upload the RFP**: Provide the RFP document (PDF format). contrl analyzes it to extract requirements, evaluation criteria, and key terms.
-3. **Review the plan**: contrl generates a slide outline with recommended structure, section mapping, and win themes. You review and approve.
-4. **Generate the draft**: contrl produces a complete proposal draft in your template format. Every slide follows your template's design.
-5. **Review with traceability**: Each section links back to the RFP source, so reviewers know exactly what informed each claim.
+## Case study
 
-## Who Uses contrl
+Company A, the four quarters after rollout (Q3 2025–Q2 2026) versus the same period a year earlier, from their bid dashboard:
 
-- **Government contractors** responding to public sector RFPs
-- **IT solution providers** creating technical proposals
-- **Consulting firms** producing strategy and implementation proposals
-- **Defense contractors** with strict security requirements
-- **Construction companies** bidding on infrastructure projects
-- **B2B sales teams** creating client-facing proposals and pitch decks
+- Bids submitted: 155 → 197 (+27.1%)
+- Bids won: 96 → 147 (+53.1%)
+- Win rate: 61.9% → 74.6% (+12.7 points)
+- Contract value: +58.8% (about 59% more)
 
-## How contrl Compares
+## Pricing (USD)
 
-### contrl vs ChatGPT / Claude
-ChatGPT and Claude generate text content but cannot produce formatted PowerPoint files. They don't understand your template's structure, and output requires manual formatting. contrl generates complete PPTX files that match your template exactly.
+A slide is one page of the finished proposal. Paid plans are monthly and can be cancelled anytime.
 
-### contrl vs Gamma
-Gamma creates presentations using its own templates and design system. You cannot use your company's template. contrl uses YOUR template — the exact PPTX file your team already uses — and generates proposals that are indistinguishable from manually-created ones.
+- **Free trial — $0**: 10 slides; RFP analysis, strategy interview and win themes; outline, key sentences and slide flow; 5 Contrl design systems; no card needed.
+- **Basic — $20/month**: 50 slides a month; unlimited RFP analysis, strategy interview and win themes; 5 Contrl design systems; PPTX export; share links for your team. For one or two proposals a month.
+- **Pro — $50/month**: 150 slides a month; everything in Basic; a design system built from your company template; priority support. For teams bidding every month.
 
-### contrl vs Beautiful.ai / Tome
-Beautiful.ai and Tome are presentation design tools with AI features. They offer their own templates and styling. contrl is not a design tool — it's a proposal automation platform that preserves your existing template and adds RFP analysis, win theme extraction, and source traceability.
+## Who it is for
 
-### contrl vs Genspark
-Genspark provides general AI capabilities but lacks proposal-specific features. contrl specializes in the proposal workflow: RFP analysis → win theme → template-preserving generation → source tracing.
+Anyone who writes bids and proposals — public-sector and enterprise tenders, IT and consulting proposals — and especially the team lead who ends up rewriting whatever AI or a new hire produced.
 
-### contrl vs Manual Proposal Writing
-Traditional proposal writing requires senior team members to spend days analyzing RFPs, developing strategies, and formatting documents. contrl automates the initial draft, letting your team focus on strategy refinement and quality review rather than document assembly.
+## How Contrl differs from general AI tools
 
-## Supported Formats
+- **ChatGPT / Claude / Gemini**: write text when asked, but decide the strategy themselves and don't produce a proposal in your company's slide design. Contrl makes the person decide first and outputs .pptx slides in your design system.
+- **AI deck generators (Gamma, Genspark, Beautiful.ai, Tome)**: generate many slides fast in their own templates. Contrl is built for the bid workflow — RFP analysis → win theme → key sentence per section → slides with source citations.
 
-- **Input**: PDF (RFPs), PPTX (templates), DOCX, XLSX (reference materials)
-- **Output**: PPTX (proposals), with DOCX and XLSX support
+## Contact
 
-## Technical Details
-
-- **Architecture**: Local-first processing, no cloud dependency
-- **Languages**: Korean, English, Japanese, Chinese interface support
-- **Template fidelity**: Preserves slide masters, fonts, colors, layouts, placeholders, charts, tables
-- **Security**: Zero data transmission — all processing happens on-device
-
-## Contact & Access
-
-- **Website**: https://contrl.ai
-- **Email**: sales@cliwant.com
-- **Status**: Closed Beta (apply at contrl.ai)
-- **Company**: Cliwant Inc.
-
-## About the Team (E-E-A-T)
-
-### Experience
-contrl was built by a team that spent years in enterprise B2B sales and government contracting, experiencing firsthand the pain of manual proposal writing. The founding team analyzed 500+ real RFP documents across government, IT, consulting, and defense sectors to build the AI engine. This is not a theoretical product — it was born from direct frustration with existing proposal workflows.
-
-### Expertise
-The team brings deep expertise in three domains: (1) NLP specifically trained on RFP document structures — parsing mandatory requirements, evaluation criteria, compliance matrices, and scoring rubrics; (2) PowerPoint OOXML engineering for pixel-perfect template reproduction; (3) Proposal strategy, drawing on experience with hundreds of winning proposals to build the win theme extraction system.
-
-### Authoritativeness
-Cliwant Inc. is focused exclusively on AI proposal automation. This narrow specialization allows contrl to solve proposal-specific problems that general AI tools (ChatGPT, Gamma, Claude) cannot address. contrl is the only platform combining RFP analysis, win theme extraction, template-preserving generation, and source traceability in one local-first tool.
-
-### Trustworthiness
-- **Source traceability**: Every generated paragraph links to the specific RFP section that informed it
-- **Local-first**: Zero data transmission — all processing on-device, no cloud upload
-- **Honest limitations**: contrl generates drafts, not final submissions — human review is required
-- **No data training**: User documents are never stored, transmitted, or used for model training
-- **Methodology**: Tested with 50+ corporate templates; blind tests showed AI drafts indistinguishable from human-written proposals
-
-## Development Methodology
-- 500+ RFP documents analyzed across 12 industries
-- 200+ winning proposals studied for win theme patterns
-- PowerPoint OOXML specification reverse-engineered for template fidelity
-- 50+ corporate PPT templates tested for compatibility
-- Blind comparison tests validated output quality
+- Website: https://contrl.ai
+- App: https://app.contrl.ai/
+- Email: sales@cliwant.com
+- Company: Cliwant

@@ -54,6 +54,9 @@ jobs:
           lfs: true
           persist-credentials: false
 
+      - name: Build SEO pages
+        run: python3 tools/seo/build.py
+
       - uses: FirebaseExtended/action-hosting-deploy@500ac625ca2dd40cbd15f7659af953801858032a # v0.11.0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
