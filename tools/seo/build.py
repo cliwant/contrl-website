@@ -332,7 +332,7 @@ BLOG_HEAD = '''<!DOCTYPE html>
     <meta name="twitter:description" content="{desc}">
     <meta name="twitter:image" content="{image}">
 {extra_meta}    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
-    <link rel="stylesheet" href="/assets/blog.css?v={css_v}">
+    <style>{css}</style>
     {ld}
 </head>
 <body>
@@ -342,9 +342,13 @@ BLOG_HEAD = '''<!DOCTYPE html>
     </div></header>
 '''
 
-def css_version():
-    import hashlib
-    return hashlib.sha1((ROOT / 'assets' / 'blog.css').read_bytes()).hexdigest()[:10]
+def blog_css():
+    # Inlined, not linked: contrl.ai sits behind CloudFront, which caches /assets/* for an hour and
+    # ignores query strings, so a changed stylesheet would reach visitors up to an hour after the
+    # HTML (which is no-cache). Inlining ships the CSS with the page. The source is tools/blog/blog.css.
+    css = (ROOT / 'tools' / 'blog' / 'blog.css').read_text(encoding='utf-8')
+    css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
+    return re.sub(r'\s*\n\s*', '', css).replace('</', '<\\/')
 
 
 BLOG_FOOT = '''    <footer class="b-foot"><div class="b-wrap">
@@ -420,7 +424,7 @@ def render_post(p):
              + ''.join(f'    <meta property="article:tag" content="{esc(t)}">\n' for t in p['tags']))
     head = BLOG_HEAD.format(source=f'tools/blog/posts/{p["slug"]}.html', lang=lang, title=esc(p['title']), desc=esc(p['description']),
                             url=p['url'], site=SITE, og_type='article', image=image, locale=LOCALE.get(lang, 'ko_KR'),
-                            extra_meta=extra, ld=jsonld({'@context': 'https://schema.org', '@graph': graph}), css_v=css_version(),
+                            extra_meta=extra, ld=jsonld({'@context': 'https://schema.org', '@graph': graph}), css=blog_css(),
                             home=home, ui_blog=ui['blog'], ui_start=ui['start'])
     parts = [head, '    <main class="b-wrap b-post">\n']
     parts.append(f'        <nav class="b-crumb"><a href="/blog/">{ui["blog"]}</a>'
@@ -459,7 +463,7 @@ def render_blog_index(posts):
                                 for p in posts]}]
     head = BLOG_HEAD.format(source='tools/blog/posts/', lang=lang, title=esc(ui['blog_title']), desc=esc(ui['blog_desc']),
                             url=url, site=SITE, og_type='website', image=f'{SITE}/og-image.png', locale=LOCALE[lang],
-                            extra_meta='', ld=jsonld({'@context': 'https://schema.org', '@graph': graph}), css_v=css_version(),
+                            extra_meta='', ld=jsonld({'@context': 'https://schema.org', '@graph': graph}), css=blog_css(),
                             home=landing_url(lang).replace(SITE, ''), ui_blog=ui['blog'], ui_start=ui['start'])
     items = []
     for p in posts:

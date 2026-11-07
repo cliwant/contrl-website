@@ -30,7 +30,7 @@ The file starts with a JSON comment, then the article body as HTML (no `<h1>`; t
 <h2>Section</h2>   <!-- h2s get ids and make the table of contents (3 or more) -->
 ```
 
-Body helpers from `assets/blog.css`: `<div class="b-table"><table>…</table></div>` (scrolls on
+Body helpers from `tools/blog/blog.css` (inlined into every blog page): `<div class="b-table"><table>…</table></div>` (scrolls on
 phones), `<div class="b-compare"><div>…</div><div class="good">…</div></div>` (side-by-side),
 `<div class="b-note">`, `<p class="b-source">` (sources / disclaimer line), `<blockquote>`.
 
