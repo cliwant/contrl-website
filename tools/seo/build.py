@@ -332,7 +332,7 @@ BLOG_HEAD = '''<!DOCTYPE html>
     <meta name="twitter:description" content="{desc}">
     <meta name="twitter:image" content="{image}">
 {extra_meta}    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
-    <link rel="stylesheet" href="/assets/blog.css">
+    <link rel="stylesheet" href="/assets/blog.css?v={css_v}">
     {ld}
 </head>
 <body>
@@ -341,6 +341,11 @@ BLOG_HEAD = '''<!DOCTYPE html>
         <nav><a href="/blog/">{ui_blog}</a><a class="b-btn" href="{home}#join">{ui_start}</a></nav>
     </div></header>
 '''
+
+def css_version():
+    import hashlib
+    return hashlib.sha1((ROOT / 'assets' / 'blog.css').read_bytes()).hexdigest()[:10]
+
 
 BLOG_FOOT = '''    <footer class="b-foot"><div class="b-wrap">
         <a class="b-logo" href="{home}">contrl<span>.</span></a>
@@ -415,7 +420,7 @@ def render_post(p):
              + ''.join(f'    <meta property="article:tag" content="{esc(t)}">\n' for t in p['tags']))
     head = BLOG_HEAD.format(source=f'tools/blog/posts/{p["slug"]}.html', lang=lang, title=esc(p['title']), desc=esc(p['description']),
                             url=p['url'], site=SITE, og_type='article', image=image, locale=LOCALE.get(lang, 'ko_KR'),
-                            extra_meta=extra, ld=jsonld({'@context': 'https://schema.org', '@graph': graph}),
+                            extra_meta=extra, ld=jsonld({'@context': 'https://schema.org', '@graph': graph}), css_v=css_version(),
                             home=home, ui_blog=ui['blog'], ui_start=ui['start'])
     parts = [head, '    <main class="b-wrap b-post">\n']
     parts.append(f'        <nav class="b-crumb"><a href="/blog/">{ui["blog"]}</a>'
@@ -454,16 +459,21 @@ def render_blog_index(posts):
                                 for p in posts]}]
     head = BLOG_HEAD.format(source='tools/blog/posts/', lang=lang, title=esc(ui['blog_title']), desc=esc(ui['blog_desc']),
                             url=url, site=SITE, og_type='website', image=f'{SITE}/og-image.png', locale=LOCALE[lang],
-                            extra_meta='', ld=jsonld({'@context': 'https://schema.org', '@graph': graph}),
+                            extra_meta='', ld=jsonld({'@context': 'https://schema.org', '@graph': graph}), css_v=css_version(),
                             home=landing_url(lang).replace(SITE, ''), ui_blog=ui['blog'], ui_start=ui['start'])
     items = []
     for p in posts:
-        thumb = (f'\n            <img class="b-thumb" src="{esc(p["image"])}" alt="" width="1344" height="752" loading="lazy" decoding="async">'
+        thumb = (f'<div class="b-thumb"><img src="{esc(p["image"])}" alt="" width="1344" height="752" loading="lazy" decoding="async"></div>'
                  if p.get('image', '').startswith('/') else '')
-        items.append(f'''        <li><a href="/blog/{p["slug"]}/">{thumb}
-            <p class="b-meta"><time datetime="{p["published"]}">{fmt_date(p["published"], p["lang"])}</time>{" · " + esc(p.get("series") or p["tags"][0]) if p.get("series") or p["tags"] else ""}</p>
-            <h2>{esc(p["title"])}</h2>
-            <p>{esc(p["description"])}</p>
+        kicker = esc(p.get('series') or (p['tags'][0] if p['tags'] else ''))
+        read = f'{p["minutes"]} {ui["min"]}' if lang == 'en' else f'{p["minutes"]}{ui["min"]}'
+        items.append(f'''        <li><a class="b-card{" has-thumb" if thumb else ""}" href="/blog/{p["slug"]}/">
+            {thumb}<div class="b-card-body">
+                {f'<p class="b-kicker">{kicker}</p>' if kicker else ''}
+                <h2>{esc(p["title"])}</h2>
+                <p class="b-desc">{esc(p["description"])}</p>
+                <p class="b-meta"><time datetime="{p["published"]}">{fmt_date(p["published"], p["lang"])}</time> · {read}</p>
+            </div>
         </a></li>''')
     body = (f'    <main class="b-wrap b-index">\n        <h1>{ui["blog"]}</h1>\n        <p class="b-lede">{ui["blog_desc"]}</p>\n'
             f'        <ul class="b-list">\n' + '\n'.join(items) + '\n        </ul>\n    </main>\n')
