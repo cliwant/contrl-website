@@ -458,7 +458,9 @@ def render_blog_index(posts):
                             home=landing_url(lang).replace(SITE, ''), ui_blog=ui['blog'], ui_start=ui['start'])
     items = []
     for p in posts:
-        items.append(f'''        <li><a href="/blog/{p["slug"]}/">
+        thumb = (f'\n            <img class="b-thumb" src="{esc(p["image"])}" alt="" width="1344" height="752" loading="lazy" decoding="async">'
+                 if p.get('image', '').startswith('/') else '')
+        items.append(f'''        <li><a href="/blog/{p["slug"]}/">{thumb}
             <p class="b-meta"><time datetime="{p["published"]}">{fmt_date(p["published"], p["lang"])}</time>{" · " + esc(p.get("series") or p["tags"][0]) if p.get("series") or p["tags"] else ""}</p>
             <h2>{esc(p["title"])}</h2>
             <p>{esc(p["description"])}</p>

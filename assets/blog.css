@@ -79,3 +79,4 @@ a { color: inherit; }
 .b-foot { border-top: 1px solid #f4f4f5; padding: 28px 0 40px; font-size: 13px; color: #a1a1aa; }
 .b-foot .b-wrap { max-width: 1080px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .b-foot p { margin: 0; }
+.b-list .b-thumb { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); margin-bottom: 14px; }
