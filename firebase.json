@@ -8,11 +8,7 @@
       "**/.*/**",
       "**/node_modules/**",
       "**/*.md",
-      "tools/**",
-      "server/**",
-      "docs/**",
-      "app/**",
-      "deploy/**"
+      "tools/**"
     ],
     "headers": [
       {
