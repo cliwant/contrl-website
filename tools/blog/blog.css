@@ -99,3 +99,11 @@ html[lang="ja"] body, html[lang="zh"] body { line-height: 1.85; }
 .b-nav nav .b-lang-list a:hover { background: #f4f1ec; color: var(--ink); }
 .b-nav nav .b-lang-list a[aria-current] { color: var(--ink); font-weight: 700; }
 .b-nav nav .b-lang-list a[aria-current]::after { content: '✓'; float: right; color: var(--accent); }
+.b-series-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 52px; }
+.b-series-nav a { display: block; border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; text-decoration: none; transition: border-color .15s, background .15s; }
+.b-series-nav a:hover { border-color: #e2d6c9; background: #fffaf6; }
+.b-series-nav a.next { text-align: right; }
+.b-series-nav .b-label { display: block; margin-bottom: 4px; }
+.b-sn-kicker { display: block; font-size: 12px; color: var(--muted); }
+.b-sn-title { display: block; font-weight: 700; line-height: 1.4; margin-top: 2px; }
+@media (max-width: 640px) { .b-series-nav { grid-template-columns: 1fr; } .b-series-nav a.next { text-align: left; } }
