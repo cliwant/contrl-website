@@ -259,23 +259,23 @@ BLOG_UI = {
            'blog_desc': '공공입찰 제안서, RFP 분석, Win Theme, 평가표 대응까지. 제안서를 쓰는 사람을 위한 실무 가이드.',
            'cta_t': '제안서, 사람이 정하고 AI가 쓰게 하세요', 'cta_p': 'RFP를 올리면 Contrl이 분석부터 전략, 슬라이드까지 함께 만듭니다. 첫 제안서는 무료예요.',
            'cta_b': '무료로 시작하기', 'start': '무료로 시작하기', 'updated': '업데이트', 'published': '작성', 'toc': '목차',
-           'summary': '핵심 요약', 'faq': '자주 묻는 질문', 'min': '분 읽기', 'all': '모든 글', 'empty': '아직 글이 없습니다.'},
+           'login': '로그인', 'summary': '핵심 요약', 'faq': '자주 묻는 질문', 'min': '분 읽기', 'all': '모든 글', 'empty': '아직 글이 없습니다.'},
     'en': {'blog': 'Blog', 'blog_title': 'Contrl Blog — Practical guides for proposals and bids',
            'blog_desc': 'RFP analysis, win themes, scoring tables and more: practical guides for people who write proposals.',
            'cta_t': 'You make the call. AI writes the proposal.', 'cta_p': 'Upload an RFP and Contrl works through it with you, from analysis and strategy to the slides. Your first proposal is free.',
            'cta_b': 'Get started free', 'start': 'Get started free', 'updated': 'Updated', 'published': 'Published', 'toc': 'Contents',
-           'summary': 'Key takeaways', 'faq': 'FAQ', 'min': 'min read', 'all': 'All posts', 'empty': 'No posts yet.'},
+           'login': 'Log in', 'summary': 'Key takeaways', 'faq': 'FAQ', 'min': 'min read', 'all': 'All posts', 'empty': 'No posts yet.'},
 }
 BLOG_UI['ja'] = {'blog': 'ブログ', 'blog_title': 'Contrl ブログ — 提案書・入札の実務ガイド',
                  'blog_desc': 'RFP分析、ウィンテーマ、評価基準への対応まで。提案書を書く人のための実務ガイド。',
                  'cta_t': '判断は人が、作成はAIが。', 'cta_p': 'RFPをアップロードすると、Contrlが分析・戦略からスライド作成まで一緒に進めます。最初の提案書は無料です。',
                  'cta_b': '無料で始める', 'start': '無料で始める', 'updated': '更新', 'published': '公開', 'toc': '目次',
-                 'summary': '要点', 'faq': 'よくある質問', 'min': '分で読めます', 'all': 'すべての記事', 'empty': 'まだ記事がありません。'}
+                 'login': 'ログイン', 'summary': '要点', 'faq': 'よくある質問', 'min': '分で読めます', 'all': 'すべての記事', 'empty': 'まだ記事がありません。'}
 BLOG_UI['zh'] = {'blog': '博客', 'blog_title': 'Contrl 博客 — 投标与提案书实务指南',
                  'blog_desc': '从RFP分析、制胜主题到评分标准应对：写给提案书撰写者的实务指南。',
                  'cta_t': '由你决策，由AI撰写。', 'cta_p': '上传RFP，Contrl会与你一起完成从分析、策略到幻灯片的全过程。第一份提案书免费。',
                  'cta_b': '免费开始', 'start': '免费开始', 'updated': '更新于', 'published': '发布于', 'toc': '目录',
-                 'summary': '要点', 'faq': '常见问题', 'min': '分钟阅读', 'all': '全部文章', 'empty': '暂无文章。'}
+                 'login': '登录', 'summary': '要点', 'faq': '常见问题', 'min': '分钟阅读', 'all': '全部文章', 'empty': '暂无文章。'}
 LANG_NAME = {'en': 'English', 'ko': '한국어', 'ja': '日本語', 'zh': '中文'}
 
 
@@ -361,7 +361,7 @@ BLOG_HEAD = '''<!DOCTYPE html>
 <body>
     <header class="b-nav"><div class="b-wrap b-nav-in">
         <a class="b-logo" href="{home}">contrl<span>.</span></a>
-        <nav><a href="{blog_home}">{ui_blog}</a><a class="b-btn" href="{home}#join">{ui_start}</a></nav>
+        <nav><a href="{blog_home}">{ui_blog}</a><a class="b-login" href="https://app.contrl.ai/">{ui_login}</a>{lang_menu}</nav>
     </div></header>
 '''
 
@@ -430,15 +430,25 @@ def cjk_font(lang):
             f'    <style>body{{font-family:\'Pretendard\',\'{NOTO[lang].replace("+", " ")}\',sans-serif}}</style>\n')
 
 
-def lang_switch(alts, current):
-    if len(alts) < 2:
-        return ''
-    links = [f'<a href="{u.replace(SITE, "")}" hreflang="{l}" lang="{l}"{" aria-current=\"page\"" if l == current else ""}>{LANG_NAME[l]}</a>'
-             for l, u in sorted(alts.items(), key=lambda kv: LANGS.index(kv[0]))]
-    return '<span class="b-langs">' + ''.join(links) + '</span>'
+GLOBE = ('<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">'
+         '<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2c2.8 3 4 6.5 4 10s-1.2 7-4 10c-2.8-3-4-6.5-4-10s1.2-7 4-10z"/></svg>')
+LANG_MENU_JS = ("<script>document.addEventListener('click',function(e){var d=document.querySelector('.b-lang');"
+                "if(d&&d.open&&!d.contains(e.target))d.open=false});document.addEventListener('keydown',function(e){"
+                "var d=document.querySelector('.b-lang');if(e.key==='Escape'&&d)d.open=false})</script>")
 
 
-def render_post(p, alts):
+def lang_menu(alts, current, index_langs):
+    """The landing's globe menu: each language goes to this page's translation, else that language's blog, else its landing."""
+    items = []
+    for l in LANGS:
+        url = alts.get(l) or (f'{SITE}{blog_base(l)}' if l in index_langs else landing_url(l))
+        on = ' aria-current="page"' if l == current else ''
+        items.append(f'<a href="{url.replace(SITE, "")}" hreflang="{l}" lang="{l}"{on}>{LANG_NAME[l]}</a>')
+    return (f'<details class="b-lang"><summary aria-label="Language">{GLOBE}</summary>'
+            f'<div class="b-lang-list">{"".join(items)}</div></details>{LANG_MENU_JS}')
+
+
+def render_post(p, alts, index_langs):
     lang = p['lang']
     ui = BLOG_UI.get(lang, BLOG_UI['en'])
     home = landing_url(lang).replace(SITE, '')
@@ -475,11 +485,11 @@ def render_post(p, alts):
     head = BLOG_HEAD.format(source=p['file'], lang=lang, title=esc(p['title']), desc=esc(p['description']),
                             url=p['url'], site=SITE, og_type='article', image=image, locale=LOCALE.get(lang, 'ko_KR'),
                             extra_meta=extra, ld=jsonld({'@context': 'https://schema.org', '@graph': graph}), css=blog_css(),
-                            home=home, ui_blog=ui['blog'], ui_start=ui['start'], blog_home=blog_base(lang))
+                            home=home, ui_blog=ui['blog'], ui_login=ui['login'], blog_home=blog_base(lang),
+                            lang_menu=lang_menu(alts, lang, index_langs))
     parts = [head, '    <main class="b-wrap b-post">\n']
-    parts.append(f'        <div class="b-crumb"><nav><a href="{blog_base(lang)}">{ui["blog"]}</a>'
-                 + (f' · <span>{esc(p.get("series") or p["tags"][0])}</span>' if p.get('series') or p['tags'] else '') + '</nav>'
-                 + lang_switch(alts, lang) + '</div>\n')
+    parts.append(f'        <nav class="b-crumb"><a href="{blog_base(lang)}">{ui["blog"]}</a>'
+                 + (f' · <span>{esc(p.get("series") or p["tags"][0])}</span>' if p.get('series') or p['tags'] else '') + '</nav>\n')
     parts.append(f'        <h1>{esc(p["title"])}</h1>\n')
     by = f'{esc(author["name"])} · ' if author else ''
     dates = f'<time datetime="{p["published"]}">{fmt_date(p["published"], lang)}</time>'
@@ -515,7 +525,8 @@ def render_blog_index(posts, lang, index_langs):
     head = BLOG_HEAD.format(source='tools/blog/posts/', lang=lang, title=esc(ui['blog_title']), desc=esc(ui['blog_desc']),
                             url=url, site=SITE, og_type='website', image=f'{SITE}/og-image.png', locale=LOCALE[lang],
                             extra_meta=hreflang_links(alts) + cjk_font(lang), ld=jsonld({'@context': 'https://schema.org', '@graph': graph}), css=blog_css(),
-                            home=landing_url(lang).replace(SITE, ''), ui_blog=ui['blog'], ui_start=ui['start'], blog_home=blog_base(lang))
+                            home=landing_url(lang).replace(SITE, ''), ui_blog=ui['blog'], ui_login=ui['login'], blog_home=blog_base(lang),
+                            lang_menu=lang_menu(alts, lang, index_langs))
     items = []
     for p in posts:
         thumb = (f'<div class="b-thumb"><img src="{esc(p["image"])}" alt="" width="1344" height="752" loading="lazy" decoding="async"></div>'
@@ -530,7 +541,7 @@ def render_blog_index(posts, lang, index_langs):
                 <p class="b-meta"><time datetime="{p["published"]}">{fmt_date(p["published"], p["lang"])}</time> · {read}</p>
             </div>
         </a></li>''')
-    body = (f'    <main class="b-wrap b-index">\n        <div class="b-crumb">{lang_switch(alts, lang)}</div>\n        <h1>{ui["blog"]}</h1>\n        <p class="b-lede">{ui["blog_desc"]}</p>\n'
+    body = (f'    <main class="b-wrap b-index">\n        <h1>{ui["blog"]}</h1>\n        <p class="b-lede">{ui["blog_desc"]}</p>\n'
             f'        <ul class="b-list">\n' + '\n'.join(items) + '\n        </ul>\n    </main>\n')
     return head + body + BLOG_FOOT.format(home=landing_url(lang).replace(SITE, ''), year=TODAY[:4])
 
@@ -550,7 +561,7 @@ def build_blog(posts):
     groups = translations(posts)
     index_langs = blog_langs(posts)
     for p in posts:
-        write(ROOT / p['path'].strip('/') / 'index.html', render_post(p, groups[p['slug']]))
+        write(ROOT / p['path'].strip('/') / 'index.html', render_post(p, groups[p['slug']], index_langs))
     for lang in LANGS:
         blog = ROOT / blog_base(lang).strip('/')
         live = {p['slug'] for p in posts if p['lang'] == lang}
