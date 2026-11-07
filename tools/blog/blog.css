@@ -19,11 +19,7 @@ img { max-width: 100%; height: auto; }
 .b-btn:hover { opacity: .9; }
 
 .b-post { padding-top: 40px; padding-bottom: 64px; }
-.b-crumb { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; font-size: 14px; color: var(--muted); margin-bottom: 12px; }
-.b-langs { display: inline-flex; gap: 4px; }
-.b-langs a { text-decoration: none; color: var(--muted); padding: 3px 9px; border-radius: 999px; font-size: 13px; }
-.b-langs a:hover { color: var(--ink); background: var(--cream); }
-.b-langs a[aria-current] { color: var(--ink); background: var(--cream); font-weight: 600; }
+.b-crumb { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
 html[lang="ja"] body, html[lang="zh"] body { line-height: 1.85; }
 .b-crumb a { color: var(--accent-ink); text-decoration: none; font-weight: 600; }
 .b-post h1 { font-size: clamp(30px, 4.6vw, 44px); line-height: 1.2; letter-spacing: -.025em; margin: 0 0 14px; }
@@ -91,3 +87,15 @@ html[lang="ja"] body, html[lang="zh"] body { line-height: 1.85; }
 .b-foot { border-top: 1px solid #f4f4f5; padding: 28px 0 40px; font-size: 13px; color: #a1a1aa; }
 .b-foot .b-wrap { max-width: 1080px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .b-foot p { margin: 0; }
+.b-nav nav { gap: 20px; }
+.b-nav nav a.b-login { color: var(--ink); font-weight: 600; }
+.b-nav nav a.b-login:hover { color: var(--accent); }
+.b-lang { position: relative; margin-left: 2px; }
+.b-lang summary { list-style: none; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; color: #a1a1aa; cursor: pointer; transition: color .15s, background .15s; }
+.b-lang summary::-webkit-details-marker { display: none; }
+.b-lang summary:hover, .b-lang[open] summary { color: var(--ink); background: #f4f1ec; }
+.b-lang-list { position: absolute; right: 0; top: calc(100% + 8px); min-width: 140px; display: flex; flex-direction: column; padding: 6px; background: #fff; border: 1px solid #e9e4df; border-radius: 12px; box-shadow: 0 12px 32px -12px rgba(24, 24, 27, .25); z-index: 20; }
+.b-nav nav .b-lang-list a { padding: 8px 10px; border-radius: 8px; font-size: 13px; color: #52525b; }
+.b-nav nav .b-lang-list a:hover { background: #f4f1ec; color: var(--ink); }
+.b-nav nav .b-lang-list a[aria-current] { color: var(--ink); font-weight: 700; }
+.b-nav nav .b-lang-list a[aria-current]::after { content: '✓'; float: right; color: var(--accent); }
