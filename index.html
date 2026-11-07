@@ -1179,6 +1179,7 @@
         @keyframes sp-dot { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
         #spMail { display: flex; gap: 6px; padding: 8px 10px 0; } #spMail input { flex: 1; border: 1px solid #e4e4e7; border-radius: 10px; padding: 7px 10px; font: inherit; font-size: 13px; } #spMail button { border: 1px solid #e4e4e7; background: #fff; border-radius: 10px; padding: 0 10px; font: inherit; font-size: 12.5px; cursor: pointer; }
         #spMailOk { font-size: 12px; color: #15803d; padding: 6px 12px 0; }
+        #spMail[hidden], #spMailOk[hidden] { display: none; }
         #spForm { display: flex; gap: 8px; padding: 10px; }
         #spForm textarea { flex: 1; resize: none; border: 1px solid #e4e4e7; border-radius: 12px; padding: 9px 11px; font: inherit; font-size: 14px; height: 42px; max-height: 120px; }
         #spForm button { border: 0; border-radius: 12px; padding: 0 14px; background: #F27A2E; color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
@@ -1191,7 +1192,7 @@
     <section id="spBox" role="dialog" aria-label="Chat">
         <header><div><b data-sp="title"></b><span data-sp="sub"></span></div><button type="button" id="spClose" aria-label="close">×</button></header>
         <div id="spList"></div>
-        <div id="spMail"><input type="email" id="spEmail" autocomplete="email"><button type="button" id="spMailGo" data-sp="mailgo"></button></div>
+        <div id="spMail" hidden><input type="email" id="spEmail" autocomplete="email"><button type="button" id="spMailGo" data-sp="mailgo"></button></div>
         <div id="spMailOk" hidden data-sp="mailok"></div>
         <div id="spNote"></div>
         <form id="spForm"><textarea id="spText" rows="1"></textarea><button type="submit" data-sp="send"></button></form>
@@ -1205,7 +1206,7 @@
             empty: { ko: '요금, 기능, 지원 파일, 우리 회사에 맞는지 — 무엇이든 물어보세요.', en: 'Pricing, features, file types, whether it fits your team — ask anything.', ja: '料金、機能、対応ファイル、自社に合うか — 何でも聞いてください。', zh: '价格、功能、支持的文件、是否适合您的团队——尽管问。' },
             ph: { ko: '메시지를 입력하세요', en: 'Type a message', ja: 'メッセージを入力', zh: '输入消息' },
             send: { ko: '보내기', en: 'Send', ja: '送信', zh: '发送' },
-            mail: { ko: '이메일 (팀 답장 받을 곳, 선택)', en: 'Email for the team’s reply (optional)', ja: 'チームからの返信用メール（任意）', zh: '接收团队回复的邮箱（可选）' },
+            mail: { ko: '팀 답장을 이메일로 받기 (선택)', en: 'Get the team’s reply by email (optional)', ja: 'チームの返信をメールで受け取る（任意）', zh: '通过邮箱接收团队回复（可选）' },
             mailgo: { ko: '남기기', en: 'Save', ja: '保存', zh: '保存' },
             mailok: { ko: '이메일을 남겼어요. 팀이 답할 때 연락드릴게요.', en: "Got it — the team can reach you there.", ja: '受け付けました。チームから連絡します。', zh: '已保存，团队会通过邮箱联系您。' },
             err: { ko: '보내지 못했어요. 잠시 후 다시 시도해 주세요.', en: "Couldn't send. Please try again in a moment.", ja: '送信できませんでした。しばらくしてからお試しください。', zh: '发送失败，请稍后再试。' },
@@ -1226,8 +1227,11 @@
             ta.placeholder = tx('ph'); $('#spEmail').placeholder = tx('mail');
             if (!list.querySelector('.spm')) list.innerHTML = '<div class="e">' + esc(tx('empty')) + '</div>';
         }
+        let mailSaved = false; try { mailSaved = localStorage.getItem('contrl-sp-mail') === '1'; } catch (e) {}
         function draw(d) {
             typingNow = !!d.typing;
+            // The email box only after the visitor has asked something (so the team can answer after they leave).
+            $('#spMail').hidden = mailSaved || !d.messages.some(m => m.from === 'me');
             const dot = btn.querySelector('.dot'); if (dot) dot.remove();
             if (!open && d.unread) btn.insertAdjacentHTML('beforeend', '<span class="dot">' + d.unread + '</span>');
             const key = JSON.stringify(d.messages.map(m => m.id)) + (d.typing ? ':t' : '');
@@ -1260,12 +1264,12 @@
         };
         $('#spMailGo').onclick = async () => {
             const email = $('#spEmail').value.trim(); if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { $('#spEmail').focus(); return; }
-            try { const r = await fetch(api, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ ...base(), text: '', email }) }); if (r.ok) { $('#spMail').hidden = true; $('#spMailOk').hidden = false; try { localStorage.setItem('contrl-sp-mail', '1'); } catch (er) {} } } catch (er) {}
+            try { const r = await fetch(api, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ ...base(), text: '', email }) }); if (r.ok) { mailSaved = true; $('#spMail').hidden = true; $('#spMailOk').hidden = false; try { localStorage.setItem('contrl-sp-mail', '1'); } catch (er) {} } } catch (er) {}
         };
-        try { if (localStorage.getItem('contrl-sp-mail') === '1') { $('#spMail').hidden = true; } } catch (e) {}
         label();
         document.addEventListener('click', e => { if (e.target.closest('.lang-switch button')) setTimeout(label, 0); });
         if (started) poll();   // a returning visitor sees the team's reply badge
+        if (new URLSearchParams(location.search).has('chat')) setTimeout(() => { if (!open) btn.click(); }, 600);   // from the reply email
     })();
     </script>
 </body>

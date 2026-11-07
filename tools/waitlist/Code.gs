@@ -5,7 +5,7 @@
  *                 the Firebase ID token. We verify it with the Identity Toolkit API, take the email from it,
  *                 append a row to "Sheet1" of TARGET_SHEET_ID, compute the onboarding position
  *                 (POSITION_OFFSET + regular signups; invited signups form a front queue from #1),
- *                 post to Slack #7-alert, email the setup schedule, return {ok, position, invited, duplicate, schedule_url}.
+ *                 post to Slack #7-alert, send the welcome email (first sign-up only), return {ok, position, invited, duplicate, schedule_url}.
  * Script Properties: SLACK_WEBHOOK, SCHEDULE_URL (Google Calendar booking page; optional).
  * Location: estimated from the browser's time zone + locale the page sends (no IP lookup).
  * UTM: utm_* / ref query params from the landing URL, stored as 'utm_source=…&utm_campaign=…'.
@@ -13,6 +13,10 @@
  *
  * Deploy: Deploy → New deployment → Web app → Execute as Me · Who has access: Anyone → copy /exec URL
  * into WAITLIST_ENDPOINT in index.html. After editing: Deploy → Manage deployments → ✎ → New version.
+ *
+ * POST {action: 'support_reply', secret, to, subject, html, text}: the web app server mails a support-chat
+ *                 reply to a customer who has left (server/support.mjs). Needs Script Property SUPPORT_SECRET
+ *                 (the same value as on the server); anything else is refused. At most 300 a day.
  *
  * Invite codes: tab "Invites", column A = codes. A used code gets the email in column B (one-time).
  */
@@ -26,29 +30,42 @@ const POSITION_OFFSET = 100;   // first regular signup is #101
 const SEND_EMAIL = true;
 const SITE = 'https://contrl.ai';
 
+// Welcome email (sent once, on the first sign-up), in the language of the page the user signed up on.
+// The web app is open: the email takes them straight to it. zh signups get the app in English.
+const APP = 'https://app.contrl.ai/';
 const T = {
-  en: { subject: () => 'Welcome to Contrl — pick a time for your team setup', hi: 'Thanks for signing up.', spot: 'Your place in line', front: 'Front of the line · invited',
-        body: 'Every team gets a hands-on setup: we connect your design system and past proposals to Contrl with you. We open accounts in signup order, so pick a time that works from the schedule below.',
-        nolink: "We'll email you a setup schedule shortly.", cta: 'Pick a setup time', tag: 'You make the decisions. AI writes on your behalf.' },
-  ko: { subject: () => 'Contrl 가입을 환영합니다 — 세팅 일정을 골라 주세요', hi: '가입해 주셔서 감사합니다.', spot: '내 순서', front: '초대 · 우선 세팅',
-        body: 'Contrl은 팀마다 디자인 시스템과 과거 제안서를 연결하는 세팅이 필요해서, 저희가 직접 도와드리며 가입 순서대로 계정을 열고 있습니다. 아래 스케줄표에서 편한 시간을 골라 주세요.',
-        nolink: '세팅 일정을 고를 수 있는 스케줄표를 곧 메일로 보내 드리겠습니다.', cta: '세팅 일정 고르기', tag: '사람이 정하고, AI가 씁니다.' },
-  ja: { subject: () => 'Contrlへようこそ — 初期設定の日程をお選びください', hi: 'ご登録ありがとうございます。', spot: 'あなたの順番', front: '招待・優先セットアップ',
-        body: 'Contrlはチームごとにデザインシステムと過去の提案書をつなぐ初期設定が必要なため、私たちが直接サポートしながら登録順にアカウントを開放しています。下の日程表からご都合のよい時間をお選びください。',
-        nolink: '設定の日程を選べる日程表を、まもなくメールでお送りします。', cta: '設定の日程を選ぶ', tag: '方針は人が決め、作成はAIが担う。' },
-  zh: { subject: () => '欢迎加入 Contrl — 请选择团队设置时间', hi: '感谢注册。', spot: '你的排位', front: '邀请 · 优先设置',
-        body: 'Contrl 需要为每个团队连接设计系统和过往提案，因此我们会亲自协助设置，并按注册顺序开通账号。请在下方排期表中选择方便的时间。',
-        nolink: '我们很快会把设置排期表发到你的邮箱。', cta: '选择设置时间', tag: '你来决定，AI来写。' },
+  en: { subject: 'Welcome to Contrl — your account is ready', hi: 'Welcome to Contrl.',
+        body: 'Your account is ready. Upload an RFP and Contrl works through it with you — from the analysis and strategy to the slides. You make the calls; AI does the writing.',
+        steps: ['Upload your RFP, or start with a sample RFP', 'Answer a short strategy interview and pick your Win Theme', 'Get the slides section by section'],
+        trial: 'Start your first proposal free.', cta: 'Start your first proposal',
+        help: 'Questions? Just reply to this email.', tag: 'You make the decisions. AI writes on your behalf.' },
+  ko: { subject: 'Contrl 가입을 환영합니다 — 지금 바로 첫 제안서를 시작해 보세요', hi: 'Contrl에 오신 것을 환영합니다.',
+        body: '계정이 준비됐습니다. RFP를 올리면 Contrl이 분석부터 전략, 슬라이드까지 함께 만들어 갑니다. 방향은 직접 정하고, 쓰는 일은 AI가 맡습니다.',
+        steps: ['RFP를 올리거나 샘플 RFP로 시작하기', '짧은 전략 인터뷰에 답하고 Win Theme 고르기', '섹션별로 슬라이드 받아 보기'],
+        trial: '첫 제안서를 무료로 시작해 보세요.', cta: '첫 제안서 시작하기',
+        help: '궁금한 점은 이 메일에 바로 답장해 주세요.', tag: '사람이 정하고, AI가 씁니다.' },
+  ja: { subject: 'Contrlへようこそ — さっそく最初の提案書を始めましょう', hi: 'Contrlへようこそ。',
+        body: 'アカウントの準備ができました。RFPをアップロードすると、Contrlが分析から戦略、スライドまで一緒に作り上げます。方針はあなたが決め、作成はAIが担います。',
+        steps: ['RFPをアップロード、またはサンプルRFPで始める', '短い戦略インタビューに答えてWin Themeを選ぶ', 'セクションごとにスライドを受け取る'],
+        trial: '最初の提案書を無料で始められます。', cta: '最初の提案書を始める',
+        help: 'ご不明な点は、このメールにそのまま返信してください。', tag: '方針は人が決め、作成はAIが担う。' },
+  zh: { subject: '欢迎加入 Contrl — 你的账号已开通', hi: '欢迎加入 Contrl。',
+        body: '你的账号已经开通。上传 RFP 后，Contrl 会和你一起完成从分析、策略到幻灯片的全过程。方向由你决定，撰写交给 AI。',
+        steps: ['上传 RFP，或用示例 RFP 开始', '回答简短的策略访谈，选定 Win Theme', '按章节获取幻灯片'],
+        trial: '第一份提案可免费开始制作。', cta: '开始第一份提案',
+        help: '有任何问题，直接回复这封邮件即可。', tag: '你来决定，AI来写。' },
 };
 
 function doPost(e) {
   let body = {};
   try { body = JSON.parse((e.postData && e.postData.contents) || '{}'); } catch (err) {}
+  if (body.action === 'support_reply') return supportReply_(body);
   let email = '', provider = 'email-only';
   if (body.idToken) {
     const who = verifyIdToken_(body.idToken);
     if (!who) return json_({ ok: false, error: 'invalid_token' });
     email = who.email; provider = who.provider;
+    reportToApp_(body);
   } else {
     email = String(body.email || '').trim().toLowerCase();   // older cached pages
   }
@@ -83,6 +100,15 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+/** Tells the web app's server about the sign-up (its admin page lists every sign-up). The server checks the
+ *  user's own ID token, so nothing else is needed; a failure here never blocks the sign-up. */
+function reportToApp_(body) {
+  try {
+    UrlFetchApp.fetch(APP + 'api/signup-record', { method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+      payload: JSON.stringify({ idToken: body.idToken, lang: body.lang || '', source: body.source || '', utm: String(body.utm || '').slice(0, 300), tz: body.tz || '', locale: body.locale || '' }) });
+  } catch (err) {}
 }
 
 /** Verifies a Firebase ID token with the Identity Toolkit API → {email, provider} or null. */
@@ -189,10 +215,9 @@ function notifySlack_(d) {
 
 function sendConfirmation_(email, position, invited, lang, schedule) {
   const t = T[lang] || T.en;
-  const plain = `${t.hi}\n${t.spot}: #${position}${invited ? ` (${t.front})` : ''}\n\n${t.body}\n\n${schedule ? `${t.cta}: ${schedule}` : t.nolink}\n\nContrl — ${t.tag}\n${SITE}`;
-  const action = schedule
-    ? `<a href="${schedule}" style="display:inline-block;background:#F27A2E;color:#ffffff;text-decoration:none;font-weight:700;font-size:15px;padding:14px 24px;border-radius:999px;">${t.cta} →</a>`
-    : `<div style="font-size:14px;color:#52525b;background:#faf7f2;border-radius:10px;padding:12px 16px;">${t.nolink}</div>`;
+  const link = APP + '?lang=' + (['ko', 'en', 'ja'].includes(lang) ? lang : 'en');
+  const plain = `${t.hi}\n\n${t.body}\n\n${t.steps.map((x, i) => `${i + 1}. ${x}`).join('\n')}\n\n${t.trial}\n\n${t.cta}: ${link}\n\n${t.help}\n\nContrl — ${t.tag}\n${SITE}`;
+  const steps = t.steps.map((x, i) => `<tr><td valign="top" style="padding:6px 10px 6px 0;"><span style="display:inline-block;width:22px;height:22px;line-height:22px;border-radius:999px;background:#fff6ef;color:#b7551b;font-size:12px;font-weight:800;text-align:center;">${i + 1}</span></td><td style="padding:6px 0;font-size:15px;line-height:1.5;color:#3f3f46;">${x}</td></tr>`).join('');
   const html = `
 <!doctype html><html><body style="margin:0;padding:0;background:#f6f3ee;">
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f6f3ee;padding:32px 16px;">
@@ -201,20 +226,36 @@ function sendConfirmation_(email, position, invited, lang, schedule) {
       <tr><td style="padding:28px 32px 0;font-size:22px;font-weight:800;letter-spacing:-0.02em;">contrl<span style="color:#F27A2E;">.</span></td></tr>
       <tr><td style="padding:24px 32px 0;font-size:19px;font-weight:800;">${t.hi}</td></tr>
       <tr><td style="padding:12px 32px 0;font-size:15px;line-height:1.65;color:#52525b;">${t.body}</td></tr>
-      <tr><td style="padding:22px 32px 0;">${action}</td></tr>
-      <tr><td style="padding:22px 32px 0;">
-        <table role="presentation" cellspacing="0" cellpadding="0" style="background:#fff6ef;border:1px solid #f3d9c4;border-radius:12px;">
-          <tr><td style="padding:10px 16px;font-size:13px;font-weight:700;color:#b7551b;">${t.spot}${invited ? ` · ${t.front}` : ''} &nbsp;<span style="font-size:18px;color:#F27A2E;">#${position}</span></td></tr>
-        </table>
-      </td></tr>
-      <tr><td style="padding:28px 32px 28px;font-size:12px;color:#a1a1aa;border-top:1px solid #f0ebe4;">Contrl — ${t.tag}<br><a href="${SITE}" style="color:#a1a1aa;">contrl.ai</a> · Cliwant Inc. · 12130 Millennium Dr #300, Los Angeles, CA 90094</td></tr>
+      <tr><td style="padding:16px 32px 0;"><table role="presentation" cellspacing="0" cellpadding="0">${steps}</table></td></tr>
+      <tr><td style="padding:22px 32px 0;"><a href="${link}" style="display:inline-block;background:#F27A2E;color:#ffffff;text-decoration:none;font-weight:700;font-size:15px;padding:14px 24px;border-radius:999px;">${t.cta} →</a></td></tr>
+      <tr><td style="padding:14px 32px 0;font-size:13px;color:#71717a;">${t.trial}</td></tr>
+      <tr><td style="padding:18px 32px 0;font-size:13px;color:#71717a;">${t.help}</td></tr>
+      <tr><td style="padding:28px 32px 28px;font-size:12px;color:#a1a1aa;border-top:1px solid #f0ebe4;margin-top:24px;">Contrl — ${t.tag}<br><a href="${SITE}" style="color:#a1a1aa;">contrl.ai</a> · Cliwant Inc. · 12130 Millennium Dr #300, Los Angeles, CA 90094</td></tr>
     </table>
   </td></tr>
 </table>
 </body></html>`;
-  try { MailApp.sendEmail({ to: email, subject: t.subject(position), body: plain, htmlBody: html, name: 'Contrl' }); } catch (err) {}
+  try { MailApp.sendEmail({ to: email, subject: t.subject, body: plain, htmlBody: html, name: 'Contrl' }); } catch (err) {}
 }
 
 function json_(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
+
+
+/** A support-chat reply by email, asked by the web app's server (server/support.mjs). Only with the shared
+ *  secret (Script Property SUPPORT_SECRET); one recipient, size-capped, at most 300 a day. */
+function supportReply_(body) {
+  const secret = PropertiesService.getScriptProperties().getProperty('SUPPORT_SECRET') || '';
+  if (secret.length < 16 || String(body.secret || '') !== secret) return json_({ ok: false, error: 'forbidden' });
+  const to = String(body.to || '').trim();
+  if (!/^[^\s@,;]+@[^\s@,;]+\.[^\s@,;]{2,}$/.test(to)) return json_({ ok: false, error: 'bad_to' });
+  const subject = String(body.subject || '').slice(0, 200), html = String(body.html || '').slice(0, 60000), text = String(body.text || '').slice(0, 20000);
+  if (!subject || !text) return json_({ ok: false, error: 'empty' });
+  const cache = CacheService.getScriptCache(), key = 'support-mail-' + Utilities.formatDate(new Date(), 'UTC', 'yyyyMMdd');
+  const n = Number(cache.get(key) || 0);
+  if (n >= 300) return json_({ ok: false, error: 'daily_limit' });
+  cache.put(key, String(n + 1), 21600);
+  MailApp.sendEmail({ to: to, subject: subject, body: text, htmlBody: html || undefined, name: 'Contrl' });
+  return json_({ ok: true });
 }
