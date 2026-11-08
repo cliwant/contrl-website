@@ -37,3 +37,15 @@ phones), `<div class="b-compare"><div>…</div><div class="good">…</div></div>
 GEO habits that help AI answers quote the post: answer the question in the first paragraph and
 the summary, use real definitions, tables and numbered steps, keep FAQ answers self-contained,
 and say where facts come from.
+
+## The "Where Contrl fits" image
+
+One key point, one short paragraph, one image per episode. Don't reuse a Contrl screen another
+episode already shows; when no distinct capture fits, draw a concept diagram instead. Captures must
+never show a client's name or logo.
+
+Diagrams are SVGs generated per language by `tools/blog/diagrams/contrl_diagrams.py`
+(`python3 tools/blog/diagrams/contrl_diagrams.py`): add a function and a `JOBS` entry, check the
+output in a browser (text wrapping is estimated), and reference `contrl-<name>.svg` from the English
+post and `contrl-<name>.<lang>.svg` from the translations, wrapped in a link to the same file so
+phone readers can open it full size.
