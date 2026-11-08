@@ -269,12 +269,36 @@
 <p class="b-source">本文是基于APMP Foundation学习指南第4.2版（© 2025 APMP）的独立学习解读，该指南是对APMP知识体系的概述。本文对原材料进行了转述和评论，并未获得APMP认可。功能·收益·证明点示例、证据类型分类、挽回情景、数据征集示例、含糊与具体回答对照表、发票处理示例以及前后对比段落，均为本文编写，其中的数字仅为示例。权威原文和认证信息请见<a href="https://www.apmp.org/" rel="noopener">apmp.org</a>。</p>
         </article>
         <section class="b-faq"><h2 id="faq">常见问题</h2><details><summary>提案书中的证明点是什么？</summary><div>证明点是支撑提案书中所述功能或收益的可核实事实，例如在类似合同中测得的成果、客户推荐、第三方评级或奖项。功能和收益告诉评审专家你承诺什么，证明点则表明你以前做成过类似的事，从而降低评审专家感知到的风险。在APMP知识体系中，证明点还支撑制胜主题和差异化优势。</div></details><details><summary>收益和证明点有什么区别？</summary><div>收益是某项功能给客户带来的改进，例如缩短处理时间，但它仍然只是承诺。证明点是这个承诺切实可行的证据，例如同样的做法曾为类似客户把处理时间缩短了可测量的幅度，并附上评审专家能核实的来源。一个有效的制胜主题包含功能、收益，以及至少一个证明点。</div></details><details><summary>证明点从哪里来？</summary><div>大多来自过往业绩：类似合同的项目数据和绩效结果、案例研究和成功故事、客户的引语和推荐、采购方的履约评价、奖项和独立评级，以及与行业标准的对比。迅速解决问题并得到客户确认的经历，可能是最有力的证明点之一。自己公司缺少的能力，可以用合作伙伴的业绩来补足。</div></details><details><summary>好的证明点需要满足什么条件？</summary><div>三个条件。有说服力：与该客户的目标和需求直接相关。可感知：使用精确数字，而不是形容词或约数。可信：客户可以通过具名的推荐人、报告或独立来源加以核实。好的证明点还会说明这个数字对客户意味着什么，例如风险、成本或延误减少了多少。</div></details><details><summary>什么时候开始收集证明点？</summary><div>在招标文件发布之前。一旦明确了制胜策略，就为故事的每个部分收集证据，查看同一客户以往的招标文件，了解它通常要求什么，并向公司内部人员和合作伙伴发出数据征集。尽早开始能暴露缺口，也留出时间去弥补，例如增加一个合作伙伴。招标文件发布后，再针对最终需求进行补充征集。</div></details></section>
-        <nav class="b-series-nav"><a class="prev" href="/zh/blog/features-benefits-discriminators/"><span class="b-label">← 上一篇</span><span class="b-sn-kicker">EP09</span><span class="b-sn-title">功能、收益与差异化优势：What、So What、Why Us</span></a><span></span></nav>
+        <nav class="b-series-nav"><a class="prev" href="/zh/blog/features-benefits-discriminators/"><span class="b-label">← 上一篇</span><span class="b-sn-kicker">EP09</span><span class="b-sn-title">功能、收益与差异化优势：What、So What、Why Us</span></a><a class="next" href="/zh/blog/competitive-price-to-win/"><span class="b-label">下一篇 →</span><span class="b-sn-kicker">EP11</span><span class="b-sn-title">竞争性制胜价格：找到能赢的定位，而不只是一个价格</span></a></nav>
         <section class="b-cta"><h2>由你决策，由AI撰写。</h2><p>上传RFP，Contrl会与你一起完成从分析、策略到幻灯片的全过程。第一份提案书免费。</p><a class="b-btn" href="/zh/#join">免费开始 →</a></section>
     </main>
     <footer class="b-foot"><div class="b-wrap">
         <a class="b-logo" href="/zh/">contrl<span>.</span></a>
         <p>&copy; 2026 Contrl by Cliwant. All rights reserved.</p>
     </div></footer>
+    <script>(function () {
+        if (navigator.webdriver || /bot|crawl|spider|headless|lighthouse|preview/i.test(navigator.userAgent)) return;
+        var url = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? location.protocol + '//' + location.hostname + ':8788/api/bt' : 'https://app.contrl.ai/api/bt';
+        var sid = Math.random().toString(36).slice(2, 12) + Date.now().toString(36);
+        function send(d) {
+            d.sid = sid; var body = JSON.stringify(d);
+            try { if (navigator.sendBeacon && navigator.sendBeacon(url, new Blob([body], { type: 'text/plain' }))) return; } catch (e) {}
+            try { fetch(url, { method: 'POST', body: body, keepalive: true, mode: 'no-cors', headers: { 'Content-Type': 'text/plain' } }); } catch (e) {}
+        }
+        var ref = '', refPath = '', q = new URLSearchParams(location.search);
+        try { if (document.referrer) { var r = new URL(document.referrer); ref = r.host; if (r.host === location.host) refPath = r.pathname; } } catch (e) {}
+        var h1 = document.querySelector('h1');
+        send({ t: 'bv', path: location.pathname, title: (h1 ? h1.textContent : document.title).trim().slice(0, 140), ref: ref, refPath: refPath,
+            utm: ['utm_source', 'utm_medium', 'utm_campaign'].filter(function (k) { return q.get(k); }).map(function (k) { return k + '=' + q.get(k).slice(0, 40); }).join('&'),
+            mobile: matchMedia('(pointer: coarse)').matches || innerWidth < 768 });
+        var dwell = 0, last = Date.now(), depth = 0;
+        function tick() { var now = Date.now(); if (document.visibilityState === 'visible') dwell += Math.min(now - last, 5000); last = now;
+            var el = document.documentElement, max = Math.max(1, el.scrollHeight - innerHeight); depth = Math.max(depth, Math.round(Math.min(1, scrollY / max) * 100)); }
+        setInterval(tick, 1000); addEventListener('scroll', tick, { passive: true });
+        var sent = '';
+        function flush() { tick(); var k = dwell + ':' + depth; if (k !== sent) { sent = k; send({ t: 'br', dwell: dwell, scroll: depth }); } }
+        addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') flush(); else last = Date.now(); });
+        addEventListener('pagehide', flush);
+    })();</script>
 </body>
 </html>
