@@ -66,34 +66,74 @@ Practical guides on winning bids and writing proposals, each available in Englis
 
 ### English — https://contrl.ai/blog/
 
+- [Competitive Price to Win: Find the Position, Not Just a Price](https://contrl.ai/blog/competitive-price-to-win/): Price to Win is not pricing and never just a number. A practical guide to the APMP Body of Knowledge on cPTW: the Big S solution, Price to Compete vs Price to Win, independence and common misconceptions.
+- [Compliance Matrix: The Blueprint Behind Every Compliant Proposal](https://contrl.ai/blog/compliance-matrix/): A compliance matrix ties each RFP requirement to the place in your proposal that answers it. How to shred the RFP, build the matrix early, keep it current and use it to sell, per the APMP Body of Knowledge.
 - [Compliance vs. Responsiveness: The Two Things Every Winning Proposal Gets Right](https://contrl.ai/blog/compliance-vs-responsiveness/): Compliance keeps your proposal from being eliminated, and responsiveness is what beats the competition. A practical walkthrough of the APMP Body of Knowledge on identifying requirements, building compliance and response matrices, and handling non-compliance.
+- [Cost and Pricing Data: Explaining Your Price as Value](https://contrl.ai/blog/cost-and-pricing-data/): A price volume is not a table of totals; it is an argument. A practical guide to the APMP Body of Knowledge on price, value and added value, cost summaries, graphics and fact-based pricing data.
 - [Customer and Competitor Intelligence: Seeing Your Bid Through the Customer's Eyes](https://contrl.ai/blog/customer-and-competitor-intelligence/): Customer intelligence explains what the buyer needs; competitor intelligence explains how the buyer sees each bidder. A practical guide to the APMP Body of Knowledge on collection plans, sources, ethics, bidder comparison matrices and SWOT.
 - [Customer Relationship Management: Win Before the RFP Is Released](https://contrl.ai/blog/customer-relationship-management/): Customers pick the bidders they know, like and trust. A practical walkthrough of the APMP Body of Knowledge on CRM: starting early, RFP shaping, contact plans, strategic customer meetings and a consistent message.
+- [Effective Presentations: Winning the Room, Not Just the Page](https://contrl.ai/blog/effective-presentations/): Orals and bid presentations are won by designing for the audience, not the presenter. A practical guide to the APMP Body of Knowledge on structure, visual slides, the right format, rehearsal and questions.
+- [Executive Summaries: Winning the Evaluation on Page One](https://contrl.ai/blog/executive-summaries/): An executive summary is not a shorter proposal; it is the case for choosing you. A practical guide to the APMP Body of Knowledge on the five-box structure, timing, length, pitfalls and the name-swap tests.
+- [Features, Benefits and Discriminators: What, So What, Why Us](https://contrl.ai/blog/features-benefits-discriminators/): Customers buy benefits, not features, and discriminators decide whose benefits they pick. A practical guide to the APMP Body of Knowledge on the So what? test, the discriminator sweet spot and quantified, provable benefits.
 - [Capture Strategy: How Professionals Win Before the RFP](https://contrl.ai/blog/opportunity-capture-strategy/): An opportunity/capture strategy is your plan to win one specific bid. A practical walkthrough of the APMP Body of Knowledge on strategy vs. tactics, hot buttons, the three buyer types, the bidder comparison matrix, strategy statements and ghosting.
+- [Proof Points: What Makes Evaluators Believe Your Proposal](https://contrl.ai/blog/proof-points/): Features and benefits are claims; proof points are the verifiable facts behind them. A practical guide to the APMP Body of Knowledge on sources, data calls, the persuasive-tangible-credible test and a reusable proof library.
+- [Proposal Organization: Decide the Shape Before You Write](https://contrl.ai/blog/proposal-organization/): Evaluators scan, so a proposal has to be easy to navigate. A practical guide to the APMP Body of Knowledge on content plans, following the customer's outline, roadmaps, layering and bottom line up front.
+- [Proposal Theme Statements: The Sentence Evaluators Can Score](https://contrl.ai/blog/proposal-theme-statements/): A theme statement is one sentence that tells evaluators why to choose you: a customer need, your discriminator, a quantified benefit and proof. How to write, test and place theme statements, from the APMP Body of Knowledge.
+- [Strategy and Win Themes: Give Evaluators a Reason Beyond Price](https://contrl.ai/blog/strategy-and-win-themes/): When evaluators can't tell bidders apart, they compare prices. The APMP Body of Knowledge on strategy vs. tactics, strategy statements, the unifying concept, the competitor litmus test and carrying win themes into every section.
 - [Value Propositions: Give the Customer a Reason to Choose You](https://contrl.ai/blog/value-propositions/): A value proposition says how your offer will improve the customer's business and how that will be measured. The APMP Body of Knowledge on its five elements, stakeholder value propositions, quantifying payback and proof points.
 
 ### 한국어 — https://contrl.ai/ko/blog/
 
+- [Competitive Price to Win: 가격이 아니라 이기는 포지션을 찾는 법](https://contrl.ai/ko/blog/competitive-price-to-win/): Price to Win은 가격 책정이 아니고, 결코 숫자 하나로 끝나지 않습니다. APMP Body of Knowledge를 바탕으로 cPTW의 개념, Big S 솔루션, Price to Compete와 Price to Win, 독립성, 흔한 오해를 정리했습니다.
+- [컴플라이언스 매트릭스: 요구사항을 하나도 놓치지 않는 제안서의 설계도](https://contrl.ai/ko/blog/compliance-matrix/): 컴플라이언스 매트릭스는 제안요청서의 요구사항마다 제안서의 어디에서 답하는지 연결하는 표입니다. APMP Body of Knowledge를 바탕으로 제안요청서 분해, 작성 전 구축, 최신 유지, 제출용 조견표 활용법을 정리합니다.
 - [Compliance와 Responsiveness: 이기는 제안서가 반드시 지키는 두 가지](https://contrl.ai/ko/blog/compliance-vs-responsiveness/): Compliance는 탈락을 막고, Responsiveness는 경쟁에서 이기게 합니다. APMP Body of Knowledge를 바탕으로 요구사항 식별, 컴플라이언스 매트릭스와 응답 매트릭스 작성, 미준수 항목 대응법을 실무 관점에서 정리했습니다.
+- [원가·가격 데이터: 가격을 가치로 설명하는 법](https://contrl.ai/ko/blog/cost-and-pricing-data/): 가격 제안서는 총액 표가 아니라 설득 문서입니다. APMP Body of Knowledge를 바탕으로 가격·가치·부가가치의 구분, 가격 요약문, 그래픽, 사실에 근거한 원가 데이터를 정리했습니다.
 - [고객·경쟁사 인텔리전스: 우리 입찰을 고객의 눈으로 보는 법](https://contrl.ai/ko/blog/customer-and-competitor-intelligence/): 고객 인텔리전스는 발주처가 무엇을 원하는지, 경쟁사 인텔리전스는 발주처가 각 입찰자를 어떻게 보는지 알려줍니다. APMP Body of Knowledge를 바탕으로 수집 계획, 정보 출처, 윤리 기준, 입찰자 비교 매트릭스와 SWOT 활용법을 정리했습니다.
 - [고객 관계 관리(CRM): 제안요청서가 나오기 전에 이기는 법](https://contrl.ai/ko/blog/customer-relationship-management/): 고객은 잘 알고, 호감이 가고, 믿을 수 있는 회사를 고릅니다. APMP Body of Knowledge를 바탕으로 이른 시작, RFP 셰이핑, 컨택 플랜, 전략적인 고객 미팅, 일관된 메시지까지 CRM을 실무 관점에서 정리했습니다.
+- [효과적인 프레젠테이션: 지면이 아니라 발표장에서 이기는 법](https://contrl.ai/ko/blog/effective-presentations/): 제안 발표(PT)는 발표자가 아니라 청중을 중심으로 설계할 때 이깁니다. APMP Body of Knowledge를 바탕으로 구성, 시각 중심 슬라이드, 상황에 맞는 발표 방식, 리허설, 질의응답을 정리했습니다.
+- [요약문(Executive Summary): 제안서 첫 페이지에서 승부를 내는 법](https://contrl.ai/ko/blog/executive-summaries/): 요약문은 제안서를 줄인 글이 아니라 우리를 선택해야 하는 이유를 담은 글입니다. APMP Body of Knowledge를 바탕으로 5-Box 구조, 작성 시점, 분량, 흔한 실수, 이름 바꾸기 테스트를 정리했습니다.
+- [기능, 혜택, 차별화 요소: What, So What, Why Us](https://contrl.ai/ko/blog/features-benefits-discriminators/): 고객은 기능이 아니라 혜택을 사고, 차별화 요소는 고객이 누구의 혜택을 고를지 결정합니다. APMP Body of Knowledge를 바탕으로 So what? 테스트, 차별화 요소의 스위트 스폿, 정량화와 증명을 정리했습니다.
 - [캡처 전략: 프로는 공고 전에 이미 이기고 들어간다](https://contrl.ai/ko/blog/opportunity-capture-strategy/): 기회/캡처 전략은 특정 사업 하나를 수주하기 위한 계획입니다. APMP Body of Knowledge를 바탕으로 전략과 전술의 차이, 핫버튼, 세 유형의 구매자, 경쟁사 비교표(BCM), 전략 진술서, 고스팅을 실무 관점에서 정리했습니다.
+- [증거 포인트: 평가위원이 제안서를 믿게 만드는 것](https://contrl.ai/ko/blog/proof-points/): 기능과 효과는 주장이고, 증거 포인트(Proof Point)는 그 주장을 뒷받침하는 검증 가능한 사실입니다. APMP Body of Knowledge를 바탕으로 출처, 데이터 콜, 설득력·구체성·신뢰성 기준, 재사용 라이브러리를 정리했습니다.
+- [제안서 구성: 쓰기 전에 모양부터 정한다](https://contrl.ai/ko/blog/proposal-organization/): 평가위원은 제안서를 훑어 읽습니다. 그래서 제안서는 찾기 쉬워야 합니다. APMP Body of Knowledge를 바탕으로 콘텐츠 계획, 제안요청서 목차 따르기, 로드맵, 정보의 층 쌓기, 결론 먼저 쓰기를 정리했습니다.
+- [제안서 테마 문장: 평가위원이 점수로 옮겨 적는 한 문장](https://contrl.ai/ko/blog/proposal-theme-statements/): 테마 문장(Theme Statement)은 평가위원에게 왜 우리를 선택해야 하는지 알려주는 한 문장입니다. 고객 니즈, 차별화 요소, 정량화된 효과, 근거를 담는 법과 테스트·배치 방법을 APMP Body of Knowledge를 바탕으로 정리했습니다.
+- [전략과 윈 테마: 가격 말고 선택할 이유를 만드는 법](https://contrl.ai/ko/blog/strategy-and-win-themes/): 평가위원이 입찰자를 구별하지 못하면 가격을 비교합니다. APMP Body of Knowledge를 바탕으로 전략과 전술, 전략 진술문, 통합 개념, 경쟁사 리트머스 테스트, 윈 테마를 모든 섹션까지 이어 가는 법을 정리했습니다.
 - [Value Proposition: 고객이 우리를 선택할 이유를 만드는 법](https://contrl.ai/ko/blog/value-propositions/): Value Proposition은 우리 제안이 고객의 사업을 어떻게 개선하고 그 효과를 어떻게 측정할지 밝히는 문장입니다. APMP Body of Knowledge를 바탕으로 5가지 요소, 이해관계자별 VP, 투자 회수 정량화, 증거 포인트를 정리했습니다.
 
 ### 日本語 — https://contrl.ai/ja/blog/
 
+- [Competitive Price to Win：価格ではなく、勝てるポジションを見つける](https://contrl.ai/ja/blog/competitive-price-to-win/): Price to Winは価格設定ではなく、決して一つの数字では終わりません。APMP Body of KnowledgeをもとにcPTWの考え方、Big Sソリューション、Price to CompeteとPrice to Win、独立性、よくある誤解を解説します。
+- [コンプライアンス・マトリクス：要件を一つも取りこぼさない提案書の設計図](https://contrl.ai/ja/blog/compliance-matrix/): コンプライアンス・マトリクスは、RFPの要件ごとに提案書のどこで答えているかを結びつける表です。APMP Body of Knowledgeにもとづき、RFPの分解、執筆前の作成、更新の続け方、提出版の活用法を解説します。
 - [コンプライアンスとレスポンシブネス：勝てる提案書が必ず押さえている2つの条件](https://contrl.ai/ja/blog/compliance-vs-responsiveness/): コンプライアンスは失格を防ぎ、レスポンシブネスは競合に勝たせる。APMP Body of Knowledgeをもとに、要件の洗い出し、コンプライアンス・マトリクスとレスポンス・マトリクスの作り方、非準拠への向き合い方を実務目線で解説します。
+- [コスト・価格データ：価格を価値として説明する](https://contrl.ai/ja/blog/cost-and-pricing-data/): 価格提案書は総額の表ではなく、説得のための文書です。APMP Body of Knowledgeをもとに、価格・価値・付加価値の区別、コストサマリー、グラフィック、事実にもとづく価格データを解説します。
 - [顧客・競合インテリジェンス：自社の入札を顧客の目で見る](https://contrl.ai/ja/blog/customer-and-competitor-intelligence/): 顧客インテリジェンスは発注者が何を必要としているかを、競合インテリジェンスは発注者が各入札者をどう見ているかを教えてくれます。APMP Body of Knowledgeをもとに、収集計画、情報源、倫理、入札者比較マトリクスとSWOTの使い方を解説します。
 - [顧客関係管理（CRM）：RFPが出る前に勝負を決める](https://contrl.ai/ja/blog/customer-relationship-management/): 顧客は、よく知っていて、好感が持てて、信頼できる相手を選びます。APMP Body of Knowledgeをもとに、早期の着手、RFPシェーピング、コンタクトプラン、戦略的な顧客ミーティング、一貫したメッセージまで、CRMを実務目線で解説します。
+- [効果的なプレゼンテーション：紙面ではなく会場で勝つ](https://contrl.ai/ja/blog/effective-presentations/): 提案プレゼンテーションは、発表者ではなく聞き手を中心に設計したときに勝てます。APMP Body of Knowledgeをもとに、構成、ビジュアル中心のスライド、場に合った発表方法、リハーサル、質疑応答を解説します。
+- [エグゼクティブサマリー：提案書の1ページ目で勝負を決める](https://contrl.ai/ja/blog/executive-summaries/): エグゼクティブサマリーは提案書を短くしたものではなく、自社を選ぶべき理由を示すものです。APMP Body of Knowledgeをもとに、5ボックス構成、書き始める時期、分量、よくある失敗、名前の入れ替えテストを解説します。
+- [機能・便益・差別化要因：What、So What、Why Us](https://contrl.ai/ja/blog/features-benefits-discriminators/): 顧客は機能ではなく便益を買い、差別化要因はどの売り手の便益を選ぶかを決めます。APMP Body of Knowledgeをもとに、So what?テスト、差別化要因のスイートスポット、定量化と証明を解説します。
 - [キャプチャー戦略：プロはRFPの前に勝負を決めている](https://contrl.ai/ja/blog/opportunity-capture-strategy/): 機会／キャプチャー戦略とは、特定の案件ひとつを受注するための計画です。APMP Body of Knowledgeをもとに、戦略と戦術の違い、ホットボタン、3種類の購買者、競合比較マトリクス、戦略ステートメント、ゴースティングを実務目線で解説します。
+- [プルーフ・ポイント：評価者に提案を信じてもらうもの](https://contrl.ai/ja/blog/proof-points/): 機能と便益は主張であり、プルーフ・ポイントはそれを裏付ける検証可能な事実です。APMP Body of Knowledgeをもとに、情報源、データコール、説得力・具体性・信頼性の基準、再利用できるライブラリを解説します。
+- [提案書の構成：書く前に形を決める](https://contrl.ai/ja/blog/proposal-organization/): 評価者は提案書を拾い読みします。だから提案書は探しやすくなければなりません。APMP Body of Knowledgeをもとに、コンテンツ計画、RFPの目次に従うこと、ロードマップ、情報の層、結論を先に書くことを解説します。
+- [提案書のテーマ・ステートメント：評価者が採点に使える一文](https://contrl.ai/ja/blog/proposal-theme-statements/): テーマ・ステートメントは、評価者になぜ自社を選ぶべきかを伝える一文です。顧客ニーズ、差別化要因、定量化した便益、証拠の盛り込み方と、テスト・配置の方法をAPMP Body of Knowledgeをもとに解説します。
+- [戦略とウィンテーマ：価格以外に選ばれる理由をつくる](https://contrl.ai/ja/blog/strategy-and-win-themes/): 評価者が入札者を見分けられないとき、比べられるのは価格です。APMP Body of Knowledgeをもとに、戦略と戦術、戦略ステートメント、統一コンセプト、競合へのリトマス試験、ウィンテーマを全セクションに通す方法を解説します。
 - [バリュー・プロポジション：顧客があなたを選ぶ理由をつくる](https://contrl.ai/ja/blog/value-propositions/): バリュー・プロポジションとは、自社の提案が顧客の事業をどう改善し、その効果をどう測るかを示す文です。APMP Body of Knowledgeをもとに、5つの要素、関係者別の価値提案、投資回収の定量化、実績による裏付けを解説します。
 
 ### 中文 — https://contrl.ai/zh/blog/
 
+- [竞争性制胜价格：找到能赢的定位，而不只是一个价格](https://contrl.ai/zh/blog/competitive-price-to-win/): 制胜价格（Price to Win）不是定价，也从来不只是一个数字。本文依据APMP知识体系，讲解cPTW的含义、Big S解决方案、Price to Compete与Price to Win、独立性以及常见误区。
+- [合规矩阵：让每条需求都有着落的提案书蓝图](https://contrl.ai/zh/blog/compliance-matrix/): 合规矩阵把招标文件中的每条需求与提案书中作答的位置一一对应。本文依据APMP知识体系，讲解如何拆解招标文件、在动笔前建立矩阵、持续更新，以及如何用提交版来加分。
 - [合规性与响应性：每份制胜提案书都做对的两件事](https://contrl.ai/zh/blog/compliance-vs-responsiveness/): 合规性让提案书不被淘汰，响应性让你胜过竞争对手。本文依据APMP知识体系，讲解如何识别需求、建立合规矩阵与响应矩阵，以及如何应对不合规项。
+- [成本与价格数据：把价格讲成价值](https://contrl.ai/zh/blog/cost-and-pricing-data/): 价格建议书不是一张总价表，而是一份说服性文件。本文依据APMP知识体系，讲解价格、价值与附加价值的区别、成本摘要、图表以及基于事实的价格数据。
 - [客户与竞争对手情报：用客户的眼光看你的投标](https://contrl.ai/zh/blog/customer-and-competitor-intelligence/): 客户情报告诉你采购方需要什么，竞争对手情报告诉你采购方如何看待每个投标人。本文依据APMP知识体系，讲解情报收集计划、信息来源、道德底线、投标人对比矩阵与SWOT的用法。
 - [客户关系管理（CRM）：在招标文件发布之前赢得先机](https://contrl.ai/zh/blog/customer-relationship-management/): 客户会选择自己了解、喜欢并信任的投标方。本文依据APMP知识体系，讲解客户关系管理的实务做法：尽早开始、影响招标需求、制定接触计划、有策略地开展客户会面，以及在所有渠道传递一致的信息。
+- [有效的演示：赢在会场，而不只是纸面](https://contrl.ai/zh/blog/effective-presentations/): 述标和投标演示，要围绕听众而不是演讲者来设计才能赢。本文依据APMP知识体系，讲解演示的结构、以视觉为主的幻灯片、因场合选择演示方式、彩排与答问。
+- [执行摘要：在提案书第一页赢下评审](https://contrl.ai/zh/blog/executive-summaries/): 执行摘要不是缩短版的提案书，而是选择你的理由。本文依据APMP知识体系，讲解五框结构、动笔时机、篇幅、常见误区以及名字替换测试。
+- [功能、收益与差异化优势：What、So What、Why Us](https://contrl.ai/zh/blog/features-benefits-discriminators/): 客户买的是收益而不是功能，差异化优势决定客户选择谁的收益。本文依据APMP知识体系，讲解So what?测试、差异化优势的最佳区域，以及收益的量化与证明。
 - [捕获策略：专业团队在招标之前就已赢下一半](https://contrl.ai/zh/blog/opportunity-capture-strategy/): 机会/捕获策略是赢得某一个具体项目的计划。本文依据APMP知识体系，讲解战略与战术的区别、客户热点、三类购买者、竞争对手比较矩阵、策略陈述以及“影射”竞争对手的方法。
+- [证明点：让评审专家相信你的提案](https://contrl.ai/zh/blog/proof-points/): 功能和收益是主张，证明点是支撑主张的可核实事实。本文依据APMP知识体系，讲解证明点的来源、数据征集、说服力·具体性·可信度三项标准，以及可复用的证明点库。
+- [提案书的组织：动笔之前先定结构](https://contrl.ai/zh/blog/proposal-organization/): 评审专家会快速浏览提案书，所以提案书必须容易查找。本文依据APMP知识体系，讲解内容计划、遵循招标文件目录、路线图、信息分层和结论先行。
+- [提案书主题陈述：评审专家可以直接用来打分的一句话](https://contrl.ai/zh/blog/proposal-theme-statements/): 主题陈述是告诉评审专家为什么选你的一句话：客户需求、差异化特征、量化收益和证据。本文依据APMP知识体系，讲解如何撰写、检验和布置主题陈述。
+- [策略与制胜主题：给评审一个价格之外的理由](https://contrl.ai/zh/blog/strategy-and-win-themes/): 当评审分不清各个投标人时，他们就会比价格。本文依据APMP知识体系，讲解战略与战术、策略陈述、统一概念、竞争对手试金石测试，以及如何把制胜主题贯穿到每一个章节。
 - [价值主张：给客户一个选择你的理由](https://contrl.ai/zh/blog/value-propositions/): 价值主张说明你的方案将如何改善客户的业务，以及如何衡量这种改善。本文依据APMP知识体系，讲解价值主张的五个要素、按利益相关方撰写价值主张、量化投资回报以及证明点。
 
 <!-- blog:end -->

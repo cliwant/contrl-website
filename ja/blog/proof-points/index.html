@@ -269,12 +269,36 @@
 <p class="b-source">この記事は、APMP Body of Knowledgeを要約したAPMP Foundation Study Guide 第4.2版（© 2025 APMP）にもとづく独立した学習用の解説です。原典を言い換え、解説したもので、APMPの承認を受けたものではありません。機能・便益・証拠の例、証拠の種類の分類、回復のシナリオ、データコールの例、あいまいな答えと具体的な答えの比較表、請求書処理の例、前後比較の文章は、この記事のために書いたもので、数字は例示です。正式な本文と資格については<a href="https://www.apmp.org/" rel="noopener">apmp.org</a>をご覧ください。</p>
         </article>
         <section class="b-faq"><h2 id="faq">よくある質問</h2><details><summary>提案書におけるプルーフ・ポイントとは何ですか？</summary><div>プルーフ・ポイントとは、提案書で示した機能や便益を裏付ける検証可能な事実です。類似案件で測定した成果、顧客の推薦、第三者の格付け、受賞などがあたります。機能と便益は評価者に何を約束するかを伝え、プルーフ・ポイントは似たことをすでに実現したと示して、評価者が感じるリスクを下げます。APMP Body of Knowledgeでは、プルーフ・ポイントはウィンテーマと差別化要因も支えます。</div></details><details><summary>便益とプルーフ・ポイントはどう違いますか？</summary><div>便益は、機能が顧客にもたらす改善です。たとえば処理時間の短縮が便益です。ただし、それはまだ約束にすぎません。プルーフ・ポイントは、その約束が現実的であることの証拠です。同じ方法で似た顧客の処理時間を測定可能なだけ短縮したという事実を、評価者が確認できる出典とともに示すことです。効果的なウィンテーマには、機能、便益、そして一つ以上のプルーフ・ポイントが含まれます。</div></details><details><summary>プルーフ・ポイントはどこから得られますか？</summary><div>多くは過去の実績から得られます。類似案件の実績データと成果、事例研究と成功事例、顧客の言葉や推薦、発注者による業績評価、受賞や独立機関の評価、業界標準との比較などです。問題をすばやく解決し、顧客もそう認めている事例は、最も強い証拠の一つになり得ます。自社にない能力は、チーミングパートナーの実績で補えます。</div></details><details><summary>良いプルーフ・ポイントの条件は何ですか？</summary><div>三つあります。説得力：この顧客の目標と要件に直接つながっている。具体性：形容詞や概数ではなく正確な数字を使う。信頼性：名前の出せるレファレンス、報告書、独立した情報源で顧客が確認できる。良いプルーフ・ポイントは、その数字が顧客にとって何を意味するか、たとえばリスク、コスト、遅延がどれだけ減るかまで説明します。</div></details><details><summary>プルーフ・ポイントはいつから集めるべきですか？</summary><div>RFPが公示される前からです。受注戦略が決まったら、ストーリーの各部分を支える証拠を集め、同じ発注者の過去の公示を見ていつも何を求めているかを確かめ、社内のスタッフとチーミングパートナーにデータコールを送ります。早く始めれば欠けている部分が見え、パートナーを加えるなどして埋める時間も生まれます。RFPが出た後は、確定した要件に合わせた追加のデータコールを送ります。</div></details></section>
-        <nav class="b-series-nav"><a class="prev" href="/ja/blog/features-benefits-discriminators/"><span class="b-label">← 前の記事</span><span class="b-sn-kicker">EP09</span><span class="b-sn-title">機能・便益・差別化要因：What、So What、Why Us</span></a><span></span></nav>
+        <nav class="b-series-nav"><a class="prev" href="/ja/blog/features-benefits-discriminators/"><span class="b-label">← 前の記事</span><span class="b-sn-kicker">EP09</span><span class="b-sn-title">機能・便益・差別化要因：What、So What、Why Us</span></a><a class="next" href="/ja/blog/competitive-price-to-win/"><span class="b-label">次の記事 →</span><span class="b-sn-kicker">EP11</span><span class="b-sn-title">Competitive Price to Win：価格ではなく、勝てるポジションを見つける</span></a></nav>
         <section class="b-cta"><h2>判断は人が、作成はAIが。</h2><p>RFPをアップロードすると、Contrlが分析・戦略からスライド作成まで一緒に進めます。最初の提案書は無料です。</p><a class="b-btn" href="/ja/#join">無料で始める →</a></section>
     </main>
     <footer class="b-foot"><div class="b-wrap">
         <a class="b-logo" href="/ja/">contrl<span>.</span></a>
         <p>&copy; 2026 Contrl by Cliwant. All rights reserved.</p>
     </div></footer>
+    <script>(function () {
+        if (navigator.webdriver || /bot|crawl|spider|headless|lighthouse|preview/i.test(navigator.userAgent)) return;
+        var url = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? location.protocol + '//' + location.hostname + ':8788/api/bt' : 'https://app.contrl.ai/api/bt';
+        var sid = Math.random().toString(36).slice(2, 12) + Date.now().toString(36);
+        function send(d) {
+            d.sid = sid; var body = JSON.stringify(d);
+            try { if (navigator.sendBeacon && navigator.sendBeacon(url, new Blob([body], { type: 'text/plain' }))) return; } catch (e) {}
+            try { fetch(url, { method: 'POST', body: body, keepalive: true, mode: 'no-cors', headers: { 'Content-Type': 'text/plain' } }); } catch (e) {}
+        }
+        var ref = '', refPath = '', q = new URLSearchParams(location.search);
+        try { if (document.referrer) { var r = new URL(document.referrer); ref = r.host; if (r.host === location.host) refPath = r.pathname; } } catch (e) {}
+        var h1 = document.querySelector('h1');
+        send({ t: 'bv', path: location.pathname, title: (h1 ? h1.textContent : document.title).trim().slice(0, 140), ref: ref, refPath: refPath,
+            utm: ['utm_source', 'utm_medium', 'utm_campaign'].filter(function (k) { return q.get(k); }).map(function (k) { return k + '=' + q.get(k).slice(0, 40); }).join('&'),
+            mobile: matchMedia('(pointer: coarse)').matches || innerWidth < 768 });
+        var dwell = 0, last = Date.now(), depth = 0;
+        function tick() { var now = Date.now(); if (document.visibilityState === 'visible') dwell += Math.min(now - last, 5000); last = now;
+            var el = document.documentElement, max = Math.max(1, el.scrollHeight - innerHeight); depth = Math.max(depth, Math.round(Math.min(1, scrollY / max) * 100)); }
+        setInterval(tick, 1000); addEventListener('scroll', tick, { passive: true });
+        var sent = '';
+        function flush() { tick(); var k = dwell + ':' + depth; if (k !== sent) { sent = k; send({ t: 'br', dwell: dwell, scroll: depth }); } }
+        addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') flush(); else last = Date.now(); });
+        addEventListener('pagehide', flush);
+    })();</script>
 </body>
 </html>
