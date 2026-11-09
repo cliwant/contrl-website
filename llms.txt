@@ -85,19 +85,19 @@ Practical guides on winning bids and writing proposals, each available in Englis
 
 ### 한국어 — https://contrl.ai/ko/blog/
 
-- [Competitive Price to Win: 가격이 아니라 이기는 포지션을 찾는 법](https://contrl.ai/ko/blog/competitive-price-to-win/): Price to Win은 가격 책정이 아니고, 결코 숫자 하나로 끝나지 않습니다. APMP Body of Knowledge를 바탕으로 cPTW의 개념, Big S 솔루션, Price to Compete와 Price to Win, 독립성, 흔한 오해를 정리했습니다.
+- [Competitive Price to Win: 가격이 아니라 이기는 포지션을 찾는 법](https://contrl.ai/ko/blog/competitive-price-to-win/): Price to Win은 가격 책정과 다른 일이고 숫자 하나로 끝나지도 않습니다. APMP Body of Knowledge를 바탕으로 cPTW의 개념, Big S 솔루션, Price to Compete와 Price to Win, 독립성, 흔한 오해를 정리했습니다.
 - [컴플라이언스 매트릭스: 요구사항을 하나도 놓치지 않는 제안서의 설계도](https://contrl.ai/ko/blog/compliance-matrix/): 컴플라이언스 매트릭스는 제안요청서의 요구사항마다 제안서의 어디에서 답하는지 연결하는 표입니다. APMP Body of Knowledge를 바탕으로 제안요청서 분해, 작성 전 구축, 최신 유지, 제출용 조견표 활용법을 정리합니다.
-- [Compliance와 Responsiveness: 이기는 제안서가 반드시 지키는 두 가지](https://contrl.ai/ko/blog/compliance-vs-responsiveness/): Compliance는 탈락을 막고, Responsiveness는 경쟁에서 이기게 합니다. APMP Body of Knowledge를 바탕으로 요구사항 식별, 컴플라이언스 매트릭스와 응답 매트릭스 작성, 미준수 항목 대응법을 실무 관점에서 정리했습니다.
-- [원가·가격 데이터: 가격을 가치로 설명하는 법](https://contrl.ai/ko/blog/cost-and-pricing-data/): 가격 제안서는 총액 표가 아니라 설득 문서입니다. APMP Body of Knowledge를 바탕으로 가격·가치·부가가치의 구분, 가격 요약문, 그래픽, 사실에 근거한 원가 데이터를 정리했습니다.
-- [고객·경쟁사 인텔리전스: 우리 입찰을 고객의 눈으로 보는 법](https://contrl.ai/ko/blog/customer-and-competitor-intelligence/): 고객 인텔리전스는 발주처가 무엇을 원하는지, 경쟁사 인텔리전스는 발주처가 각 입찰자를 어떻게 보는지 알려줍니다. APMP Body of Knowledge를 바탕으로 수집 계획, 정보 출처, 윤리 기준, 입찰자 비교 매트릭스와 SWOT 활용법을 정리했습니다.
-- [고객 관계 관리(CRM): 제안요청서가 나오기 전에 이기는 법](https://contrl.ai/ko/blog/customer-relationship-management/): 고객은 잘 알고, 호감이 가고, 믿을 수 있는 회사를 고릅니다. APMP Body of Knowledge를 바탕으로 이른 시작, RFP 셰이핑, 컨택 플랜, 전략적인 고객 미팅, 일관된 메시지까지 CRM을 실무 관점에서 정리했습니다.
+- [Compliance와 Responsiveness: 이기는 제안서가 반드시 지키는 두 가지](https://contrl.ai/ko/blog/compliance-vs-responsiveness/): Compliance로 탈락을 막고 Responsiveness로 경쟁에서 이깁니다. APMP Body of Knowledge를 바탕으로 요구사항 식별, 컴플라이언스 매트릭스와 응답 매트릭스 작성, 미준수 항목 대응법을 실무 관점에서 정리했습니다.
+- [원가·가격 데이터: 가격을 가치로 설명하는 법](https://contrl.ai/ko/blog/cost-and-pricing-data/): 가격 제안서는 총액 표로 끝나지 않는 설득 문서입니다. APMP Body of Knowledge를 바탕으로 가격·가치·부가가치의 구분, 가격 요약문, 그래픽, 사실에 근거한 원가 데이터를 정리했습니다.
+- [고객·경쟁사 인텔리전스: 우리 입찰을 고객의 눈으로 보는 법](https://contrl.ai/ko/blog/customer-and-competitor-intelligence/): 고객 인텔리전스로는 발주처가 무엇을 원하는지, 경쟁사 인텔리전스로는 발주처가 각 입찰자를 어떻게 보는지 알 수 있습니다. APMP Body of Knowledge를 바탕으로 수집 계획, 정보 출처, 윤리 기준, 입찰자 비교 매트릭스와 SWOT 활용법을 정리했습니다.
+- [고객 관계 관리(CRM): 제안요청서가 나오기 전에 이기는 법](https://contrl.ai/ko/blog/customer-relationship-management/): 고객은 잘 알고 호감이 가고 믿을 수 있는 회사를 고릅니다. APMP Body of Knowledge를 바탕으로 이른 시작, RFP 셰이핑, 컨택 플랜, 전략적인 고객 미팅, 일관된 메시지까지 CRM을 실무 관점에서 정리했습니다.
 - [효과적인 프레젠테이션: 지면이 아니라 발표장에서 이기는 법](https://contrl.ai/ko/blog/effective-presentations/): 제안 발표(PT)는 발표자가 아니라 청중을 중심으로 설계할 때 이깁니다. APMP Body of Knowledge를 바탕으로 구성, 시각 중심 슬라이드, 상황에 맞는 발표 방식, 리허설, 질의응답을 정리했습니다.
 - [요약문(Executive Summary): 제안서 첫 페이지에서 승부를 내는 법](https://contrl.ai/ko/blog/executive-summaries/): 요약문은 제안서를 줄인 글이 아니라 우리를 선택해야 하는 이유를 담은 글입니다. APMP Body of Knowledge를 바탕으로 5-Box 구조, 작성 시점, 분량, 흔한 실수, 이름 바꾸기 테스트를 정리했습니다.
-- [기능, 혜택, 차별화 요소: What, So What, Why Us](https://contrl.ai/ko/blog/features-benefits-discriminators/): 고객은 기능이 아니라 혜택을 사고, 차별화 요소는 고객이 누구의 혜택을 고를지 결정합니다. APMP Body of Knowledge를 바탕으로 So what? 테스트, 차별화 요소의 스위트 스폿, 정량화와 증명을 정리했습니다.
+- [기능, 혜택, 차별화 요소: What, So What, Why Us](https://contrl.ai/ko/blog/features-benefits-discriminators/): 고객은 기능이 아니라 혜택을 사고 누구의 혜택을 고를지는 차별화 요소를 보고 정합니다. APMP Body of Knowledge를 바탕으로 So what? 테스트, 차별화 요소의 스위트 스폿, 정량화와 증명을 정리했습니다.
 - [캡처 전략: 프로는 공고 전에 이미 이기고 들어간다](https://contrl.ai/ko/blog/opportunity-capture-strategy/): 기회/캡처 전략은 특정 사업 하나를 수주하기 위한 계획입니다. APMP Body of Knowledge를 바탕으로 전략과 전술의 차이, 핫버튼, 세 유형의 구매자, 경쟁사 비교표(BCM), 전략 진술서, 고스팅을 실무 관점에서 정리했습니다.
-- [설득하는 글쓰기: 제품이 아니라 읽는 사람의 아픈 곳에서 시작한다](https://contrl.ai/ko/blog/persuasive-writing/): 제안서는 한 사람의 독자를 향한 글로 쓴 논증입니다. APMP Body of Knowledge를 바탕으로 진짜 아픔에서 나오는 긴급성, 논증 구조, 주장과 증거, 감정, 거절할 이유 없애기를 정리했습니다.
-- [증거 포인트: 평가위원이 제안서를 믿게 만드는 것](https://contrl.ai/ko/blog/proof-points/): 기능과 효과는 주장이고, 증거 포인트(Proof Point)는 그 주장을 뒷받침하는 검증 가능한 사실입니다. APMP Body of Knowledge를 바탕으로 출처, 데이터 콜, 설득력·구체성·신뢰성 기준, 재사용 라이브러리를 정리했습니다.
-- [제안서 구성: 쓰기 전에 모양부터 정한다](https://contrl.ai/ko/blog/proposal-organization/): 평가위원은 제안서를 훑어 읽습니다. 그래서 제안서는 찾기 쉬워야 합니다. APMP Body of Knowledge를 바탕으로 콘텐츠 계획, 제안요청서 목차 따르기, 로드맵, 정보의 층 쌓기, 결론 먼저 쓰기를 정리했습니다.
+- [설득하는 글쓰기: 제품이 아니라 읽는 사람의 아픈 곳에서 시작한다](https://contrl.ai/ko/blog/persuasive-writing/): 제안서는 한 사람의 독자를 향해 글로 쓴 논증입니다. APMP Body of Knowledge를 바탕으로 진짜 아픔에서 나오는 긴급성, 논증 구조, 주장과 증거, 감정, 거절할 이유 없애기를 정리했습니다.
+- [증거 포인트: 평가위원이 제안서를 믿게 만드는 것](https://contrl.ai/ko/blog/proof-points/): 증거 포인트(Proof Point)는 기능과 효과라는 주장을 뒷받침하는 검증 가능한 사실입니다. 출처, 데이터 콜, 설득력·구체성·신뢰성 기준, 재사용 라이브러리를 APMP Body of Knowledge를 바탕으로 정리했습니다.
+- [제안서 구성: 쓰기 전에 모양부터 정한다](https://contrl.ai/ko/blog/proposal-organization/): 평가위원은 제안서를 훑어 읽으므로 제안서는 찾기 쉬워야 합니다. APMP Body of Knowledge를 바탕으로 콘텐츠 계획, 제안요청서 목차 따르기, 로드맵, 정보의 층 쌓기, 결론 먼저 쓰기를 정리했습니다.
 - [제안서 테마 문장: 평가위원이 점수로 옮겨 적는 한 문장](https://contrl.ai/ko/blog/proposal-theme-statements/): 테마 문장(Theme Statement)은 평가위원에게 왜 우리를 선택해야 하는지 알려주는 한 문장입니다. 고객 니즈, 차별화 요소, 정량화된 효과, 근거를 담는 법과 테스트·배치 방법을 APMP Body of Knowledge를 바탕으로 정리했습니다.
 - [전략과 윈 테마: 가격 말고 선택할 이유를 만드는 법](https://contrl.ai/ko/blog/strategy-and-win-themes/): 평가위원이 입찰자를 구별하지 못하면 가격을 비교합니다. APMP Body of Knowledge를 바탕으로 전략과 전술, 전략 진술문, 통합 개념, 경쟁사 리트머스 테스트, 윈 테마를 모든 섹션까지 이어 가는 법을 정리했습니다.
 - [Value Proposition: 고객이 우리를 선택할 이유를 만드는 법](https://contrl.ai/ko/blog/value-propositions/): Value Proposition은 우리 제안이 고객의 사업을 어떻게 개선하고 그 효과를 어떻게 측정할지 밝히는 문장입니다. APMP Body of Knowledge를 바탕으로 5가지 요소, 이해관계자별 VP, 투자 회수 정량화, 증거 포인트를 정리했습니다.
