@@ -6,8 +6,19 @@
         <link>https://contrl.ai/blog/</link>
         <description>RFP analysis, win themes, scoring tables and more: practical guides for people who write proposals.</description>
         <language>en</language>
-        <lastBuildDate>Sun, 08 Nov 2026 09:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Wed, 11 Nov 2026 09:00:00 +0000</lastBuildDate>
         <atom:link href="https://contrl.ai/rss.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title>Writing Clearly: Help Evaluators Understand You on the First Read</title>
+            <link>https://contrl.ai/blog/writing-clearly/</link>
+            <guid isPermaLink="true">https://contrl.ai/blog/writing-clearly/</guid>
+            <description>Clear writing is a competitive edge. A practical guide to the APMP Body of Knowledge on storytelling, active voice, plain words, tight paragraphs, jargon and planning time to revise.</description>
+            <pubDate>Wed, 11 Nov 2026 09:00:00 +0000</pubDate>
+            <dc:creator>Junho Cho</dc:creator>
+            <category>APMP Foundation</category>
+            <category>Clear writing</category>
+            <category>Proposal writing</category>
+        </item>
         <item>
             <title>Persuasive Writing: Start From the Reader&#x27;s Pain, Not Your Product</title>
             <link>https://contrl.ai/blog/persuasive-writing/</link>
