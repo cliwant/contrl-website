@@ -45,7 +45,7 @@
     </url>
     <url>
         <loc>https://contrl.ai/blog/</loc>
-        <lastmod>2026-11-08</lastmod>
+        <lastmod>2026-11-11</lastmod>
         <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/"/>
         <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/"/>
@@ -54,7 +54,7 @@
     </url>
     <url>
         <loc>https://contrl.ai/ko/blog/</loc>
-        <lastmod>2026-11-08</lastmod>
+        <lastmod>2026-11-11</lastmod>
         <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/"/>
         <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/"/>
@@ -63,7 +63,7 @@
     </url>
     <url>
         <loc>https://contrl.ai/ja/blog/</loc>
-        <lastmod>2026-11-08</lastmod>
+        <lastmod>2026-11-11</lastmod>
         <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/"/>
         <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/"/>
@@ -72,12 +72,52 @@
     </url>
     <url>
         <loc>https://contrl.ai/zh/blog/</loc>
-        <lastmod>2026-11-08</lastmod>
+        <lastmod>2026-11-11</lastmod>
         <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/"/>
         <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/zh/blog/"/>
         <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/blog/"/>
+    </url>
+    <url>
+        <loc>https://contrl.ai/blog/writing-clearly/</loc>
+        <lastmod>2026-11-11</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/zh/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/blog/writing-clearly/"/>
+        <image:image><image:loc>https://contrl.ai/images/blog/writing-clearly/untangled-thread.jpg</image:loc></image:image>
+    </url>
+    <url>
+        <loc>https://contrl.ai/ja/blog/writing-clearly/</loc>
+        <lastmod>2026-11-11</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/zh/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/blog/writing-clearly/"/>
+        <image:image><image:loc>https://contrl.ai/images/blog/writing-clearly/untangled-thread.jpg</image:loc></image:image>
+    </url>
+    <url>
+        <loc>https://contrl.ai/ko/blog/writing-clearly/</loc>
+        <lastmod>2026-11-11</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/zh/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/blog/writing-clearly/"/>
+        <image:image><image:loc>https://contrl.ai/images/blog/writing-clearly/untangled-thread.jpg</image:loc></image:image>
+    </url>
+    <url>
+        <loc>https://contrl.ai/zh/blog/writing-clearly/</loc>
+        <lastmod>2026-11-11</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/zh/blog/writing-clearly/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/blog/writing-clearly/"/>
+        <image:image><image:loc>https://contrl.ai/images/blog/writing-clearly/untangled-thread.jpg</image:loc></image:image>
     </url>
     <url>
         <loc>https://contrl.ai/blog/persuasive-writing/</loc>
