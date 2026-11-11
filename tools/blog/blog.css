@@ -107,3 +107,38 @@ html[lang="ja"] body, html[lang="zh"] body { line-height: 1.85; }
 .b-sn-kicker { display: block; font-size: 12px; color: var(--muted); }
 .b-sn-title { display: block; font-weight: 700; line-height: 1.4; margin-top: 2px; }
 @media (max-width: 640px) { .b-series-nav { grid-template-columns: 1fr; } .b-series-nav a.next { text-align: left; } }
+
+/* Likes and comments (filled in by the script BLOG_SOCIAL in build.py; app.contrl.ai /api/blog/*) */
+.b-social { margin-top: 52px; border-top: 1px solid var(--line); padding-top: 28px; }
+.b-like { display: inline-flex; align-items: center; gap: 8px; font: inherit; font-size: 15px; font-weight: 600; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 8px 18px; cursor: pointer; transition: border-color .15s, background .15s, color .15s; }
+.b-like:hover { border-color: #e2d6c9; background: #fffaf6; }
+.b-like svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; transition: transform .15s; }
+.b-like[aria-pressed="true"] { color: var(--accent-ink); border-color: var(--accent); background: #fffaf6; }
+.b-like[aria-pressed="true"] svg { fill: var(--accent); stroke: var(--accent); }
+.b-like:active svg { transform: scale(1.2); }
+.b-like-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+.b-like-row .b-hint { color: var(--muted); font-size: 14px; }
+.b-social h2 { font-size: 22px; letter-spacing: -.02em; margin: 0 0 16px; }
+.b-social h2 small { color: var(--muted); font-weight: 500; font-size: 15px; margin-left: 6px; }
+.b-comments { list-style: none; margin: 0 0 24px; padding: 0; }
+.b-comments li { padding: 16px 0; border-bottom: 1px solid var(--line); }
+.b-comments li:first-child { padding-top: 0; }
+.b-c-head { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 14px; margin-bottom: 4px; }
+.b-c-head b { font-weight: 700; }
+.b-c-head time { color: var(--muted); font-size: 13px; }
+.b-badge { font-size: 11px; font-weight: 700; color: var(--accent-ink); background: #fff3ea; border-radius: 999px; padding: 2px 8px; }
+.b-c-body { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 15.5px; line-height: 1.7; color: #3f3f46; }
+.b-c-empty { color: var(--muted); font-size: 15px; margin: 0 0 20px; }
+.b-c-form { display: grid; gap: 10px; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+.b-c-form input, .b-c-form textarea { font: inherit; font-size: 15px; width: 100%; border: 1px solid #e2d6c9; border-radius: 10px; padding: 10px 12px; background: #fff; color: var(--ink); }
+.b-c-form textarea { min-height: 96px; resize: vertical; line-height: 1.6; }
+.b-c-form input:focus, .b-c-form textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
+.b-c-form .b-c-name { max-width: 260px; }
+.b-c-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.b-c-foot span { color: var(--muted); font-size: 13px; }
+.b-c-form button { font: inherit; font-weight: 600; font-size: 15px; color: #fff; background: var(--ink); border: 0; border-radius: 10px; padding: 9px 18px; cursor: pointer; }
+.b-c-form button:disabled { opacity: .5; cursor: default; }
+.b-c-msg { font-size: 14px; color: var(--accent-ink); margin: 0; }
+.b-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.b-card-social { white-space: nowrap; }
+@media (max-width: 640px) { .b-c-form .b-c-name { max-width: none; } .b-c-foot button { width: 100%; } }
