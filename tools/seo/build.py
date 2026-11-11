@@ -72,6 +72,8 @@ def jsonld(obj):
 ORG = {
     '@type': 'Organization', '@id': f'{SITE}/#org', 'name': 'Contrl', 'alternateName': ['contrl', 'CONTRL', '컨트롤'],
     'legalName': 'Cliwant', 'url': f'{SITE}/', 'logo': f'{SITE}/favicon.svg',
+    'parentOrganization': {'@type': 'Organization', 'name': 'Cliwant',
+                           'description': 'The company that leads the APMP Korea Chapter'},
 }
 
 
@@ -259,23 +261,23 @@ BLOG_UI = {
            'blog_desc': '공공입찰 제안서, RFP 분석, Win Theme, 평가표 대응까지. 제안서를 쓰는 사람을 위한 실무 가이드.',
            'cta_t': '제안서, 사람이 정하고 AI가 쓰게 하세요', 'cta_p': 'RFP를 올리면 Contrl이 분석부터 전략, 슬라이드까지 함께 만듭니다. 첫 제안서는 무료예요.',
            'cta_b': '무료로 시작하기', 'start': '무료로 시작하기', 'updated': '업데이트', 'published': '작성', 'toc': '목차',
-           'prev': '이전 글', 'next': '다음 글', 'login': '로그인', 'summary': '핵심 요약', 'faq': '자주 묻는 질문', 'min': '분 읽기', 'all': '모든 글', 'empty': '아직 글이 없습니다.'},
+           'prev': '이전 글', 'next': '다음 글', 'login': '로그인', 'summary': '핵심 요약', 'faq': '자주 묻는 질문', 'min': '분 읽기', 'all': '모든 글', 'empty': '아직 글이 없습니다.', 'about': 'Contrl은 APMP 한국 챕터(APMP Korea)를 이끄는 Cliwant가 만듭니다.'},
     'en': {'blog': 'Blog', 'blog_title': 'Contrl Blog — Practical guides for proposals and bids',
            'blog_desc': 'RFP analysis, win themes, scoring tables and more: practical guides for people who write proposals.',
            'cta_t': 'You make the call. AI writes the proposal.', 'cta_p': 'Upload an RFP and Contrl works through it with you, from analysis and strategy to the slides. Your first proposal is free.',
            'cta_b': 'Get started free', 'start': 'Get started free', 'updated': 'Updated', 'published': 'Published', 'toc': 'Contents',
-           'prev': 'Previous', 'next': 'Next', 'login': 'Log in', 'summary': 'Key takeaways', 'faq': 'FAQ', 'min': 'min read', 'all': 'All posts', 'empty': 'No posts yet.'},
+           'prev': 'Previous', 'next': 'Next', 'login': 'Log in', 'summary': 'Key takeaways', 'faq': 'FAQ', 'min': 'min read', 'all': 'All posts', 'empty': 'No posts yet.', 'about': 'Contrl is built by Cliwant, the company that leads the APMP Korea Chapter.'},
 }
 BLOG_UI['ja'] = {'blog': 'ブログ', 'blog_title': 'Contrl ブログ — 提案書・入札の実務ガイド',
                  'blog_desc': 'RFP分析、ウィンテーマ、評価基準への対応まで。提案書を書く人のための実務ガイド。',
                  'cta_t': '判断は人が、作成はAIが。', 'cta_p': 'RFPをアップロードすると、Contrlが分析・戦略からスライド作成まで一緒に進めます。最初の提案書は無料です。',
                  'cta_b': '無料で始める', 'start': '無料で始める', 'updated': '更新', 'published': '公開', 'toc': '目次',
-                 'prev': '前の記事', 'next': '次の記事', 'login': 'ログイン', 'summary': '要点', 'faq': 'よくある質問', 'min': '分で読めます', 'all': 'すべての記事', 'empty': 'まだ記事がありません。'}
+                 'prev': '前の記事', 'next': '次の記事', 'login': 'ログイン', 'summary': '要点', 'faq': 'よくある質問', 'min': '分で読めます', 'all': 'すべての記事', 'empty': 'まだ記事がありません。', 'about': 'Contrlは、APMP韓国支部（APMP Korea）を率いるCliwantが開発しています。'}
 BLOG_UI['zh'] = {'blog': '博客', 'blog_title': 'Contrl 博客 — 投标与提案书实务指南',
                  'blog_desc': '从RFP分析、制胜主题到评分标准应对：写给提案书撰写者的实务指南。',
                  'cta_t': '由你决策，由AI撰写。', 'cta_p': '上传RFP，Contrl会与你一起完成从分析、策略到幻灯片的全过程。第一份提案书免费。',
                  'cta_b': '免费开始', 'start': '免费开始', 'updated': '更新于', 'published': '发布于', 'toc': '目录',
-                 'prev': '上一篇', 'next': '下一篇', 'login': '登录', 'summary': '要点', 'faq': '常见问题', 'min': '分钟阅读', 'all': '全部文章', 'empty': '暂无文章。'}
+                 'prev': '上一篇', 'next': '下一篇', 'login': '登录', 'summary': '要点', 'faq': '常见问题', 'min': '分钟阅读', 'all': '全部文章', 'empty': '暂无文章。', 'about': 'Contrl 由领导 APMP 韩国分会（APMP Korea）的 Cliwant 打造。'}
 LANG_NAME = {'en': 'English', 'ko': '한국어', 'ja': '日本語', 'zh': '中文'}
 
 
@@ -629,6 +631,7 @@ def render_post(p, alts, index_langs, posts=()):
     if p['updated'] != p['published']:
         dates += f' · {ui["updated"]} <time datetime="{p["updated"]}">{fmt_date(p["updated"], lang)}</time>'
     parts.append(f'        <p class="b-meta">{by}{dates} · {p["minutes"]}{ui["min"] if lang != "en" else " " + ui["min"]}</p>\n')
+    parts.append(f'        <p class="b-about">{ui["about"]}</p>\n')
     if p['summary']:
         parts.append(f'        <aside class="b-summary"><p class="b-label">{ui["summary"]}</p><ul>'
                      + ''.join(f'<li>{s}</li>' for s in p['summary']) + '</ul></aside>\n')
@@ -681,7 +684,7 @@ def render_blog_index(posts, lang, index_langs):
                 <p class="b-meta"><time datetime="{p["published"]}">{fmt_date(p["published"], p["lang"])}</time> · {read}</p>
             </div>
         </a></li>''')
-    body = (f'    <main class="b-wrap b-index">\n        <h1>{ui["blog"]}</h1>\n        <p class="b-lede">{ui["blog_desc"]}</p>\n'
+    body = (f'    <main class="b-wrap b-index">\n        <h1>{ui["blog"]}</h1>\n        <p class="b-lede">{ui["blog_desc"]}</p>\n        <p class="b-about">{ui["about"]}</p>\n'
             f'        <ul class="b-list">\n' + '\n'.join(items) + '\n        </ul>\n    </main>\n')
     return head + body + BLOG_FOOT.format(home=landing_url(lang).replace(SITE, ''), year=TODAY[:4], beacon=BLOG_BEACON + '\n' + BLOG_SOCIAL)
 
