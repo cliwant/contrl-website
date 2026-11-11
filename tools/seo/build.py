@@ -415,6 +415,96 @@ BLOG_BEACON = r'''    <script>(function () {
     })();</script>'''
 
 
+# Likes and comments, open to anyone (signed up or not). Loaded after the page, so the static HTML that search
+# and AI engines read is unchanged. The backend is app.contrl.ai /api/blog/* (server/blog-social.mjs in the web
+# app): comments with a link wait for review, the rest publish at once; the admin page moderates them. A random
+# id kept in this browser makes one like per post; a visitor signed in to Contrl gets a member badge.
+BLOG_SOCIAL = r'''    <script>(function () {
+        var API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? location.protocol + '//' + location.hostname + ':8788/api/blog/' : 'https://app.contrl.ai/api/blog/';
+        var lang = (document.documentElement.lang || 'en').slice(0, 2);
+        var T = {
+            en: { like: 'Helpful', likeHint: 'Found this useful? Let us know.', title: 'Comments', none: 'No comments yet. Questions or experiences are welcome.', name: 'Name (optional)', body: 'Leave a comment — a question, a different view, or your experience', send: 'Post', sending: 'Posting…', anon: 'Anonymous', team: 'Contrl team', member: 'Contrl member', asMember: 'Posting as a Contrl member', asGuest: 'No sign-up needed', held: 'Thanks! Comments with links are posted after a quick review.', limited: 'Too many comments in a short time. Please try again later.', dup: 'You already posted this comment.', fail: 'Could not post. Please try again.' },
+            ko: { like: '도움이 됐어요', likeHint: '도움이 됐다면 눌러 주세요.', title: '댓글', none: '아직 댓글이 없어요. 질문이나 경험을 남겨 주세요.', name: '이름 (선택)', body: '질문, 다른 의견, 실무 경험을 남겨 주세요', send: '등록', sending: '등록 중…', anon: '익명', team: 'Contrl 팀', member: 'Contrl 회원', asMember: 'Contrl 회원으로 등록돼요', asGuest: '가입 없이 남길 수 있어요', held: '고마워요! 링크가 들어간 댓글은 확인 후 게시돼요.', limited: '짧은 시간에 댓글이 너무 많아요. 잠시 후 다시 시도해 주세요.', dup: '이미 같은 댓글을 남기셨어요.', fail: '등록하지 못했어요. 다시 시도해 주세요.' },
+            ja: { like: '役に立った', likeHint: '役に立ったら押してください。', title: 'コメント', none: 'まだコメントはありません。質問や経験談をお寄せください。', name: '名前（任意）', body: '質問、別の視点、実務での経験などをどうぞ', send: '投稿', sending: '投稿中…', anon: '匿名', team: 'Contrl チーム', member: 'Contrl 会員', asMember: 'Contrl 会員として投稿されます', asGuest: '登録なしで投稿できます', held: 'ありがとうございます。リンクを含むコメントは確認後に公開されます。', limited: '短時間に投稿が多すぎます。しばらくしてからお試しください。', dup: '同じコメントがすでに投稿されています。', fail: '投稿できませんでした。もう一度お試しください。' },
+            zh: { like: '有帮助', likeHint: '觉得有用就点一下吧。', title: '评论', none: '还没有评论。欢迎留下问题或经验。', name: '昵称（选填）', body: '留下你的问题、不同观点或实战经验', send: '发布', sending: '发布中…', anon: '匿名', team: 'Contrl 团队', member: 'Contrl 会员', asMember: '将以 Contrl 会员身份发布', asGuest: '无需注册即可评论', held: '谢谢！含链接的评论审核后发布。', limited: '短时间内评论过多，请稍后再试。', dup: '你已发布过相同的评论。', fail: '发布失败，请重试。' }
+        }[lang] || null;
+        if (!T) return;
+        function vid() { try { var v = localStorage.getItem('contrl-blog-vid'); if (!v) { v = Math.random().toString(36).slice(2, 12) + Date.now().toString(36); localStorage.setItem('contrl-blog-vid', v); } return v; } catch (e) { return ''; } }
+        function req(path, body) {
+            return fetch(API + path, body ? { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(body) } : { credentials: 'include' })
+                .then(function (r) { return r.json().then(function (d) { d._status = r.status; return d; }); });
+        }
+        function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+        var HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 7.9 3.6 4.5 7 4.5c2 0 3.5 1.1 5 3 1.5-1.9 3-3 5-3 3.4 0 5.6 3.4 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg>';
+
+        // ---- Blog index: like and comment counts on the cards ----
+        if (document.querySelector('.b-list')) {
+            req('counts').then(function (c) {
+                document.querySelectorAll('.b-list a.b-card').forEach(function (a) {
+                    var m = a.getAttribute('href').match(/blog\/([a-z0-9-]+)\/?$/), n = m && c[m[1]], meta = a.querySelector('.b-meta');
+                    if (!n || !meta) return;
+                    meta.appendChild(el('span', 'b-card-social', (n.likes ? ' · ♥ ' + n.likes : '') + (n.comments ? ' · 💬 ' + n.comments : '')));
+                });
+            }).catch(function () {});
+            return;
+        }
+        // ---- Post: a like button and the comments of this language page, before the series links ----
+        var m = location.pathname.match(/blog\/([a-z0-9-]+)\/?$/), article = document.querySelector('.b-body');
+        if (!m || !article) return;
+        var slug = m[1], v = vid(), shown = Date.now();
+        var box = el('section', 'b-social'); box.id = 'comments';
+        var row = el('div', 'b-like-row'), btn = el('button', 'b-like'); btn.type = 'button'; btn.setAttribute('aria-pressed', 'false');
+        btn.innerHTML = HEART + '<span></span><span class="b-like-n"></span>'; btn.children[1].textContent = T.like;
+        row.appendChild(btn); row.appendChild(el('span', 'b-hint', T.likeHint)); box.appendChild(row);
+        var h = el('h2', null, T.title), count = el('small'); h.appendChild(count); box.appendChild(h);
+        var list = el('ul', 'b-comments'), empty = el('p', 'b-c-empty', T.none); box.appendChild(list); box.appendChild(empty);
+        var form = el('form', 'b-c-form'); form.noValidate = true;
+        form.innerHTML = '<input class="b-c-name" name="name" maxlength="40" autocomplete="nickname"><textarea name="body" maxlength="2000" required></textarea>'
+            + '<label class="b-hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>'
+            + '<div class="b-c-foot"><span class="b-c-who"></span><button type="submit"></button></div><p class="b-c-msg" role="status" hidden></p>';
+        var F = form.elements; F['name'].placeholder = T.name; F['body'].placeholder = T.body; form.querySelector('button').textContent = T.send;
+        form.querySelector('.b-c-who').textContent = T.asGuest;
+        box.appendChild(form);
+        var anchor = document.querySelector('.b-series-nav') || document.querySelector('.b-cta');
+        anchor ? anchor.parentNode.insertBefore(box, anchor) : article.parentNode.appendChild(box);
+
+        var dateFmt; try { dateFmt = new Intl.DateTimeFormat(lang, { year: 'numeric', month: 'short', day: 'numeric' }); } catch (e) {}
+        function addComment(c) {
+            var li = el('li'), head = el('div', 'b-c-head');
+            head.appendChild(el('b', null, c.name || T.anon));
+            if (c.badge) head.appendChild(el('span', 'b-badge', c.badge === 'team' ? T.team : T.member));
+            var t = el('time', null, dateFmt ? dateFmt.format(new Date(c.at)) : new Date(c.at).toISOString().slice(0, 10)); t.dateTime = new Date(c.at).toISOString(); head.appendChild(t);
+            li.appendChild(head); li.appendChild(el('div', 'b-c-body', c.body)); list.appendChild(li);
+            empty.hidden = true; count.textContent = list.children.length;
+        }
+        function setLike(n, on) { btn.setAttribute('aria-pressed', on ? 'true' : 'false'); btn.querySelector('.b-like-n').textContent = n ? ' ' + n : ''; }
+        req('social?slug=' + slug + '&lang=' + lang + '&vid=' + v).then(function (d) {
+            if (d.error) return;
+            setLike(d.likes, d.liked); (d.comments || []).forEach(addComment);
+            if (d.me) form.querySelector('.b-c-who').textContent = T.asMember;
+            if (location.hash === '#comments') box.scrollIntoView();
+        }).catch(function () {});
+        btn.addEventListener('click', function () {
+            if (!v) return;
+            var on = btn.getAttribute('aria-pressed') !== 'true', n = parseInt(btn.querySelector('.b-like-n').textContent, 10) || 0;
+            setLike(Math.max(0, n + (on ? 1 : -1)), on);
+            req('like', { slug: slug, lang: lang, vid: v, on: on }).then(function (d) { if (d.likes != null) setLike(d.likes, d.liked); }).catch(function () {});
+        });
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var b = F['body'].value.trim(), send = form.querySelector('button'), msg = form.querySelector('.b-c-msg');
+            if (b.length < 2) { F['body'].focus(); return; }
+            send.disabled = true; send.textContent = T.sending; msg.hidden = true;
+            req('comment', { slug: slug, lang: lang, name: F['name'].value, body: b, website: F['website'].value, ms: Date.now() - shown }).then(function (d) {
+                if (d._status === 200 && d.status === 'published') { addComment(d.comment); F['body'].value = ''; }
+                else if (d._status === 200) { msg.textContent = T.held; msg.hidden = false; F['body'].value = ''; }
+                else { msg.textContent = d.error === 'rate_limited' ? T.limited : d.error === 'duplicate' ? T.dup : T.fail; msg.hidden = false; }
+            }).catch(function () { msg.textContent = T.fail; msg.hidden = false; })
+              .then(function () { send.disabled = false; send.textContent = T.send; });
+        });
+    })();</script>'''
+
+
 def slugify_heading(text, used):
     base = re.sub(r'[^\w가-힣ぁ-んァ-ン一-龥-]+', '-', strip_tags(text).lower()).strip('-') or 'section'
     s, n = base, 2
@@ -560,7 +650,7 @@ def render_post(p, alts, index_langs, posts=()):
     parts.append(f'        <section class="b-cta"><h2>{ui["cta_t"]}</h2><p>{ui["cta_p"]}</p>'
                  f'<a class="b-btn" href="{home}#join">{ui["cta_b"]} →</a></section>\n')
     parts.append('    </main>\n')
-    parts.append(BLOG_FOOT.format(home=home, year=p['published'][:4], beacon=BLOG_BEACON))
+    parts.append(BLOG_FOOT.format(home=home, year=p['published'][:4], beacon=BLOG_BEACON + '\n' + BLOG_SOCIAL))
     return ''.join(parts)
 
 
@@ -593,7 +683,7 @@ def render_blog_index(posts, lang, index_langs):
         </a></li>''')
     body = (f'    <main class="b-wrap b-index">\n        <h1>{ui["blog"]}</h1>\n        <p class="b-lede">{ui["blog_desc"]}</p>\n'
             f'        <ul class="b-list">\n' + '\n'.join(items) + '\n        </ul>\n    </main>\n')
-    return head + body + BLOG_FOOT.format(home=landing_url(lang).replace(SITE, ''), year=TODAY[:4], beacon=BLOG_BEACON)
+    return head + body + BLOG_FOOT.format(home=landing_url(lang).replace(SITE, ''), year=TODAY[:4], beacon=BLOG_BEACON + '\n' + BLOG_SOCIAL)
 
 
 def translations(posts):
