@@ -227,7 +227,7 @@ def render_landing(src, i18n, meta, lang):
                          (r'property="og:url"', url), (r'property="og:locale"', LOCALE[lang])):
             out = re.sub(r'(<meta ' + sel + r' content=)"[^"]*"', lambda mm: mm.group(1) + '"' + esc(val) + '"', out, count=1)
         out = re.sub(r'(<link rel="canonical" href=)"[^"]*"', lambda mm: mm.group(1) + f'"{url}"', out, count=1)
-        out = out.replace('href="/en/" class="text-xl font-bold', f'href="/{lang}/" class="text-xl font-bold')
+        out = out.replace('href="/" class="text-xl font-bold', f'href="/{lang}/" class="text-xl font-bold')
         still = lang if lang in ('ko', 'ja') else 'en'
         out = re.sub(r'(/images/why/still-[a-z-]+)\.en\.jpg', lambda mm: f'{mm.group(1)}.{still}.jpg', out)
         out = re.sub(r'(/images/hero/[a-z-]+)\.en\.jpg', lambda mm: f'{mm.group(1)}.{lang}.jpg', out)
