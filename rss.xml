@@ -6,8 +6,19 @@
         <link>https://contrl.ai/blog/</link>
         <description>RFP analysis, win themes, scoring tables and more: practical guides for people who write proposals.</description>
         <language>en</language>
-        <lastBuildDate>Wed, 11 Nov 2026 09:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Thu, 12 Nov 2026 09:00:00 +0000</lastBuildDate>
         <atom:link href="https://contrl.ai/rss.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title>Headings: Let Evaluators Find the Answer and Get the Message</title>
+            <link>https://contrl.ai/blog/headings/</link>
+            <guid isPermaLink="true">https://contrl.ai/blog/headings/</guid>
+            <description>Headings are how evaluators navigate and score a proposal. A practical guide to the APMP Body of Knowledge on RFP headings, active headings, section introductions, hierarchy and parallel form.</description>
+            <pubDate>Thu, 12 Nov 2026 09:00:00 +0000</pubDate>
+            <dc:creator>Junho Cho</dc:creator>
+            <category>APMP Foundation</category>
+            <category>Headings</category>
+            <category>Proposal writing</category>
+        </item>
         <item>
             <title>Writing Clearly: Help Evaluators Understand You on the First Read</title>
             <link>https://contrl.ai/blog/writing-clearly/</link>
