@@ -755,12 +755,14 @@
             const q = new URLSearchParams(location.search).get('lang'); if (LANGS.includes(q)) return q;
             try { const saved = localStorage.getItem('contrl-lang'); if (LANGS.includes(saved)) return saved; } catch (e) {}
             const nav = (navigator.languages || [navigator.language || 'en']).map(l => l.toLowerCase());
-            // A browser set to Korean / Japanese / Chinese wins; one set to English (or anything else) in
-            // Japan, Korea or China gets that country's language: many there browse with English UI.
-            for (const l of nav) { if (l.startsWith('ko')) return 'ko'; if (l.startsWith('ja')) return 'ja'; if (l.startsWith('zh')) return 'zh'; if (l.startsWith('en')) break; }
             const tz = (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { return ''; } })();
+            // Anyone in Korea gets Korean, whatever the browser language (many there browse with an English UI).
+            // Korea = the Seoul time zone, or a browser locale with the KR region (e.g. en-KR).
+            if (tz === 'Asia/Seoul' || nav.some(l => /-kr$/.test(l))) return 'ko';
+            // Elsewhere a browser set to Korean / Japanese / Chinese wins; one set to English (or anything else)
+            // in Japan or China gets that country's language.
+            for (const l of nav) { if (l.startsWith('ko')) return 'ko'; if (l.startsWith('ja')) return 'ja'; if (l.startsWith('zh')) return 'zh'; if (l.startsWith('en')) break; }
             if (tz === 'Asia/Tokyo') return 'ja';
-            if (tz === 'Asia/Seoul') return 'ko';
             if (/^Asia\/(Shanghai|Chongqing|Urumqi|Harbin|Taipei|Hong_Kong|Macau)$/.test(tz)) return 'zh';
             return 'en';
         }
