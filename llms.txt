@@ -84,6 +84,7 @@ Practical guides on winning bids and writing proposals, each available in Englis
 - [Value Propositions: Give the Customer a Reason to Choose You](https://contrl.ai/blog/value-propositions/): A value proposition says how your offer will improve the customer's business and how that will be measured. The APMP Body of Knowledge on its five elements, stakeholder value propositions, quantifying payback and proof points.
 - [Writing Clearly: Help Evaluators Understand You on the First Read](https://contrl.ai/blog/writing-clearly/): Clear writing is a competitive edge. A practical guide to the APMP Body of Knowledge on storytelling, active voice, plain words, tight paragraphs, jargon and planning time to revise.
 - [Headings: Let Evaluators Find the Answer and Get the Message](https://contrl.ai/blog/headings/): Headings are how evaluators navigate and score a proposal. A practical guide to the APMP Body of Knowledge on RFP headings, active headings, section introductions, hierarchy and parallel form.
+- [Proposal Graphics: Decide the Message Before You Draw](https://contrl.ai/blog/graphics/): Proposal graphics persuade only when they carry a message the customer cares about. A practical guide to the APMP Body of Knowledge on graphics: action captions, four steps, objective tests and design principles.
 
 ### 한국어 — https://contrl.ai/ko/blog/
 
@@ -105,6 +106,7 @@ Practical guides on winning bids and writing proposals, each available in Englis
 - [Value Proposition: 고객이 우리를 선택할 이유를 만드는 법](https://contrl.ai/ko/blog/value-propositions/): Value Proposition은 우리 제안이 고객의 사업을 어떻게 개선하고 그 효과를 어떻게 측정할지 밝히는 문장입니다. APMP Body of Knowledge를 바탕으로 5가지 요소, 이해관계자별 VP, 투자 회수 정량화, 증거 포인트를 정리했습니다.
 - [명확하게 쓰기: 평가위원이 한 번 읽고 이해하게 한다](https://contrl.ai/ko/blog/writing-clearly/): 명확한 글은 경쟁력입니다. APMP Body of Knowledge를 바탕으로 스토리텔링, 능동태, 쉬운 말, 군더더기 없는 문단, 전문용어, 고쳐 쓸 시간 확보를 정리했습니다.
 - [제목: 평가위원이 답을 찾고 메시지까지 읽게 한다](https://contrl.ai/ko/blog/headings/): 제목은 평가위원이 제안서를 찾아 읽고 점수를 매기는 길잡이입니다. APMP Body of Knowledge를 바탕으로 제안요청서 목차, 능동형 제목, 섹션 도입부, 위계, 병렬 구조를 정리했습니다.
+- [제안서 그래픽: 그리기 전에 메시지부터 정한다](https://contrl.ai/ko/blog/graphics/): 제안서 그래픽은 고객이 관심 있는 메시지를 담을 때만 설득력이 생깁니다. APMP Body of Knowledge를 바탕으로 액션 캡션, 그래픽 제작 4단계, 객관적 검증, 디자인 원칙을 정리했습니다.
 
 ### 日本語 — https://contrl.ai/ja/blog/
 
@@ -126,6 +128,7 @@ Practical guides on winning bids and writing proposals, each available in Englis
 - [バリュー・プロポジション：顧客があなたを選ぶ理由をつくる](https://contrl.ai/ja/blog/value-propositions/): バリュー・プロポジションとは、自社の提案が顧客の事業をどう改善し、その効果をどう測るかを示す文です。APMP Body of Knowledgeをもとに、5つの要素、関係者別の価値提案、投資回収の定量化、実績による裏付けを解説します。
 - [明確に書く：評価者が一度読んで理解できる提案書に](https://contrl.ai/ja/blog/writing-clearly/): 明確な文章は競争力です。APMP Body of Knowledgeをもとに、ストーリーテリング、能動態、平易な言葉、引き締まった段落、専門用語、推敲の時間の確保を整理しました。
 - [見出し：評価者が答えを見つけ、メッセージまで受け取れるように](https://contrl.ai/ja/blog/headings/): 見出しは、評価者が提案書の中を移動し、採点するための道しるべです。APMP Body of Knowledgeをもとに、RFPの見出し、能動的な見出し、セクションの導入、階層、並列構造を整理しました。
+- [提案書のグラフィック：描く前にメッセージを決める](https://contrl.ai/ja/blog/graphics/): 提案書のグラフィックは、顧客が関心を持つメッセージを運ぶときにだけ説得力を持ちます。APMP Body of Knowledgeをもとに、アクションキャプション、4つのステップ、客観的な検証、デザイン原則を整理しました。
 
 ### 中文 — https://contrl.ai/zh/blog/
 
@@ -147,6 +150,7 @@ Practical guides on winning bids and writing proposals, each available in Englis
 - [价值主张：给客户一个选择你的理由](https://contrl.ai/zh/blog/value-propositions/): 价值主张说明你的方案将如何改善客户的业务，以及如何衡量这种改善。本文依据APMP知识体系，讲解价值主张的五个要素、按利益相关方撰写价值主张、量化投资回报以及证明点。
 - [清晰写作：让评审专家读一遍就懂](https://contrl.ai/zh/blog/writing-clearly/): 清晰的文字本身就是竞争力。本文依据APMP知识体系，梳理讲故事、主动语态、平实用词、紧凑的段落、行业术语以及为修改预留时间。
 - [标题：让评审专家找到答案，也读到信息](https://contrl.ai/zh/blog/headings/): 标题是评审专家在提案书中定位和打分的路标。本文基于APMP知识体系，梳理招标文件的标题、主动式标题、章节引言、层级和平行结构。
+- [提案书图形：先定信息，再动手画](https://contrl.ai/zh/blog/graphics/): 提案书中的图形只有承载客户关心的信息时才有说服力。本文基于APMP知识体系，梳理行动式图注、图形制作四步法、客观检验方法和设计原则。
 
 <!-- blog:end -->
 

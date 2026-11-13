@@ -5,7 +5,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
         <loc>https://contrl.ai/</loc>
-        <lastmod>2026-11-11</lastmod>
+        <lastmod>2026-11-13</lastmod>
         <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/"/>
         <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/"/>
@@ -15,7 +15,7 @@
     </url>
     <url>
         <loc>https://contrl.ai/ko/</loc>
-        <lastmod>2026-11-11</lastmod>
+        <lastmod>2026-11-13</lastmod>
         <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/"/>
         <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/"/>
@@ -25,7 +25,7 @@
     </url>
     <url>
         <loc>https://contrl.ai/ja/</loc>
-        <lastmod>2026-11-11</lastmod>
+        <lastmod>2026-11-13</lastmod>
         <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/"/>
         <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/"/>
@@ -35,7 +35,7 @@
     </url>
     <url>
         <loc>https://contrl.ai/zh/</loc>
-        <lastmod>2026-11-11</lastmod>
+        <lastmod>2026-11-13</lastmod>
         <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/"/>
         <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/"/>
@@ -45,7 +45,7 @@
     </url>
     <url>
         <loc>https://contrl.ai/blog/</loc>
-        <lastmod>2026-11-12</lastmod>
+        <lastmod>2026-11-13</lastmod>
         <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/"/>
         <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/"/>
@@ -54,7 +54,7 @@
     </url>
     <url>
         <loc>https://contrl.ai/ko/blog/</loc>
-        <lastmod>2026-11-12</lastmod>
+        <lastmod>2026-11-13</lastmod>
         <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/"/>
         <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/"/>
@@ -63,7 +63,7 @@
     </url>
     <url>
         <loc>https://contrl.ai/ja/blog/</loc>
-        <lastmod>2026-11-12</lastmod>
+        <lastmod>2026-11-13</lastmod>
         <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/"/>
         <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/"/>
@@ -72,12 +72,52 @@
     </url>
     <url>
         <loc>https://contrl.ai/zh/blog/</loc>
-        <lastmod>2026-11-12</lastmod>
+        <lastmod>2026-11-13</lastmod>
         <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/"/>
         <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/zh/blog/"/>
         <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/blog/"/>
+    </url>
+    <url>
+        <loc>https://contrl.ai/blog/graphics/</loc>
+        <lastmod>2026-11-13</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/zh/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/blog/graphics/"/>
+        <image:image><image:loc>https://contrl.ai/images/blog/graphics/text-vs-graphic.jpg</image:loc></image:image>
+    </url>
+    <url>
+        <loc>https://contrl.ai/ja/blog/graphics/</loc>
+        <lastmod>2026-11-13</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/zh/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/blog/graphics/"/>
+        <image:image><image:loc>https://contrl.ai/images/blog/graphics/text-vs-graphic.jpg</image:loc></image:image>
+    </url>
+    <url>
+        <loc>https://contrl.ai/ko/blog/graphics/</loc>
+        <lastmod>2026-11-13</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/zh/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/blog/graphics/"/>
+        <image:image><image:loc>https://contrl.ai/images/blog/graphics/text-vs-graphic.jpg</image:loc></image:image>
+    </url>
+    <url>
+        <loc>https://contrl.ai/zh/blog/graphics/</loc>
+        <lastmod>2026-11-13</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/zh/blog/graphics/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/blog/graphics/"/>
+        <image:image><image:loc>https://contrl.ai/images/blog/graphics/text-vs-graphic.jpg</image:loc></image:image>
     </url>
     <url>
         <loc>https://contrl.ai/blog/headings/</loc>
