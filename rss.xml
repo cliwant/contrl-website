@@ -6,8 +6,19 @@
         <link>https://contrl.ai/blog/</link>
         <description>RFP analysis, win themes, scoring tables and more: practical guides for people who write proposals.</description>
         <language>en</language>
-        <lastBuildDate>Thu, 12 Nov 2026 09:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Fri, 13 Nov 2026 09:00:00 +0000</lastBuildDate>
         <atom:link href="https://contrl.ai/rss.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title>Proposal Graphics: Decide the Message Before You Draw</title>
+            <link>https://contrl.ai/blog/graphics/</link>
+            <guid isPermaLink="true">https://contrl.ai/blog/graphics/</guid>
+            <description>Proposal graphics persuade only when they carry a message the customer cares about. A practical guide to the APMP Body of Knowledge on graphics: action captions, four steps, objective tests and design principles.</description>
+            <pubDate>Fri, 13 Nov 2026 09:00:00 +0000</pubDate>
+            <dc:creator>Junho Cho</dc:creator>
+            <category>APMP Foundation</category>
+            <category>Graphics</category>
+            <category>Proposal design</category>
+        </item>
         <item>
             <title>Headings: Let Evaluators Find the Answer and Get the Message</title>
             <link>https://contrl.ai/blog/headings/</link>
