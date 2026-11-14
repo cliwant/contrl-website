@@ -6,8 +6,19 @@
         <link>https://contrl.ai/blog/</link>
         <description>RFP analysis, win themes, scoring tables and more: practical guides for people who write proposals.</description>
         <language>en</language>
-        <lastBuildDate>Fri, 13 Nov 2026 09:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Sat, 14 Nov 2026 09:00:00 +0000</lastBuildDate>
         <atom:link href="https://contrl.ai/rss.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title>Page and Document Design: One Template, Set Early, Used by All</title>
+            <link>https://contrl.ai/blog/page-and-document-design/</link>
+            <guid isPermaLink="true">https://contrl.ai/blog/page-and-document-design/</guid>
+            <description>Proposal page design makes a document compliant, consistent and easy to evaluate. A practical guide to the APMP Body of Knowledge: the document template, PDF production and six layout strategies.</description>
+            <pubDate>Sat, 14 Nov 2026 09:00:00 +0000</pubDate>
+            <dc:creator>Junho Cho</dc:creator>
+            <category>APMP Foundation</category>
+            <category>Page design</category>
+            <category>Proposal design</category>
+        </item>
         <item>
             <title>Proposal Graphics: Decide the Message Before You Draw</title>
             <link>https://contrl.ai/blog/graphics/</link>
