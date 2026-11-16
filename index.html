@@ -936,9 +936,11 @@
             // Where the web app runs, don't wait for the sign-up record (sheet, Slack, welcome email; it
             // takes several seconds): send it with keepalive, so it completes after the page has left,
             // and go straight into the app.
+            // The analytics sign_up is sent by the app, once, when its server has made a new Contrl account: a sign-in
+            // here may be a returning member, so it is not counted here.
             if (APP_READY) {
                 fetch(WAITLIST_ENDPOINT, { method: 'POST', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body }).catch(() => {});
-                track(); enterApp(idToken); return;
+                enterApp(idToken, provider); return;
             }
             const res = await fetch(WAITLIST_ENDPOINT, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body });
             const data = await res.json().catch(() => ({}));
@@ -1027,10 +1029,10 @@
         }
         // Back from the app (bfcache): don't leave the overlay up.
         window.addEventListener('pageshow', e => { const o = document.getElementById('enter-app'); if (e.persisted && o) { clearInterval(o._timer); o.remove(); } });
-        function enterApp(idToken) {
+        function enterApp(idToken, method = '') {
             const f = document.createElement('form');
             f.method = 'POST'; f.action = new URL('/api/handoff', new URL(APP_URL, location.href)).href; f.style.display = 'none';
-            const fields = { idToken, next: APP_URL.endsWith('/app/') ? '/app/' : '/', lang: ['ko', 'en', 'ja'].includes(currentLang) ? currentLang : 'en',
+            const fields = { idToken, method: method === 'email' ? 'password' : method, next: APP_URL.endsWith('/app/') ? '/app/' : '/', lang: ['ko', 'en', 'ja'].includes(currentLang) ? currentLang : 'en',
                 tz: Intl.DateTimeFormat().resolvedOptions().timeZone || '', locale: (navigator.languages && navigator.languages[0]) || navigator.language || '', lsid: LT.sid, ...PICK };
             LT.enter();
             for (const [k, v] of Object.entries(fields)) { const i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = v; f.appendChild(i); }
