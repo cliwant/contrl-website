@@ -120,6 +120,46 @@
         <image:image><image:loc>https://contrl.ai/images/blog/relevant-past-performance/right-fit.jpg</image:loc></image:image>
     </url>
     <url>
+        <loc>https://contrl.ai/blog/resumes/</loc>
+        <lastmod>2026-11-17</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/zh/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/blog/resumes/"/>
+        <image:image><image:loc>https://contrl.ai/images/blog/resumes/named-team.jpg</image:loc></image:image>
+    </url>
+    <url>
+        <loc>https://contrl.ai/ja/blog/resumes/</loc>
+        <lastmod>2026-11-17</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/zh/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/blog/resumes/"/>
+        <image:image><image:loc>https://contrl.ai/images/blog/resumes/named-team.jpg</image:loc></image:image>
+    </url>
+    <url>
+        <loc>https://contrl.ai/ko/blog/resumes/</loc>
+        <lastmod>2026-11-17</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/zh/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/blog/resumes/"/>
+        <image:image><image:loc>https://contrl.ai/images/blog/resumes/named-team.jpg</image:loc></image:image>
+    </url>
+    <url>
+        <loc>https://contrl.ai/zh/blog/resumes/</loc>
+        <lastmod>2026-11-17</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://contrl.ai/ja/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://contrl.ai/ko/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://contrl.ai/zh/blog/resumes/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://contrl.ai/blog/resumes/"/>
+        <image:image><image:loc>https://contrl.ai/images/blog/resumes/named-team.jpg</image:loc></image:image>
+    </url>
+    <url>
         <loc>https://contrl.ai/blog/managing-questions-to-the-customer/</loc>
         <lastmod>2026-11-15</lastmod>
         <xhtml:link rel="alternate" hreflang="en" href="https://contrl.ai/blog/managing-questions-to-the-customer/"/>
