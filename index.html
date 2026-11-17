@@ -819,9 +819,9 @@
         document.addEventListener('keydown', e => { if (e.key === 'Escape') setLangMenu(false); });
 
         // ---- Waitlist -----------------------------------------------------
-        // Backend: Google Apps Script web app (tools/waitlist/Code.gs). It verifies the Firebase ID token,
-        // stores the signup in the sheet, posts to Slack and emails the setup schedule.
-        const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyA3mF0q5v3o6goJRZ00y165ViiphCLf-Wd2nZs8Xz-ScKnGUnLZusDpBiF97scRhR2/exec';
+        // Backend: the app server (POST /api/signup, text/plain so no preflight). It verifies the Firebase ID token,
+        // records the sign-up, alerts the team and sends the welcome e-mail; GET ?invite= answers the invite check.
+        const WAITLIST_ENDPOINT = 'https://app.contrl.ai/api/signup';   // the app server: records the sign-up, alerts the team, sends the welcome e-mail
 
         async function checkInvite(btn) {
             const wrap = btn.closest('[data-waitlist]'), input = wrap.querySelector('input[name=invite]'), st = wrap.querySelector('[data-invite-status]');
