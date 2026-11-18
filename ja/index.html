@@ -959,9 +959,7 @@
         // "See a real tender analysis first": a live tender of the visitor's region, its ready-made analysis
         // viewable without an account (app.contrl.ai/try/<slug>); going on from there needs the sign-up.
         if (APP_READY) {
-            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-            const pickTry = () => currentLang === 'ja' ? 'jp-suginami-dx' : currentLang === 'ko' ? 'kr-gwangju-web'
-                : tz === 'Asia/Singapore' ? 'singapore-it' : /^Asia\//.test(tz) ? 'india-consultancy' : 'us-darpa-unison';
+            const pickTry = () => currentLang === 'ja' ? 'jp-suginami-dx' : currentLang === 'ko' ? 'kr-gwangju-web' : 'us-darpa-unison';
             const TRY = { ko: '가입 없이 실제 공고 분석 먼저 보기', en: 'See a real tender analysis first — no sign-up', ja: '登録なしで実際の公告の分析を見る', zh: '无需注册，先看真实招标的分析' };
             const drawTry = () => document.querySelectorAll('[data-try]').forEach(a => {
                 a.href = new URL('try/' + pickTry(), new URL(APP_URL, location.href)).href;
