@@ -87,8 +87,8 @@ Practical guides on winning bids and writing proposals, each available in Englis
 - [Proposal Graphics: Decide the Message Before You Draw](https://contrl.ai/blog/graphics/): Proposal graphics persuade only when they carry a message the customer cares about. A practical guide to the APMP Body of Knowledge on graphics: action captions, four steps, objective tests and design principles.
 - [Page and Document Design: One Template, Set Early, Used by All](https://contrl.ai/blog/page-and-document-design/): Proposal page design makes a document compliant, consistent and easy to evaluate. A practical guide to the APMP Body of Knowledge: the document template, PDF production and six layout strategies.
 - [Managing Questions to the Customer: Ask Early, Ask Precisely](https://contrl.ai/blog/managing-questions-to-the-customer/): How to run the RFP question-and-answer period: one point of contact, early submission, exact citations, neutral wording and a question log. A practical guide to the APMP Body of Knowledge.
-- [Proposal Resumes: Show the Customer Who Will Do the Work](https://contrl.ai/blog/resumes/): How to write resumes for a proposal: name real, available people, screen them against the RFP early, use one compliant template, let a writer draft and lead with results. A practical guide to the APMP Body of Knowledge.
 - [Relevant Past Performance: Prove You Have Done This Before](https://contrl.ai/blog/relevant-past-performance/): How to choose and write past performance for a proposal: relevance, reference quality and recency, proposal risk vs performance risk, a coverage chart and descriptions built for skimming. A practical guide to the APMP Body of Knowledge.
+- [Proposal Resumes: Show the Customer Who Will Do the Work](https://contrl.ai/blog/resumes/): How to write resumes for a proposal: name real, available people, screen them against the RFP early, use one compliant template, let a writer draft and lead with results. A practical guide to the APMP Body of Knowledge.
 
 ### 한국어 — https://contrl.ai/ko/blog/
 
@@ -113,8 +113,8 @@ Practical guides on winning bids and writing proposals, each available in Englis
 - [제안서 그래픽: 그리기 전에 메시지부터 정한다](https://contrl.ai/ko/blog/graphics/): 제안서 그래픽은 고객이 관심 있는 메시지를 담을 때만 설득력이 생깁니다. APMP Body of Knowledge를 바탕으로 액션 캡션, 그래픽 제작 4단계, 객관적 검증, 디자인 원칙을 정리했습니다.
 - [페이지와 문서 디자인: 템플릿 하나를 일찍 정해 모두가 쓴다](https://contrl.ai/ko/blog/page-and-document-design/): 제안서의 페이지 디자인은 문서를 규정에 맞고 일관되며 평가하기 쉽게 만듭니다. APMP Body of Knowledge를 바탕으로 문서 템플릿, PDF 제작, 여섯 가지 레이아웃 전략을 정리했습니다.
 - [고객 질의 관리: 일찍, 정확하게 묻는다](https://contrl.ai/ko/blog/managing-questions-to-the-customer/): 제안요청서 질의응답 기간을 운영하는 법. 창구 일원화, 이른 제출, 조항 인용, 중립적인 표현, 질의 관리표까지 APMP Body of Knowledge를 바탕으로 정리했습니다.
-- [제안용 이력서: 누가 일할지 발주처에 보여 준다](https://contrl.ai/ko/blog/resumes/): 제안서에 넣는 이력서 쓰는 법. 실제로 투입 가능한 사람을 실명으로 제시하고 제안요청서 기준으로 일찍 검증한 뒤, 서식 하나를 정해 작성자가 성과 위주로 초안을 잡습니다. APMP Body of Knowledge를 바탕으로 정리했습니다.
 - [관련 수행 실적: 해 본 적이 있다는 것을 증명한다](https://contrl.ai/ko/blog/relevant-past-performance/): 제안서에 넣을 수행 실적을 고르고 쓰는 법. 관련성·레퍼런스 품질·최근성, 제안 위험과 수행 위험, 커버리지 표, 훑어 읽기에 맞춘 실적 기술까지 APMP Body of Knowledge를 바탕으로 정리했습니다.
+- [제안용 이력서: 누가 일할지 발주처에 보여 준다](https://contrl.ai/ko/blog/resumes/): 제안서에 넣는 이력서 쓰는 법. 실제로 투입 가능한 사람을 실명으로 제시하고 제안요청서 기준으로 일찍 검증한 뒤, 서식 하나를 정해 작성자가 성과 위주로 초안을 잡습니다. APMP Body of Knowledge를 바탕으로 정리했습니다.
 
 ### 日本語 — https://contrl.ai/ja/blog/
 
@@ -139,8 +139,8 @@ Practical guides on winning bids and writing proposals, each available in Englis
 - [提案書のグラフィック：描く前にメッセージを決める](https://contrl.ai/ja/blog/graphics/): 提案書のグラフィックは、顧客が関心を持つメッセージを運ぶときにだけ説得力を持ちます。APMP Body of Knowledgeをもとに、アクションキャプション、4つのステップ、客観的な検証、デザイン原則を整理しました。
 - [ページと文書のデザイン：テンプレートを早く決め、全員で使う](https://contrl.ai/ja/blog/page-and-document-design/): 提案書のページデザインは、文書を規定どおりで一貫した、評価しやすいものにします。APMP Body of Knowledgeをもとに、文書テンプレート、PDFでの制作、6つのレイアウト戦略を整理しました。
 - [顧客への質問の管理：早く、正確に尋ねる](https://contrl.ai/ja/blog/managing-questions-to-the-customer/): RFPの質疑応答期間の進め方。窓口の一本化、早めの提出、条項の引用、中立的な言葉、質問管理表まで、APMP Body of Knowledgeにもとづいて整理します。
-- [提案用の履歴書：誰が仕事をするのかを顧客に示す](https://contrl.ai/ja/blog/resumes/): 提案書に載せる履歴書の書き方。実在し投入できる人を名前で示し、RFPに照らして早めに確認し、一つの書式を使い、ライターが下書きして成果を前に出します。APMP Body of Knowledgeにもとづいて解説します。
 - [関連する過去実績：やったことがあると証明する](https://contrl.ai/ja/blog/relevant-past-performance/): 提案書に載せる過去実績の選び方と書き方。関連性・照会先の質・新しさ、提案リスクと履行リスク、カバレッジ表、拾い読みに耐える実績記述まで、APMP Body of Knowledgeにもとづいて解説します。
+- [提案用の履歴書：誰が仕事をするのかを顧客に示す](https://contrl.ai/ja/blog/resumes/): 提案書に載せる履歴書の書き方。実在し投入できる人を名前で示し、RFPに照らして早めに確認し、一つの書式を使い、ライターが下書きして成果を前に出します。APMP Body of Knowledgeにもとづいて解説します。
 
 ### 中文 — https://contrl.ai/zh/blog/
 
@@ -165,8 +165,8 @@ Practical guides on winning bids and writing proposals, each available in Englis
 - [提案书图形：先定信息，再动手画](https://contrl.ai/zh/blog/graphics/): 提案书中的图形只有承载客户关心的信息时才有说服力。本文基于APMP知识体系，梳理行动式图注、图形制作四步法、客观检验方法和设计原则。
 - [页面与文档设计：尽早定好一个模板，全员共用](https://contrl.ai/zh/blog/page-and-document-design/): 提案书的页面设计让文档合规、一致、便于评审。本文基于APMP知识体系，梳理文档模板、PDF制作和六项版式策略。
 - [管理向客户的提问：早问，问准](https://contrl.ai/zh/blog/managing-questions-to-the-customer/): 如何运作招标答疑期：统一窗口、尽早提交、引用条款、中性措辞和问题跟踪表。基于APMP知识体系的实用指南。
-- [提案简历：让客户看到谁来做这项工作](https://contrl.ai/zh/blog/resumes/): 如何撰写提案中的简历：实名提出真实、可到岗的人员，尽早对照招标文件审核，使用统一的合规模板，由撰稿人起草并突出成果。基于APMP知识体系的实用指南。
 - [相关过往业绩：证明你做过这件事](https://contrl.ai/zh/blog/relevant-past-performance/): 如何为提案挑选和撰写过往业绩：相关性、证明人质量与时效性，提案风险与履约风险，覆盖表，以及经得起快速浏览的业绩描述。基于APMP知识体系的实用指南。
+- [提案简历：让客户看到谁来做这项工作](https://contrl.ai/zh/blog/resumes/): 如何撰写提案中的简历：实名提出真实、可到岗的人员，尽早对照招标文件审核，使用统一的合规模板，由撰稿人起草并突出成果。基于APMP知识体系的实用指南。
 
 <!-- blog:end -->
 
